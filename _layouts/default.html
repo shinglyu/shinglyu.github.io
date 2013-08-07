@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>{{ page.title }}</title>
+
+  
+  <link rel="stylesheet" href="css/foundation.css" />
+  <link rel="stylesheet" href="css/default.css" />
+  <link rel="stylesheet" href="{{page.css}}" />
+  
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body>
+   <!--
+   <div class="large-12 columns">
+      -->
+   <div class="large-12 columns contain-to-grid sticky">
+      <nav class="top-bar">
+      <ul class="title-area">
+         <li class="name">
+         <h1><a href="#">{{ site.name }} ▲</a></h1>
+         </li>
+         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
+         </li>
+      </ul>
+      <section class="top-bar-section">
+      <ul class="right">
+         {% for node in site.pages%}
+         <li class="divider"></li>
+         <li {% if node.url == page.url%} class="active" {% endif %}><a href="{{node.url}}">{{node.title}}</a></li>
+         {%endfor%}
+      </ul>
+      </section>
+      </nav>
+   </div>
+   
+   <div class="large-12 columns">
+      <br> <!-- space holder for top bar-->
+   </div>
+   {{ content }}
+
+
+  <div class="row">
+     <hr>
+     <div class="large-6 small-6 columns">
+         <p><strong><a href="mailto:{{site.email}}">{{site.email}}</a></strong></p>
+     </div>
+     <div class="large-6 small-6 columns right-align">
+        <p>Last update: {{site.time | date_to_string}}</p>
+     </div>
+  </div>
+
+  <script>
+  document.write('<script src=' +
+  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+  '.js><\/script>')
+  </script>
+  
+  <script src="js/foundation.min.js"></script>
+  <script src="js/foundation/foundation.topbar.js"></script>
+  <!--
+  <script src="js/foundation/foundation.js"></script>
+  <script src="js/foundation/foundation.alerts.js"></script>
+  <script src="js/foundation/foundation.clearing.js"></script>
+  <script src="js/foundation/foundation.cookie.js"></script>
+  <script src="js/foundation/foundation.dropdown.js"></script>
+  <script src="js/foundation/foundation.forms.js"></script>
+  <script src="js/foundation/foundation.joyride.js"></script>
+  <script src="js/foundation/foundation.magellan.js"></script>
+  <script src="js/foundation/foundation.orbit.js"></script>
+  <script src="js/foundation/foundation.reveal.js"></script>
+  <script src="js/foundation/foundation.section.js"></script>
+  <script src="js/foundation/foundation.tooltips.js"></script>
+  <script src="js/foundation/foundation.topbar.js"></script>
+  <script src="js/foundation/foundation.interchange.js"></script>
+  <script src="js/foundation/foundation.placeholder.js"></script>
+  -->
+  
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+
+</html>
