@@ -1,0 +1,287 @@
+<html>
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+   
+      <title>台大選課系統</title>
+      
+      <link rel="stylesheet" id="uncomp-core-screen" href="./css/blueprint/screen.css" type="text/css" media="screen" />
+      <link rel="stylesheet" id="uncomp-core-print" href="./css/blueprint/print.css" type="text/css" media="print" />
+      <link rel="stylesheet" id="layout" href="./css/layout.css" type="text/css" media="screen" />
+
+      <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+      <script language="javascript" type="text/javascript" src="js/add_buttons.js"></script>
+      <script type="text/javascript" charset="utf-8">
+      </script>
+   </head>
+   <body>
+      <div class="container ">
+         <div id="header" class="span-24">
+            <div id="nav" class="span-16 prepend-1">
+               <a href="index.htm">主選單</a> 
+               <h1> > </h1> 
+               <a>匯入/加選</a>
+            </div>
+            <div id="logoContainer" class="span-6 append-1 last">
+               <a id="logo">台大選課系統</a>
+            </div>
+         </div>
+         <div id="indexMenu" class="span-24">
+            <div id="add" class="span-6 clickable " onclick="location.href='add_chinese.html'" >
+                <h1> 國文</h1>
+            </div>
+            <div id="delete" class="span-6 clickable" onclick="location.href='add_english.html'" >
+               <h1 > 英外文</h1>
+            </div>
+            <div id="timetable" class="span-6 clickable selected" onclick="location.href='add_calculus.html'" >
+               <h1 > 微積分</h1>
+            </div>
+            <div id="timetable" class="span-6 last clickable " onclick="location.href='add.html'" >
+               <h1 > 其他科目</h1>
+            </div>
+            <hr>
+         </div>
+         <div id="manual" class="span-8 prepend-8 last ">
+            <fieldset id="manualInputSet">
+               <h2>手動輸入流水號</h2>
+               <input type="text" value="輸入流水號"></input>
+               <button> 加選 </button>
+            </fieldset>
+            <h2>or</h2>
+         </div>
+         <div id="imported" class="span-24 last">
+            <h2>從課程網匯入</h2>
+            <table>
+               <tr>
+                  <th>加選</th>
+                  <th>流水號</th>
+                  <th>課程名稱</th>
+                  <th>教師</th>
+                  <th>課號</th>
+                  <th>班次</th>
+                  <th>學分</th>
+                  <th>上課時間</th>
+                  <th>限制人數</th>
+                  <th>登記人數</th>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="addButton"> 匯入 </button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上07</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="addButton"> 匯入 </button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上08</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="addButton"> 匯入 </button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上09</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="addButton"> 匯入 </button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上10</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="addButton"> 匯入 </button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上11</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="addButton"> 匯入 </button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上12</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+            </table>
+         </div>
+         <div id="downArrowContainer" class="span-24">
+            <img src="resource/downArrow.png">
+         </div>
+         <div id="selected" class="span-24">
+            <h2>調整志願序</h2>
+            <table id=selectedTable>
+               <tr>
+                  <th>調整志願序</th>
+                  <th>流水號</th>
+                  <th>課程名稱</th>
+                  <th>教師</th>
+                  <th>課號</th>
+                  <th>班次</th>
+                  <th>學分</th>
+                  <th>上課時間</th>
+                  <th>限制人數</th>
+                  <th>登記人數</th>
+               </tr>
+               <tr>
+                  <td class="itemMenuUpDown">
+                     <button class="button_red"> x</button>
+                     <button class="up tight"> ▲</button>
+                     <button class="down tight"> ▼</button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上01</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenuUpDown">
+                     <button class="button_red"> x</button>
+                     <button class="up tight"> ▲</button>
+                     <button class="down tight"> ▼</button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上02</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenuUpDown">
+                     <button class="button_red"> x</button>
+                     <button class="up tight"> ▲</button>
+                     <button class="down tight"> ▼</button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上03</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenuUpDown">
+                     <button class="button_red"> x</button>
+                     <button class="up tight"> ▲</button>
+                     <button class="down tight"> ▼</button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上04</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenuUpDown">
+                     <button class="button_red"> x</button>
+                     <button class="up tight"> ▲</button>
+                     <button class="down tight"> ▼</button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上05</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+               <tr>
+                  <td class="itemMenuUpDown">
+                     <button class="button_red"> x</button>
+                     <button class="up tight"> ▲</button>
+                     <button class="down tight"> ▼</button>
+                  </td>
+                  <td>01001</td>
+                  <td>微積分甲上06</td>
+                  <td>陳某某</td>
+                  <td>CHIN1002</td>
+                  <td>06</td>
+                  <td>3</td>
+                  <td>F6 F7 F8</td>
+                  <td>80</td>
+                  <td>154</td>
+               </tr>
+            </table>
+         </div>
+         <div id="downArrowContainer" class="span-24">
+            <img src="resource/downArrow.png">
+         </div>
+         <div id="submitContainer" class="span-24">
+            <div id="submit" class="span-12">
+               <button id="submit" onclick="location.href='index.htm'"> 送  出</button>
+            </div>
+            <div id="clear" class="span-12 last">
+               <button id="clear" class="button_grey" onclick="location.href='add_calculus.html'"> 清  除</button>
+            </div>
+
+         </div>
+         <div id="footer" class="span-24">
+            <hr>
+            <a href="mailto:sombody@ntu.edu.tw">聯絡我們</a>
+         </div>
+      </div> <!-- container -->
+      
+   </body>
+</html>

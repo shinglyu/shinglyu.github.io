@@ -1,0 +1,561 @@
+<html>
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+   
+      <title>台大選課系統</title>
+      
+   <link rel="stylesheet" id="uncomp-core-screen" href="./css/blueprint/screen.css" type="text/css" media="screen" />
+   <link rel="stylesheet" id="uncomp-core-print" href="./css/blueprint/print.css" type="text/css" media="print" />
+   <link rel="stylesheet" id="layout" href="./css/layout.css" type="text/css" media="screen" />
+   <link rel="stylesheet" id="layout" href="./css/confirm.css" type="text/css" media="screen" />
+   <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+   <script type='text/javascript' src='js/jquery.simplemodal.js'></script>
+   <script type='text/javascript' src='js/confirm.js'></script>
+   <script type="text/javascript" charset="utf-8">
+      
+      /*
+      $(document).ready(function() {
+         $(".button_red").click(function() {
+         });
+      });
+      */
+   </script>
+   </head>
+   <body>
+      <div class="container ">
+         <div id="header" class="span-24">
+            <div id="nav" class="span-16 prepend-1">
+               <a href="index.htm">主選單</a> 
+               <h1> > </h1> 
+               <a>退選</a>
+            </div>
+            <div id="logoContainer" class="span-6 append-1 last">
+               <a id="logo">台大選課系統</a>
+            </div>
+         </div>
+         <div id="imported" class="span-24">
+            <h2>已登記課程</h2>
+            <table >
+               <tr>
+                  <th>退選</th>
+                  <th>必帶</th>
+                  <th>流水號</th>
+                  <th>課程名稱</th>
+                  <th>教師</th>
+                  <th>課號</th>
+                  <th>班次</th>
+                  <th>分組</th>
+                  <th>學分</th>
+                  <th>上課時間</th>
+                  <th>限制人數</th>
+                  <th>必帶人數</th>
+                  <th>登記人數</th>
+                  <th>先修課程</th>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+            </table>
+            <h2>已登記--國文</h2>
+            <table >
+               <tr>
+                  <th>退選</th>
+                  <th>必帶</th>
+                  <th>流水號</th>
+                  <th>課程名稱</th>
+                  <th>教師</th>
+                  <th>課號</th>
+                  <th>班次</th>
+                  <th>分組</th>
+                  <th>學分</th>
+                  <th>上課時間</th>
+                  <th>限制人數</th>
+                  <th>必帶人數</th>
+                  <th>登記人數</th>
+                  <th>先修課程</th>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+            </table>
+            <h2>已登記--英外文</h2>
+            <table >
+               <tr>
+                  <th>退選</th>
+                  <th>必帶</th>
+                  <th>流水號</th>
+                  <th>課程名稱</th>
+                  <th>教師</th>
+                  <th>課號</th>
+                  <th>班次</th>
+                  <th>分組</th>
+                  <th>學分</th>
+                  <th>上課時間</th>
+                  <th>限制人數</th>
+                  <th>必帶人數</th>
+                  <th>登記人數</th>
+                  <th>先修課程</th>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+            </table>
+            <h2>已登記--微積分</h2>
+            <table >
+               <tr>
+                  <th>退選</th>
+                  <th>必帶</th>
+                  <th>流水號</th>
+                  <th>課程名稱</th>
+                  <th>教師</th>
+                  <th>課號</th>
+                  <th>班次</th>
+                  <th>分組</th>
+                  <th>學分</th>
+                  <th>上課時間</th>
+                  <th>限制人數</th>
+                  <th>必帶人數</th>
+                  <th>登記人數</th>
+                  <th>先修課程</th>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td class="itemMenu">
+                     <button class="button_red"> x</button>
+                  </td>
+                  <td></td>
+                  <td>54321</td>
+                  <td>課程上</td>
+                  <td>王某某</td>
+                  <td>STH400X</td>
+                  <td></td>
+                  <td>02</td>
+                  <td>2</td>
+                  <td>T5 T6</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td></td>
+               </tr>
+            </table>
+         </div>
+         <div id="footer" class="span-24">
+            <hr>
+            <a href="mailto:sombody@ntu.edu.tw">聯絡我們</a>
+         </div>
+         <div id='confirm'>
+            <div class='header'><span></span></div>
+            <div class='message'></div>
+            <div class='buttons'>
+               <div class='no simplemodal-close'>cancel</div><div class='yes'>Yes</div>
+            </div>
+         </div>
+         <!-- preload the images -->
+      </div> <!-- container -->
+      
+   </body>
+</html>
