@@ -5,24 +5,23 @@ css: css/index.css
 ---
 
 	<div class="row">
-		<div class="large-8 columns">
+		<div class="large-12 columns">
          <div class="large-8 push-4 columns">
             <h2>呂  行  Shing Lyu</h2>
-            <p> I am a graduate student in CS, intern at Intel, and software developer based in Taipei, Taiwan.</p>
+            <h6> I am a QA engineer and freelance programmer from Taipei, Taiwan. I build websites, web apps, and all kind of programmes from artificial intelligence musician and stock price monitors.</h6>
+            <div>
+               {% for node in site.pages %}
+                   {% if node.url != page.url %}
+                   <h5 class="inline"><a href="{{node.url}}">{{node.title}}</a></h5> | 
+                   {% endif %}
+               {% endfor %}
+               <h5 class="inline"><a href="mailto:shing.lyu@gmail.com">Contact</a></h5>
+            </div>
          </div>
          <div class="large-4 pull-8 columns">
             <img id="head" src="img/head.png" alt="photo of myself"/>
          </div>
 		</div>
-		<div class="large-4 columns">
-         {% for node in site.pages %}
-             {% if node.url != page.url %}
-             <form action="{{node.url}}">
-                <button type="submit"> {{node.title}}→ </button>
-             </form>
-             {% endif %}
-         {% endfor %}
-      </div>
       <hr />
 	</div>
 
