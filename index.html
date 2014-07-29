@@ -16,7 +16,8 @@ css: css/index.css
 <div class="row" id="title-links">
    <div class="large-12 columns center">
       
-      {% for node in site.pages %}
+      {% assign sorted_pages = site.pages | sort:"name" %}
+      {% for node in sorted_pages%}
           {% if node.url != page.url %}
           <h1 class="inline"><a href="{{node.url}}"><span style="white-space:nowrap;">{{node.title}}</span></a> | </h1>  
           {% endif %}
