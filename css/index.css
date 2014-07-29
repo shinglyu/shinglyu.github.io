@@ -9,3 +9,8 @@
 .inline {
    display:inline;
 }
+
+li strong {
+   color:#0099ff;
+}
+
