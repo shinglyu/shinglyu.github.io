@@ -1,0 +1,125 @@
+---
+layout: default 
+title: JCMG Corpus
+---
+
+<div class="row">
+    <div class="large-12 columns">
+        <h1>{{page.title}}</h1>
+
+        <h4><a href="https://github.com/shinglyu/jcmg_corpus/archive/master.zip">Download (zip)</a> | <a href="https://github.com/shinglyu/jcmg_corpus">Github Repo</a></h4>
+
+
+<p>By Shing Lyu
+Last modified: 2014/09/05</p>
+<h1 id="introduction">Introduction</h1>
+<p>  This corpus is a collection of monophonic piano performances with their corresponding scores. They were intended to be used for computer expressive music performance research, but you may adapt to your own research needs. This corpus is a part of my master thesis at Prof. Shyh-Kang Jeng's lab, JCMG (Jeng's Computer Music Group). </p>
+<h1 id="license">License</h1>
+<p>  This corpus is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  Please use this corpus freely, but remember to cite (see Citing This Work section).</p>
+<h1 id="content">Content</h1>
+<p>  The corpus consists of 6 set of recordings of Muzio Clementi's Sonatinas Op.36 (See Appendix A), recorded by 6 graduate students (not majored in music).
+One of the performer (涂智展) didn't finish all the pieces in Op.36. The name of the performers are listed below:</p>
+<table>
+<thead>
+<tr>
+<th>Codename</th>
+<th>Real name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wei</td>
+<td>魏振宇</td>
+</tr>
+<tr>
+<td>jen</td>
+<td>任俞仲</td>
+</tr>
+<tr>
+<td>jung</td>
+<td>鍾  愛</td>
+</tr>
+<tr>
+<td>lin</td>
+<td>林宗緯</td>
+</tr>
+<tr>
+<td>lian</td>
+<td>林廉喬</td>
+</tr>
+<tr>
+<td>tu</td>
+<td>涂智展</td>
+</tr>
+</tbody>
+</table>
+<p>  The recordings, along with their corresponding scores, come in two formats: a whole piece and a piece split into phrases. The phrasing is given by the author. The phrasing information is also provided, so you can split a piece into phrases manually.</p>
+<p>  The scores are downloaded from IMSLP (<a href="http://imslp.org/wiki/6_Sonatinas,_Op.36_%28Clementi,_Muzio%29">http://imslp.org/wiki/6_Sonatinas,_Op.36_%28Clementi,_Muzio%29</a>), published by Paris: Durand &amp; Cie., n.d.(1915). Plate D. &amp; F. 9318 (reissue 1968). The scores are manually reduced to monophonic melodies. </p>
+<h1 id="equipments-">Equipments:</h1>
+<ul>
+<li>Yamaha P-80 88-key graded hammer effect digital piano</li>
+<li>M-Audio MIDISPORT 2x2 MIDI-to-USB converter</li>
+<li>Lenovo x220i Laptop</li>
+<li>Rosegarden DAW (on Linux)</li>
+</ul>
+<h1 id="format">Format</h1>
+<p>  All the complete, pre-split files are in the ./corpus/whole folder.
+  Each sample comes in the following filename:</p>
+<pre><code><span class="hljs-attr_selector">[performer name]</span>_clementi_sonatina-36-<span class="hljs-attr_selector">[no]</span>-<span class="hljs-attr_selector">[movement no]</span><span class="hljs-class">.perf</span><span class="hljs-class">.mid</span>         <span class="hljs-comment">//performance</span>
+<span class="hljs-attr_selector">[performer name]</span>_clementi_sonatina-36-<span class="hljs-attr_selector">[no]</span>-<span class="hljs-attr_selector">[movement no]</span><span class="hljs-class">.score</span><span class="hljs-class">.xml</span>        <span class="hljs-comment">//score</span>
+<span class="hljs-attr_selector">[performer name]</span>_clementi_sonatina-36-<span class="hljs-attr_selector">[no]</span>-<span class="hljs-attr_selector">[movement no]</span><span class="hljs-class">.score</span><span class="hljs-class">.xml</span><span class="hljs-class">.phrase</span> <span class="hljs-comment">//phrasing file</span>
+</code></pre><p>  Here [performer name] is a codename given to each performer recording that piece. [no] is the piece number. [movement no] indicates the movement number.
+  The phrasing file is a plain text file, each line in the file marks the starting point of a phrase (unit: beats). If the phrase starts on a non-integer beat, the number may be rounded to an integer between the end of the previous phrase and the start of the current phrase.</p>
+<p>  All the split phrase files are in the ./corpus/split folder.
+  Each sample comes in the following filename:</p>
+<pre><code><span class="hljs-attr_selector">[performer name]</span>_clementi_sonatina-36-<span class="hljs-attr_selector">[no]</span>-<span class="hljs-attr_selector">[movement no]</span>-<span class="hljs-attr_selector">[phrase no]</span><span class="hljs-class">.perf</span><span class="hljs-class">.mid</span>  <span class="hljs-comment">//performance</span>
+<span class="hljs-attr_selector">[performer name]</span>_clementi_sonatina-36-<span class="hljs-attr_selector">[no]</span>-<span class="hljs-attr_selector">[movement no]</span>-<span class="hljs-attr_selector">[phrase no]</span><span class="hljs-class">.score</span><span class="hljs-class">.xml</span> <span class="hljs-comment">//score</span>
+</code></pre><h1 id="citing-this-work">Citing This Work</h1>
+<p>  This corpus is a part of my master thesis, so please cite the thesis:</p>
+<pre><code>Shing Lyu, “A Semi-automatic Computer Expressive Music Performance System <span class="hljs-keyword">Using</span> Structural Support Vector Machine,” M.S. thesis, Department of Electrical Engineering, National Taiwan University, Taipei, Taiwan (R.<span class="hljs-keyword">O</span>.<span class="hljs-keyword">C</span>), <span class="hljs-number">2014.</span> 
+</code></pre><h1 id="special-thanks">Special Thanks</h1>
+<p>  Thanks Prof. Shyh-Kang Jeng for providing guidance through out my graduate years,and supplying the lab space and equipments. And thank all the performers for participating the wonderful performances.</p>
+<h1 id="appendix-a-list-of-works">Appendix A: List of works</h1>
+<p>Muzio Clementi: 6 sonatinas, Op.36</p>
+<pre><code><span class="hljs-number">1.</span> Sonatina in <span class="hljs-keyword">C</span> major 
+
+<span class="hljs-keyword">I</span>. Allegro 
+II. Andante 
+III. Vivace 
+
+<span class="hljs-number">2.</span> Sonatina in G major 
+
+<span class="hljs-keyword">I</span>. Allegretto 
+II. Allegretto 
+III. Allegro 
+
+<span class="hljs-number">3.</span> Sonatina in <span class="hljs-keyword">C</span> major 
+
+<span class="hljs-keyword">I</span>. Spiritoso 
+II. Un poco adagio 
+III. Allegro 
+
+<span class="hljs-number">4.</span> Sonatina in F major 
+
+<span class="hljs-keyword">I</span>. Con spirito 
+II. Andante con espressione 
+III. Rondó: Allegro vivace 
+
+<span class="hljs-number">5.</span> Sonatina in G major 
+
+<span class="hljs-keyword">I</span>. Presto 
+II. Allegretto moderato 
+III. Rondó: Allegro molto 
+
+<span class="hljs-number">6.</span> Sonatina in <span class="hljs-keyword">D</span> major 
+
+<span class="hljs-keyword">I</span>. Allegro con spirito 
+II. Allegretto 
+</code></pre><h1 id="change-log">Change Log</h1>
+<p>2014/9/5    Initial version.</p>
+
+    </div>
+</div>
+
+
