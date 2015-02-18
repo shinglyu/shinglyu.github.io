@@ -1,0 +1,19 @@
+- title: Featured
+  projects:
+    - title: hi
+      title_href: hi
+      description: Ho
+      thumbnail_url:
+
+    - title: hi
+      title_href: hi
+      description: Ho
+      thumbnail_url: feijfie
+      source_url: foo
+
+- title: Test Group 2
+  projects:
+    - title: hr2ji
+      description: Ho
+    - title: For2ro
+      description: Bar

@@ -19,13 +19,18 @@ title: Projects
          <div class="large-9 columns">
             <div class="row">
                <div class="small-9 columns">
-                 <h5><a href="http://mdslides.herokuapp.com/">{{project.title}}</a></h5>
+                 <h5><a href="{{project.title_href}}">{{project.title}}</a></h5>
                  <p>{{project.description}}</p>
+                 {% if project.source_url%}
+                 <p><a href="{{project.source_url}}">Source Code</a></p>
+                 {% endif %}
                </div>
                <div class="small-3 columns">
-                  <a class="th radius" href="projects/MDSlides/screenshot.png">
-                     <img src="projects/MDSlides/screenshot.png">
-                  </a>
+                {% if project.thumbnail_url%}
+                <a class="th radius" href="{{project.thumbnail_url}}">
+                     <img src="{{project.thumbnail_url}}">
+                </a>
+                {% endif %}
                </div>
             </div>
             <br>
