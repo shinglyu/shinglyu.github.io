@@ -143,8 +143,8 @@
 
     - title: "Automatic Saliency Inspired Foreground Object Extraction from Videos"
       title_href: 
-      description: "by Hermes Shing Lyu and Shyh-Kang Jeng,<br/> International Workshop on Computer Music and Audio Technology, 2012."
-      thumbnail_url: "projects/wocmat12/result.png"
+      description: by Wei-te Li, Huei-tang Chang, Hermes Shing Lyu, and Yu-chiang Frank Wang,<br>IEEE International Conference of Image Processing, 2012
+      thumbnail_url: "projects/ICIP12/results.png"
       source_url:
 
     - title: "Classical music composition style clustering"
