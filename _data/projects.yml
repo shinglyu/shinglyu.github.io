@@ -2,33 +2,28 @@
   projects:
     - title: "The Servo Parallel Browser Engine"
       title_href: "https://github.com/servo/servo"
-      description: 
+      description: Servo is a prototype web browser engine written in the Rust language.I am contributing to servo as a community developer.
       thumbnail_url: 
       source_url: 
 
     - title: "MozTrap"
-      title_href: ""
-      description: 
+      title_href: "https://moztrap.mozilla.org"
+      description: MozTrap is the test case managment system for Mozilla. I am expanding its REST API for new UI design.
       thumbnail_url: 
-      source_url: 
+      source_url: https://github.com/mozilla/moztrap
 
     - title: "MozTrap New UI"
-      title_href: ""
-      description: 
+      title_href: "https://github.com/shinglyu/moztrap-new-ui"
+      description: A new frontend UI prototype for MozTrap
       thumbnail_url: 
-      source_url: 
+      source_url: https://github.com/shinglyu/moztrap-new-ui 
 
     - title: "MDSlides-local"
-      title_href: ""
-      description: 
+      title_href: "https://github.com/shinglyu/mdslides-local"
+      description: Markdown slideshow system based on Reveal.js, runs locally without the need for a web server 
       thumbnail_url: 
       source_url: 
 
-    - title: "MDSlides"
-      title_href: "http://mdslides.herokuapp.com/"
-      description: "An cloud-based editor for presentation slides using Markdown syntax."
-      thumbnail_url: "projects/MDSlides/screenshot.png" 
-      source_url: 
 
     - title: "JCMG Corpus for Computer Experssive Music Performance"
       title_href: "projects/jcmg_corpus/corpus.html"
@@ -42,11 +37,6 @@
       thumbnail_url: "projects/roulette.png"
       source_url: "https://github.com/shinglyu/svg-roulette"
 
-    - title: FullBatteryAlarm
-      title_href: "https://marketplace.firefox.com/app/fullbatteryalarm"
-      description: "Alarm you when the battery if fully charged. Never over-charge your battery again!"
-      thumbnail_url: projects/fullbatteryalarm.png
-      source_url:
 
 - title: To be Released Soon
   projects:
@@ -64,15 +54,21 @@
 
 - title: Firefox OS Apps & Firefox Add-ons
   projects: 
+    - title: FullBatteryAlarm
+      title_href: "https://marketplace.firefox.com/app/fullbatteryalarm"
+      description: "Alarm you when the battery if fully charged. Never over-charge your battery again!"
+      thumbnail_url: projects/fullbatteryalarm.png
+      source_url:
+
     - title: "Taipei MRT Map"
       title_href: "https://marketplace.firefox.com/app/taipei-mrt-map"
-      description: 
+      description: An offline map for Taipei MRT 
       thumbnail_url: 
       source_url: 
 
-    - title: TabataTimer
+    - title: "TabataTimer"
       title_href: "https://marketplace.firefox.com/app/tabatatimer"
-      description: 
+      description: A simple timer for a 4-minute tabata workout with voice reminders (remember to turn up the volume). 
       thumbnail_url: 
       source_url: 
 
@@ -95,10 +91,42 @@
       source_url: 
 
     - title: "Bugzilla Summarizer"
-      title_href: 
-      description: 
+      title_href: http://shinglyu.github.io/bugzilla_summarizer/
+      description: A visualization for Bugzilla's history
       thumbnail_url: 
+      source_url: https://github.com/shinglyu/bugzilla_summarizer 
+
+- title: Side Projects
+  projects: 
+    - title: "HTML5 Countdown Timer"
+      title_href: "http://shinglyu.github.io/countdown/countdown.html"
+      description: A simple countdown timer with audio and flashing light.
+      thumbnail_url: projects/countdown/screenshot.png 
+      source_url: "https://github.com/shinglyu/countdown"
+
+    - title: "MDSlides"
+      title_href: "http://mdslides.herokuapp.com/"
+      description: "An cloud-based editor for presentation slides using Markdown syntax."
+      thumbnail_url: "projects/MDSlides/screenshot.png" 
       source_url: 
+
+- title: Freelancing
+  projects:
+    - title: "The Figured Bass"
+      title_href: "http://thefiguredbass.com/"
+      description: "A music education startup that tries to help students learn music theories with our automatic grading system."
+
+    - title: ASCII Oscilloscope running on Raspberry Pi
+      description: This oscilloscope can display the audio input as ASCII art in realtime. A commssioned work for a design student's graduation project (2012).
+      thumbnail_url: projects/oscilloscope/oscilloscope.jpg 
+
+    - title: "Chinese Corpus Search Engine for Linguistic Research"
+      description: "A query system for the Academia Scinica Chinese Corpus. Commissioned by National Taiwan University in 2013"
+
+    - title: "NTU Course Selection System Design Award"
+      title_href: "projects/ntuDesign/"
+      description: "An UI rework (mockup) for National Taiwan University's online course selection system."
+
 
 - title: Academic
   projects: 
@@ -112,7 +140,6 @@
       title_href: 
       description: "by Hermes Shing Lyu and Shyh-Kang Jeng,<br/> International Workshop on Computer Music and Audio Technology, 2012."
       thumbnail_url: "http://127.0.0.1:4000/projects/wocmat12/result.png"
-      source_url:
 
     - title: "Automatic Saliency Inspired Foreground Object Extraction from Videos"
       title_href: 
@@ -136,28 +163,3 @@
     - title: "Musical Source Separation Using Average Harmonic Models"
       description: "2009 Multimedia Signal Processing Final Projects"
 
-- title: Freelancing
-  projects:
-    - title: "Chinese Corpus Search Engine for Linguistic Research"
-      description: "A query system for the Academia Scinica Chinese Corpus. Commissioned by National Taiwan University in 2013"
-
-    - title: "The Figured Bass"
-      title_href: "http://thefiguredbass.com/"
-      description: "A music education startup that tries to help students learn music theories with our automatic grading system."
-
-    - title: "NTU Course Selection System Design Award"
-      title_href: "projects/ntuDesign/"
-      description: "An UI rework (mockup) for National Taiwan University's online course selection system."
-
-    - title: ASCII Oscilloscope running on Raspberry Pi
-      description: This oscilloscope can display the audio input as ASCII art in realtime. A commssioned work for a design student's graduation project (2012).
-      thumbnail_url: projects/oscilloscope/oscilloscope.jpg 
-
-
-- title: Side Projects
-  projects: 
-    - title: "HTML5 Countdown Timer"
-      title_href: "http://shinglyu.github.io/countdown/countdown.html"
-      description: A simple countdown timer with audio and flashing light.
-      thumbnail_url: projects/countdown/screenshot.png 
-      source_url: "https://github.com/shinglyu/countdown"
