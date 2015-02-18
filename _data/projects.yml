@@ -139,7 +139,7 @@
     - title: "Computer Expressive Music Performance By Phrase-wise Modeling"
       title_href: 
       description: "by Hermes Shing Lyu and Shyh-Kang Jeng,<br/> International Workshop on Computer Music and Audio Technology, 2012."
-      thumbnail_url: "http://127.0.0.1:4000/projects/wocmat12/result.png"
+      thumbnail_url: "projects/wocmat12/result.png"
 
     - title: "Automatic Saliency Inspired Foreground Object Extraction from Videos"
       title_href: 
