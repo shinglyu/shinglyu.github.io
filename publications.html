@@ -1,0 +1,44 @@
+---
+layout: default 
+title: Publications
+---
+
+
+<div class="row">
+   <div class="large-12 columns">
+
+      <h1>{{ page.title }}</h1>
+
+      {% for category in site.data.publications%}
+      <div class="row">
+         <div class="large-3 columns">
+           <h4>{{category.title}}</h4>
+         </div>
+         <div class="large-9 columns">
+         {% for publication in category.publications%}
+            <div class="row">
+               <div class="small-9 columns">
+                 <h5><a href="{{publication.title_href}}">{{publication.title}}</a></h5>
+                 <p>{{publication.description}}
+                 {% if publication.source_url%}
+                 <a href="{{publication.source_url}}">Source Code</a></p>
+                 {% endif %}
+               </div>
+               <div class="small-3 columns">
+                {% if publication.thumbnail_url%}
+                <a class="th radius" href="{{publication.thumbnail_url}}">
+                     <img src="{{publication.thumbnail_url}}">
+                </a>
+                {% endif %}
+               </div>
+            </div>
+            <br>
+         {% endfor %}
+         </div>
+      </div>
+      <hr> <!-- =============================== -->
+      {% endfor %}
+
+   </div>
+</div>
+

@@ -1,0 +1,39 @@
+- title: Technical
+  publications:
+    - title: The Servo Browser Engine -- A Learner's Notebook
+      title_url: http://shinglyu.gitbooks.io/the-servo-browser-engine-a-learner-s-notebook/
+
+    - title: 自己的瀏覽器自己改 (Part I) －利用Firefox Addon SDK開發簡單的附加元件
+      title_url: http://tech.mozilla.com.tw/posts/5832/%e8%87%aa%e5%b7%b1%e7%9a%84%e7%80%8f%e8%a6%bd%e5%99%a8%e8%87%aa%e5%b7%b1%e6%94%b9-part-i-%e5%88%a9%e7%94%a8firefox-addon-sdk%e9%96%8b%e7%99%bc%e7%b0%a1%e5%96%ae%e7%9a%84%e9%99%84%e5%8a%a0%e5%85%83
+      description: Published on Mozilla Tech Blog
+
+- title: Public Notes
+  publications:
+    - title: Technical BKMs (Best Known Methods)
+      title_url: https://dl.dropboxusercontent.com/u/7281903/docs/bkm_tiddly.html
+      description: Guides to install and configure software development environments
+
+    - title: Commandline Cheatsheet
+      title_url: https://dl.dropboxusercontent.com/u/7281903/docs/cheatsheet_tiddly.html
+      description: Frequently used commands
+
+
+- title: Academic
+  publications: 
+    - title: "A Semi-automatic Computer Expressive Music Performance System Using Structural Support Vector Machine"
+      title_href: "http://handle.ncl.edu.tw/11296/ndltd/78460609550247011906"
+      description: "Master Thesis, National Taiwan University, Jun 2014" 
+      thumbnail_url: "projects/wocmat12/result.png"
+      source_url:
+
+    - title: "Computer Expressive Music Performance By Phrase-wise Modeling"
+      title_href: 
+      description: "by Hermes Shing Lyu and Shyh-Kang Jeng,<br/> International Workshop on Computer Music and Audio Technology, 2012."
+      thumbnail_url: "http://127.0.0.1:4000/projects/wocmat12/result.png"
+
+    - title: "Automatic Saliency Inspired Foreground Object Extraction from Videos"
+      title_href: 
+      description: by Wei-te Li, Huei-tang Chang, Hermes Shing Lyu, and Yu-chiang Frank Wang,<br>IEEE International Conference of Image Processing, 2012
+      thumbnail_url: "projects/ICIP12/results.png"
+      source_url:
+
