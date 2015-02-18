@@ -10,6 +10,36 @@ title: Projects
       <h1>{{ page.title }}</h1>
       <p> Here are some highlights from my personal and course projects, for work-related projects, please check my <a href="resume.html">Resume</a>.
 
+      {% for category in site.data.projects%}
+      <div class="row">
+         <div class="large-3 columns">
+           <h4>{{category.title}}</h4>
+         </div>
+         {% for project in category.projects%}
+         <div class="large-9 columns">
+            <div class="row">
+               <div class="small-9 columns">
+                 <h5><a href="{{project.title_href}}">{{project.title}}</a></h5>
+                 <p>{{project.description}}</p>
+                 {% if project.source_url%}
+                 <p><a href="{{project.source_url}}">Source Code</a></p>
+                 {% endif %}
+               </div>
+               <div class="small-3 columns">
+                {% if project.thumbnail_url%}
+                <a class="th radius" href="{{project.thumbnail_url}}">
+                     <img src="{{project.thumbnail_url}}">
+                </a>
+                {% endif %}
+               </div>
+            </div>
+            <br>
+         </div>
+         {% endfor %}
+      </div>
+      <hr> <!-- =============================== -->
+      {% endfor %}
+
       <hr> <!-- =============================== -->
       <div class="row">
          <div class="large-3 columns">
