@@ -9,20 +9,30 @@ css: css/index.css
    <div class="large-12 columns center">
       <img id="head" src="img/head.png" alt="photo of myself"/>
          <h2>Hi, I'm 呂  行  (Shing Lyu)</h2>
-         <p> I am a <strong>QA engineer</strong> and <strong>programmer</strong> from Taipei, Taiwan. I build websites, web apps, and all kind of programmes from artificial intelligence musician and stock price monitors.</p>
+         <p> I am a <strong>QA engineer</strong> and <strong>programmer</strong> based in Taipei, Taiwan. I build websites, web apps, and all kind of programmes from artificial intelligence musician and stock price monitors.</p>
    </div>
 </div>
 
 <div class="row" id="title-links">
    <div class="large-12 columns center">
-      
+     |
       {% assign sorted_pages = site.pages | sort:"name" %}
       {% for node in sorted_pages%}
-          {% if node.url != page.url %}
-          <h1 class="inline"><a href="{{node.url}}"><span style="white-space:nowrap;">{{node.title}}</span></a> | </h1>  
+        {% for ignore in site.data.pagesignore%}
+          {% if node.title == ignore %}
+            {% break %}
           {% endif %}
+          {% if node.url != page.url %}
+          <h5 class="inline"><a href="{{node.url}}"><span style="white-space:nowrap;">{{node.title}}</span></a> | </h5>  
+          {% endif %}
+        {% endfor %}
       {% endfor %}
+      <br/>
+      <br/>
 
-      <h1 class="inline"><a href="mailto:shing.lyu@gmail.com">Email</a></h1>
+      <h5 class="inline"><a href="mailto:shing.lyu@gmail.com">Email</a></h5> | 
+      <h5 class="inline"><a href="http://tw.linkedin.com/pub/shing-lyu/50/361/599/en">LinkedIn</a></h5> | 
+      <h5 class="inline"><a href="https://www.github.com/shinglyu">GitHub</a></h5> 
    </div>
 </div>
+

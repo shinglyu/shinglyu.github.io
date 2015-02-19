@@ -13,74 +13,15 @@ css: css/index.css
 		<div class="large-6 columns">
          <img class="icon" src="img/keyboard_48.png" alt=""/>
          <h3>Programming</h3>
-         <h4>Skill</h4>
-         <ul> 
-            <li><strong>Software Validation/Testing</strong></li>
-            <li><strong>Machine Learning</strong></li>
-            <li><strong>Computer Music/Audio</strong></li>
-            <li>MIDI</li>
-         </ul>
-         <h4>Learning</h4>
-         <ul>
-            <li>Functional Programming</li>
-            <li>Node.js</li>
-            <li>Firefox OS and open web app</li>
-         </ul>
-         <h4>Language</h4>
-         <ul> 
-            <li><strong>Python</strong></li>
-            <li><strong>R </strong></li>
-            <li>Shell Script </li>
-            <li>Matlab </li>
-            <li>C++ </li>
-            <li>Java</li>
-            <li>C#</li>
-
-         </ul>
-         <h4>Web</h4>
-         <ul> 
-            <li><strong>HTML5</strong></li>
-            <li>CSS  
-               <ul> 
-                  <li>Foundation Framework</li>
-                  <li><strong>Bootstrap CSS</strong></li>
-               </ul>
-            </li>
-            <li>JavaScript  </li>
-            <li>jQuery </li>
-            <li><strong>Ruby on Rails</strong></li>
-            <li>PHP
-               <ul> 
-                  <li>CodeIgniter</li>
-               </ul>
-            </li>
-            <li>ASP.NET</li>
-            <li>Jekyll (static site generator)</li>
-         </ul>
-         <h4>Testing/Version Control</h4>
-         <ul> 
-            <li><strong>Selenium (Frontend)</strong></li>
-            <li><strong>unittest (python)</strong></li>
-            <li>Sikuli (GUI) </li>
-            <li>JUnit</li>
-            <li>TestNG</li>
-            <li><strong>git </strong></li>
-         </ul>
-         <h4>Server Management</h4>
-         <ul> 
-            <li><strong>Linux</strong></li>
-            <li>LAMP (Linux, Apaxhe, MySQL, PHP) </li>
-            <li>Windows Server 2008/2012 </li>
-            <li>Windows IIS Server</li>
-            <li>DNS/DHCP</li>
-            <li>Hyper-V</li>
-            <li><strong>VirtualBox</strong></li>
-
-         </ul>
-         <h4>Misc.</h4>
-         <ul>
-            <li>LaTex</li>
-         </ul>
+         
+        {% for category in site.data.skillset_programming%}
+          <h4>{{category.title}}</h4>
+          <ul> 
+          {% for item in category.items%}
+            <li>{{item}}</li>
+          {% endfor %}
+          </ul>
+        {% endfor %}
 
       </div>
       <div class="large-6 columns">
@@ -104,6 +45,10 @@ css: css/index.css
             <div class="large-12 columns">
                <img class="icon" src="img/money_48.png" alt=""/>
                <h3>Finance</h3>
+                <ul> 
+                  <li>WorldQuant WebSim Quantitative Finance Investment Contest 2nd Prize, 2014</li>
+                  <li>Senior Securities Specialist License, Taiwan</li>
+                </ul>
                <p> I am a Quant by training. I have finished <a href="http://newweb.management.ntu.edu.tw/chinese/mba/qfa/">Quantitative Finance Program</a> in National Taiwan University, which equipped me with knowledge in <b>algorithmic trading, derivatives pricing</b> and so on. My electrical engineering background provides me quantitative skill such as <b>multivariate statistical analysis, machines learning and signal processing</b>.</p>
                <p> I also have a <b>Senior Securities Specialist License (證券商高級業務員證照)</b>(Taiwan)<p>
             </div>

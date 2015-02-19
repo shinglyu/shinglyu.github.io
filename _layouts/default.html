@@ -24,7 +24,7 @@
       <nav class="top-bar">
       <ul class="title-area">
          <li class="name">
-         <h1><a href="#">{{ site.name }} ▲</a></h1>
+         <h1><a href="/">{{ site.name }}</a></h1>
          </li>
          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
          </li>
@@ -33,8 +33,13 @@
       <ul class="right">
          {% assign sorted_pages = site.pages | sort:"name" %}
          {% for node in sorted_pages%}
-         <li class="divider"></li>
-         <li {% if node.url == page.url%} class="active" {% endif %}><a href="{{node.url}}">{{node.title}}</a></li>
+           {% for ignore in site.data.pagesignore%}
+            {% if node.title == ignore %}
+              {% break %}
+            {% endif %}
+           <li class="divider"></li>
+           <li {% if node.url == page.url%} class="active" {% endif %}><a href="{{node.url}}">{{node.title}}</a></li>
+           {%endfor%}
          {%endfor%}
       </ul>
       </section>
