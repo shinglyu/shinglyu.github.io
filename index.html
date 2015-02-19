@@ -9,13 +9,13 @@ css: css/index.css
    <div class="large-12 columns center">
       <img id="head" src="img/head.png" alt="photo of myself"/>
          <h2>Hi, I'm 呂  行  (Shing Lyu)</h2>
-         <p> I am a <strong>QA engineer</strong> and <strong>programmer</strong> from Taipei, Taiwan. I build websites, web apps, and all kind of programmes from artificial intelligence musician and stock price monitors.</p>
+         <p> I am a <strong>QA engineer</strong> and <strong>programmer</strong> based in Taipei, Taiwan. I build websites, web apps, and all kind of programmes from artificial intelligence musician and stock price monitors.</p>
    </div>
 </div>
 
 <div class="row" id="title-links">
    <div class="large-12 columns center">
-      
+     |
       {% assign sorted_pages = site.pages | sort:"name" %}
       {% for node in sorted_pages%}
         {% for ignore in site.data.pagesignore%}
@@ -27,7 +27,12 @@ css: css/index.css
           {% endif %}
         {% endfor %}
       {% endfor %}
+      <br/>
+      <br/>
 
-      <h5 class="inline"><a href="mailto:shing.lyu@gmail.com">Email</a></h5>
+      <h5 class="inline"><a href="mailto:shing.lyu@gmail.com">Email</a></h5> | 
+      <h5 class="inline"><a href="http://tw.linkedin.com/pub/shing-lyu/50/361/599/en">LinkedIn</a></h5> | 
+      <h5 class="inline"><a href="https://www.github.com/shinglyu">GitHub</a></h5> 
    </div>
 </div>
+
