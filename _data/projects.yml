@@ -4,6 +4,30 @@
       title_href: "https://github.com/servo/servo"
       description: Servo is a prototype web browser engine written in the Rust language.I am contributing to servo as a community developer.
       thumbnail_url: 
+      source_url: "https://github.com/servo/servo"
+
+    - title: "BzDeck"
+      title_href: "https://www.bzdeck.com"
+      description: A useful experimental Bugzilla client demonstrating modern Web application technologies such as CSS3, DOM4, HTML5, ECMAScript 6 and WAI-ARIA
+      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
+      source_url: https://github.com/bzdeck/bzdeck
+
+    - title: "BzDeck (Firefox Add-on)"
+      title_href: https://addons.mozilla.org/en-US/firefox/addon/bzdeck
+      description: Redirect you to BzDeck when you open a bugzilla link 
+      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
+      source_url: https://github.com/shinglyu/bzdeck-addon 
+
+    - title: "FocusBlocker"
+      title_href: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
+      description: "Block websites for a given time to help you focus on work/study (currently blocks facebook, twitter, feedly and icanhazcheezeburger.)"
+      thumbnail_url: "projects/FocusBlocker/screenshot_icon.png"
+      source_url: 
+
+    - title: "Kanbanmarks (Firefox Add-on)"
+      title_href: https://addons.mozilla.org/en-US/firefox/addon/kanbanmark/ 
+      description: Organize your bookmarks with ease in a kanban-style layout 
+      thumbnail_url: https://addons.cdn.mozilla.net/user-media/previews/full/154/154040.png 
       source_url: 
 
     - title: "MozTrap"
@@ -32,8 +56,8 @@
       source_url: 
 
     - title: "HTML5 Roulette"
-      title_href: "https://marketplace.firefox.com/app/roulette-3"
-      description: "A lucky draw roulette created using HTML5 technology."
+      title_href: http://shinglyu.github.io/svg-roulette/roulette.html 
+      description: "A lucky draw roulette created using HTML5 technology. <a href=\"https://marketplace.firefox.com/app/roulette-3\">[App version]</a>"
       thumbnail_url: "projects/roulette.png"
       source_url: "https://github.com/shinglyu/svg-roulette"
 
@@ -72,11 +96,6 @@
       thumbnail_url: 
       source_url: 
 
-    - title: "FocusBlocker"
-      title_href: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
-      description: "Block websites for a given time to help you focus on work/study (currently blocks facebook, twitter, feedly and icanhazcheezeburger.)"
-      thumbnail_url: "projects/FocusBlocker/screenshot_icon.png"
-      source_url: 
 
     - title: "MozTrapHelper"
       title_href: "https://addons.mozilla.org/en-US/firefox/addon/moztraphelper/"
