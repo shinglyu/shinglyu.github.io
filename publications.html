@@ -18,7 +18,7 @@ title: Publications
          {% for publication in category.publications%}
             <div class="row">
                <div class="small-9 columns">
-                 <h5><a href="{{publication.title_href}}">{{publication.title}}</a></h5>
+                 <h5><a href="{{publication.title_url}}">{{publication.title}}</a></h5>
                  <p>{{publication.description}}
                  {% if publication.source_url%}
                  <a href="{{publication.source_url}}">Source Code</a></p>
