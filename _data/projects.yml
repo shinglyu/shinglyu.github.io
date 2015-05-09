@@ -6,21 +6,9 @@
       thumbnail_url: 
       source_url: "https://github.com/servo/servo"
 
-    - title: "BzDeck"
-      title_href: "https://www.bzdeck.com"
-      description: A useful experimental Bugzilla client demonstrating modern Web application technologies such as CSS3, DOM4, HTML5, ECMAScript 6 and WAI-ARIA
-      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
-      source_url: https://github.com/bzdeck/bzdeck
-
-    - title: "BzDeck (Firefox Add-on)"
-      title_href: https://addons.mozilla.org/en-US/firefox/addon/bzdeck
-      description: Redirect you to BzDeck when you open a bugzilla link 
-      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
-      source_url: https://github.com/shinglyu/bzdeck-addon 
-
     - title: "FocusBlocker"
       title_href: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
-      description: "Block websites for a given time to help you focus on work/study (currently blocks facebook, twitter, feedly and icanhazcheezeburger.)"
+      description: "700+ daily active users! Block websites for a given time to help you focus on work/study (currently blocks facebook, twitter, feedly and icanhazcheezeburger.)"
       thumbnail_url: "projects/FocusBlocker/screenshot_icon.png"
       source_url: 
 
@@ -29,6 +17,27 @@
       description: Organize your bookmarks with ease in a kanban-style layout 
       thumbnail_url: https://addons.cdn.mozilla.net/user-media/previews/full/154/154040.png 
       source_url: 
+
+    - title: "MDSlides-local"
+      title_href: "https://github.com/shinglyu/mdslides-local"
+      description: Markdown slideshow system based on Reveal.js, runs locally without the need for a web server 
+      thumbnail_url: 
+      source_url: 
+
+    - title: "BzDeck"
+      title_href: "https://www.bzdeck.com"
+      description: A useful experimental Bugzilla client demonstrating modern Web application technologies such as CSS3, DOM4, HTML5, ECMAScript 6 and WAI-ARIA
+      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
+      source_url: https://github.com/bzdeck/bzdeck
+
+- title: Mozilla
+  projects:
+
+    - title: "BzDeck (Firefox Add-on)"
+      title_href: https://addons.mozilla.org/en-US/firefox/addon/bzdeck
+      description: Redirect you to BzDeck when you open a bugzilla link 
+      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
+      source_url: https://github.com/shinglyu/bzdeck-addon 
 
     - title: "MozTrap"
       title_href: "https://moztrap.mozilla.org"
@@ -42,33 +51,20 @@
       thumbnail_url: 
       source_url: https://github.com/shinglyu/moztrap-new-ui 
 
-    - title: "MDSlides-local"
-      title_href: "https://github.com/shinglyu/mdslides-local"
-      description: Markdown slideshow system based on Reveal.js, runs locally without the need for a web server 
+    - title: "MozTrapHelper"
+      title_href: "https://addons.mozilla.org/en-US/firefox/addon/moztraphelper/"
+      description: "Add those missing functionalities to MozTrap ( http://moztrap.mozilla.org/  )."
       thumbnail_url: 
       source_url: 
 
-
-    - title: "JCMG Corpus for Computer Experssive Music Performance"
-      title_href: "projects/jcmg_corpus/corpus.html"
-      description: "Piano performance corpus for computer expressive music performance research."
+    - title: "Bugzilla Summarizer"
+      title_href: http://shinglyu.github.io/bugzilla_summarizer/
+      description: A visualization for Bugzilla's history
       thumbnail_url: 
-      source_url: 
-
-    - title: "HTML5 Roulette"
-      title_href: http://shinglyu.github.io/svg-roulette/roulette.html 
-      description: "A lucky draw roulette created using HTML5 technology. <a href=\"https://marketplace.firefox.com/app/roulette-3\">[App version]</a>"
-      thumbnail_url: "projects/roulette.png"
-      source_url: "https://github.com/shinglyu/svg-roulette"
-
+      source_url: https://github.com/shinglyu/bugzilla_summarizer 
 
 - title: To be Released Soon
   projects:
-    - title: "Kanbanmarks"
-      title_href: 
-      description: "A Trello-inspired UI for Firefox bookmarks"
-      thumbnail_url: 
-      source_url:
   
     - title: "Guitar Karaoke"
       title_href: 
@@ -78,6 +74,12 @@
 
 - title: Firefox OS Apps & Firefox Add-ons
   projects: 
+    - title: "HTML5 Roulette"
+      title_href: http://shinglyu.github.io/svg-roulette/roulette.html 
+      description: "A lucky draw roulette created using HTML5 technology. <a href=\"https://marketplace.firefox.com/app/roulette-3\">[App version]</a>"
+      thumbnail_url: "projects/roulette.png"
+      source_url: "https://github.com/shinglyu/svg-roulette"
+
     - title: FullBatteryAlarm
       title_href: "https://marketplace.firefox.com/app/fullbatteryalarm"
       description: "Alarm you when the battery if fully charged. Never over-charge your battery again!"
@@ -96,24 +98,11 @@
       thumbnail_url: 
       source_url: 
 
-
-    - title: "MozTrapHelper"
-      title_href: "https://addons.mozilla.org/en-US/firefox/addon/moztraphelper/"
-      description: "Add those missing functionalities to MozTrap ( http://moztrap.mozilla.org/  )."
-      thumbnail_url: 
-      source_url: 
-
     - title: "Coursera Autoplay"
       title_href: "https://addons.mozilla.org/en-US/firefox/addon/coursera-autoplay/"
       description: "Auto skip in-video quizes and continue to the next video when current video ends."
       thumbnail_url: 
       source_url: 
-
-    - title: "Bugzilla Summarizer"
-      title_href: http://shinglyu.github.io/bugzilla_summarizer/
-      description: A visualization for Bugzilla's history
-      thumbnail_url: 
-      source_url: https://github.com/shinglyu/bugzilla_summarizer 
 
 - title: Side Projects
   projects: 
@@ -154,6 +143,12 @@
       description: "Master Thesis, National Taiwan University, Jun 2014" 
       thumbnail_url: "projects/wocmat12/result.png"
       source_url:
+
+    - title: "JCMG Corpus for Computer Experssive Music Performance"
+      title_href: "projects/jcmg_corpus/corpus.html"
+      description: "Piano performance corpus for computer expressive music performance research."
+      thumbnail_url: 
+      source_url: 
 
     - title: "Computer Expressive Music Performance By Phrase-wise Modeling"
       title_href: 
