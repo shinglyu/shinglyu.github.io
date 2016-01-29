@@ -31,16 +31,15 @@
       </ul>
       <section class="top-bar-section">
       <ul class="right">
-         {% assign sorted_pages = site.pages | sort:"name" %}
-         {% for node in sorted_pages%}
-           {% for ignore in site.data.pagesignore%}
-            {% if node.title == ignore %}
-              {% break %}
-            {% endif %}
+        {% assign sorted_pages = site.pages | sort:"name" %}
+        {% for node in sorted_pages %}
+          {% if site.exclude_pages contains node.title %}
+            {% continue %}
+          {% else %}
            <li class="divider"></li>
            <li {% if node.url == page.url%} class="active" {% endif %}><a href="{{node.url}}">{{node.title}}</a></li>
-           {%endfor%}
-         {%endfor%}
+        {% endif %}
+        {%endfor%}
       </ul>
       </section>
       </nav>

@@ -2,5 +2,6 @@ name: Shing Lyu
 email: shing.lyu@gmail.com
 highlighter: null
 markdown: kramdown
+exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus"]
 
 

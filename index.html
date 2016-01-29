@@ -25,22 +25,22 @@ css: css/index.css
    <div class="large-12 columns center">
      |
       {% assign sorted_pages = site.pages | sort:"name" %}
-      {% for node in sorted_pages%}
-        {% for ignore in site.data.pagesignore%}
-          {% if node.title == ignore %}
-            {% break %}
-          {% endif %}
-          {% if node.url != page.url %}
+      {% for node in sorted_pages %}
+        {% if site.exclude_pages contains node.title %}
+          {% continue %}
+        {% else %}
           <h5 class="inline"><a href="{{node.url}}"><span style="white-space:nowrap;">{{node.title}}</span></a> | </h5>  
-          {% endif %}
-        {% endfor %}
+        {% endif %}
       {% endfor %}
+
       <br/>
       <br/>
 
+      |
       <h5 class="inline"><a href="mailto:shing.lyu@gmail.com">Email</a></h5> | 
       <h5 class="inline"><a href="http://tw.linkedin.com/pub/shing-lyu/50/361/599/en">LinkedIn</a></h5> | 
       <h5 class="inline"><a href="https://www.github.com/shinglyu">GitHub</a></h5> 
+      |
    </div>
 </div>
 
