@@ -1,5 +1,11 @@
 - title: "Featured"
   projects:
+    - title: "MozITP"
+      title_href: "https://github.com/Mozilla-TWQA/MozITP"
+      description: "Mozilla Integrated Tools Package. An all-in-one testing tool for Firefox ecosystem. You can flash phones, run Firefox OS phone or TV simulators, and run automated tests in this package. Greatly reduce the time and effort of setting up a testing enviornment."
+      thumbnail_url: "https://raw.githubusercontent.com/Mozilla-TWQA/MozITP/master/menu.png"
+      source_url: "https://github.com/Mozilla-TWQA/MozITP"
+
     - title: "The Servo Parallel Browser Engine"
       title_href: "https://github.com/servo/servo"
       description: Servo is a prototype web browser engine written in the Rust language.I am contributing to servo as a community developer.
@@ -8,14 +14,8 @@
 
     - title: "FocusBlocker"
       title_href: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
-      description: "700+ daily active users! Block websites for a given time to help you focus on work/study (currently blocks facebook, twitter, feedly and icanhazcheezeburger.)"
+      description: "1000+ daily active users! Block websites for a given time to help you focus on work/study."
       thumbnail_url: "projects/FocusBlocker/screenshot_icon.png"
-      source_url: 
-
-    - title: "Kanbanmarks (Firefox Add-on)"
-      title_href: https://addons.mozilla.org/en-US/firefox/addon/kanbanmark/ 
-      description: Organize your bookmarks with ease in a kanban-style layout 
-      thumbnail_url: https://addons.cdn.mozilla.net/user-media/previews/full/154/154040.png 
       source_url: 
 
     - title: "MDSlides-local"
@@ -32,6 +32,17 @@
 
 - title: Mozilla
   projects:
+    - title: "MozIlluminate"
+      title_href: "https://github.com/MozIlluminate/mozilluminate-demo"
+      description: "Next generation MozTrap, Mozilla's test case management database.  Using Google Spreadsheet to manage test cases and execute them in MozTrap. Greatly imporve the readability and maintainablity of test cases"
+      thumbnail_url: 
+      source_url: "https://github.com/MozIlluminate/mozilluminate-demo"
+
+    - title: "MozTrap Duplication Finder"
+      title_href: "https://github.com/shinglyu/moztrap-dup-finder"
+      description: "Using machine learning to find duplicated or redundent test cases on MozTrap, our test case management database."
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/moztrap-dup-finder"
 
     - title: "BzDeck (Firefox Add-on)"
       title_href: https://addons.mozilla.org/en-US/firefox/addon/bzdeck
@@ -46,10 +57,10 @@
       source_url: https://github.com/mozilla/moztrap
 
     - title: "MozTrap New UI"
-      title_href: "https://github.com/shinglyu/moztrap-new-ui"
-      description: A new frontend UI prototype for MozTrap
+      title_href: "https://shinglyu.github.io/moztrap-new-ui/#/"
+      description: "A new frontend UI for MozTrap. Improved searchablity; Better suite and test case managment and diff'ing test cases online"
       thumbnail_url: 
-      source_url: https://github.com/shinglyu/moztrap-new-ui 
+      source_url: "https://github.com/shinglyu/moztrap-new-ui"
 
     - title: "MozTrapHelper"
       title_href: "https://addons.mozilla.org/en-US/firefox/addon/moztraphelper/"
@@ -63,17 +74,32 @@
       thumbnail_url: 
       source_url: https://github.com/shinglyu/bugzilla_summarizer 
 
-- title: To be Released Soon
-  projects:
-  
-    - title: "Guitar Karaoke"
-      title_href: 
-      description: "A Karaoke-style guitar tab reader"
-      thumbnail_url: 
-      source_url:
-
-- title: Firefox OS Apps & Firefox Add-ons
+- title: Firefox OS Apps & Add-ons
   projects: 
+    - title: "Unread Icon (Fireofx OS Add-on)"
+      title_href: "https://marketplace.firefox.com/addon/unread-icons-1"
+      description: "Show unread messages counts on Firefox OS homescreen icons. Winner of the **2015 Firefox OS Add-on Hackathon** -- Most Useful Award. Featured in this [Mozilla Hack Blog article](https://hacks.mozilla.org/2015/11/building-an-ios-style-unread-notifications-add-on-for-firefox-os/)"
+      thumbnail_url: "https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2015/10/demo-250x444.png"
+      source_url: "https://github.com/shinglyu/fxos-unread-icon"
+
+    - title: "Back Button (Fireofx OS Add-on)"
+      title_href: "https://marketplace.firefox.com/addon/back-button-4"
+      description: "Add an global back button to Firefox OS"
+      thumbnail_url: "https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2015/10/demo-250x444.png"
+      source_url: "https://github.com/shinglyu/fxos-back-button"
+
+    - title: "Reader Mode"
+      title_href: "https://marketplace.firefox.com/app/reader-mode/"
+      description: "Cleanup the clutters on webpages for better reading experience"
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/176/176898.png?modified=1437707097"
+      source_url: "https://github.com/shinglyu/readermode"
+
+    - title: "Tip Calculator"
+      title_href: "https://marketplace.firefox.com/app/tip-calculator-3/"
+      description: "Help you calculate restaurant tips"
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/180/180944.png?modified=1447650668"
+      source_url: "https://github.com/shinglyu/tip-calculator"
+
     - title: "HTML5 Roulette"
       title_href: http://shinglyu.github.io/svg-roulette/roulette.html 
       description: "A lucky draw roulette created using HTML5 technology. <a href=\"https://marketplace.firefox.com/app/roulette-3\">[App version]</a>"
@@ -82,30 +108,44 @@
 
     - title: FullBatteryAlarm
       title_href: "https://marketplace.firefox.com/app/fullbatteryalarm"
-      description: "Alarm you when the battery if fully charged. Never over-charge your battery again!"
+      description: "Alarm you when the battery if fully charged. Never over-charge your battery again! Over 2600 downloads"
       thumbnail_url: projects/fullbatteryalarm.png
       source_url:
 
     - title: "Taipei MRT Map"
       title_href: "https://marketplace.firefox.com/app/taipei-mrt-map"
       description: An offline map for Taipei MRT 
-      thumbnail_url: 
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/160/160484.png?modified=1418916861"
       source_url: 
 
     - title: "TabataTimer"
       title_href: "https://marketplace.firefox.com/app/tabatatimer"
       description: A simple timer for a 4-minute tabata workout with voice reminders (remember to turn up the volume). 
-      thumbnail_url: 
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/149/149637.png?modified=1409889255"
+      source_url: 
+
+- title: Firefox (Desktop) Add-ons
+  projects:
+    - title: "Kanbanmarks"
+      title_href: https://addons.mozilla.org/en-US/firefox/addon/kanbanmark/ 
+      description: Organize your bookmarks with ease in a kanban-style layout 
+      thumbnail_url: https://addons.cdn.mozilla.net/user-media/previews/full/154/154040.png 
       source_url: 
 
     - title: "Coursera Autoplay"
       title_href: "https://addons.mozilla.org/en-US/firefox/addon/coursera-autoplay/"
       description: "Auto skip in-video quizes and continue to the next video when current video ends."
-      thumbnail_url: 
+      thumbnail_url: "https://addons.cdn.mozilla.net/user-media/previews/full/148/148510.png?modified=1419153666"
       source_url: 
 
 - title: Side Projects
   projects: 
+    - title: "Music Explorer"
+      title_href: "http://shinglyu.github.io/musicexplorer/"
+      description: "Recommend a variety of music to expand your music repertoire, e.g. Classical, Opera, Jazz, Chinese."
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/musicexplorer"
+
     - title: "HTML5 Countdown Timer"
       title_href: "http://shinglyu.github.io/countdown/countdown.html"
       description: A simple countdown timer with audio and flashing light.

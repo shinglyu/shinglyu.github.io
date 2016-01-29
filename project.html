@@ -8,7 +8,7 @@ title: Projects
    <div class="large-12 columns">
 
       <h1>{{ page.title }}</h1>
-      <p> Here are some highlights from my personal and course projects, for work-related projects, please check my <a href="resume.html">Resume</a>.
+      <p>Here are some projects I've created/co-created<p>
 
       {% for category in site.data.projects%}
       <div class="row">
@@ -19,11 +19,11 @@ title: Projects
          {% for project in category.projects%}
             <div class="row">
                <div class="small-9 columns">
-                 <h5><a href="{{project.title_href}}">{{project.title}}</a></h5>
-                 <p>{{project.description}}
+                 <h5><a href="{{project.title_href}}" target="_blank">{{project.title}}</a></h5>
                  {% if project.source_url%}
-                 [<a href="{{project.source_url}}">Source Code</a>]</p>
+                 [<a href="{{project.source_url}}" target="_blank">Source Code</a>]
                  {% endif %}
+                 <p>{{project.description | markdownify}}
                </div>
                <div class="small-3 columns">
                 {% if project.thumbnail_url%}
