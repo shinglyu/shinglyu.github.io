@@ -1,22 +1,41 @@
+- title: Community
+  publications:
+    - title: "2015 MozLando Firefox OS All-hands speaker"
+      title_url: ""
+      description: Talking about Firefox OS Add-ons
+
+    - title: "2015 NCU Academy Program Lecturer"
+      title_url: "https://wiki.mozilla.org/Firefox_OS/AcademyNCU2015#Mentors_.2F_Session_Owner"
+      description: "Teaching undergrads about software testing and JavaScrpt unit testing at \"Implementation and SDLC of Web Apps\" class at National Central Univesity"
+
+    - title: "2015 NTU Open Source Club Workshop Speaker"
+      title_url: ""
+      description: "Hosting the Firefox OS Hands-on Workshop at National Taiwan University Open Source Club"
+
 - title: Technical
   publications:
+    - title: "Building an iOS-style “Unread Notifications” add-on for Firefox OS"
+      title_url: "https://hacks.mozilla.org/2015/11/building-an-ios-style-unread-notifications-add-on-for-firefox-os/"
+      description: Published on Mozilla Hacks
+
     - title: The Servo Browser Engine -- A Learner's Notebook
       title_url: http://shinglyu.gitbooks.io/the-servo-browser-engine-a-learner-s-notebook/
+    - title: Where am I?－Part III－用 Geolocation API 以及 Offline Storage 實現導航與離線儲存
+      title_url: "https://tech.mozilla.com.tw/posts/5797/where-am-i-part-iii-%E7%94%A8-geolocation-api-%E4%BB%A5%E5%8F%8A-offline-storage-%E5%AF%A6%E7%8F%BE%E5%B0%8E%E8%88%AA%E8%88%87%E9%9B%A2%E7%B7%9A%E5%84%B2%E5%AD%98#ref-8"
+      description: Published on Mozilla Tech Blog
 
     - title: 自己的瀏覽器自己改 (Part I) －利用Firefox Addon SDK開發簡單的附加元件
       title_url: http://tech.mozilla.com.tw/posts/5832/%e8%87%aa%e5%b7%b1%e7%9a%84%e7%80%8f%e8%a6%bd%e5%99%a8%e8%87%aa%e5%b7%b1%e6%94%b9-part-i-%e5%88%a9%e7%94%a8firefox-addon-sdk%e9%96%8b%e7%99%bc%e7%b0%a1%e5%96%ae%e7%9a%84%e9%99%84%e5%8a%a0%e5%85%83
       description: Published on Mozilla Tech Blog
 
-- title: Public Notes
+- title: Notes and Slides
   publications:
     - title: Technical BKMs (Best Known Methods)
       title_url: https://dl.dropboxusercontent.com/u/7281903/docs/bkm_tiddly.html
       description: Guides to install and configure software development environments
-
-    - title: Commandline Cheatsheet
-      title_url: https://dl.dropboxusercontent.com/u/7281903/docs/cheatsheet_tiddly.html
-      description: Frequently used commands
-
+    - title: Slides
+      title_url: http://shinglyu.github.io/my_presentations/
+      description: Slides for my presentations
 
 - title: Academic
   publications: 
