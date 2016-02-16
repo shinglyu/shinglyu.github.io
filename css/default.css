@@ -9,3 +9,7 @@
 .th {
    width:100%;
 }
+
+ul, ol, li {
+  list-style-position:inside
+}
