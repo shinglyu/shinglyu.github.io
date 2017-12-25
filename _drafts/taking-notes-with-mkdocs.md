@@ -7,15 +7,6 @@ tags: mozilla
 excerpt_separator: <!--more-->
 ---
 
-TiddlyWiki
-screenshot
-My desired notetaking app property
-MkDocs usage
-screenshot
-MkDocs config
-
-migrating from tiddlywiki
-
 
 I've been using [TiddlyWiki][tiddly] for note-taking for a few years. I use them to keep track of my technical notes and checklists. [TiddlyWiki][tiddly] is a brilliant piece of software. It is a single HTML file with a note-taking interface, where the notes you take are stored directly in the HTML file itself, so you can easily carry (copy) the file around and easily deploy it online for sharing. However, most modern browsers don't allow web pages to access the filesystem, so in order to let [TiddlyWiki][tiddly] save the notes, you need to rely on [browser extensions][tiddly-extension] or Dropbox integration service like [TiddlyWiki in the Sky][in-the-sky]. But they still have some frictions.
 
@@ -36,7 +27,7 @@ Then I suddenly had an epiphany during shower: all I need is a bunch of Markdown
 
 # Using MkDocs
 
-MkDocs is really straight-forward to setup and use (under Linux). To install, simply use `pip`: 
+MkDocs is really straight-forward to setup and use (under Linux). To install, simply use `pip` (assuming you have Python and pip installed): 
 
 ```
 sudo pip install mkdocs
@@ -59,11 +50,14 @@ The generated folder will have the following structure:
 
 You can then start to write documents in the `docs` folder. You can create subfolders to organize the Markdown files. To view the generated HTML, `cd` into the project folder, then run `mkdocs serve`, the development server will start to serve on port 8000. Opening `127.0.0.1:8000` in your browser then you can see the document. You can also run `mkdocs build` to generate the static HTML into the `sites` folder. The folder can then be hosted using any server.
 
+![MkDocs]({{site_url}}/blog_assets/mkdocs/mkdocs.png)
+
 The `mkdocs.yml` file contains some configuration. For example, you can use the ReadTheDocs theme by adding the line: 
 
 ```
 theme: readthedocs
 ```
+![readthedocs]({{site_url}}/blog_assets/mkdocs/readthedocs.png)
 
 If you wish to open the generated site locally using the `file://` protocol, you can add this line:
 
@@ -78,6 +72,8 @@ When you have a note named `foo.md`, the generated file will be `/foo/index.html
 
 Moving all the notes from TiddlyWiki to MkDocs is very easy. If you are using TiddlyWiki 5.x+, you can go to "Tools" right under the search box, there is a "export all" button. Export the tiddlers (notes) to CSV. Then you can use the [`tiddly2md`][tiddly2md] script to convert the CSV to individual `.md` files. If your tiddler has UTF-8 titles, you need to add a parameter `encoding='utf-8'` to the `pd.read_csv()` call in the script for it to work.
 
+![export_all]({{site_url}}/blog_assets/mkdocs/tiddly.png)
+
 The exported Markdown files will lose the tag information, so if you are using tag as folder structure like me, you'll have to manually create folders to arrange them. Some tiddlers using the old WikiText format will also be empty (I use Markdown in my TiddlyWiki, but there are some old ones from the old versions). You can use `ls -lS` to see which file has no content and manually fix them. After the `.md` files are in place, run `mkdocs` as usual.
 
 # Conclusion
@@ -85,5 +81,10 @@ The exported Markdown files will lose the tag information, so if you are using t
 MkDocs is a pretty simple but powerful tool for note-taking. You get all the benefit of editing the notes using plain text editor, and have them version controlled by git. But you also get a nicely rendered HTML version with search functionality. One thing I miss from TiddlyWiki is the ability to generate a single HTML file containing all the notes. (MkDocs generates a folder of separate HTML, CSS and JS files.) There are some scripts like [mkdocs-combine][mkdocs-combine] that claims to do this using [Pandoc][pandoc], but I haven't tested them. 
 
 
+[in-the-sky]: https://github.com/Jermolene/TiddlyWiki-in-the-Sky
+[mkdocs]: http://www.mkdocs.org/ 
+[pandoc]: https://pandoc.org/
+[tiddly]:https://tiddlywiki.com/ 
+[tiddly2md]: https://github.com/achabotl/tiddly2md
+[tiddly-extension]: https://tiddlywiki.com/#%22savetiddlers%22%20Extension%20for%20Chrome%20and%20Firefox%20by%20buggyj
 [mkdocs-combine]: https://github.com/twardoch/mkdocs-combine
-
