@@ -4,6 +4,9 @@
       title_url: http://shinglyu.github.io/my_presentations/
       description: Slides for my presentations
 
+    - title: "2017/12/20 Booking.com Internal Tech Talk, Amsterdam"
+      description: "What's inside the new Firefox Quantum?"
+
     - title: "2017/8/6 COSCUP speaker, Taipei"
       title_url: https://coscup.org/2017/#/schedule
       description: "Rust Hands-on Workshop"

@@ -1,9 +1,9 @@
 - title: "Featured"
   projects:
 
-    - title: "Quantum Browser Engine"
-      title_url: "https://medium.com/mozilla-tech/a-quantum-leap-for-the-web-a3b7174b3c12"
-      description: The next-generation web engine that will be the core of future Firefox product.
+    - title: "Firefox Quantum - CSS engine"
+      title_url: "https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/"
+      description: A completely overhauled Firefox engine, super-fast and stable. I help port the Rust-based CSS engine from Servo into Gecko (Firefox's engine), and bring the automated test into place.
       thumbnail_url: 
 
 
@@ -19,16 +19,11 @@
       thumbnail_url: 
       source_url: "https://github.com/shinglyu/RustPython"
 
-    - title: "Asia Tech Conferences"
-      title_url: "https://asia-confs.github.io/asia-tech-confs"
-      description: A list of tech conferences in Aisa I collected
-      thumbnail_url: 
-
     - title: "FocusBlocker"
       title_url: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
       description: "1000+ daily active users! Block websites for a given time to help you focus on work/study."
       thumbnail_url: "projects/FocusBlocker/screenshot_icon.png"
-      source_url: 
+      source_url: https://github.com/shinglyu/focusblocker
 
     - title: "Itinerary Viewer"
       title_url: https://github.com/shinglyu/itinerary-viewer
@@ -182,6 +177,12 @@
       description: "Recommend a variety of music to expand your music repertoire, e.g. Classical, Opera, Jazz, Chinese."
       thumbnail_url: 
       source_url: "https://github.com/shinglyu/musicexplorer"
+
+    - title: "Asia Tech Conferences"
+      title_url: "https://asia-confs.github.io/asia-tech-confs"
+      description: A list of tech conferences in Aisa I collected
+      thumbnail_url: 
+
 
     - title: "HTML5 Countdown Timer"
       title_url: "http://shinglyu.github.io/countdown/countdown.html"
