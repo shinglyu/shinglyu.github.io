@@ -6,6 +6,8 @@ date:   2016-04-06 21:55:00 +08:00
 excerpt_separator: <!--more-->
 ---
 
+__Update: There is an updated post [here]({{site_url}}/web/2018/02/08/minimal-react-js-without-a-build-step-updated.html). Check it out! It has more up-to-date data and more information about how to use 3rd-party libraries.__
+
 Nowadays, starting a frontend project means setting up a complex build system with preprocessors, transpliers, compressors, packagers, and many more. Don't you missed the day when you can just write `<script src=”./jquery.js”/>` and start coding? I love to build prototype or small tools using HTML and React.js, but the build system thing is killing me (the [official documentation](https://facebook.github.io/react/docs/getting-started.html) suggest you use browserify and babel). So I'm going to show you how to build a minimal react page without any of those distractions.
 <!--more-->
 
