@@ -8,6 +8,8 @@ excerpt_separator: <!--more-->
 ---
 
 Back in 2016, I wrote a [post][oldpost] about how to write a React.js page without a build step. If I remember correctly, at that time the official React.js site have very little information about running React.js without [Webpack][webpack], [in-browser Babel transpiler][babel] is not very stable and they are deprecating `JSXTransformer.js`. After the post my focus turned to browser backend projects and I haven't touch React.js for a while. Now after 1.5 years, when I try to update one of [my React.js project][itinerary-viewer], I notice that the official site now has a clearer instruction on how to use React.js without a build step. So I'm going to write an update the post here.
+
+You can find the example code on [GitHub][gh].
 <!--more-->
 
 ## 1. Load React.js from CDN instead of npm
@@ -226,3 +228,4 @@ Finally, It’s super easy to deploy the program. Simply drop the files into any
 [browserify-post]: http://krasimirtsonev.com/blog/article/distributing-react-components-babel-browserify-webpack-uglifyjs
 [simplemodal]: https://www.npmjs.com/package/simple-react-modal
 [oldpost]:{{site_url}}/web/2016/04/06/minimal_react.html 
+[gh]: https://github.com/shinglyu/minimal-react
