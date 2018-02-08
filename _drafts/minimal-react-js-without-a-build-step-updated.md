@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Minimal React.js Without A Build Step in 2018
+title: Minimal React.js Without A Build Step (Updated)
 categories: Web
 date: 2018-01-31 21:39:50 +08:00
 tags: mozilla
@@ -110,7 +110,103 @@ The pitfall here is that you must keep the `type="text/babel"` attribute if you 
 SyntaxError: expected expression, got '<'[Learn More]        app.js:2:2
 ```
 
-# The Benefits
+# Using 3rd-party NPM components
+
+## Modules with browser support
+You can find tons of ready-made React components on NPM, but the quality varies. Some of them are released with browser support, for example [Reactstrap][reactstrap], which contains Bootstrap 4 components wrapped in React. In its documentation you can see a "CDN" section with a CDN link, which should just work by adding it to a script tag:
+
+```html
+<!-- react-transition-group is required by reactstrap -->
+<script src="https://unpkg.com/react-transition-group@2.2.1/dist/react-transition-group.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reactstrap/4.8.0/reactstrap.min.js" charset="utf-8"></script>
+```
+
+then you can find the components in a gloabl variable `Reactstrap`:
+
+```html
+<script type="text/babel" charset="utf-8">
+  // "Import" the components from Reactstrap
+  const {Button} = Reactstrap;
+
+  // Render a Reactstrap Button element onto root
+  ReactDOM.render(
+    <Button color="danger">Hello, world!</Button>,
+    document.getElementById('root')
+  );
+</script>
+```
+
+(In case you are curious, the first line is the [destructing assignment of objects][desctruct] in JavaScript).
+
+Of course it also works without JSX:
+
+```html
+<script type="text/javascript" charset="utf-8">
+  // "Import" the components from Reactstrap
+  const {Button} = Reactstrap;
+
+  // Render a Reactstrap Button element onto root
+  ReactDOM.render(
+    React.createElement(Button, {'color': 'danger'}, "Hello world!"),
+    document.getElementById('root'),
+  );
+</script>
+```
+
+## Modules without browser support
+For modules without explicit browser support, you can still try to expose it to the browser with [Browserify][browserify], as described in [this post][browserify-post]. Browserify is a tool that converts a Node.js module into something a browser can take. There are two tricks here:
+
+1. Use the `--standalone` option so Browserify will expose the component under the `window` namespace, so you don't need a module system to use it.
+2. Use the `browserify-global-shim` plugin to strip all the usage of `React` and `ReactDOM` in the NPM module code, so it will use the `React` and `ReactDOM` we included using the `<script>` tags.
+
+I'll use a very simple React component on NPM, [simple-react-modal][simplemodal], to illustrate this. First, we download this module to see what it looks like:
+
+```bash
+npm install simple-react-modal
+```
+
+If we go to `node_modules/simple-react-modal`, we can see a pre-built JavaScript package in the `dist` folder. Now we can install Browserify by `npm install -g browserify`. But we can't just run it yet, because the code uses `require('react')` but we want to use our version loaded in the browser. So we need to install `npm install browserify-global-shim` and add the configuration to `package.json`: 
+
+```javascript
+// package.json
+"browserify-global-shim": {
+  "react": "React",
+  "react-dom": "ReactDOM"
+}
+```
+
+Now we can run 
+```bash
+browserify node_modules/simple-react-modal \
+  -o simple-react-modal-browser.js \
+  --transform browserify-global-shim \
+  --standalone Modal
+```
+
+We'll get a `simple-react-modal-browser.js` file, which we can just load in the browser using the `<script>` tag. Then you can use the Modal like so: 
+
+```html
+<script type="text/javascript" charset="utf-8">
+  // "Import" the components from Reactstrap
+  const Modal = window.Modal.default;
+
+  // Render a Reactstrap Button element onto root
+  ReactDOM.render(
+    React.createElement(Modal, 
+      { 
+        'show': true,
+        'closeOnOuterClick': true 
+      }, 
+      React.createElement("h1", null, "Hello")
+    ),
+    document.getElementById('root')
+  );
+</script>
+```
+(There are some implementation detail about the `simple-react-modal` module in the above code, so don't be worried if you don't get everything.)
+
+
+# The benefits
 
 Using this method, you can start prototyping by simply copying a HTML file. You don't need to install Node.js, NPM and all the NPM modules that quickly make your small proof-of-concept page bloat.
 
@@ -124,5 +220,8 @@ Finally, It’s super easy to deploy the program. Simply drop the files into any
 [crossorigin]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-crossorigin
 [without-jsx]:https://reactjs.org/docs/react-without-jsx.html
 [devtool]: https://github.com/facebook/react-devtools
-
-
+[reactstrap]: https://reactstrap.github.io/
+[desctruct]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructurig.
+[browserify]: http://browserify.org/
+[browserify-post]: http://krasimirtsonev.com/blog/article/distributing-react-components-babel-browserify-webpack-uglifyjs
+[simplemodal]: https://www.npmjs.com/package/simple-react-modal
