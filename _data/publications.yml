@@ -50,13 +50,16 @@
       description: Talking about Firefox OS Add-ons
 
     - title: "2015 NCU academy program lecturer, Taoyuan"
-      description: "Teaching undergrads about software testing and JavaScrpt unit testing at \"Implementation and SDLC of Web Apps\" class at National Central Univesity"
+      description: "Teaching undergrads about software testing and JavaScript unit testing at \"Implementation and SDLC of Web Apps\" class at National Central Univesity"
 
     - title: "2015 NTU Open Source Club workshop speaker, Taipei"
       description: "Hosting the Firefox OS Hands-on Workshop at National Taiwan University Open Source Club"
 
 - title: Guest Posts
   publications:
+    - title: "把 Chrome Extension 移到 Firefox 上"
+      title_url: "https://medium.com/@moz2000tw/%E6%8A%8A-chrome-extension-%E7%A7%BB%E5%88%B0-firefox-%E4%B8%8A-45a005783d3a"
+      description: Published on Mozilla Taiwan's offical Medium blog
     - title: "Building an iOS-style “Unread Notifications” add-on for Firefox OS"
       title_url: "https://hacks.mozilla.org/2015/11/building-an-ios-style-unread-notifications-add-on-for-firefox-os/"
       description: Published on Mozilla Hacks
