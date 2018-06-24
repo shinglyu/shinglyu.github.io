@@ -2,7 +2,7 @@
 layout: post
 title: How to Unit Test WebExtensions
 categories: Web
-date: 2018-01-11 19:29:48 +08:00
+date: 2018-06-24 21:44:13 +02:00
 tags: mozilla
 excerpt_separator: <!--more-->
 ---
