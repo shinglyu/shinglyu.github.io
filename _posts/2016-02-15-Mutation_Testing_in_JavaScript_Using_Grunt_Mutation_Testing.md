@@ -5,7 +5,7 @@ date:   2016-02-15 00:00:00
 categories: Testing
 ---
 
-__Update__: Since the development on grunt-mutation-testing has [moved to Stryker](https://www.npmjs.com/package/grunt-mutation-testing), I've rewritten this post using the new Stryker framework. Please checkout the updated post [here]().
+__Update__: Since the development on grunt-mutation-testing has [moved to Stryker](https://www.npmjs.com/package/grunt-mutation-testing), I've rewritten this post using the new Stryker framework. Please checkout the updated post [here](https://shinglyu.github.io/testing/2016/10/11/Mutation_Testing_in_JavaScript_Using_Stryker.html).
 
 <hr>
 
