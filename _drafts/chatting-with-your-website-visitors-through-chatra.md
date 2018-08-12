@@ -7,7 +7,7 @@ tags: mozilla
 excerpt_separator: <!--more-->
 ---
 
-When I started the blog, I didn't add a message board below each article because I don't have the time to deal with spams. Due to [broken ewindows theory][broken_window], if I leave the spam unattended my blog will soon become a landfill for spammers. But nowadays many e-commerce site or brand sites have a live chatting box, which will solve my problem because I can simply ignore the spams, while interested readers can ask questions and provide feedbacks easily. That's why when my sponsor, [Chatra.io][chatra], approached me with their great tool, I fell in love with it right away and must share it with everyone.
+When I started the blog, I didn't add a message board below each article because I don't have the time to deal with spams. Due to [broken windows theory][broken_window], if I leave the spam unattended my blog will soon become a landfill for spammers. But nowadays many e-commerce site or brand sites have a live chatting box, which will solve my problem because I can simply ignore the spams, while interested readers can ask questions and provide feedbacks easily. That's why when my sponsor, [Chatra.io][chatra], approached me with their great tool, I fell in love with it right away and must share it with everyone.
 
 <!--more-->
 
