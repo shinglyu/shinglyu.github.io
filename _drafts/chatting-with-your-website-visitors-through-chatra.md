@@ -7,7 +7,7 @@ tags: mozilla
 excerpt_separator: <!--more-->
 ---
 
-When I started the blog, I didn't add a message board below each article because I don't have the time to deal with spams. Due to [broken windows theory][broken_window], if I leave the spam unattended my blog will soon become a landfill for spammers. But nowadays many e-commerce site or brand sites have a live chatting box, which will solve my problem because I can simply ignore the spams, while interested readers can ask questions and provide feedbacks easily. That's why when my sponsor, [Chatra.io][chatra], approached me with their great tool, I fell in love with it right away and must share it with everyone.
+When I started the blog, I didn't add a message board below each article because I don't have the time to deal with spam. Due to [broken windows theory][broken_window], if I leave the spam unattended my blog will soon become a landfill for spammers. But nowadays many e-commerce site or brand sites have a live chatting box, which will solve my problem because I can simply ignore spam, while interested readers can ask questions and provide feedbacks easily. That's why when my sponsor, [Chatra.io][chatra], approached me with their great tool, I fell in love with it right away and must share it with everyone.
 
 <!--more-->
 
@@ -47,17 +47,17 @@ The paid plan starts at $15 per month and gives you access to all features, incl
 
 All in all, Chatra is a nice tool to further engage your visitors. The free plan is generous enough for most small scale websites. In case you scales up in the future, their paid plan is affordable and pays for itself after a few successful sales. So if you want an easy and convenient way to chat with your visitors, gain feedback and have more insights into your users, you should give Chatra a try with this [link][signup] now.
 
-[api]: https://chatra.io/help/api/
+[api]: https://chatra.io/help/api/?partnerId=3Leg7HgLErPj4Fy6v
 [broken_window]: https://en.wikipedia.org/wiki/Broken_windows_theory
-[chatra]: https://chatra.io
-[cms]: https://chatra.io/help/cms/
+[chatra]: https://chatra.io/?partnerId=3Leg7HgLErPj4Fy6v
+[cms]: https://chatra.io/help/cms/?partnerId=3Leg7HgLErPj4Fy6v
 [goal]: https://support.google.com/analytics/answer/1012040 
-[messenger]: https://chatra.io/messenger/
+[messenger]: https://chatra.io/messenger/?partnerId=3Leg7HgLErPj4Fy6v
 [signup]: https://app.chatra.io/?enroll=&partnerId=3Leg7HgLErPj4Fy6v
-[app]: https://chatra.io/apps/ 
-[plan]: https://chatra.io/plans/ 
-[web]: https://app.chatra.io/
-[google_analytics]: https://chatra.io/help/analytics/
+[app]: https://chatra.io/apps/?partnerId=3Leg7HgLErPj4Fy6v 
+[plan]: https://chatra.io/plans/?partnerId=3Leg7HgLErPj4Fy6v
+[web]: https://app.chatra.io/?partnerId=3Leg7HgLErPj4Fy6v
+[google_analytics]: https://chatra.io/help/analytics/?partnerId=3Leg7HgLErPj4Fy6v
 
 [chat_page]: {{site_url}}/blog_assets/chatra/chat_page.png
 [chat_box]: {{site_url}}/blog_assets/chatra/chat_box.png
