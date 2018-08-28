@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 退役了如何註銷護照上的役出境管制
+title: 退役了如何註銷護照上的出境管制章
 categories: Misc
 date: 2017-07-13 13:39:40 +08:00
 excerpt_separator: <!--more-->
