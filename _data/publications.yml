@@ -1,3 +1,10 @@
+- title: Video Courses
+  publications:
+    - title: Building Reusable Code with Rust
+      title_url: https://www.packtpub.com/application-development/building-reusable-code-rust-video
+      description: "Packt Publishing (ISBN: 9781788399524)"
+      thumbnail_url: "blog_assets/packt_book.png"
+
 - title: Talks
   publications:
     - title: Slides
