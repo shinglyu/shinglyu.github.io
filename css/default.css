@@ -108,6 +108,10 @@ dt {
   font-weight: bold;
 }
 
+dd {
+  margin-top: 0.5em;
+}
+
 footer > a {
   margin: auto 1em;
 }
