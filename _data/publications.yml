@@ -5,7 +5,9 @@
       description: |
         Packt Publishing (ISBN: 9781788399524)<br>
         Also on:
-        <a href="https://www.oreilly.com/library/view/building-reusable-code/9781788399524/">Safari Books</a>
+        <a href="https://www.udemy.com/building-reusable-code-with-rust/">Udemy</a>, 
+        <a href="https://www.oreilly.com/library/view/building-reusable-code/9781788399524/">Safari Books</a>, 
+        <a href="https://www.packtpub.com/application-development/building-reusable-code-rust-video">Packt</a>
       thumbnail_url: "blog_assets/packt_book.png"
 
 - title: Talks
