@@ -32,6 +32,8 @@ This gives you a list of commit counts by user:
 1  wildskyf
 ```
 
+(The example comes from [shinglyu/QuantumVim][quantumvim].)
+
 If you only care about one user you can use
 
 ```bash
@@ -47,7 +49,7 @@ Let's explain how this works:
 
 # Count the line of insertion and deletions by a user
 
-Insertion and deletions are a little bit tricker. This is what I cam up with:
+Insertion and deletions are a little bit tricker. This is what I came up with:
 
 ```bash
 git log --author=Shing --pretty=tformat: --numstat | grep -v '^-' | awk '{ add+=$1; remove+=$2 } END { print add, remove }' 
@@ -119,3 +121,4 @@ awk '{ add+=$1; remove+=$2 } END { print add, remove }'
 
 There are many other off-the-shelf scrips that will help you calculate contribution statistics. Like [git-quick-stats](https://github.com/arzzen/git-quick-stats), [git-fame](https://github.com/casperdcl/git-fame) and [git-fame-rb](https://github.com/oleander/git-fame-rb). But if you only want a quick-and-easy solution please give it a try.
 
+[quantumvim]: https://github.com/shinglyu/QuantumVim
