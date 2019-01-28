@@ -6,7 +6,7 @@ date: 2019-01-15 16:00:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
-Terraform has many backend types. The `local` backend stores the state on the local filesystem, so it's ideal for quick local testing. By it's not super obvious how to have multiple local backend and state, and how to easily switch between them. One use case for this is when you deploy the same set of resources to multiple AWS regions. Let's say we want to create two API gateways and their corresponding DNS records to two regions. We use the `aws_route53_record` resource to deploy them:
+Terraform has many [backend][backend] types. The [local` backend][local] stores the state on the local filesystem, so it's ideal for quick local testing. By it's not very obvious how to have multiple local backend and state, and how to easily switch between them. One use case for this is when you deploy the same set of resources to multiple AWS regions. Let's say we want to create two API gateways and their corresponding DNS records to two regions. We use the [`aws_route53_record`][aws_route53_record] resource to deploy them:
 
 ```
 resource "aws_route53_record" "api" {
@@ -25,24 +25,22 @@ terraform apply -var-file=eu.tfvars
 terraform apply -var-file=us.tfvars
 ```
 
-You'll notice that the second apply will try to destroy your `api-eu.example.com` record, and replace it with an `api-us-example.com` record. This is because the states are the same, and the resource name is the same between two applies, so terraform think you want to destroy the existing record and create a new one. There is also a problem when you try to destroy resources. Because the resources have the same name, so if you destroy them in one region, you won't be able to destroy then in the other one. Because terraform assumes everything is already gone.
-
-To workaround this, you need two separate state for each region, so the resources can be tracked separately.
+You'll notice that the second apply will try to destroy your `api-eu.example.com` record, and replace it with an `api-us-example.com` record. This is because the states are the same, and the resource name is the same between two apply attempts, so terraform think you want to destroy the existing record and create a new one. There is also a problem when you try to destroy resources. Because the resources have the same name, so if you destroy them in one region, you won't be able to destroy then in the other one. Because terraform assumes everything is already gone.
 
 <!--more-->
 
 # The solution
-One way to workaround this is the combine the `TF_DATA_DIR` environment variable and the `local` backend. By default, the terraform data are stored in the local folder called `.terraform`. Using `TF_DATA_DIR` we can specify where to store the data. So theoretically we can do the following:
+To workaround this, you need two separate state for each region, so the resources can be tracked separately.  One hacky way is the combine the [`TF_DATA_DIR`][tf_data_dir] environment variable and the `local` backend. By default, the terraform data are stored in the local folder called `.terraform`. Using `TF_DATA_DIR` we can specify where to store the data. So theoretically we can do the following:
 
 ```
 TF_DATA_DIR=.terraform-eu terraform init
 TF_DATA_DIR=.terraform-us terraform init
 ```
 
-to create two separate environment in the `.terraform-eu` and `.terraform-us` folder.
-But this setup won't work as we expected because by default terraform stores the state in a file `terraform.tfstate` outside of the `.terraform-*` folders, in your project root.
+to create two separate environment in the `.terraform-eu` and `.terraform-us` folder to hold our seprate states.
+But this setup won't work as we expected because by default terraform stores the state in a file `terraform.tfstate` outside of the `.terraform-<region>` folders, in your project root.
 
-Therefore we need to specify the `local` backend in our `.tf` file. So create a file named `backend.tf` and copy paste the following into it:
+Therefore we need to specify the `local` backend in our `.tf` file, which will force the terrafrom state to be saved in the `TF_DATA_DIR` folder. Create a file named `backend.tf` and copy paste the following into it:
 
 ```
 terraform {
@@ -65,7 +63,7 @@ TF_DATA_DIR=.terraform-us terraform init
 TF_DATA_DIR=.terraform-us terraform plan -var-file=us.tfvars -out us.plan
 TF_DATA_DIR=.terraform-us terraform apply us.plan
 
-# Destory will also work independently
+# Destroy will also work independently
 TF_DATA_DIR=.terraform-eu terraform destroy -var-file=eu.tfvars
 TF_DATA_DIR=.terraform-us terraform destroy -var-file=us.tfvars
 ```
@@ -79,7 +77,7 @@ terraform init
 terraform workspace new eu
 ```
 
-It will create a workspace named `eu`, which is separated from other workspaces. So you can achieve the same behavior as above using the following command:
+It will create a workspace named `eu`, which is tracks its state separately from other workspaces. So you can achieve the same behavior as above using the following command:
 
 ```
 terraform init
@@ -103,7 +101,12 @@ The workspaces are stored in `terraform.tfstate.d/<workspace_name>`, similar to 
 
 # Conclusion
 
-Terraform supplies a built-in way to create independent state environments (i.e. workspace). But you can also achieve the same goal using the `TF_DATA_DIR` environment variable. So when do you need to use the `TF_DATA_DIR` hack instead of the built-in workspace? One scenario is when you use CI pipelines. You might create two CI pipeline for deploying to EU and US. Your CI stages may run in isolated environment so their state will not conflict. Creating workspaces inside those CI stages will just add extra complexity. If you are only testing it locally occasionally , you can apply the `TF_DATA_DIR` trick and keep your CI script simple.
+Terraform resources are tracked using the states, if you want to keep track of two separate deployements (e.g. same setup for different regions), you need separate states to avoid problems. Terraform supplies a built-in way to create independent state environments (i.e. workspace). But you can also achieve the same goal using the `TF_DATA_DIR` environment variable. 
 
+So when do you need to use the `TF_DATA_DIR` hack instead of the built-in workspace? One scenario is when you use CI pipelines. You might create two CI pipeline for deploying to EU and US. Your CI stages may run in isolated environment so their state will not conflict. Creating workspaces inside those CI stages will just add extra complexity. If you are only testing it locally occasionally, you can apply the `TF_DATA_DIR` trick locally and keep your CI script simple.
+
+[workspace]: https://www.terraform.io/docs/state/workspaces.html
+[backend]: https://www.terraform.io/docs/backends/
+[local]: https://www.terraform.io/docs/backends/types/local.html
+[aws_route53_record]: https://www.terraform.io/docs/providers/aws/r/route53_record.html
 [tf_data_dir]: https://www.terraform.io/docs/configuration/environment-variables.html#tf_data_dir
-[workspace]:
