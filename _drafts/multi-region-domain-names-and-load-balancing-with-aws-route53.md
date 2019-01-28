@@ -6,13 +6,13 @@ date: 2019-01-16 00:00:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
-We are going to build an REST API that is deployed to multiple AWS regions, which has one public-facing URL, which is load balanced through Route 53. There are some additional requirements:
+Terraform has some great [documentation][route53_doc] on Route 53, but it's a little bit hard to understand how all the resources works together. So to demonstrate, we are going to build an REST API that is deployed to multiple AWS regions, which has one public-facing URL, which is load balanced through Route 53. There are some additional requirements:
 
 * API is done using API Gateway + Lambda
 * The same API is deployed to multiple AWS regions. To demonstrate this we'll deploy to EU Frankfurt (eu-central-1) and N.Virginia, US (us-east-1).
 * The API in each region will get a public facing URL for easy debugging. So there will be `https://api-eu.example.com` and `https://api-us.example.com` pointing to the API gateway in each region.
 * There will be a global URL, `https://api.example.com` which points to the underlying `https://api-eu.example.com` and `https://api-us.example.com` endpoints.
-* The global URL will do a 50%-50% active-active load balancing to each region. So 50% of the traffic will go to each region.
+* The global URL will do a 50%-50% active-active load balancing to each region. In other words 50% of the traffic will go to each region.
 * The health of the regional APIs are monitored, if one of it goes down, all the traffic will be routed to the other alive one.
 * Everything is deployed with Terraform
 
@@ -22,8 +22,8 @@ We are going to build an REST API that is deployed to multiple AWS regions, whic
 
 There are some AWS resources that needs to be created beforehand, but they are out of the scope of this post so we'll leave it out for now. You can consult the Terraform or AWS documentation to create them.
 
-* A [domain name][domain_name] and [hosted zone][hosted_zone]
-* [AWS Certificate Manager][acm]
+* Buy a [domain name][domain_name] and create a Route 53 [hosted zone][hosted_zone]. For example purpose we assume that we are using `example.com`.
+* Setup [AWS Certificate Manager][acm] for your domain.
 
 Write down their [ARNs (Amazon Resource Names)][arn] and keep them handy, because we're going to need them very soon.
 
@@ -50,18 +50,20 @@ exports.handler = function(event, context, callback) {
 }
 ```
 
-This will display something like this in the browser:
+If we open that URL in the browser we'll see something like this:
 
-#TODO: pic
+```
+Hello world! I'm in eu-central-1
+```
 
-To deploy this lambda by Terraform, we create the following resource in our terraform config:
+To deploy this lambda by Terraform, we zip the `main.js` in to a `lambda.zip` file and create the following resource in our terraform config:
 
 ```
 # lambda.tf
 
 resource "aws_lambda_function" "example" {
   function_name = "report_region"
-  filename = "lambda.zip"
+  filename = "lambda.zip"  # Terrafrom will handle the upload
   handler = "main.handler"  # Call handler in main.js
   runtime = "nodejs6.10"
 
@@ -94,6 +96,8 @@ EOF
 }
 ```
 
+This IAM role is referenced in the `aws_lambda_function.role`.
+
 To create the API Gateway, first we create the `aws_api_gateway_rest_api` resource:
 
 ```
@@ -108,9 +112,9 @@ resource "aws_api_gateway_rest_api" "example" {
 }
 ```
 
-Notice that we created a "regional" endpoint instead of an "edge-optimized" one, that's because we want to handle the DNS names and routing by ourselves. If we choose the "edge-optimized" endpoint, AWS will do all that for us magically in [CloudFront][cloud_front].
+Notice that we created a "regional" endpoint instead of an "edge-optimized" one, that's because we want to handle the DNS names and routing by ourselves. If we choose the "edge-optimized" endpoint, AWS will do all that for us magically with [CloudFront][cloud_front].
 
-Then, to actually trigger the lambda function when the API is called, we create the gateway method and gateway intergration for it:
+Then, to actually trigger the lambda function when the API is called, we create the gateway method and gateway integration for it:
 
 ```
 resource "aws_api_gateway_method" "proxy_root" {
@@ -161,7 +165,10 @@ resource "aws_lambda_permission" "apigw" {
 }
 ```
 
-Now our APIs are ready to go, but they only get an auto-generated URL like `https://8gz2uzemsx.execute-api.eu-central-1.amazonaws.com/dev/`. We are going to give them a more friendly name in the next section.
+Now our APIs are ready to go, but they only get an auto-generated URL like `https://8gz2uzemsx.execute-api.eu-central-1.amazonaws.com/dev/` when deployed. We are going to give it a more friendly name in the next section.
+
+# A side-note about deployment
+To deploy the same set of resources to multiple regions, we use the same terraform files, but we have one `.tfvars` file per region. So when we deploy we have to run `terraform apply -var-files=<region-specific.tfvars>` once per region.  Some resources are global, e.g. Route 53 CNAME records. In that case you need to be careful about only deploying it in one region, otherwise the subsequent `terraform apply` might fail because the resource already exists.
 
 # Creating regional URLs
 
@@ -171,7 +178,8 @@ To give API a custom URL, we need two parts: the API Gateway Custom Domain Name 
 
 ```
 resource "aws_api_gateway_domain_name" "regional" {
-  domain_name = "${replace(local.regional_hostname, "/[.]$/", "")}"
+  # var.regional_hostname = api-eu.example.com for eu-central-1
+  domain_name = "${replace(var.regional_hostname, "/[.]$/", "")}"
 
   regional_certificate_arn = "<YOUR regional ACM ARN>"
   endpoint_configuration {
@@ -199,7 +207,7 @@ But this alone will not make your URL available to people on the internet. You n
 resource "aws_route53_record" "regional" {
   zone_id = "${data.aws_route53_zone.public_zone.id}"
 
-  name = "${local.regional_hostname}"  # e.g. api-eu.example.com
+  name = "${var.regional_hostname}"  # e.g. api-eu.example.com
   type = "A"
 
   alias {
@@ -210,19 +218,21 @@ resource "aws_route53_record" "regional" {
 }
 ```
 
+This will create a [A record][a_record], which maps the `api-eu.example.com` URL to an AWS alias to the API Gateway.
+
 Now if we deploy the API to EU and US regions, we'll have `https://api-eu.example.com` and `https://api-us.example.com` ready.
 
 # Global domain name and load balancing
 
-But having one URL for each region doesn't make much sense for an API that is used globally. Ideally our API user should have one URL like `https://api.example.com`, and it will get routed to either EU or US endpoints based on the load balancing strategy. For demonstration purpose we'll use a very simple weighted load balancing strategy, where 50% of the traffic will be routed to EU and the other 50% to US, randomly. You can also use more advanced strategy like latency-based or geolocation-based.
+But having only URLs for each region doesn't make much sense for an API that is used globally. Ideally our API user should only use one URL like `https://api.example.com`, no matter where they are, and it will get routed to either EU or US endpoints based on the load balancing strategy. For demonstration purpose we'll use a very simple [weighted load balancing strategy][weighted], where 50% of the traffic will be routed to EU and the other 50% to US, randomly. You can also use more advanced strategy like [latency-based][latency] or [geolocation-based][geolocation].
 
-To create the global URL, we need to create a [CNAME][cname] record with a `weighted_routing_policy`, like so:
+To create the global URL, we need to create a [CNAME][cname] record with a `weighted_routing_policy`, We store all the regional URLs we have in a Terraform array variable `deploy_hostnames`.
 
 ```
 resource "aws_route53_record" "balanced" {
     count = "${length(var.deploy_hostnames)}"
     zone_id = "${data.aws_route53_zone.public_zone.id}"
-    name = "${local.global_hostname}"  # e.g. api.example.com
+    name = "${var.global_hostname}"  # e.g. api.example.com
     type = "CNAME"
     ttl = "60"
     set_identifier = "${element(var.deploy_hostnames, count.index)}"
@@ -237,7 +247,7 @@ resource "aws_route53_record" "balanced" {
 }
 ```
 
-Notice that we use a `count`, this will repeat the block once per element for `var.deploy_hostnames`, which contains the `https://api-eu.example.com` and `https://api-us.example.com`. Also keep an eye on the weighted_routing_policy. We have `weight = 1` so every record will get equal share of the weight. So this block will be expand to something like:
+Notice that we use a `count`, this will repeat the block once per element for `var.deploy_hostnames`, which contains the `https://api-eu.example.com` and `https://api-us.example.com`. Also keep an eye on the ``weighted_routing_policy`. We have `weight = 1` so every record will get equal share of the weight. This block will be expanded under the `count` to something like:
 
 ```
 resource "aws_route53_record" "balanced" {
@@ -245,7 +255,10 @@ resource "aws_route53_record" "balanced" {
     records = [
         "api-eu.example.com"
     ]
-    // other fields are omitted
+    weighted_routing_policy  {
+        weight = 1
+    }
+    // ...
 }
 
 resource "aws_route53_record" "balanced" {
@@ -253,17 +266,20 @@ resource "aws_route53_record" "balanced" {
     records = [
         "api-us.example.com"
     ]
-    // other fields are omitted
+    weighted_routing_policy  {
+        weight = 1
+    }
+    // ...
 }
 ```
 
-This CNAME record will not work by itself. We still need two things, Take a look at the health_check_id field of the `aws_route53_record` configuration. In order to properly route the traffic, and redistribute the traffic to other regions in case one region goes down, Route53 need to know if the endpoint in each region is alive or not. Therefore we need to setup a periodic health check to monitor them.
+We haven't discuss the `health_check_id` field of the `aws_route53_record` configuration. In order to properly route the traffic, and redistribute the traffic to other regions in case one region goes down, Route 53 need to know if the endpoint in each region is alive or not. Therefore we need to setup a periodic health check to monitor them.
 
-A simple health check can be a ping that checks if the endpoint is responding. Or it can simulate a normal user request and check for the response body (with text search, for example). It can also be a specialized endpoint that triggers a lambda, which in turn verifies the health of other critical resources (e.g. Database, Queue). To keep it simple, we'll just make a request to our API (the root path `/`)and check if it's alive using HTTPS. Here are the terraform code for it:
+A simple health check can be a ping that checks if the endpoint is responding. Or it can simulate a normal user request and check for the response body (with text search, for example). It can also be a specialized endpoint that triggers a lambda, which in turn verifies the health of other critical resources (e.g. Database, Queue). To keep it simple, we'll just make a request to our API (the root path `/`) and check if it's alive using HTTPS. Here are the Terraform code for it:
 
 ```
 resource "aws_route53_health_check" "health" {
-  count             = "${var.aws_region == "eu-central-1" ? length(var.deploy_hostnames) : 0}" # Only deploy it once 
+  count             = "${var.aws_region == "eu-central-1" ? length(var.deploy_hostnames) : 0}" # Only deploy it once
   fqdn              = "${element(var.deploy_hostnames, count.index)}"
   type              = "HTTPS"
   port              = "443"
@@ -273,16 +289,17 @@ resource "aws_route53_health_check" "health" {
 }
 ```
 
-Because the health check is not region specific, so we use the `count` to make it only run when we deploy to the `eu-central-1` region. When it deploys to `us-east-1` the `count` will be 0 and this block won't run.
+This makes a HTTPS call (`type`) to the root path `/` (`resource_path`) every 30 seconds (`request_interval`). AWS will mark this API as dead if the `failure_threshold` is exceeded.
+Because the health check is not region specific, to avoid re-creating them when we deploy to multiple regions, we use the `count` hack to make it only run when we deploy to the `eu-central-1` region. When it deploys to `us-east-1` the `count` will be 0 and this block won't run.
 
-One last bit for the global URL setup is the custom domain name. Although we already configured the custom domain name for `https://api-*.example.com`, we didn't setup anything for `https://api.example.com`. When we call the API with `https://api.example.com`, although Route53 will do the routing to one of the regional endpoint, it will not replace the URL in the HTTPS header to `https://api-*.example.com`, so the API gateway will see a mismatch between the request URL (`https://api.example.com`) and its own custom domain name (`https://api-*.example.com`), thus failing the request. To fix this easily we can add a custom domain name for the global URL:
+One last bit for the global URL setup is the custom domain name. Although we already configured the custom domain name for `https://api-*.example.com`, we didn't setup anything for `https://api.example.com`. When we call the API with `https://api.example.com`, although Route 53 will do the routing to one of the regional endpoint, it will not replace the URL in the HTTPS header to `https://api-*.example.com`, so the API gateway will see a mismatch between the request URL (`https://api.example.com`) and its own custom domain name (`https://api-*.example.com`), thus failing the request. To fix this easily we can add a custom domain name for the global URL:
 
 ```
 resource "aws_api_gateway_domain_name" "global" {
   # Remember to strip the traling dot
-  domain_name = "${replace(local.global_hostname, "/[.]$/", "")}"
+  domain_name = "${replace(var.global_hostname, "/[.]$/", "")}"
 
-  regional_certificate_arn = "${local.regional_certificate_arn}"
+  regional_certificate_arn = "${var.regional_certificate_arn}"
   endpoint_configuration {
     types = ["REGIONAL"]
   }
@@ -295,17 +312,12 @@ resource "aws_api_gateway_base_path_mapping" "global" {
 }
 ```
 
-# A side-note about deployment
-To deploy the same setting to multiple regions, we use the same terraform files, but we have one `.tfvars` file per region. So when we deploy we have to run `terraform apply -var-files=<region-specific.tfvars>` once per region.  As mentioned before some resources are global, e.g. the CNAME record for pointing the global URL to local URLs. In that case you need to be careful about only deploying it in one region, otherwise the subsequent `terraform apply` might fail because the resource already exists.
-
 # Testing
 
-Now we are all set! Now deploy the service and wait for a short while for the DNS record and health check to warn up. To test this setup you can open a browser and go the the global URL `https://api.example.com`. You should be able to see the message "Hello world! I'm in eu-central-1" or "Hello world! I'm in us-east-1" about 50%-50%. If you can only see one region, you can try opening it in an incognito/private tab. You can also disable (or un-deploy) one of the region and wait for the health check to detect it. Then you'll see all the traffic are routed to the region that is still alive.
-
+Now we are all set! Now deploy the service for both regions and wait for a short while for the DNS record and health check to warm up. To test this setup you can open a browser and go the the global URL `https://api.example.com`. You should be able to see the message "Hello world! I'm in eu-central-1" or "Hello world! I'm in us-east-1" about 50%-50%. If you can only see one region, you can try opening it in an incognito/private tab. You can also disable (or `terraform destroy`) one of the API Gateway in one region and wait for the health check to detect it. Then you'll see all the traffic are routed to the region that is still alive.
 
 # Conclusion
 
-We covered how to create Route53 load-balancing in Route53. We also gave each regional endpoint their own region-specific URL, so it's easier to test and debug. These all have to be created with API gateway custom domains plus the Route53 DNS records. All these configurations might be a little be hard to visualize, so it would be helpful to check the AWS web console after you deploy. Or you can try to create this setup manually first using the AWS web console and then compare that to the terraform setup.
-
+We covered how to create Route53 load-balancing in Route53. We first create a hello world API using API Gateway and Lambda. We gave each regional endpoint their own region-specific URL, so it's easier to test and debug. These all have to be created with API gateway custom domains with base path mapping, plus the Route53 DNS A records. Then we create a global URL CNAME record using Route 53 and let that do weighted routing to our region-specific URLs. Finally we setup health checks to ensure Route 53 is aware of the health of each region, so it can do proper routing in case anyone goes down. All these configurations might be a little be hard to visualize, so it would be helpful to check the AWS web console after you deploy. Or you can try to create this setup manually first using the AWS web console and then compare that to the terraform setup.
 
 [hosted_zone]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html
