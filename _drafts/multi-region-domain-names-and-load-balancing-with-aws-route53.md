@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AWS Route 53 load balancing with Terraform
+title: AWS Route 53 Load Balancing with Terraform
 categories: Web
 date: 2019-01-16 00:00:00 +01:00
 excerpt_separator: <!--more-->
