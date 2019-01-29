@@ -27,17 +27,23 @@ There are some AWS resources that needs to be created beforehand, but they are o
 
 Write down their [ARNs (Amazon Resource Names)][arn] and keep them handy, because we're going to need them very soon.
 
+# Architecture
+
+Here is a high-level architecture diagram for the example we are going to set up. Don't get intimidated by the complexity, we'll walk through the components one-by-one.
+
+![High-Level Architecture]({{site_url}}/blog_assets/route53_arch.svg)
+
 # Creating the API gateway with a hello world lambda
 In this part we are going to create a REST API with API gateway and a simple lambda. This part is inspired by [this guide][lambda_guide]. If you are already familiar with how to do this, you can skip to the next section.
 
 For easy testing, we want our API to tell us which region it is in. So we create a simple Node.js-based lambda like so:
 
-```
-# main.js
+```javascript
+// main.js
 'use strict'
 
 exports.handler = function(event, context, callback) {
-  # Region name is the forth part of the lambda function ARN
+  // Region name is the forth part of the lambda function ARN
   const region = context.invokedFunctionArn.split(':')[3];
   var response = {
     statusCode: 200,
@@ -58,7 +64,7 @@ Hello world! I'm in eu-central-1
 
 To deploy this lambda by Terraform, we zip the `main.js` in to a `lambda.zip` file and create the following resource in our terraform config:
 
-```
+```hcl
 # lambda.tf
 
 resource "aws_lambda_function" "example" {
@@ -73,7 +79,7 @@ resource "aws_lambda_function" "example" {
 
 And since lambda need permission to execute, we'll add a [IAM][iam] role for it:
 
-```
+```hcl
 resource "aws_iam_role" "lambda_exec" {
   count = "${var.create_global_resources ? 1 : 0}"
   name = "example_lambda"
@@ -100,7 +106,7 @@ This IAM role is referenced in the `aws_lambda_function.role`.
 
 To create the API Gateway, first we create the `aws_api_gateway_rest_api` resource:
 
-```
+```hcl
 # api_gateway.tf
 
 resource "aws_api_gateway_rest_api" "example" {
@@ -116,7 +122,7 @@ Notice that we created a "regional" endpoint instead of an "edge-optimized" one,
 
 Then, to actually trigger the lambda function when the API is called, we create the gateway method and gateway integration for it:
 
-```
+```hcl
 resource "aws_api_gateway_method" "proxy_root" {
   rest_api_id   = "${aws_api_gateway_rest_api.example.id}"
   resource_id   = "${aws_api_gateway_rest_api.example.root_resource_id}"
@@ -139,7 +145,7 @@ We use the `root_resource_id` as the path, so the user can just call the root pa
 
 Finally, we deploy this API with the following config:
 
-```
+```hcl
 resource "aws_api_gateway_deployment" "example" {
   depends_on = [
     "aws_api_gateway_integration.lambda_root",
@@ -152,7 +158,7 @@ resource "aws_api_gateway_deployment" "example" {
 
 But we miss one permission setting to allow the API gateway to invoke the lambda, so let's add the `aws_lambda_permission` as follows:
 
-```
+```hcl
 resource "aws_lambda_permission" "apigw" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
@@ -176,7 +182,7 @@ The auto-generated URLs are not very user-friendly. Although technically we don'
 
 To give API a custom URL, we need two parts: the API Gateway Custom Domain Name and the DNS record. The AWS Gateway Custom Domain Name, as the name suggests, will give a custom domain name to the API. There is also a concept called Base Path Mapping under the custom domain name, which will map a path in the url to an API and stage. This is useful when you want to put multiple APIs under one domain name. For example https://api.example.com/account-dev can be mapped to the dev stage of the account API, while https://api.example.com/payment can be mapped to the production stage of the payment API. But for our case we only need to use the root path `/` and map that to our one and only API. So we can create a setting like this:
 
-```
+```hcl
 resource "aws_api_gateway_domain_name" "regional" {
   # var.regional_hostname = api-eu.example.com for eu-central-1
   domain_name = "${replace(var.regional_hostname, "/[.]$/", "")}"
@@ -203,7 +209,7 @@ A few pitfalls to avoid in the `aws_api_gateway_domain_name` are
 
 But this alone will not make your URL available to people on the internet. You need to create a DNS record. The DNS record will let users on the internet to resolve `https://api-eu.example.com` into the actual API gateway URL AWS is assigned to our API gateway. The terraform code for the DNS record will look like:
 
-```
+```hcl
 resource "aws_route53_record" "regional" {
   zone_id = "${data.aws_route53_zone.public_zone.id}"
 
@@ -228,7 +234,7 @@ But having only URLs for each region doesn't make much sense for an API that is 
 
 To create the global URL, we need to create a [CNAME][cname] record with a `weighted_routing_policy`, We store all the regional URLs we have in a Terraform array variable `deploy_hostnames`.
 
-```
+```hcl
 resource "aws_route53_record" "balanced" {
     count = "${length(var.deploy_hostnames)}"
     zone_id = "${data.aws_route53_zone.public_zone.id}"
@@ -249,7 +255,7 @@ resource "aws_route53_record" "balanced" {
 
 Notice that we use a `count`, this will repeat the block once per element for `var.deploy_hostnames`, which contains the `https://api-eu.example.com` and `https://api-us.example.com`. Also keep an eye on the ``weighted_routing_policy`. We have `weight = 1` so every record will get equal share of the weight. This block will be expanded under the `count` to something like:
 
-```
+```hcl
 resource "aws_route53_record" "balanced" {
     name = "api.example.com"
     records = [
@@ -277,7 +283,7 @@ We haven't discuss the `health_check_id` field of the `aws_route53_record` confi
 
 A simple health check can be a ping that checks if the endpoint is responding. Or it can simulate a normal user request and check for the response body (with text search, for example). It can also be a specialized endpoint that triggers a lambda, which in turn verifies the health of other critical resources (e.g. Database, Queue). To keep it simple, we'll just make a request to our API (the root path `/`) and check if it's alive using HTTPS. Here are the Terraform code for it:
 
-```
+```hcl
 resource "aws_route53_health_check" "health" {
   count             = "${var.aws_region == "eu-central-1" ? length(var.deploy_hostnames) : 0}" # Only deploy it once
   fqdn              = "${element(var.deploy_hostnames, count.index)}"
@@ -294,7 +300,7 @@ Because the health check is not region specific, to avoid re-creating them when 
 
 One last bit for the global URL setup is the custom domain name. Although we already configured the custom domain name for `https://api-*.example.com`, we didn't setup anything for `https://api.example.com`. When we call the API with `https://api.example.com`, although Route 53 will do the routing to one of the regional endpoint, it will not replace the URL in the HTTPS header to `https://api-*.example.com`, so the API gateway will see a mismatch between the request URL (`https://api.example.com`) and its own custom domain name (`https://api-*.example.com`), thus failing the request. To fix this easily we can add a custom domain name for the global URL:
 
-```
+```hcl
 resource "aws_api_gateway_domain_name" "global" {
   # Remember to strip the traling dot
   domain_name = "${replace(var.global_hostname, "/[.]$/", "")}"
