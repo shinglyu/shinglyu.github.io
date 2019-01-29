@@ -111,7 +111,7 @@ To create the API Gateway, first we create the `aws_api_gateway_rest_api` resour
 
 resource "aws_api_gateway_rest_api" "example" {
   name        = "report_region"
-  description = "Reports the region it is in so we can test Route53"
+  description = "Reports the region it is in so we can test Route 53"
   endpoint_configuration {
     types = ["REGIONAL"]
   }
@@ -324,6 +324,22 @@ Now we are all set! Now deploy the service for both regions and wait for a short
 
 # Conclusion
 
-We covered how to create Route53 load-balancing in Route53. We first create a hello world API using API Gateway and Lambda. We gave each regional endpoint their own region-specific URL, so it's easier to test and debug. These all have to be created with API gateway custom domains with base path mapping, plus the Route53 DNS A records. Then we create a global URL CNAME record using Route 53 and let that do weighted routing to our region-specific URLs. Finally we setup health checks to ensure Route 53 is aware of the health of each region, so it can do proper routing in case anyone goes down. All these configurations might be a little be hard to visualize, so it would be helpful to check the AWS web console after you deploy. Or you can try to create this setup manually first using the AWS web console and then compare that to the terraform setup.
+We covered how to create Route 53 load-balancing in Route 53. We first create a hello world API using API Gateway and Lambda. We gave each regional endpoint their own region-specific URL, so it's easier to test and debug. These all have to be created with API gateway custom domains with base path mapping, plus the Route 53 DNS A records. Then we create a global URL CNAME record using Route 53 and let that do weighted routing to our region-specific URLs. Finally we setup health checks to ensure Route 53 is aware of the health of each region, so it can do proper routing in case anyone goes down. All these configurations might be a little be hard to visualize, so it would be helpful to check the AWS web console after you deploy. Or you can try to create this setup manually first using the AWS web console and then compare that to the terraform setup.
 
 [hosted_zone]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html
+[a_record]: https://support.dnsimple.com/articles/a-record/
+[acm]: https://docs.aws.amazon.com/acm/latest/userguide/setup.html
+[arn]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+[cloud_front]: https://aws.amazon.com/cloudfront/
+[cname]: https://support.dnsimple.com/articles/cname-record/
+[domain_name]: https://aws.amazon.com/getting-started/tutorials/get-a-domain/
+[geolocation]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo
+[iam]: https://aws.amazon.com/iam/
+[lambda_guide]: https://aws.amazon.com/blogs/compute/building-a-multi-region-serverless-application-with-amazon-api-gateway-and-aws-lambda/
+[latency]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
+[route53_doc]: https://www.terraform.io/docs/providers/aws/r/route53_record.html
+[weighted]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted
+
+Images
+-----------------
+https://www.google.com/images?q=High-Level+Architecture
