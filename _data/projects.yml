@@ -1,23 +1,22 @@
 - title: "Featured"
   projects:
 
+    - title: "RustPython"
+      title_url: "https://github.com/RustPython/RustPython"
+      description: A Python interpreter written in Rust
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/RustPython"
+
     - title: "Firefox Quantum - CSS engine"
       title_url: "https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/"
       description: A completely overhauled Firefox engine, super-fast and stable. I help port the Rust-based CSS engine from Servo into Gecko (Firefox's engine), and bring the automated test into place.
       thumbnail_url: 
-
 
     - title: "The Servo Parallel Browser Engine"
       title_url: "https://servo.org"
       description: Servo is a prototype web browser engine focus on parallism, security, and performance; written in the Rust language. I'm the core team reviewer of this project.
       thumbnail_url: 
       source_url: "https://github.com/servo/servo"
-
-    - title: "RustPython"
-      title_url: "https://github.com/shinglyu/RustPython"
-      description: A Python interpreter written in Rust
-      thumbnail_url: 
-      source_url: "https://github.com/shinglyu/RustPython"
 
     - title: "FocusBlocker"
       title_url: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
