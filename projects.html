@@ -5,7 +5,7 @@ css: css/projects.css
 ---
       {% for category in site.data.projects%}
       <section class="project-category">
-         <h1>{{category.title}}</h4>
+         <h2>{{category.title}}</h2>
          {% for project in category.projects%}
          <dl>
            {% if project.title_url%}
