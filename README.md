@@ -1,7 +1,9 @@
-My Protofolio Site
+My Portfolio Site
 ====================
+
+Visit [https://shinglyu.com](https://shinglyu.com)
+
 # Installation
-* Install jekyll (see the BKM in Google Drive)
 
 ```
 sudo apt-get install ruby ruby-dev nodejs
@@ -9,6 +11,6 @@ sudo gem install jekyll
 ```
 
 # Preview
-* jekyll server --watch
-
-#
+```
+jekyll serve --drafts
+```
