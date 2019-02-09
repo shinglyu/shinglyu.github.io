@@ -14,3 +14,7 @@ head "${OUTPUT}"
 echo "========================="
 
 git add "${OUTPUT}"
+
+mv "${1}" "${1}_PUBLISHED"
+
+git add -A "${1}" "${1}_PUBLISHED"
