@@ -49,4 +49,4 @@ var url = window.URL.createObjectURL(data);
 window.URL.revokeObjectURL(url);
 ```
 
-This is a simple trick to let your user download files without setting up any server. If you want to see it in action, you can check out this [CodePen](http://codepen.io/anon/pen/qZQBmN?editors=1010). And you can see this trick in React.js in our MozApoy project: [code](https://github.com/Mozilla-TWQA/apoy/blob/master/apoy/static/js/result.js#L276https://github.com/Mozilla-TWQA/apoy/blob/master/apoy/static/js/result.js#L276).
+This is a simple trick to let your user download files without setting up any server. If you want to see it in action, you can check out this [CodePen](http://codepen.io/anon/pen/qZQBmN?editors=1010).
