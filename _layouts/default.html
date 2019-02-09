@@ -25,7 +25,7 @@
       <header><h1>Shing Lyu</h1></header>
       <nav class="nav">
         <ul id="nav_list">
-           <li {% if page.url == "/blog/"%} class="active" {% endif %}><a href="/blog/">Blog</a></li>
+           <li {% if page.url == "/" or page.url == "/blog/" %} class="active" {% endif %}><a href="/">Blog</a></li>
           {% assign sorted_pages = site.pages | sort:"name" %}
           {% for node in sorted_pages %}
             {% if site.exclude_pages contains node.title %}
