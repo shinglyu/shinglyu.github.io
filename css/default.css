@@ -75,25 +75,28 @@ article {
   }
 }
 
-hr{
+hr {
   max-width: 600px;
-  margin: 2em auto;
+  margin: 1em auto;
   border: none;
   border-top: 1px solid;
   text-align: center;
+  overflow: visible;
+  height: 0px;
 }
+
 hr:after {
   content: '§';
   display: inline-block;
+  font-size: 24px;
+  padding: 12px 2px;
   position: relative;
-  top: -12px;
-  /*background: #f0f0f0;*/
+  top: -26px;
   background: #ffffff;
   color: #8c8b8b;
-  font-size: 18px;
-  -webkit-transform: rotate(70deg);
-  -moz-transform: rotate(70deg);
-  transform: rotate(70deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
   font-family: Serif;
   font-weight: normal;
 }
