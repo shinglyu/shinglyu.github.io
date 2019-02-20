@@ -3,6 +3,7 @@ email: shing.lyu@gmail.com
 highlighter: rouge
 markdown: kramdown
 exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus", "RSS", "Blog"]
+include: ['.well-known']
 description: Shing Lyu's Portfolio and Blog
 url: https://shinglyu.com
 gems: [jekyll-paginate]
