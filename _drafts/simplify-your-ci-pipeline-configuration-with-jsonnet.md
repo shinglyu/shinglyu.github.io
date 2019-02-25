@@ -75,21 +75,59 @@ Now imaging you are new to the project and read this drone pipeline, what would 
 
 But it will be much simpler if we duplicate the build and test steps and enumerate every combinations with `when` blocks. But this way we'll end up with 8 steps, each with different `when` condition, while most of the code is duplicated. We'll solve this with jsonnet after we explain the second problem.
 
-The second problem is code duplication. YAML provides [anchor][yaml_anchor] to cut down on repetition. But that only works at key-value granularity. So let' imaging
+The second problem is code duplication. YAML provides [anchor][yaml_anchor] to cut down on repetition. But that only works at key-value granularity. Let's assume that we are going to deploy the imaginary service to multiple  AWS regions for resilience, we'll have even more combinations. If we have 3 environments, `dev`, `stage` and `prod` (production), and 2 regions, 'eu-central-1' and 'us-west-1', then we'll have 3 x 2 = 6 deployment combinations. Even if we use YAML anchor to avoid repeating the `when` part, we still repeat a lot of the code:
+p
+
+```
+aliases-deployment-triggers:
+  - &when_deploy_stage
+    when:
+      event:
+        - promote
+      environment:
+        - stage
+  - &when_deploy_prod
+    when:
+      event:
+        - promote
+      environment:
+        - prod
+
+kind: pipeline
+name: default
+
+steps:
+# ... omitting some steps
+- name: deploy_stage_eu
+  image: node:8.6.0
+  commands:
+    - npm run deploy -- --env=stage --region=eu-central-1
+  <<: *when_deploy_stage
+
+- name: deploy_stage_us
+  image: node:8.6.0
+  commands:
+    - npm run deploy -- --env=stage --region=us-west-1
+  <<: *when_deploy_stage
+
+- name: deploy_prod_eu
+  image: node:8.6.0
+  commands:
+    - npm run deploy -- --env=prod --region=eu-central-1
+  <<: *when_deploy_prod
+
+- name: deploy_stage_us
+  image: node:8.6.0
+  commands:
+    - npm run deploy -- --env=prod --region=us-west-1
+  <<: *when_deploy_prod
+```
+
+Notice that even if we reduce the repetition by  `when_deploy_stage` for both the stage part, but we can't abstract out the `npm run ...` line and the name, because we can't parameterize the environment and region bit within the line. The good news is that Jsonnet can solve both problem we discussed. We'll give a short introduction about Jsonnet and explain how we can solve the problems with Jsonnet.
+
+## Jsonnet 
 
 
-Problem:
-  Hard to reason pipelines, it's a tree rather then few strait lines
-    e.g. build-test-deploy-dev in master push, build-test-deploy-prod in manual deploy prod
-    explain the tree vs lists with diagram => list lead to repetion
-  Repetitions
-    e.g. deploy to [dev, test, prod] x [eu, jp]. The yaml aliasing is only at key-value level, so you end up with repetition
-    ```
-        deploy:
-            <<: Some preperation
-            action: deploy.sh --env=dev --region=jp
-            <<: WHEN_DEPLOY
-   ```
 
 JSONNET intro
 simple JSONNET hello world
