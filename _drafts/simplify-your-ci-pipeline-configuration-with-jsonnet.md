@@ -10,6 +10,8 @@ excerpt_separator: <!--more-->
 ## The problem with YAML-based CI configuration files
 Most of the CI/CD (Continuous Integration/Continuous Delivery) tools nowadays supports some form of configuration file. For example [Travis CI][travis_file], [Gitlab CI][gitlab_file], [Circle CI][circle_file] and [Drone CI][drone_file] uses YAML file. [Jenkins][jenkins_file] uses its own DSL. These YAML-based configuration file is easy to read and edit, but they doesn't scale very well. In this post we'll demonstrate the problem with Drone CI v1.0, but the idea can be easily applied to other CI tool.
 
+<!--more-->
+
 The first problem is that pipelines become hard to reason about when you have more and more conditional builds. Usually when we are using git with CI pipelines, we end up with multiple pipelines for each scenario. For example, imagine we have a imaginary Node.js web service, when I do a feature branch push (i.e. non-master branch push) we would probably want to trigger the `build` and `test` step. But when we merge a request to `master` branch, we want it to `build`, `test` and then deploy to our `dev` environment. Also Drone CI gives you the ability to trigger a deployment from the CLI, so we also want to also add a `build`-`test`-deploy to stage pipeline for that. So to summarize, we ant the following pipelines:
 
 ```
@@ -69,11 +71,13 @@ steps:
 
 The `event: promote` in the `deploy_stage` is triggered by a CLI call `drone promote <repo/name> <build> <environment>`. This is how manual deployment is triggered in Drone. Don't worry if you don't understand how this works, it's not critical to our discussion.
 
-Now imaging you are new to the project and read this drone pipeline, what would happend when you push a feature branch? You have to do all the condition matching in your head to come up with a list of steps that fits the condition. The pipeline configuration we just created is basically a tree, and we apply conditions onto it to get a branch of it. 
+Now imaging you are new to the project and read this drone pipeline, what would happen when you push a feature branch? You have to do all the condition matching in your head to come up with a list of steps that fits the condition. The pipeline configuration we just created is basically a tree, and we apply conditions onto it to get a branch of it. 
 
 ![pipeline tree]({{site_url}}/blog_assets/drone_jsonnet/pipeline_tree.svg)
 
 But it will be much simpler if we duplicate the build and test steps and enumerate every combinations with `when` blocks. But this way we'll end up with 8 steps, each with different `when` condition, while most of the code is duplicated. We'll solve this with jsonnet after we explain the second problem.
+
+![pipelines]({{site_url}}/blog_assets/drone_jsonnet/pipelines.svg)
 
 The second problem is code duplication. YAML provides [anchor][yaml_anchor] to cut down on repetition. But that only works at key-value granularity. Let's assume that we are going to deploy the imaginary service to multiple  AWS regions for resilience, we'll have even more combinations. If we have 3 environments, `dev`, `stage` and `prod` (production), and 2 regions, 'eu-central-1' and 'us-west-1', then we'll have 3 x 2 = 6 deployment combinations. Even if we use YAML anchor to avoid repeating the `when` part, we still repeat a lot of the code:
 p
@@ -126,12 +130,246 @@ steps:
 Notice that even if we reduce the repetition by  `when_deploy_stage` for both the stage part, but we can't abstract out the `npm run ...` line and the name, because we can't parameterize the environment and region bit within the line. The good news is that Jsonnet can solve both problem we discussed. We'll give a short introduction about Jsonnet and explain how we can solve the problems with Jsonnet.
 
 ## Jsonnet 
+Jsonnet is an open source templating language based on JSON. The backbone of it is still native json, but it adds variables, conditionals, functions, arithmetics and more to it. It also have nice linter, formatter, and IDE integrations. It also have a nicely designed standard library that provides you utilities for string manipulation, math, and functional tools like map and fold.
+
+A jsonnet source code pass through the compiler, which emits JSON. On MacOS you can easily install it with `brew install jsonnet`. Although Drone now [natively supports jsonnet][drone_jsonnet_post], but since my team still runs the old version of Drone, we decided to compile jsonnet to JSON, then use the [json2yaml][json2yaml] tool to convert it to YAML. We then commit the jsonnet source and the generated YAML file into our git repository.
+
+### Avoiding repetition with functions
+
+So let's try to solve the repetition problem by using jsonnet functions. The moving parts in our deploy step is the environment and region. So we can define a function that takes the two parameters and do string interpolation in there:
+
+```
+// demo1.jsonnet
+
+local deploy(env, region) =
+  {
+    name: 'deploy_%(env)s_%(region)s' % { env: env, region: region },
+    image: 'node:8.6.0',
+    commands: [
+      'npm run deploy -- --env=%(env)s --region=%(region)s' % { env: env, region: region },
+    ],
+    when: {
+      event: ['promote'],
+      environment: [env],
+    },
+  };
+
+// Calling the function
+{
+  steps: [
+    deploy('dev', 'eu-central-1'),
+    deploy('dev', 'us-west-1'),
+    deploy('stage', 'eu-central-1'),
+    deploy('stage', 'us-west-1'),
+    deploy('prod', 'eu-central-1'),
+    deploy('prod', 'us-west-1'),
+
+  ],
+}
+```
+
+Let's take a closer look to the `name` field. Jsonnet supports old Python-like string formatting (the `%` operator). In the template string, the `%(env)s` will search for the `env` field in the object following the `%` operator. The `s` at the end of the `%(...)` means we want to format it as a string. 
+
+If we run `jsonnet demo1.jsonnet`, this will be printed to the STDOUT:
+
+```
+{
+   "steps": [
+      {
+         "commands": [
+            "npm run deploy -- --env=dev --region=eu-central-1"
+         ],
+         "image": "node:8.6.0",
+         "name": "deploy_dev_eu-central-1",
+         "when": {
+            "environment": [
+               "dev"
+            ],
+            "event": [
+               "promote"
+            ]
+         }
+      },
+      {
+         "commands": [
+            "npm run deploy -- --env=dev --region=us-west-1"
+         ],
+         "image": "node:8.6.0",
+         "name": "deploy_dev_us-west-1",
+         "when": {
+            "environment": [
+               "dev"
+            ],
+            "event": [
+               "promote"
+            ]
+         }
+      },
+      {
+         "commands": [
+            "npm run deploy -- --env=stage --region=eu-central-1"
+         ],
+         "image": "node:8.6.0",
+         "name": "deploy_stage_eu-central-1",
+         "when": {
+            "environment": [
+               "stage"
+            ],
+            "event": [
+               "promote"
+            ]
+         }
+      },
+      {
+         "commands": [
+            "npm run deploy -- --env=stage --region=us-west-1"
+         ],
+         "image": "node:8.6.0",
+         "name": "deploy_stage_us-west-1",
+         "when": {
+            "environment": [
+               "stage"
+            ],
+            "event": [
+               "promote"
+            ]
+         }
+      },
+      {
+         "commands": [
+            "npm run deploy -- --env=prod --region=eu-central-1"
+         ],
+         "image": "node:8.6.0",
+         "name": "deploy_prod_eu-central-1",
+         "when": {
+            "environment": [
+               "prod"
+            ],
+            "event": [
+               "promote"
+            ]
+         }
+      },
+      {
+         "commands": [
+            "npm run deploy -- --env=prod --region=us-west-1"
+         ],
+         "image": "node:8.6.0",
+         "name": "deploy_prod_us-west-1",
+         "when": {
+            "environment": [
+               "prod"
+            ],
+            "event": [
+               "promote"
+            ]
+         }
+      }
+   ]
+}
+```
+
+We generated 94 lines of json from just 25 lines of jsonnet, and it's much easier to read!
+
+### Define separate pipelines for each scenario
+
+The next question is how can we structure our jsonnet code so we can easily understand what steps are included in each scenario (e.g. push to non-master, merge to master etc.). We can first define the building blocks, the steps:
+
+```
+local build = {
+  name: 'build',
+  image: 'node:8.6.0',
+  commands: [
+    'npm install',
+    'npm run build',
+  ],
+};
+
+local test = {
+  name: 'test',
+  image: 'node:8.6.0',
+  commands: [
+    'npm test',
+  ],
+};
+
+local deploy(env, region) =
+  {
+    name: 'deploy_%(env)s_%(region)s' % { env: env, region: region },
+    image: 'node:8.6.0',
+    commands: [
+      'npm run deploy -- --env=%(env)s --region=%(region)s' % { env: env, region: region },
+    ],
+  };
+```
+
+Then we can start composing our pipelines with these steps. First we define a list of steps we want when pushing to a non-master branch:
+
+```
+local commitToNonMasterSteps = [
+  build,
+  test
+];
+```
+
+We want to restrict these steps to only run on a push to non-master, we can use a `std.map` to add the conditional block (i.e. `when` block) to each step of it.
+
+```
+local whenCommitToNonMaster(step) = step {
+  when: {
+    event: ['push'],
+    branch: {
+      exclude: ['master'],
+    },
+  },
+};
+
+local commitToNonMasterSteps = std.map(whenCommitToNonMaster, [
+  build,
+  test,
+]);
+```
+
+The `whenCommitToNonMaster` function will append the `when` block to the step you pass in. The syntax `step { when: ... }` is actually meaning "merging the `step` object with the `{ when: ... }` object". This function is then applied to each and every step using the `std.map` function. This pattern can then be applied to other scenarios, for example when we do a manual deployement to stage:
+
+```
+local whenDeployToStage(step) = step {
+  when: {
+    event: ['deployment'],
+    environment: 'stage',
+  },
+};
+
+local deployToStageSteps = std.map(whenDeployToStage, [
+  build,
+  test,
+  deploy('stage', 'eu-central-1'),
+  deploy('stage', 'us-west-1'),
+]);
+```
+
+We choose to repeat the `build` and `test` step here, so we can clearly see what is included in the "manually deploy so stage" pipeline. In the generated code there will be two copies of the `build` step, one with a `when` block of pushing to non master and another with a `when` block of manually deploying to stage. We can carry on with defining the scenarios and their list of steps. In the end we'll have a list of scenarios, each scenario variable contains a list of steps. We can then flatten all the lists into one giant list of all possible steps using the `std.flattenArrays()` function.
+
+```
+local pipelines = std.flattenArrays([
+  commitToNonMasterSteps, // a list/array of [build, test]
+  commitToMasterSteps,
+  deployToDevSteps,
+  deployToStageSteps,
+  deployToProdSteps,
+]);
+
+// Below is the actual JSON object that will be emit by the jsonnet compiler.
+{
+  kind: 'pipeline',
+  name: 'default',
+  steps: pipelines,
+}
+```
 
 
+Using this architecture, anyone reading the Drone configuration can clearly see the list of scenarios (the `pipelines` list) we care about. To see what steps are executed in each scenario, we can easly see that from the definition of the scenario variable (e.g. `commitToNonMasterSteps`).
 
-JSONNET intro
-simple JSONNET hello world
-use jsonnet function for templating
-use jsonnet to generate the lists pipeline
-conclusion, recap what are the problems and how jsonnet solve it
-<!--more-->
+## Conclusions
+We discussed the problems for writing the CI pipeline in plain YAML. The first problem is that if we use complex conditionals to control which step to run in which scenario, the pipeline will quickly become hard to reason about. THe second problem is that even if we use YAML anchors we still can't eliminate all the repetitions. By using jsonnet, we can solve the two problems. We can eliminate the repetition using jsonnet functions and string interpolation. To address the complex conditionals problem, we strcutre our jsonnet code in a way that we enumerate all the steps under each scenario. Thanks to the jsonnet templating, we can be explict but keep our code concise and clean.
+
