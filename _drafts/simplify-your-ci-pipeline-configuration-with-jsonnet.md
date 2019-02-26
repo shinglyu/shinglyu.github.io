@@ -32,7 +32,7 @@ When manually deploy to stage
 
 Drone and many other CI solution allow you to achieve this with some conditions.  A Drone config file for the above pipelines will look like this:
 
-```
+```yaml
 kind: pipeline
 name: default
 
@@ -82,7 +82,7 @@ But it will be much simpler if we duplicate the build and test steps and enumera
 The second problem is code duplication. YAML provides [anchor][yaml_anchor] to cut down on repetition. But that only works at key-value granularity. Let's assume that we are going to deploy the imaginary service to multiple  AWS regions for resilience, we'll have even more combinations. If we have 3 environments, `dev`, `stage` and `prod` (production), and 2 regions, 'eu-central-1' and 'us-west-1', then we'll have 3 x 2 = 6 deployment combinations. Even if we use YAML anchor to avoid repeating the `when` part, we still repeat a lot of the code:
 p
 
-```
+```yaml
 aliases-deployment-triggers:
   - &when_deploy_stage
     when:
@@ -138,7 +138,7 @@ A jsonnet source code pass through the compiler, which emits JSON. On MacOS you 
 
 So let's try to solve the repetition problem by using jsonnet functions. The moving parts in our deploy step is the environment and region. So we can define a function that takes the two parameters and do string interpolation in there:
 
-```
+```jsonnet
 // demo1.jsonnet
 
 local deploy(env, region) =
@@ -172,7 +172,7 @@ Let's take a closer look to the `name` field. Jsonnet supports old Python-like s
 
 If we run `jsonnet demo1.jsonnet`, this will be printed to the STDOUT:
 
-```
+```javascript
 {
    "steps": [
       {
@@ -275,7 +275,7 @@ We generated 94 lines of json from just 25 lines of jsonnet, and it's much easie
 
 The next question is how can we structure our jsonnet code so we can easily understand what steps are included in each scenario (e.g. push to non-master, merge to master etc.). We can first define the building blocks, the steps:
 
-```
+```jsonnet
 local build = {
   name: 'build',
   image: 'node:8.6.0',
@@ -305,7 +305,7 @@ local deploy(env, region) =
 
 Then we can start composing our pipelines with these steps. First we define a list of steps we want when pushing to a non-master branch:
 
-```
+```jsonnet
 local commitToNonMasterSteps = [
   build,
   test
@@ -314,7 +314,7 @@ local commitToNonMasterSteps = [
 
 We want to restrict these steps to only run on a push to non-master, we can use a `std.map` to add the conditional block (i.e. `when` block) to each step of it.
 
-```
+```jsonnet
 local whenCommitToNonMaster(step) = step {
   when: {
     event: ['push'],
@@ -332,7 +332,7 @@ local commitToNonMasterSteps = std.map(whenCommitToNonMaster, [
 
 The `whenCommitToNonMaster` function will append the `when` block to the step you pass in. The syntax `step { when: ... }` is actually meaning "merging the `step` object with the `{ when: ... }` object". This function is then applied to each and every step using the `std.map` function. This pattern can then be applied to other scenarios, for example when we do a manual deployement to stage:
 
-```
+```jsonnet
 local whenDeployToStage(step) = step {
   when: {
     event: ['deployment'],
@@ -350,7 +350,7 @@ local deployToStageSteps = std.map(whenDeployToStage, [
 
 We choose to repeat the `build` and `test` step here, so we can clearly see what is included in the "manually deploy so stage" pipeline. In the generated code there will be two copies of the `build` step, one with a `when` block of pushing to non master and another with a `when` block of manually deploying to stage. We can carry on with defining the scenarios and their list of steps. In the end we'll have a list of scenarios, each scenario variable contains a list of steps. We can then flatten all the lists into one giant list of all possible steps using the `std.flattenArrays()` function.
 
-```
+```jsonnet
 local pipelines = std.flattenArrays([
   commitToNonMasterSteps, // a list/array of [build, test]
   commitToMasterSteps,
