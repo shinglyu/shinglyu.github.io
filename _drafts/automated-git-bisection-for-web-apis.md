@@ -7,16 +7,43 @@ tags: mozilla
 excerpt_separator: <!--more-->
 ---
 
-Intro
+Bug are a hard thing to pin down. Especially if you are working on a big project with a lot of commits being pushed/merged all the time. By the time you found out the master branch is broken, the commit that introduced the bug might already be buried in history. This is when git bisection shines. The man page of `git bisect` says:
+
+> This command uses a binary search algorithm to find which commit in your project’s history introduced a bug. You use it by first telling it a "bad" commit that is known to contain the bug, and a "good" commit that is known to be before the bug was introduced. Then git bisect picks a commit between those two endpoints and asks you whether the selected commit is "good" or "bad". It continues narrowing down the range until it finds the exact commit that introduced the change.
+
+If you do it manually, you'll need to compile your code (if applicable), restart your server and test if it works, then tell git if it's "good" or "bad". But if you have a lot of commits to test, the process soon becomes tedious. A better solution is to use `git bisect run`. You can give `git bisect run` a script that will exit with code `0` if the code is good, and exit with `1` to `127` (except `125`) if the commit is bad. Then `git` will automatically run until it finds the first offending commit.
+
+Usually if you have a high-coverage unit test or integration test, you can `git bisect run` your tests. But if you web API test is still mostly manual, you can still use curl and grep to quickly bisect it.
+
 <!--more-->
 
-Git bisection
-Setup the server
-Run git bisect run
+## Setting up a test server
+For demonstration purpose, we are going to run a simple Python [Flask][flask] server.
+
+```
+# server.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    # raise Exception  # Uncomment this to make the server return 500
+    return "Hello World!"
+```
+
+To run it, we run
+
+```
+pipenv install Flask
+pipenv shell  # activate the pipenv environment 
+FLASK_DEBUG=1 FLASK_APP=server.py flask run
+```
+
+We run the flask server with `FLASK_DEBUG=1`, this way the flask development server will reload the server when file changes. Since `git bisect` will keep checking out to different commits, have auto-reload enabled will make the bisection smoother.
 
 ## Running automated `git bisect`
 
-Git bisect provides the [`git bisect run`][bisectrun] command to automatically test your commits with the given command.  Just like a manual bisect run, the process starts like this:
+The process of running [`git bisect run`][bisectrun] is just like a manual bisect run.
 
 * `git checkout master`: assuming we our master branch is now broken. Let's checkout to the master branch first.
 * `git bisect start`: let's start the bisection
@@ -36,7 +63,7 @@ The `./bisect-test.sh` scripts contains the following:
 curl http://127.0.0.1:5000
 ```
 
-If your server needs a deployment or restart to run the new code, you can do it in the script before running cURL. But since we are running the development server that will automatically reload when the code changes, we can ignore this step.
+If your server needs a deployment or restart to run the new code, you can do it in the script before running cURL. But since we are running the development server that will automatically reload when the code changes, we can ignore this step. You might want to add a short `sleep` here so the flask server have some time to restart.
 
 ## Make cURL return non-zero return code when getting HTTP errors
 
@@ -156,12 +183,30 @@ bisect run success
 
 ## For badly designed APIs that always returns 200 OK
 
-If you are unlucky and need to work on a badly designed 
+If you are unlucky enough to need to work on a badly designed API that always return 200 OK, and put the error message inside the response body, the above trick won't work for you. But do not despair! We still have the reliable `grep` command to help. The question is how to make get return the correct return code?
+
+Let's the API returns 200 OK and the following response body when hitting an error:
+
+```
+{
+  "message": "Error: Unexpected error happened."
+}
+```
+
+`grep` will return `0` if some match is found, and `1` otherwise. But we want it to return non-zero when we match something pattern like `Error`. So we can use the `!` operator like so
+
+```
+curl http://127.0.0.1:5000 | (! grep ERROR)
+```
+
+You might be tempting to use the `-v/--invert-match` flag for `grep`, but this might not work because `grep` works on lines. If any of your line doesn't contain the `Error`, it will be matched and returns 0.
+
+## Conclusion
+
+Git's automated bisection is a powerful tool to pin down the commit that introduced a bug. Without a proper set of automated testing, using curl is your best bet. To correctly pass the exit code to `git bisect run`, you'll need to use the `--fail` option of curl to 
 
 
-The above 
-## for always 200 APIs: (! grep)
-## Auto bisect
+
 
 [bisectrun]:  https://git-scm.com/docs/git-bisect#_bisect_run
 
