@@ -6,6 +6,8 @@ date: 2019-02-28 14:45:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
+> This post is also featured on the [DAZN Engineering Blog][dazn_blog].
+
 Most of the CI/CD (Continuous Integration/Continuous Delivery) tools nowadays supports some form of configuration file so you can properly version control them. For example [Travis CI][travis_file], [Gitlab CI][gitlab_file], [Circle CI][circle_file] and [Drone CI][drone_file] uses YAML file. [Jenkins][jenkins_file] uses its own DSL. These YAML-based configuration files are easy to read and edit, but they don't scale very well when the file grows big. This problem can be solved by using a nice data templating language called Jsonnet. In this post we'll be demonstrating Drone CI v1.0 configuration file format, but the idea can be easily applied to other CI tool.
 
 <!--more-->
@@ -401,3 +403,4 @@ We discussed the problems for writing the CI pipeline in plain YAML. The first p
 [json2yaml]: https://www.npmjs.com/package/json2yaml
 [travis_file]: https://docs.travis-ci.com/user/tutorial/
 [yaml_anchor]: https://blog.daemonl.com/2016/02/yaml.html
+[dazn_blog]: https://medium.com/dazn-tech/simplify-your-ci-pipeline-configuration-with-jsonnet-5a96cd9ccc51

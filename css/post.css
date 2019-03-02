@@ -38,6 +38,14 @@ code {
   font-family: Courier New, Courier, monospace;
 }
 
+blockquote {
+  font-style: italic;
+  border-left: 5px solid grey;
+  margin-left: 0px;
+  padding-left: 1em;
+  background-color: #efefef;
+}
+
 @media (min-width: 768px) {
   div.highlighter-rouge:hover {
     width: 900px; /* 1.5x of the article width */
