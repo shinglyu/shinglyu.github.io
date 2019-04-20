@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: shinglyu.com
+Token: d97f95fad1041c888b5bb61777fda3972a3af36896519eb60a7fec649732b951
