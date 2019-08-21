@@ -12,9 +12,17 @@
 
 - title: Talks
   publications:
-    - title: Slides
-      title_url: http://shinglyu.github.io/my_presentations/
-      description: Slides for my presentations
+    - title: "2019/08/17 COSCUP speaker, Taipei (slides)"
+      title_url: /blog_assets/coscup_2019/serverless-rust-coscup-2019.pdf
+      description: "Serverless Web Service in Rust"
+
+    - title: "2019/08/17 COSCUP speaker, Taipei"
+      title_url: 
+      description: "海外頭路：憂喜甘苦談 (Working abroad: experience sharing)"
+
+    - title: "2019/08/17 COSCUP host, Taipei"
+      title_url: 
+      description: "Closing keynote host"
 
     - title: "2019/02/03 FOSDEM (video)"
       title_url: https://fosdem.org/2019/schedule/event/rust_python/
@@ -70,6 +78,10 @@
 
     - title: "2015 NTU Open Source Club workshop speaker, Taipei"
       description: "Hosting the Firefox OS Hands-on Workshop at National Taiwan University Open Source Club"
+
+    - title: Slides for my old presentations
+      title_url: http://shinglyu.github.io/my_presentations/
+      description: Slides for my presentations
 
 - title: Guest Posts
   publications:
