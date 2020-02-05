@@ -6,7 +6,7 @@ date: 2020-01-30 16:17:58 +08:00
 excerpt_separator: <!--more-->
 ---
 
-In theory, Terraform is capable of figuring out the dependency between AWS resources and make updates in the correct order. However, AWS security group will often become a source of trouble if you don't understand how Terraform handles it. If you are having issues modifying the security group because they are used by other resources, here are some ways you can mitigate that. 
+In theory, Terraform is capable of figuring out the dependency between AWS resources and make updates in the correct order. However, AWS security groups often become a source of trouble if you don't understand how Terraform handles it. If you are having issues modifying the security group because they are used by other resources, here are some ways you can mitigate that. 
 
 <!--more-->
 If we have the following security group:
@@ -32,7 +32,7 @@ resource "aws_security_group" "allow_http_traffic" {
 }
 ```
 
-This security group has two rules, it allows inbound traffic from the `10.0.1.0/24` IP range on port 80, and allows all outbound traffic. This security group is used by an application load balancer to control the traffic:
+This security group has two rules; it allows inbound traffic from the `10.0.1.0/24` IP range on port 80, and allows all outbound traffic. This security group is used by an application load balancer to control the traffic:
 
 ```hcl
 resource "aws_lb" "example" {
@@ -86,7 +86,7 @@ aws_security_group.allow_http_traffic: Still destroying... [id=sg-02e90ca52c7b44
 aws_security_group.allow_http_traffic: Still destroying... [id=sg-02e90ca52c7b4484a, 10m0s elapsed]
 
 Error: DependencyViolation: resource sg-02e90ca52c7b4484a has a dependent object
-	status code: 400, request id: a1814f80-9eea-414c-bbc2-6685b0bf1129
+    status code: 400, request id: a1814f80-9eea-414c-bbc2-6685b0bf1129
 ```
 ## Destroy-before-create v.s. Create-before-destroy
 This is actually caused by they way Terraform tries to update the security group. If we look into the `terraform plan` output:
@@ -98,17 +98,17 @@ This is actually caused by they way Terraform tries to update the security group
 }
 ```
 
-By default, if Terraform thinks the resource can't be updated in-place, it will try to first destroy the resource and create a new one. The `-/+` symbol in the `terraform plan` output confirms that. This is illustrated in the following diagram:
+By default, if Terraform thinks the resource can't be updated in-place, it will try first to destroy the resource and create a new one. The `-/+` symbol in the `terraform plan` output confirms that. This is illustrated in the following diagram:
 
 
 ![destroy before create]({{site_url}}/blog_assets/tf-sg/destroy_before_create.png)
 
-However, AWS doesn't allow you to destroy a security group while the application load balancer is using it. So Terraform will be stuck in step 1 trying to destroy the security group until it times out.
+However, AWS doesn't allow you to destroy a security group while the application load balancer is using it. So Terraform will be stuck in step 1, trying to destroy the security group until it times out.
 
 The solution is to:
 1. create a new security group
-2. Re-configure the application load balancer so it uses the new security group instead of the old one.
-3. Now the old security group is not reference by anyone anymore, we can safely delete it.
+2. Re-configure the application load balancer, so it uses the new security group instead of the old one.
+3. Now the old security group is not referenced by anyone anymore. We can safely delete it.
 
 
 ![create before destroy]({{site_url}}/blog_assets/tf-sg/create_before_destroy.png)
@@ -156,7 +156,7 @@ If we run `terraform apply` now, we'll get another issue:
 aws_security_group.allow_http_traffic: Creating...
 
 Error: Error creating Security Group: InvalidGroup.Duplicate: The security group 'allow_http_traffic' already exists for VPC 'vpc-03a1b980a68f57ab3'
-	status code: 400, request id: 0ad62c71-99cc-448a-91c0-38fe19a1adaa
+    status code: 400, request id: 0ad62c71-99cc-448a-91c0-38fe19a1adaa
 
   on alb.tf line 1, in resource "aws_security_group" "allow_http_traffic":
   1: resource "aws_security_group" "allow_http_traffic" {
@@ -164,7 +164,7 @@ Error: Error creating Security Group: InvalidGroup.Duplicate: The security group
 
 The error message is pretty self-explanatory: when Terraform tries to create the new security group, it has the same `name` as the existing one. You'll have to change the `name` of the security group so Terraform can create a new security group with a new name. 
 
-If you run out of ideas for naming, you can consider adding a sequence number to the end of the name, like `allow_http_traffic_1`, `allow_http_traffic_2`, and so on. Or you can automate that with a variable like the commit hash (`allow_http_traffic_${var.commit_hash}`), and let the CI pipeline present the commit hash as a Terraform variable. The draw back of the commit-hash approach is that it will force the security group to be re-created on every commit. If your Terraform code lives alongside the application code in the same repository, that might be a waste of deployment time. Usually the security group won't change too often so it'll be easier to just rename them manually.
+If you run out of ideas for naming, you can consider adding a sequence number to the end of the name, like `allow_http_traffic_1`, `allow_http_traffic_2`, and so on. Or you can automate that with a variable like the commit hash (`allow_http_traffic_${var.commit_hash}`), and let the CI pipeline present the commit hash as a Terraform variable. The drawback of the commit-hash approach is that it will force the security group to be re-created on every commit. If your Terraform code lives alongside the application code in the same repository, that might be a waste of deployment time. Usually, the security group won't change too often, so it'll be easier just to rename them manually.
 
 
 [lifecycle]:  https://www.terraform.io/docs/configuration/resources.html#lifecycle-lifecycle-customizations
