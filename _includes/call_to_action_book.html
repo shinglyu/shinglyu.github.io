@@ -1,0 +1,38 @@
+<div class="call_to_action">
+  <p>Want to learn Rust?</p> 
+  <p>Checkout my new book:</p>
+  <a href="https://www.apress.com/gp/book/9781484255988" onclick="trackOutboundLink('https://www.apress.com/gp/book/9781484255988'); return false" target="_blank" id="book_btn">
+    Practial Rust Projects
+    <img src="/blog_assets/book_cover.jpg" alt=""/>
+  </a>
+  <p>Also available on O'Reilly and Amazon</p>
+</div>
+<style>
+.call_to_action {
+  text-align: center;
+  font-style: italic;
+  background: lightgrey;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+#book_btn {
+  display: block;
+  font-style: normal;
+  font-weight: bold;
+  background: white;
+  width: 16em;
+  padding: 1em;
+  margin: 1em auto;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+</style>
+<script>
+  var trackOutboundLink = function(url) {
+    ga('send', 'event', 'codementor', 'click', url, {
+           'transport': 'beacon',
+           'hitCallback': function(){document.location = url;}
+    });
+  }
+</script> 
