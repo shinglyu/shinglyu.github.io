@@ -1,5 +1,13 @@
 - title: Books
   publications:
+    - title: "Practical Rust Web Projects: Building Cloud and Web-Based Applications"
+      title_url: https://www.apress.com/gp/book/9781484265888
+      description: |
+        Apress (ISBN: 978-1-4842-6589-5)<br>
+        Also on:
+        <a href="https://www.amazon.com/Practical-Rust-Web-Projects-Applications/dp/1484265882">Amazon</a>, 
+        <a href="https://www.amazon.com/Practical-Rust-Projects-Computing-Applications/dp/1484255984">O'Reilly</a>, 
+      thumbnail_url: "blog_assets/book_2_cover.jpg"
     - title: "Practical Rust Projects: Building Game, Physical Computing, and Machine Learning ApplicationsBuilding Reusable Code with Rust"
       title_url: https://www.apress.com/gp/book/9781484255988
       description: |
