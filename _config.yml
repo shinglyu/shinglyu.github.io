@@ -2,7 +2,7 @@ name: Shing Lyu
 email: shing.lyu@gmail.com
 highlighter: rouge
 markdown: kramdown
-exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus", "RSS", "Blog"]
+exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus", "RSS", "Blog", "Privacy Policy"]
 include: [".well-known"]
 description: Shing Lyu's Portfolio and Blog
 url: https://shinglyu.com
