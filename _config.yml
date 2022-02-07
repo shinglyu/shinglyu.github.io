@@ -6,7 +6,7 @@ exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus", "RSS", "Blog", "Privacy Poli
 include: [".well-known"]
 description: Shing Lyu's Portfolio and Blog
 url: https://shinglyu.com
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 paginate: 5
 paginate_path: "/blog/page:num/"
 defaults:
