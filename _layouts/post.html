@@ -2,10 +2,12 @@
 layout: default
 ---
 <article>
-
    <h1>{{page.title}}</h1>
-  {% include disclaimer.html %}
+   <span class="author">By Shing Lyu</span>
+   &nbsp;
+   &nbsp;
    <time class="post_time">{{ page.date | date: '%B %d, %Y'}}</time>
+  {% include disclaimer.html %}
   {{ content }}
 </article>
 

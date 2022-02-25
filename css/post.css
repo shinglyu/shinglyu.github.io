@@ -2,12 +2,14 @@
   list-style-type:none;
 }
 
-time {
-  display: block;
-  text-align: right;
+.author {
   font-style: italic;
-  color: grey;
 }
+.post_time {
+  float: right;
+  font-style: italic;
+}
+
 
 main > article {
   max-width: 600px;
