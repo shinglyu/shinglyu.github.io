@@ -31,12 +31,19 @@
   display: flex;
 }
 
+@media (max-width: 768px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .book_card{
   display: block;
   font-style: normal;
   font-weight: bold;
   background: white;
-  width: 16em;
+  width: 14em;
   padding: 1em;
   margin: 1em auto;
   border: 2px solid black;
