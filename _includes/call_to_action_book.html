@@ -1,15 +1,22 @@
 <div class="call_to_action">
-  <p>Want to learn Rust?</p> 
-  <p>Check out my new book:</p>
-  <a href="https://link.springer.com/book/10.1007/978-1-4842-6589-5" onclick="trackOutboundLink('https://link.springer.com/book/10.1007/978-1-4842-6589-5'); return false" target="_blank" id="book_2_btn" class="book_card">
-    Practial Rust Web Projects
-    <img src="/blog_assets/book_2_cover.jpg" alt=""/>
-  </a>
-  <a href="https://www.apress.com/gp/book/9781484255988" onclick="trackOutboundLink('https://www.apress.com/gp/book/9781484255988'); return false" target="_blank" id="book_btn" class="book_card">
-    Practial Rust Projects
-    <img src="/blog_assets/book_cover.jpg" alt=""/>
-  </a>
-  <p>Also available on O'Reilly and Amazon</p>
+  <p>Want to learn Rust? Check out my books:</p>
+  <div class="cards">
+    <a href="https://link.springer.com/book/10.1007/978-1-4842-6589-5" onclick="trackOutboundLink('https://link.springer.com/book/10.1007/978-1-4842-6589-5'); return false" target="_blank" id="book_2_btn" class="book_card">
+      <!--Practial Rust Web Projects-->
+      <img src="/blog_assets/book_2_cover.jpg" alt=""/>
+    </a>
+    <a href="https://www.apress.com/gp/book/9781484255988" onclick="trackOutboundLink('https://www.apress.com/gp/book/9781484255988'); return false" target="_blank" id="book_btn" class="book_card">
+      <!--Practial Rust Projects-->
+      <img src="/blog_assets/book_cover.jpg" alt=""/>
+    </a>
+  </div>
+  <p>Also available on 
+    <a href="https://www.oreilly.com/search/?query=author%3A%22Shing%20Lyu%22" onclick="trackOutboundLink('https://www.oreilly.com/search/?query=author%3A%22Shing%20Lyu%22')" target="_blank">
+      O'Reilly
+    </a> and <a href="https://www.amazon.com/Shing-Lyu/e/B088781BMP" onclick="trackOutboundLink('https://www.amazon.com/Shing-Lyu/e/B088781BMP')" target="_blank">
+      Amazon
+    </a>
+  </p>
 </div>
 <style>
 .call_to_action {
@@ -18,6 +25,10 @@
   background: lightgrey;
   padding: 1em;
   border-radius: 10px;
+}
+
+.cards {
+  display: flex;
 }
 
 .book_card{
