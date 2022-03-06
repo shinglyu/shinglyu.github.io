@@ -16,7 +16,7 @@ After some recent discussion with a friend on note-taking methods, I decided to 
 The system is shown in the diagram above. Let me explain it in detail.
 
 ## Getting input
-I get news mostly from a few sources: social media, podcast and RSS (using [Feedly][feedly]). I try to mitigate the information bubble (or *THE ALGORITHM*, whatever you call it) by subscribing to a collection of balanced RSS feeds from multiple news sources, they include news sites from different country and different political views. For tech it's a combination of news sites, [InfoQ][infoq], [DZone][dzone]and individual thinkers' blog. 
+I get news mostly from a few sources: social media, podcast and RSS (using [Feedly][feedly]). I try to mitigate the information bubble (or *THE ALGORITHM*, whatever you call it) by subscribing to a collection of balanced RSS feeds from multiple news sources, they include news sites from different country and different political views. For tech it's a combination of news sites, [InfoQ][infoq], [DZone][dzone] and individual thinkers' blog. 
 
 If the article is too long to be read immediately, I'll save them to [Pocket][pocket] to read later. If it's even bigger than that, for example a long research paper, book or video course, I'd also save the link to a Kanban board in [Joplin][joplin]. I used to use Trello but it has deteriorated a lot since it was acquired by Atlassian. Therefore I migrated the kanban to Joplin and use a plugin called [Kanban][kanban]. The kanban board collects everything I want to learn in the long term, e.g. books, articles, courses, topics, etc.. Sometimes when I read the article stored in Pocket, I get new ideas or references I want to follow up. In that case I add them to the kanban board as well. 
 
@@ -42,3 +42,13 @@ I have to admit that I didn't use the power of zettelkasten when I wrote my prev
 
 This is just a high-level overview of how I work. There are many details on how I apply these methodologies and how I setup the software. If you are interested in any of the step or the software I'm using, please leave a message using the chat or send me a message via any social media channel. I'd love to write more articles on the details.
 
+
+[dzone]: https://dzone.com/
+[feedly]: https://feedly.com/
+[ifttt]: https://ifttt.com/
+[infoq]: https://www.infoq.com/
+[joplin]: https://joplinapp.org/
+[kanban]: https://github.com/joplin/plugin-kanban
+[notebook]: https://takesmartnotes.com/
+[pocket]: https://getpocket.com/
+[zettelkasten]: https://en.wikipedia.org/wiki/Zettelkasten
