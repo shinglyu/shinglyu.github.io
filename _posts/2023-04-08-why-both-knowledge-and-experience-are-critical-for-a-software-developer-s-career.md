@@ -2,7 +2,7 @@
 layout: post
 title: Why Both Knowledge and Experience Are Critical for a Software Developer's Career
 categories: Web
-date: 2023-04-08 22:42:51 +02:00
+date: 2023-04-08 22:42:51 +01:00
 excerpt_separator: <!--more-->
 ---
 There is an age-old debate about whether theoretical knowledge or hands-on experience is more important for a successful software developer career. However, the reality is that both knowledge and experience are equally important and complementary to each other. When I was a student (a long time ago...), I was proud of my education and the knowledge and skills that I have acquired throughout my academic journey. However, I couldn't help but feel frustrated that despite my academic achievements, I was still struggling to find a job due to a lack of experience. Many companies seem to be looking for candidates who have already worked in the industry, leaving fresh graduates like myself feeling left out in the job market. It's a catch-22 situation: how can I gain experience if no one is willing to give me a chance? In this blog post, I want to share my thoughts and experiences on how to overcome this challenge and land a job despite not having any prior work experience.
