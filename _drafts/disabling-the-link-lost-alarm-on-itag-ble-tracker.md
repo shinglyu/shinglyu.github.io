@@ -52,3 +52,5 @@ I followed these steps to disable link lost alarm:
 6. Disconnect from the iTag device and close the app. 
 
 This should disable the link lost alarm on the iTag device. Now it won’t beep when the Bluetooth connection is lost. I can use itracing2 to ring it when I need to find my TV remote.
+
+*Disclaimer: this post is written with the help from generative AI, this is an experiment*

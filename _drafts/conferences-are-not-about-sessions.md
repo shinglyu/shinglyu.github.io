@@ -58,3 +58,5 @@ Watching out for trends can help you learn from the experts and thought leaders 
 Networking can help you expand your knowledge and learn from others’ experiences, gain exposure and visibility for yourself and your work, find mentors, partners, or customers for your projects or products, and create a positive reputation and impression in your field.
 
 Of course, this doesn’t mean that you should never listen to sessions at a conference. Sessions can still be useful and enjoyable, especially if they are relevant to your interests or goals, or if they are presented by someone you admire or respect. But sessions should not be your main priority or focus at a conference.
+
+*Disclaimer: this post is written with the help from generative AI, this is an experiment*
