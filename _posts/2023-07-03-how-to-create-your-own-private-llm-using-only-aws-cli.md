@@ -109,3 +109,5 @@ The model uses ml.g4.24xlarge instance, which costs $12.73 per hour in Frankfurt
 
 ## Conclusion
 In this blog post, you learned how to use AWS CLI and SageMaker JumpStart to create your own private LLM on Amazon SageMaker. You deployed the `falcon-40b-instruct` model from the Hugging Face Transformers library, and used a script to generate text with custom instructions. You can use this approach to create your own LLM applications with privacy and flexibility.
+
+*Disclaimer: this post is written with the help from generative AI, this is an experiment*
