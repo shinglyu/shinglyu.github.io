@@ -30,6 +30,54 @@
 
 - title: Talks
   publications:
+    - title: 2023/04/06 Rotterdam School of Management - AI/ML for Manufacturing and Supply Chain, Rotterdam
+      title_url: 
+      description: 
+
+    - title: 2023/03/28 Tech Summit Europe - Why MLOps, Amsterdam
+      title_url: 
+      description: 
+
+    - title: 2023/02/09 Twitch Live Stream - AI/ML Re:Invent Re:Cap, Online
+      title_url: 
+      description: 
+
+    - title: 2023/01/11 TU-Delft Google Developer Student Club - Designing Highly-Available Cloud Infrastrcture, Delft
+      title_url: 
+      description: 
+
+    - title: 2022/11/17 AWS User Group Taiwan - AutoML on AWS, Taipei
+      title_url: 
+      description: 
+
+    - title: 2022/10/20 Twitch Live Stream - IoT on AWS, Online
+      title_url: 
+      description: 
+
+    - title: 2022/10/04 AWS Community Day Netherlands - Using Rust on AWS, Amersfoort
+      title_url: 
+      description: 
+
+    - title: 2022/06/16 AWS User Group Taiwan - AWS mid-year AI/ML update, Online
+      title_url: 
+      description: 
+
+    - title: 2022/04/20 Molliecon - Highly Resilient AWS Infrastructure, Amsterdam
+      title_url: 
+      description: 
+
+    - title: 2022/03/23 AWS User Group Netherlands - Rust and AWS, Netherlands
+      title_url: 
+      description: 
+
+    - title: 2022/03/17 AWS User Group Taiwan - Migrating legacy Windows application to AWS, Online
+      title_url: 
+      description: 
+
+    - title:  2021/08/19 Twitch Live Stream - Multi-region on AWS , Online
+      title_url: 
+      description: Twitch office hour with Sara Gerion
+
     - title: "2019/08/17 COSCUP speaker, Taipei (slides)"
       title_url: /blog_assets/coscup_2019/serverless-rust-coscup-2019.pdf
       description: "Serverless Web Service in Rust"
