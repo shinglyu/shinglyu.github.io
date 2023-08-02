@@ -6,7 +6,7 @@ date: 2023-08-02 22:10:09 +02:00
 excerpt_separator: <!--more-->
 ---
 
-Recently I've been contributing to [`llm-chain`](https://github.com/sobelio/llm-chain), a Rust library for working with large language models (LLMs). It's similar to Python's [`LangChain`](https://docs.langchain.com/docs/). I contributed the this tutorial to the official website for setting up a simple llm-chain using LLaMA models running locally using the [`llama.cpp`](https://github.com/ggerganov/llama.cpp) project. I'm also publishing the same tutorial in this blog for archiving.
+Recently I've been contributing to [`llm-chain`](https://github.com/sobelio/llm-chain), a Rust library for working with large language models (LLMs). It's similar to Python's [`LangChain`](https://docs.langchain.com/docs/). I contributed this tutorial to the official website for setting up a simple llm-chain using LLaMA models running locally using the [`llama.cpp`](https://github.com/ggerganov/llama.cpp) project. I'm also publishing the same tutorial in this blog for archiving.
 
 ---
 
