@@ -2,7 +2,7 @@
 layout: post
 title: "My New Book: Practical Rust Projects, 2nd Edition"
 categories: Web
-date: 2023-08-04 21:32:22 +08:00
+date: 2023-08-04 22:05:15 +02:00
 excerpt_separator: <!--more-->
 ---
 Hi, everyone! I hope you are all doing well and enjoying Rust as much as I do. I have some exciting news to share with you today: I have just published my new book, Practical Rust Projects, 2nd Edition.
