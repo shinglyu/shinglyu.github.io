@@ -2,7 +2,7 @@
 layout: post
 title: Introducing the llm-chain-mock Driver for Cost-Effective LLM Testing
 categories: Web
-date: 2023-08-15 22:20:39 +08:00
+date: 2023-08-15 22:51:15 +02:00
 excerpt_separator: <!--more-->
 ---
 [Llm-chain][llm-chain] is a Rust crate that help you create advanced LLM applications such as chatbots, agents, and more. It supports various drivers, such as [OpenAI][llm-chain-openai], [llama.cpp][llm-chain-llama], and [llm][llm-chain-local], that can connect to different APIs or run models locally. llm-chain allows you to easily switch between different drivers and options without a complete rewrite of your code.
