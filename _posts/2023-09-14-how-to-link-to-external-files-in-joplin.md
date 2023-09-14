@@ -2,7 +2,7 @@
 layout: post
 title: How to link to external files in Joplin
 categories: Web
-date: 2023-09-14 22:01:07 +08:00
+date: 2023-09-14 22:14:49 +02:00
 excerpt_separator: <!--more-->
 ---
 I have been using Joplin for work for two years now, and I love it. Joplin is a free and open source note-taking app that lets you create notes in Markdown format, sync them across devices, and encrypt them for privacy. Joplin is also very flexible and customizable, allowing you to use plugins, themes, templates, and more to suit your needs.
