@@ -2,7 +2,7 @@
 layout: post
 title: Summarize Text Quickly with Raycast and Amazon Bedrock
 categories: Web
-date: 2023-10-20 21:04:29 +08:00
+date: 2023-10-20 21:47:37 +02:00
 excerpt_separator: <!--more-->
 ---
 [Raycast][raycast] has become an indispensable tool in my workflow. The ability to quickly automate tasks and create custom integrations boosts my productivity daily. One common need I have is getting key summaries from long blocks of text. For example, summarize a long blog article I'm too lazy to read. Or quickly understand what is going on based on a long email thread. While there are pre-built Raycast AI extensions, I prefer to use [Amazon Bedrock][amazon-bedrock] for privacy and security. 
