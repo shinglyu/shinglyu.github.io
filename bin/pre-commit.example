@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Check if there are any unstaged changes in the blog_assets folder
+if git diff --quiet -- blog_assets; then
+  # No changes
+  exit 0
+else
+  # There are changes
+  echo "Warning: You might forgot to commit come image files. There are unstaged changes in the blog_assets folder."
+  exit 1
+fi
