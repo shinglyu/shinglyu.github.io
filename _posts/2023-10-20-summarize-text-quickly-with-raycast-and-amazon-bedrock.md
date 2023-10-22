@@ -112,6 +112,8 @@ Assistant:
 
 This format about "Human:" and "Assistant:" is required by the Claude v2 model. Then we use the AWS Python SDK to invoke Amazon Bedrock API, get the response, and print it out after parsing. 
 
+You need valid AWS credentials for the API call to work. Follow the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) to set it up. I use the shared credentails file method, but you can use anyone from the documentation.
+
 Because I use the dark theme on macOS, the default font color is a dim gray. So in the final `print()` I added ANSI color codes to make it bright white on black background.
 
 Here are some screen shots of it summarizing the [*Amazon Bedrock Is Now Generally Available*][bedrock-ga-post] blog post.
