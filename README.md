@@ -7,7 +7,7 @@ Visit [https://shinglyu.com](https://shinglyu.com)
 
 ```
 sudo apt-get install ruby ruby-dev nodejs
-sudo gem install jekyll
+sudo gem install jekyll jekyll-paginate
 ```
 
 # Preview
