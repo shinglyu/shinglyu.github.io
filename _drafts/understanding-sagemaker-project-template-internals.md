@@ -7,19 +7,19 @@ excerpt_separator: <!--more-->
 ---
 Authors: [Brajendra Singh](https://www.linkedin.com/in/brajendrasingh/), Shing Lyu
 
-*The blog post is derived from a workshop I built with [Brajendra Singh](https://www.linkedin.com/in/brajendrasingh/), which was never published. I'm extracting the content to make a blog post. You will learn how to deploy the SageMaker provided MLOps template for model deployment and how the template works internally.*
+_The blog post is derived from a workshop I built with [Brajendra Singh](https://www.linkedin.com/in/brajendrasingh/), which was never published. I'm extracting the content to make a blog post. You will learn how to deploy the SageMaker provided MLOps template for model deployment and how the template works internally. If the screenshot is too small, right-click on the image and select **Open Image in New Tab**_
 
-In this step, you are going to create the MLOps pipeline using the SageMaker-provided MLOps template. This template creates the deployment pipeline, and creates a trigger to monitor if new models are approved in the SageMaker model registry, and use that as a signal to deploy it.
+MLOps is the one of the hottest topic in the field right now. Organizations are looking for ways to productionize their ML models, and MLOps is the key to repeatable results. Amazon SageMaker Projects is a feature that allows you to create a full MLOps pipeline in just a few clicks. You are going to create the MLOps pipeline using the SageMaker-provided MLOps template. This template creates the deployment pipeline, and creates a trigger to monitor if new models are approved in the SageMaker model registry, and use that as a signal to deploy it.
 
-## Why do we need a MLOps pipeline?
+## Why do you need a MLOps pipeline?
 
-The MLOps pipeline you are going to deploy will help you build a robust foundation for your machine learning experiments. It automates the model deployment and testing processing so there is less room for human error. Once the model is approved in the model registry the model is deployed automatically to the staging endpoint, and an automated test is run against the staging endpoint. This help you catch problems with the model early and prevents you from deploying faulty model to production. You remain in control on what should be deployed to production, thanks to the manual approval step in the pipeline. All the pipeline configuration, CloudFormation templates and test script are managed as code in a CodeCommit repository, so you have repeatable deployment of the pipeline itself. By managing the pipeline as code, you also have better visibility on when and how the pipeline has changed. You can easily rollback any bad configuration. All these benefits gives your data scientists more confidence in experimenting fast and fail fast, because they know that they can easily rollback any failed experiments. 
+The MLOps pipeline you are going to deploy will help you build a robust foundation for your machine learning experiments. It automates the model deployment and testing processing so there is less room for human error. Once the model is approved in the model registry the model is deployed automatically to the staging endpoint, and an automated test is run against the staging endpoint. This help you catch problems with the model early and prevents you from deploying faulty model to production. You remain in control on what should be deployed to production, thanks to the manual approval step in the pipeline. All the pipeline configuration, CloudFormation templates and test script are managed as code in a CodeCommit repository, so you have repeatable deployment of the pipeline itself. By managing the pipeline as code, you also have better visibility on when and how the pipeline has changed. You can easily rollback any bad configuration. All these benefits gives your data scientists more confidence in experimenting fast and fail fast, because they know that they can easily rollback any failed experiments.
 
 ## Create a Project from template
-First, go to the SageMaker Studio and click on the **SageMaker resources** icon on the left panel:
+First, go to the SageMaker Studio Classic and click on the **SageMaker resources** icon on the left panel:
 ![resouces icon]({{site_url}}/blog_assets/sagemaker_project/resources_icon.png)
 
-In the **SageMaker resources** side-panel, select **Projects** from the dropdown:
+In the **SageMaker resources** side-panel, select **Projects** from the dropdown: 
 
 ![select project]({{site_url}}/blog_assets/sagemaker_project/select_project.png)
 
@@ -33,7 +33,7 @@ In the **Create project** panel, select the **MLOps template for model deploymen
 
 Now SageMaker asks you for some details of the project. In the **Name** field put **customer-model-deploy-pipeline**. In the **SourceModelPackageGroupName**, put the model group name you created in Lab 1: **customer-interest-prediction-model-group**. Then click **Create project**.
 
-![project details]({{site_url}}/blog_assets/sagemaker_project/project_details.png)
+![project details]({{site_url}}/blog_assets/sagemaker_project/project_details.png) 
 
 It should take several minutes to create the project, you should see a progress indicator like this:
 
@@ -42,9 +42,6 @@ It should take several minutes to create the project, you should see a progress 
 Once the project is created, you are redirected to the project page:
 
 ![project page]({{site_url}}/blog_assets/sagemaker_project/project_created.png)
-
-
-
 
 ## Understanding what the template contains
 
@@ -100,20 +97,13 @@ The diagram below shows the data flow of these files:
 
 ![data flow]({{site_url}}/blog_assets/sagemaker_project/MLOps_template_data_flow.svg)
 
-Now you have deployed the MLOps pipeline, you can deploy the model in the next lab.
+Now you have deployed the MLOps pipeline, you can deploy the model using it.
 
- The blog post is derived from a workshop in the past that was never published. I'm extracting the content to make a blog post. You will learn how to deploy the SageMaker provided ML Ops template for model deployment and how the template works internally.
+## Approve and Deploy Model
 
+You can train a model in a SageMaker Sutdio notebook (or just Python scripts) and registered it in the model registry. This post focus on the deployment aspect of MLOps, so we won't go into detail on how to train and register the model. You can reference this [notebook]({{site_url}}/blog_assets/sagemaker_project/1-train_model_xgboost.ipynb).
 
-## Approve and Deploy Model"
-
-You trained the model, registered it in the model registry and also created the project for the deployment pipeline in the previous steps. 
-
-In this step, you approve the registered model in the model registry to deploy the model as **SageMaker Endpoint**. When you approve the model in the registry, it triggers the deployment pipeline which creates the **staging** SageMaker Endpoint for the model. It is the model deployment for the staging and used for the pre-production testing purpose. Once you are satisfied with the testing at the staging, you can approve production deployment step in the deployment pipeline to create the **production** SageMaker Endpoint for the model.
-
-In this step, you will work on the sections, highlighted on the picture below:
-
-![]({{site_url}}/blog_assets/sagemaker_project/lab3_process.png)
+You approve the registered model in the model registry to deploy the model as **SageMaker Endpoint**. When you approve the model in the registry, it triggers the deployment pipeline which creates the **staging** SageMaker Endpoint for the model. It is the model deployment for the staging and used for the pre-production testing purpose. Once you are satisfied with the testing at the staging, you can approve production deployment step in the deployment pipeline to create the **production** SageMaker Endpoint for the model.
 
 ## Staging Deployment
 
@@ -165,10 +155,9 @@ Congratulations!!! With model deployment in staging and production, this step is
 
 ## Automated testing
 
-In this step, you are going to implement an automated test. After the staging endpoint is deployed by the pipeline, the automated test will invoke the staging endpoint to make sure the endpoint is functional. This can help you identify problems with the model or the endpoint configuration before you deploy the model to production. This step happens in the highlighted section below: ![]({{site_url}}/blog_assets/sagemaker_project/lab3_process.png)
-
+In this step, you are going to implement an automated test for the model you trained in this [notebook]({{site_url}}/blog_assets/sagemaker_project/1-train_model_xgboost.ipynb). After the staging endpoint is deployed by the pipeline, the automated test will invoke the staging endpoint to make sure the endpoint is functional. This can help you identify problems with the model or the endpoint configuration before you deploy the model to production. 
 ## Adding the test script
-In lab 2 you saw that the MLOps pipeline has a test step. But the `test/test.py` from the template only contains some scaffolding, and it is not actually testing anything. First let's take a look at what the template provides you. Navigate to the file panel to the left and open the `test/test.py` file:
+The MLOps pipeline you just deployed has a test step. But the `test/test.py` from the template only contains some scaffolding, and it is not actually testing anything. First let's take a look at what the template provides you. Navigate to the file panel to the left and open the `test/test.py` file:
 
 ```python
 import argparse
@@ -414,3 +403,17 @@ In the action details page, you can see the logs under the **Build logs** tab.
 You can see that the test runs the `python test/test.py` script and outputs the predictions. 
 
 In case you accidentally breaks the model and the model is not performing inference correctly, this test action will fail and prevent you from deploying a broken model to production. This kind of automated test is critical to your MLOps pipeline because it give you confidence to deploy and prevents human errors in manual testing.
+
+## Conclusion
+Amazon SageMaker provides a powerful tool for MLOps through SageMaker Projects and the MLOps Project Template. As we saw in this post, with just a few clicks you can set up an automated continuous deployment pipeline powered by CodePipeline, CodeBuild, and other AWS services.
+
+The key highlights include:
+
+- The template creates all the pipeline infrastructure needed: CodeCommit repo, EventBridge rules, CodePipeline, etc.  
+- The pipeline detects new models registered and approved in the Model Registry and automatically deploys them.
+- Configuration like endpoints are defined in code for repeatability.
+- An automated test step allows you to validate the staged model before production deployment.
+
+By managing both the ML application code and the MLOps scaffolding code in Git, you gain full visibility into changes over time. This best practice enables collaboration between data scientists and ops engineers to build a robust MLOps foundation.  
+
+Going forward, you can extend the template by adding data quality checks, model monitoring, and integrating the endpoints with applications. With this automated foundation in place, your team will be able to experiment and update ML models rapidly while maintaining high quality.
