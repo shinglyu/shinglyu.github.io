@@ -15,6 +15,7 @@ MLOps is the one of the hottest topic in the field right now. Organizations are 
 
 The MLOps pipeline you are going to deploy will help you build a robust foundation for your machine learning experiments. It automates the model deployment and testing processing so there is less room for human error. Once the model is approved in the model registry the model is deployed automatically to the staging endpoint, and an automated test is run against the staging endpoint. This help you catch problems with the model early and prevents you from deploying faulty model to production. You remain in control on what should be deployed to production, thanks to the manual approval step in the pipeline. All the pipeline configuration, CloudFormation templates and test script are managed as code in a CodeCommit repository, so you have repeatable deployment of the pipeline itself. By managing the pipeline as code, you also have better visibility on when and how the pipeline has changed. You can easily rollback any bad configuration. All these benefits gives your data scientists more confidence in experimenting fast and fail fast, because they know that they can easily rollback any failed experiments.
 
+<!--more-->
 ## Create a Project from template
 First, go to the SageMaker Studio Classic and click on the **SageMaker resources** icon on the left panel:
 ![resouces icon]({{site_url}}/blog_assets/sagemaker_project/resources_icon.png)
@@ -49,7 +50,7 @@ What does this **MLOps template for model deployment** actually do? Let's take a
 
 ![Service Catalog deploy]({{site_url}}/blog_assets/sagemaker_project/MLOps_template_ServiceCatalog.svg)
 
-<!--more-->
+
 
 * A CodeCommit repository that contains the definition of the pipeline steps and configuration files.
 * Two EventBridge rules:
