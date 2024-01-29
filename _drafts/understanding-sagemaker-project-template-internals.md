@@ -5,7 +5,9 @@ categories: AI
 date: 2024-01-29 00:00:00 +08:00
 excerpt_separator: <!--more-->
 ---
-*The blog post is derived from a workshop in the past that was never published. I'm extracting the content to make a blog post. You will learn how to deploy the SageMaker provided MLOps template for model deployment and how the template works internally.*
+Authors: [Brajendra Singh](https://www.linkedin.com/in/brajendrasingh/), Shing Lyu
+
+*The blog post is derived from a workshop I built with [Brajendra Singh](https://www.linkedin.com/in/brajendrasingh/), which was never published. I'm extracting the content to make a blog post. You will learn how to deploy the SageMaker provided MLOps template for model deployment and how the template works internally.*
 
 In this step, you are going to create the MLOps pipeline using the SageMaker-provided MLOps template. This template creates the deployment pipeline, and creates a trigger to monitor if new models are approved in the SageMaker model registry, and use that as a signal to deploy it.
 
