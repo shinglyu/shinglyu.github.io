@@ -1,12 +1,17 @@
-# Transcribe voice to text locally with Whisper.cpp and Raycast
-
+---
+layout: post
+title: Transcribe voice to text locally with Whisper.cpp and Raycast
+categories: AI
+date: 2024-05-25 21:34:00 +02:00
+excerpt_separator: <!--more-->
+---
 ## Why local transcription?
 
 In today's world, many of us rely on cloud-based services for tasks like speech-to-text transcription. While these services are convenient, they come with drawbacks like high latency due to network transfers and potential privacy concerns as our audio data is sent to the cloud.
 
 Local transcription addresses these issues by performing the speech recognition process entirely on your device, ensuring low latency and keeping your audio data private. This is where whisper.cpp comes in.
-
-What is whisper.cpp?
+<!--more-->
+## What is whisper.cpp?
 
 Whisper.cpp is a high-performance implementation of OpenAI's Whisper automatic speech recognition model. It's written in C/C++ with no dependencies, making it lightweight and efficient. Key features of whisper.cpp include:
 
@@ -18,10 +23,6 @@ Whisper.cpp is a high-performance implementation of OpenAI's Whisper automatic s
 
 - GPU acceleration via CUDA (NVIDIA), OpenCL, and more
 
-- Zero runtime memory allocations for efficiency
-
-- C-style API for easy integration into applications
-
 In this blog post, we are going to set up Whisper.cpp on MacOS for local voice to text transcription. Then, we'll write a wrapper script to allow easy invocation from Raycast, a popular productivity tool that enables users to streamline various tasks with customizable keyboard shortcuts and integrations.
 
 # How to set up this Whisper.cpp
@@ -30,26 +31,26 @@ Setting up the whisper.cpp project on macOS involves the following steps:
 
 1. Clone the whisper.cpp repository and navigate into it:
 
-```
+```bash
 git clone https://github.com/ggerganov/whisper.cpp.git
 cd whisper.cpp
 ```
 
 2. Download a pre-converted Whisper model in the ggml format. For example, to get the base English model:
 
-```
+```bash
 bash ./models/download-ggml-model.sh base.en
 ```
 
 3. Build the main example:
 
-```
+```bash
 make
 ```
 
 4. Transcribe an audio file:
 
-```
+```bash
 ./main -m models/ggml-base.en.bin -f /path/to/audio.wav
 ```
 
@@ -83,7 +84,7 @@ You commonly see this at the end of the unofficial Chinese subtitle of pirated m
 
 But overall, the transcription quality is pretty good even for small models, the it can finish within seconds.
 
-# Integrating with Raycast for one-click transcription
+## Integrating with Raycast for one-click transcription
 
 Raycast is a popular productivity launcher for macOS that allows you to create custom scripts and workflows. Here's how to integrate whisper.cpp with Raycast for convenient one-click transcription:
 
@@ -121,53 +122,34 @@ The script sets up various paths and filenames, records audio using Sox with a s
 #!/bin/bash
 
 # Required parameters:
-
 # @raycast.schemaVersion 1
-
 # @raycast.title Transcribe
-
 # @raycast.mode silent
 
 # Optional parameters:
-
 # @raycast.icon 💬
 
 # Documentation:
-
 # @raycast.description Transcribe with local model
-
 # @raycast.author Shing Lyu
-
 # @raycast.authorURL https://shinglyu.com
-
-# Open a iTerm and run the shell script transcribe.sh in the same folder
 
 osascript <<EOF
 
     tell application "iTerm2"
-
          create window with default profile
-
          tell current session of current window
-
               delay 1
-
               write text "cd $(pwd)"
-
               write text "./transcribe.sh"
-
           end tell
-
     end tell
-
 EOF
-
 ```
 
 This code is a Bash script that opens a new iTerm2 window and runs the `transcribe.sh` script in the current directory. The script uses the `osascript` command to interact with the macOS scripting environment and automate the iTerm2 application. The `tell` statements are used to send commands to iTerm2, such as creating a new window, navigating to the current directory, and executing the `transcribe.sh` script. The delay of 1 second is added to ensure that the commands are executed in the correct order.
 
 Now, you can simply invoke the "Transcribe" command in Raycast, and it will capture audio, transcribe it locally using whisper.cpp, and copy the transcription to your clipboard – all with just one click!
 
-Conclusion:
 
 Whisper.cpp brings OpenAI's powerful Whisper speech recognition model to your local device, ensuring low latency and privacy. Combined with Raycast's convenience, you can now enjoy seamless, one-click local transcription on your Mac. Give it a try and experience the power of on-device speech recognition!
