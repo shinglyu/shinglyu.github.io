@@ -151,5 +151,10 @@ This code is a Bash script that opens a new iTerm2 window and runs the `transcri
 
 Now, you can simply invoke the "Transcribe" command in Raycast, and it will capture audio, transcribe it locally using whisper.cpp, and copy the transcription to your clipboard – all with just one click!
 
+## Further reading: clean up the transcription
+
+If you find the quality of the transcription is not good enough, you can clean them up with LLMs using the method outlined here: [Using LLM to get cleaner voice transcriptions]({{site_url}}/ai/2024/01/17/using-llm-to-get-cleaner-voice-transcriptions.html). You can also use LLM to summarize, or rewrite your transcription into bullet points. There are commercial products like [AudioPen](https://audiopen.ai/) but you can easily roll your own.
+
+## Conclusion:
 
 Whisper.cpp brings OpenAI's powerful Whisper speech recognition model to your local device, ensuring low latency and privacy. Combined with Raycast's convenience, you can now enjoy seamless, one-click local transcription on your Mac. Give it a try and experience the power of on-device speech recognition!
