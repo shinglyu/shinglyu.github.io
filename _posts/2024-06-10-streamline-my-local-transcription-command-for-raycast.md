@@ -2,7 +2,7 @@
 layout: post
 title: Streamline my local transcription command for Raycast
 categories: AI
-date: 2024-06-10 00:00:00 +08:00
+date: 2024-06-10 16:00:00 +02:00
 excerpt_separator: <!--more-->
 ---
 
@@ -31,7 +31,7 @@ Here's the updated code:
 # @raycast.author Shing Lyu
 # @raycast.authorURL https://shinglyu.com
 
-WHISPER_CPP_PATH=/Users/shinglyu/PersistDocs/workspace/whisper.cpp
+WHISPER_CPP_PATH=/Users/shinglyu/whisper.cpp
 MODEL=models/ggml-small.bin
 RECORDING_PATH="${TMPDIR}/transcribe/"
 RECORDING_FILE="${RECORDING_PATH}/recording-$(date +%s).wav"
