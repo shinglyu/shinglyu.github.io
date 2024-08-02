@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Demystifying the options for triggering AWS CodePipeline with Amazon S3 events
+title: Demystifying The Options for Triggering AWS CodePipeline with Amazon S3 Events
 categories: Web
 date: 2024-08-02 22:32:31 +0200
 excerpt_separator: <!--more--->
