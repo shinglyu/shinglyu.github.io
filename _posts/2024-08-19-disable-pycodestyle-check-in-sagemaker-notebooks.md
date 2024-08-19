@@ -2,7 +2,7 @@
 layout: post
 title: Disable pycodestyle Check in SageMaker Notebooks
 categories: AI
-date: 2024-08-19 11:09:10 +02:00
+date: 2024-08-19 11:34:41 +0200
 excerpt_separator: <!--more-->
 ---
 _The solution in this post is originally proposed by [MattC](https://stackoverflow.com/a/77932753) and [krassowski](https://stackoverflow.com/a/67671347) in this [StakeOverflow thread](https://stackoverflow.com/questions/67669843/jupyterlab-3-0-14-how-to-disable-code-style-highlights-pycodestyle). I just added some screenshots._
