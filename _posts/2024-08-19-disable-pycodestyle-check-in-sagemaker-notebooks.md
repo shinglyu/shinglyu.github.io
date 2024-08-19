@@ -5,7 +5,7 @@ categories: AI
 date: 2024-08-19 11:34:41 +0200
 excerpt_separator: <!--more-->
 ---
-_The solution in this post is originally proposed by [MattC](https://stackoverflow.com/a/77932753) and [krassowski](https://stackoverflow.com/a/67671347) in this [StakeOverflow thread](https://stackoverflow.com/questions/67669843/jupyterlab-3-0-14-how-to-disable-code-style-highlights-pycodestyle). I just added some screenshots._
+_The solution in this post is originally proposed by [MattC](https://stackoverflow.com/a/77932753) and [krassowski](https://stackoverflow.com/a/67671347) in this [StakeOverflow thread](https://stackoverflow.com/questions/67669843/jupyterlab-3-0-14-how-to-disable-code-style-highlights-pycodestyle). I just added some screenshots. Thanks to [Nadhya Polanco](https://www.linkedin.com/in/nadhya-polanco/) for pointing me to this solution._
 
 _(To view a larger version of a screenshot, right-click on the image and select **Open Image in New Tab**.)_
 
