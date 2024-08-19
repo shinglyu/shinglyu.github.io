@@ -9,7 +9,7 @@ _The solution in this post is originally proposed by [MattC](https://stackoverfl
 
 _(To view a larger version of a screenshot, right-click on the image and select **Open Image in New Tab**.)_
 
-By default, when you use JupyterLab in SageMaker Studio, you'll see some Python code being highlighted with pycodestyle syntax check error. This can get distracting if you don't care about them or have the checks in the CI/CD pipeline already.
+By default, when you use JupyterLab in Amazon SageMaker Studio, you'll see some Python code being highlighted with pycodestyle syntax check error. This can get distracting if you don't care about them or have the checks in the CI/CD pipeline already.
 
 ![Problem]({{site_url}}/blog_assets/sagemaker-disable-pycodestyle/1.problem.png)
 
