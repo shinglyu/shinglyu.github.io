@@ -5,9 +5,9 @@ categories: Web
 date: 2024-09-16 11:13:59 +08:00
 excerpt_separator: <!--more-->
 ---
-My Linux laptop is running the old Ubuntu 20.04 and is going to go out of support next year. I was planning to switch over to NixOS but I don't have time right now to do a fresh reinstall and learn NixOS from scratch. That's why I decided to simply upgrade to Ubuntu 24.04 and switch to Wayland. 
+My Linux laptop is running the old Ubuntu 20.04 and is going to go out of support next year. I was planning to switch over to [NixOS](https://nixos.org/) but I don't have time right now to do a fresh reinstall and learn NixOS from scratch. That's why I decided to simply upgrade to Ubuntu 24.04 and switch to [Wayland](https://wayland.freedesktop.org/). 
 
-I was using i3 on X11, so switching to Wayland means I have to change many of my settings and switch to utilities that supports Wayland. This post is a rundonw of all the changes I've made to switch to Wayland. Overall, I enjoy the smoothness of Wayalnd (abiet barely noticable), and being able to use newer, more polished utiltity tools.
+I was using [i3](https://i3wm.org/) on X11, so switching to Wayland means I have to change many of my settings and switch to utilities that supports Wayland. This post is a rundonw of all the changes I've made to switch to Wayland. Overall, I enjoy the smoothness of Wayalnd (abiet barely noticable), and being able to use newer, more polished utiltity tools.
 <!--more-->
 
 ## Upgrading from Ubuntu 20.04 to 24.04
@@ -19,7 +19,7 @@ The upgrade process was smooth, I had to upgrade from 20.04 LTS to 22.04 LTS, th
 
 ## Switching to Sway
 
-After upgrading Ubuntu, the next step was to switch from i3 to Sway, a tiling window manager for Wayland that's very similar to i3. Here's how I set it up:
+After upgrading Ubuntu, the next step was to switch from i3 to [Sway](https://swaywm.org/), a tiling window manager for Wayland that's very similar to i3. Here's how I set it up:
 
 1. Installation is straightforward:
    ```
@@ -56,9 +56,14 @@ To replace i3-bar with something more feature-rich, I opted for [Waybar](https:/
 
 4. Waybar is highly configurable. You can find configuration examples and documentation on the [Waybar GitHub wiki](https://github.com/Alexays/Waybar/wiki/Configuration).
 
+Here is an example of how my Sway and Waybar looks like:
+
+![Sway and Waybar screenshot]({{site_url}}/blog_assets/wayland/sway_and_waybar.png)	
+
+
 ## Input Method
 
-For input methods, I found that ibus doesn't work well with Wayland, so I switched to fcitx5:
+For input methods, I found that [ibus](https://github.com/ibus/ibus) doesn't work well with Wayland, so I switched to [fcitx5](https://github.com/fcitx/fcitx5):
 
 1. Install fcitx5 and any language-specific modules you need:
    ```
@@ -70,7 +75,7 @@ For input methods, I found that ibus doesn't work well with Wayland, so I switch
 3. Right-click on the menu bar icon, go to configure, and add your desired input methods to the list.
 ## Display Management
 
-I have one laptop built-in monitor and 2 external monitors. For managing multiple displays under Wayland, I found `wdisplays` to be a useful GUI tool:
+I have one laptop built-in monitor and 2 external monitors. For managing multiple displays under Wayland, I found [`wdisplays`](https://github.com/artizirk/wdisplays) to be a useful GUI tool:
 
 1. Install wdisplays:
    ```
@@ -78,6 +83,9 @@ I have one laptop built-in monitor and 2 external monitors. For managing multipl
    ```
 
 2. Launch it with `wdisplays` command.
+
+![wdisplays screenshot]({{site_url}}/blog_assets/wayland/wdisplays.png)	
+
 
 3. To make display settings persist after Sway reload, add output configurations to your `~/.config/sway/config`:
    ```
@@ -97,14 +105,20 @@ I have one laptop built-in monitor and 2 external monitors. For managing multipl
     ```
 
 ## Controlling built-in monitor brightness
-I use the 
+I use the tool [light](https://gitlab.com/dpeukert/light) to contorl the brightness of my built-in monitor:
+
+```
 sudo apt install light
 sudo light -A 10 # increase by 10%
 sudo light -U 10 # decrease by 10%
+```
 
 ## autotiling
 
-Autotiling is a script that automatically adjusts the split direction in Sway (or i3) based on the dimensions of the currently focused window. This creates a more intuitive tiling experience, where you get 1 > 1/2 > 1/4 > ... smaller window splits as you open new windows.
+[Autotiling](https://github.com/nwg-piotr/autotiling) is a script that automatically adjusts the split direction in Sway (or i3) based on the dimensions of the currently focused window. This creates a more intuitive tiling experience, where you get 1 > 1/2 > 1/4 > ... smaller window splits as you open new windows. Here is an example:
+
+![autotiling screenshot]({{site_url}}/blog_assets/wayland/autotiling.png)	
+
 
 1. Installation:
    As of my writing, autotiling is not available in the standard Ubuntu repositories for versions before 24.10. So we need to install it using pip:
@@ -131,7 +145,7 @@ Autotiling is a script that automatically adjusts the split direction in Sway (o
 
 ## Screenshots
 
-For taking screenshots in Wayland, I use a combination of `grim`, `slurp`, and `wl-copy`:
+For taking screenshots in Wayland, I use a combination of [`grim`](https://wayland.emersion.fr/grim/), [`slurp`](https://wayland.emersion.fr/slurp/), and [`wl-copy`](https://github.com/bugaevc/wl-clipboard):
 
     ```
     sudo apt install grim slurp wl-clipboard
@@ -150,7 +164,7 @@ Here are their responsibilities:
 
 ### fuzzel: application launcher and custom menu selector
 
-Fuzzel is a fast, lightweight application launcher and dmenu replacement designed for Wayland. It's an excellent alternative to tools like rofi or dmenu that were primarily designed for X11.
+[Fuzzel](https://codeberg.org/dnkl/fuzzel) is a fast, lightweight application launcher and dmenu replacement designed for Wayland. It's an excellent alternative to tools like rofi or dmenu that were primarily designed for X11.
 
 1. Installation:
    Fuzzel should be available in the Ubuntu repositories:
@@ -167,6 +181,8 @@ Fuzzel is a fast, lightweight application launcher and dmenu replacement designe
    ```
 
    This will open a prompt where you can start typing the name of the application you want to launch.
+![fuzzel]({{site_url}}/blog_assets/wayland/fuzzel.png)	
+
 
 4. Using fuzzel as a dmenu replacement:
    Fuzzel can also work as a dmenu replacement, allowing you to create custom menus and selection interfaces. Here's an example of how to use fuzzel to create a custom screenshot selection menu:
@@ -202,7 +218,7 @@ Here's a section on using `cliphist` for clipboard management in Wayland:
 
 ## Clipboard Management with cliphist
 
-Managing clipboard history in Wayland can be a bit tricky, but `cliphist` provides a robust solution that integrates well with our existing setup. Here's how to set it up and use it effectively:
+Managing clipboard history in Wayland can be a bit tricky, but [`cliphist`](https://github.com/sentriz/cliphist) provides a robust solution that integrates well with our existing setup. Here's how to set it up and use it effectively:
 
 ### Installation
 
