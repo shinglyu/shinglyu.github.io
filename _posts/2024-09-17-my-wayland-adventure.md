@@ -2,7 +2,7 @@
 layout: post
 title: My Wayland adventure
 categories: Web
-date: 2024-09-16 11:13:59 +08:00
+date: 2024-09-17 23:29:06 +0200
 excerpt_separator: <!--more-->
 ---
 My Linux laptop is running the old Ubuntu 20.04 and is going to go out of support next year. I was planning to switch over to [NixOS](https://nixos.org/) but I don't have time right now to do a fresh reinstall and learn NixOS from scratch. That's why I decided to simply upgrade to Ubuntu 24.04 and switch to [Wayland](https://wayland.freedesktop.org/). 
@@ -181,6 +181,7 @@ Here are their responsibilities:
    ```
 
    This will open a prompt where you can start typing the name of the application you want to launch.
+
 ![fuzzel]({{site_url}}/blog_assets/wayland/fuzzel.png)	
 
 
