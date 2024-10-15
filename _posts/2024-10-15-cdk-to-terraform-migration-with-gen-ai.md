@@ -2,7 +2,7 @@
 layout: post
 title: CDK to Terraform Migration with Gen AI
 categories: AI
-date: 2024-10-15 13:52:09 +02:00
+date: 2024-10-15 15:03:36 +0200
 excerpt_separator: <!--more-->
 ---
 I recently worked on a project to migrate a CDK project to Terraform, because the client want to standarize on Terrafrom. This could have been a time-consuming job, and it requires expertise on both CDK and Terraform, but with the help from generative AI, especailly Amazon Q Developer and Amazon Bedrock, it becomes quite easy. This article will walk you through how I performed the migration and the lessons learned through the process.
