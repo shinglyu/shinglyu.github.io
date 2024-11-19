@@ -1,5 +1,5 @@
 - name: Email
-  url: mailto://wntaztopr@mozmail.com
+  url: mailto:wntaztopr@mozmail.com
 
 - name: GitHub
   url: https://www.github.com/shinglyu
