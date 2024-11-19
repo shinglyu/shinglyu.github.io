@@ -1,0 +1,65 @@
+- title: Skill
+  items:
+    - Software Testing &#9734
+    - Machine Learning &#9734
+    - Computer Music &#9734
+    - MIDI
+
+- title: Learning 
+  items:
+    - Functional Programming
+
+- title: Platform
+  items:
+    - Firefox OS App
+
+- title: Programming Language
+  items:
+    - Python &#9734
+    - JavaScript &#9734
+    - Rust &#9734
+    - R
+    - Shell Script
+    - Matlab
+    - C++
+    - Java
+    - C#
+
+- title: Frontend
+  items:
+    - HTML5 &#9734
+    - CSS &#9734
+    - JavaScript &#9734
+    - jQuery
+    - React.js
+    - Jekyll
+    - Bootstrap CSS
+    - Foundation Framework
+
+- title: Backend
+  items:
+    - Django
+    - Node.js
+    - Ruby on Rails
+    - PHP
+    - ASP.NET
+
+- title: Testing
+  items:
+    - Marriotte
+    - Selenium
+    - Sikuli
+    - python unittest
+    - frisby.js
+    - xUnit
+-
+- title: IT & DevOps
+  items:
+    - Linux Server &#9734
+    - Jenkins CI
+    - Windows Server + IIS
+    - DNS/DHCP
+
+- title: Misc.
+  items:
+    - LaTex

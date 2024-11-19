@@ -1,0 +1,52 @@
+---
+layout: post
+title:  "Download JavaScript Data as Files on the Client Side"
+categories: Web
+date: 2019-02-09 10:28:39 +01:00
+tag: 
+  - mozilla
+excerpt_separator: <!--more-->
+---
+
+When building websites or web apps, creating a “Download as file” link is quite useful. For example if you want to allow user to export some data as JSON, CSV or plain text files so they can open them in external programs or load them back later. Usually this requires a web server to format the file and serve it. But actually you can export arbitrary JavaScript variable to file entirely on the client side. I have implemented that function in one of my project, MozApoy, and here I’ll explain how I did that.
+
+<!--more-->
+
+First, we create a link in HTML
+
+```
+<a id="download_link" download="my_exported_file.txt" href=”” >Download as Text File</a>
+```
+
+The `download` attribute will be the filename for your file. It will look like this:
+
+![plain text file download]({{site_url}}/blog_assets/js_download_as_file/plain.png)
+
+Notice that we keep the `href` attribute blank. Traditionally we fill this attribute with a server-generated file path, but this time we’ll assign it dynamically generate the link using JavaScript.
+
+
+Then, if we want to export the content of the `text` variable as a text file, we can use this JavaScript code:
+
+```
+var text = 'Some data I want to export';
+var data = new Blob([text], {type: 'text/plain'});
+
+var url = window.URL.createObjectURL(data);
+
+document.getElementById('download_link').href = url;
+```
+
+The magic happens on the third line, the [`window.URL.createObjectURL()` API](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL) takes a [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob) and returns an URL to access it. The URL lives as long as the document in the window on which it was created. Notice that you can assign the type of the data in the `new Blob()` constructor. If you assign the correct format, the browser can better handle the file. Other commonly seen formats include `application/json` and `text/csv`. For example, if we name the file as `*.csv` and give it `type: 'text/csv'`, Firefox will recognize it as "CSV document" and suggest you open it with LibreOffice Calc.
+
+![csv file download]({{site_url}}/blog_assets/js_download_as_file/csv.png)
+
+And in the last line we assign the url to the `<a/>` element's `href` attribute, so when the user clicks on the link, the browser will initiate an download action (or other default action for the specific file type.)
+
+Everytime you call `createObjectURL()`, a new object URL will be created, which will use up the memory if you call it many times. So if you don't need the old URL anymore, you should call the `revokeObjectURL()` API to free them.
+
+```
+var url = window.URL.createObjectURL(data);
+window.URL.revokeObjectURL(url);
+```
+
+This is a simple trick to let your user download files without setting up any server. If you want to see it in action, you can check out this [CodePen](http://codepen.io/anon/pen/qZQBmN?editors=1010).

@@ -1,0 +1,69 @@
+img {
+  max-width: 100%;
+  max-height: 80vh;
+}
+
+main > hr {
+  width: 50%;
+  margin:2em auto;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+main > article > time {
+  display:block;
+  /* width: 100%;*/
+  text-align: right;
+}
+
+.previous {
+  flex:1;
+  text-align: left;
+}
+
+.next {
+  flex:1;
+  text-align: right;
+}
+
+.page_number {
+  flex:1;
+  text-align: center;
+}
+
+#rss {
+  text-align: center;
+}
+
+time {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  color: grey;
+}
+
+nav {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+
+}
+
+pre {
+  padding: 1em 1em;
+  border-radius: 0.5em;
+  overflow: auto;
+  background: #e0e0e0;
+}
+
+code {
+  background: #e0e0e0;
+  /* padding: 0.2em; */
+  border-radius: 0.2em;
+  font-size: 16px;
+  line-height: 1em;
+  font-family: Courier New, Courier, monospace;
+}

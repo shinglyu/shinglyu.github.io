@@ -1,0 +1,12 @@
+#!/bin/bash
+# Check for untracked files in blog_assets folder
+# Copy it to .git/hook/pre-commit
+# chmod to make it executable
+untracked_files=$(git ls-files --others --exclude-standard -- "blog_assets/*")
+if [ -n "$untracked_files" ]; then
+  echo "You might forgot to commit the images."
+  echo "There are untracked files in blog_assets folder:"
+  echo "$untracked_files"
+  echo "Please add them to git or ignore them before committing."
+  exit 1
+fi

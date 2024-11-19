@@ -1,0 +1,30 @@
+#head {
+   margin-bottom:1em;
+}
+
+.icon {
+   height:3em;
+}
+
+.inline {
+   display:inline;
+}
+
+li strong {
+   color:#0099ff;
+}
+
+.center {
+   text-align:center;
+}
+
+#title-links {
+   margin-top:10%;
+   margin-bottom:10%;
+}
+
+#short-bio{
+   height: 60vh;
+   padding-top:20vh;
+}
+

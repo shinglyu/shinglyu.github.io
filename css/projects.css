@@ -1,0 +1,10 @@
+.project-category {
+  max-width: 600px;
+}
+
+dd > a > img {
+  max-width: 80%;
+  max-height: 60vh;
+}
+
+

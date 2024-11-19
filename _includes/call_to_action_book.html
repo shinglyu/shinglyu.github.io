@@ -1,0 +1,62 @@
+<div class="call_to_action">
+  <p>Want to learn Rust? Check out my book:</p>
+  <div class="cards">
+    <a href="https://www.amazon.com/Practical-Rust-Projects-Serverless-Applications/dp/1484293304/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr=" onclick="trackOutboundLink('https://www.amazon.com/Practical-Rust-Projects-Serverless-Applications/dp/1484293304/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr='); return false" target="_blank" id="book_btn" class="book_card">
+      <!--Practial Rust Projects 2nd-->
+      <img src="/blog_assets/rust-book-2nd-cover.webp" alt=""/>
+    </a>
+  </div>
+  <!--
+  <p>Also available on 
+    <a href="https://www.oreilly.com/search/?query=author%3A%22Shing%20Lyu%22" onclick="trackOutboundLink('https://www.oreilly.com/search/?query=author%3A%22Shing%20Lyu%22')" target="_blank">
+      O'Reilly
+    </a> and <a href="https://www.amazon.com/Shing-Lyu/e/B088781BMP" onclick="trackOutboundLink('https://www.amazon.com/Shing-Lyu/e/B088781BMP')" target="_blank">
+      Amazon
+    </a>
+  </p>
+  -->
+</div>
+<style>
+.call_to_action {
+  text-align: center;
+  font-style: italic;
+  background: lightgrey;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.cards {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.book_card{
+  display: block;
+  font-style: normal;
+  font-weight: bold;
+  background: white;
+  width: 14em;
+  padding: 1em;
+  margin: 1em auto;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.book_card > img {
+  max-width: 14em;
+}
+</style>
+<script>
+  var trackOutboundLink = function(url) {
+    ga('send', 'event', 'rustbook1', 'click', url, {
+           'transport': 'beacon',
+           'hitCallback': function(){document.location = url;}
+    });
+  }
+</script> 

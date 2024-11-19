@@ -1,0 +1,35 @@
+---
+layout: default
+title: Talks & Publications
+css: /css/projects.css
+---
+
+{% for category in site.data.publications%}
+<section class="publication-category">
+  <h2>{{category.title}}</h2>
+  {% for publication in category.publications%}
+  <dl>
+
+    {% if publication.title_url%}
+    <dt><a href="{{publication.title_url}}" target="_blank">{{publication.title}}</a></dt>
+    {% else %}
+    <dt>{{publication.title}}</dt>
+    {% endif %}
+    {% if publication.source_url%}
+    <dd>[<a href="{{publication.source_url}}" target="_blank">Source Code</a>]</dd>
+    {% endif %}
+    <dd>{{publication.description}}</dd>
+    {% if publication.thumbnail_url%}
+    <dd><a class="th radius" href="{{publication.thumbnail_url}}">
+        <img src="{{publication.thumbnail_url}}">
+    </a></dd>
+    {% endif %}
+  </dl>
+  <div class="small-3 columns">
+  </div>
+</div>
+<br>
+{% endfor %}
+<hr>
+</section>
+{% endfor %}

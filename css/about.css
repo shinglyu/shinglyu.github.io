@@ -1,0 +1,11 @@
+#about-photo {
+  flex: 1;
+  text-align: center;
+}
+
+#about-photo > img {
+  box-shadow: unset;
+  width: 80%;
+  max-width: 20em;
+}
+

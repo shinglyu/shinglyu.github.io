@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- GA4 tags -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2F5HVSVTH6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2F5HVSVTH6');
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{ page.title }} | Shing's Blog</title>
+    <link href="/css/default.css" rel="stylesheet">
+    {% if page.css %}
+    <link href="{{page.css}}" rel="stylesheet">
+    {% endif %}
+    <link href="/css/github.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+    <meta name="description" content="Shing Lyu's blog" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@shinglyu" />
+    <meta name="twitter:creator" content="@shinglyu" />
+
+    <meta property="og:url" content="{{site.url}}{{page.url}}"/>
+    <meta property="og:title" content="{{page.title}} | Shing's Blog"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:description" content="Shing Lyu's blog"/>
+    <meta property="og:image" content="{{site.url}}/img/head_circle.png"/>
+    <meta property="og:image:alt" content="photo of Shing"/>
+  </head>
+  <body>
+      <header><h1>Shing Lyu</h1></header>
+      <nav class="nav">
+        <ul id="nav_list">
+          <li {% if page.url == "/" or page.url == "/blog/" %} class="active" {% endif %}><a href="/">Blog</a></li>
+          {% assign sorted_pages = site.pages | sort:"name" %}
+          {% for node in sorted_pages %}
+            {% if site.exclude_pages contains node.title %}
+              {% continue %}
+            {% endif %}
+            {% if node.url contains "css" %}
+              {% continue %}
+            {% endif %}
+             <li {% if node.url == page.url%} class="active" {% endif %}><a href="{{node.url}}">{{node.title}}</a></li>
+          {%endfor%}
+        </ul>
+        <hr>
+      </nav>
+      <main class="content">
+        {{ content }}
+      </main>
+    <footer>
+      <hr>
+      <ul id="footer_list">
+      {% for contact in site.data.contacts %}
+      <li>
+        <a href="{{contact.url}}">{{contact.name}}</a>
+      </li>
+      {% endfor %}
+      <li>
+        <a href="/feed.xml">RSS</a>
+      </li>
+      </ul>
+      <p>Last update: {{site.time | date_to_string}}</p>
+    </footer>
+    <!-- Chatra {literal} -->
+    <script>
+      (function(d, w, c) {
+        w.ChatraID = '3Leg7HgLErPj4Fy6v';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+          (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+      })(document, window, 'Chatra');
+    </script>
+    <!-- /Chatra {/literal} -->
+  </body>
+</html>
+

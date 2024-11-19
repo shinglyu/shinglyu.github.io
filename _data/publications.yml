@@ -1,0 +1,195 @@
+- title: Books
+  publications:
+    - title: "Practical Rust Web Projects: Building Cloud and Web-Based Applications"
+      title_url: https://www.apress.com/gp/book/9781484265888
+      description: |
+        Apress (ISBN: 978-1-4842-6589-5)<br>
+        Also on:
+        <a href="https://www.amazon.com/Practical-Rust-Web-Projects-Applications/dp/1484265882">Amazon</a>,
+        <a href="https://www.amazon.com/Practical-Rust-Projects-Computing-Applications/dp/1484255984">O'Reilly</a>
+      thumbnail_url: "blog_assets/book_2_cover.jpg"
+    - title: "Practical Rust Projects: Building Game, Physical Computing, and Machine Learning ApplicationsBuilding Reusable Code with Rust"
+      title_url: https://www.apress.com/gp/book/9781484255988
+      description: |
+        Apress (ISBN: 978-1-4842-5599-5)<br>
+        Also on:
+        <a href="https://www.amazon.com/Practical-Rust-Projects-Computing-Applications/dp/1484255984">Amazon</a>, 
+        <a href="https://learning.oreilly.com/library/view/practical-rust-projects/9781484255995/">O'Reilly</a>
+      thumbnail_url: "blog_assets/book_cover.jpg"
+- title: Video Courses
+  publications:
+    - title: Building Reusable Code with Rust
+      title_url: https://www.packtpub.com/application-development/building-reusable-code-rust-video
+      description: |
+        Packt Publishing (ISBN: 9781788399524)<br>
+        Also on:
+        <a href="https://www.udemy.com/building-reusable-code-with-rust/">Udemy</a>, 
+        <a href="https://www.oreilly.com/library/view/building-reusable-code/9781788399524/">O'Reilly</a>, 
+        <a href="https://www.packtpub.com/application-development/building-reusable-code-rust-video">Packt</a>
+      thumbnail_url: "blog_assets/packt_book.png"
+
+- title: Talks
+  publications:
+    - title: 2023/04/06 Rotterdam School of Management - AI/ML for Manufacturing and Supply Chain, Rotterdam
+      title_url: 
+      description: 
+
+    - title: 2023/03/28 Tech Summit Europe - Why MLOps, Amsterdam
+      title_url: 
+      description: 
+
+    - title: 2023/02/09 Twitch Live Stream - AI/ML Re:Invent Re:Cap, Online
+      title_url: 
+      description: 
+
+    - title: 2023/01/11 TU-Delft Google Developer Student Club - Designing Highly-Available Cloud Infrastrcture, Delft
+      title_url: 
+      description: 
+
+    - title: 2022/11/17 AWS User Group Taiwan - AutoML on AWS, Taipei
+      title_url: 
+      description: 
+
+    - title: 2022/10/20 Twitch Live Stream - IoT on AWS, Online
+      title_url: 
+      description: 
+
+    - title: 2022/10/04 AWS Community Day Netherlands - Using Rust on AWS, Amersfoort
+      title_url: 
+      description: 
+
+    - title: 2022/06/16 AWS User Group Taiwan - AWS mid-year AI/ML update, Online
+      title_url: 
+      description: 
+
+    - title: 2022/04/20 Molliecon - Highly Resilient AWS Infrastructure, Amsterdam
+      title_url: 
+      description: 
+
+    - title: 2022/03/23 AWS User Group Netherlands - Rust and AWS, Netherlands
+      title_url: 
+      description: 
+
+    - title: 2022/03/17 AWS User Group Taiwan - Migrating legacy Windows application to AWS, Online
+      title_url: 
+      description: 
+
+    - title:  2021/08/19 Twitch Live Stream - Multi-region on AWS , Online
+      title_url: 
+      description: Twitch office hour with Sara Gerion
+
+    - title: "2019/08/17 COSCUP speaker, Taipei (slides)"
+      title_url: /blog_assets/coscup_2019/serverless-rust-coscup-2019.pdf
+      description: "Serverless Web Service in Rust"
+
+    - title: "2019/08/17 COSCUP speaker, Taipei"
+      title_url: 
+      description: "海外頭路：憂喜甘苦談 (Working abroad: experience sharing)"
+
+    - title: "2019/08/17 COSCUP host, Taipei"
+      title_url: 
+      description: "Closing keynote host"
+
+    - title: "2019/02/03 FOSDEM (video)"
+      title_url: https://fosdem.org/2019/schedule/event/rust_python/
+      description: "RustPython: a Python implementation in Rust (with Windel Bouwman)"
+
+    - title: "2017/12/20 Booking.com Internal Tech Talk, Amsterdam"
+      description: "What's inside the new Firefox Quantum?"
+
+    - title: "2017/8/16 SITCON Camp speaker, Taipei"
+      title_url: http://sitcon.camp/2017/
+      description: "視界咖啡館(開源經驗座談)"
+
+    - title: "2017/8/6 COSCUP speaker, Taipei"
+      title_url: https://www.youtube.com/watch?v=AYNlHeUMwkA
+      description: "Rust Hands-on Workshop"
+
+    - title: "2017/8/6 COSCUP speaker, Taipei"
+      title_url: https://www.youtube.com/watch?v=9fUdKm3njMo
+      description: "Python Interpreter in Rust"
+
+    - title: "2017/7/21 HackNTU Hackathon mentor, Taipei"
+      title_url: https://hackntu.tumblr.com/tagged/intro
+
+    - title: "2017/3/22 Taipei Mozilla Community speaker"
+      description: "The Future of Firefox -- Project Quantum"
+
+    - title: "2017/3/18 SITCON (Student's IT Conference) speaker, Taipei"
+      description: "The Future of Firefox -- Project Quantum"
+
+    - title: "2017/1/7 Rust Beginner Workshop host and mentor, Taipei"
+
+    - title: "2016/10/19 Speaker at EE dept., National Taiwan University, Taipei"
+      description: "\"How it feels like to be a browser hacker?\""
+
+    - title: "2016 Taipei Rust Meetup and Study Group lecturer"
+
+    - title: "2016 Taiwan Code Sprint mentor"
+      description: "Mentoring new contributors to fix Servo bugs"
+
+    - title: "2016 Modern Web Conf speaker"
+      title_url: "http://www.ithome.com.tw/video/108438"
+      description: "\"Servo, the parallel browser engine\""
+
+    - title: "2016 COSCUP speaker"
+      title_url: https://shinglyu.github.io/my_presentations/2016-coscup-servo-intro.pdf
+      description: "\"Servo, the parallel browser engine\" at Conference for Open Source Coders, Users and Promoters (click the title for slides)"
+
+    - title: "2015 MozLando Firefox OS All-hands speaker, Orlando"
+      description: Talking about Firefox OS Add-ons
+
+    - title: "2015 NCU academy program lecturer, Taoyuan"
+      description: "Teaching undergrads about software testing and JavaScript unit testing at \"Implementation and SDLC of Web Apps\" class at National Central Univesity"
+
+    - title: "2015 NTU Open Source Club workshop speaker, Taipei"
+      description: "Hosting the Firefox OS Hands-on Workshop at National Taiwan University Open Source Club"
+
+    - title: Slides for my old presentations
+      title_url: http://shinglyu.github.io/my_presentations/
+      description: Slides for my presentations
+
+- title: Guest Posts
+  publications:
+    - title: "把 Chrome Extension 移到 Firefox 上"
+      title_url: "https://medium.com/@moz2000tw/%E6%8A%8A-chrome-extension-%E7%A7%BB%E5%88%B0-firefox-%E4%B8%8A-45a005783d3a"
+      description: Published on Mozilla Taiwan's offical Medium blog
+    - title: "Building an iOS-style “Unread Notifications” add-on for Firefox OS"
+      title_url: "https://hacks.mozilla.org/2015/11/building-an-ios-style-unread-notifications-add-on-for-firefox-os/"
+      description: Published on Mozilla Hacks
+
+    - title: Where am I?－Part III－用 Geolocation API 以及 Offline Storage 實現導航與離線儲存
+      title_url: "https://tech.mozilla.com.tw/posts/5797/where-am-i-part-iii-%E7%94%A8-geolocation-api-%E4%BB%A5%E5%8F%8A-offline-storage-%E5%AF%A6%E7%8F%BE%E5%B0%8E%E8%88%AA%E8%88%87%E9%9B%A2%E7%B7%9A%E5%84%B2%E5%AD%98#ref-8"
+      description: Published on Mozilla Tech Blog
+
+    - title: 自己的瀏覽器自己改 (Part I) －利用Firefox Addon SDK開發簡單的附加元件
+      title_url: http://tech.mozilla.com.tw/posts/5832/%e8%87%aa%e5%b7%b1%e7%9a%84%e7%80%8f%e8%a6%bd%e5%99%a8%e8%87%aa%e5%b7%b1%e6%94%b9-part-i-%e5%88%a9%e7%94%a8firefox-addon-sdk%e9%96%8b%e7%99%bc%e7%b0%a1%e5%96%ae%e7%9a%84%e9%99%84%e5%8a%a0%e5%85%83
+      description: Published on Mozilla Tech Blog
+
+- title: Notes
+  publications:
+    - title: Technical BKMs (Best Known Methods)
+      title_url: https://dl.dropboxusercontent.com/u/7281903/docs/bkm_tiddly.html
+      description: Guides to install and configure software development environments
+    - title: The Servo Browser Engine -- A Learner's Notebook
+      title_url: http://shinglyu.gitbooks.io/the-servo-browser-engine-a-learner-s-notebook/
+
+- title: Academic
+  publications: 
+    - title: "A Semi-automatic Computer Expressive Music Performance System Using Structural Support Vector Machine"
+      title_url: "http://handle.ncl.edu.tw/11296/ndltd/78460609550247011906"
+      description: "Master Thesis, National Taiwan University, Jun 2014" 
+      thumbnail_url: "projects/wocmat12/result.png"
+      source_url:
+
+    - title: "Computer Expressive Music Performance By Phrase-wise Modeling"
+      title_url:
+      description: "by Hermes Shing Lyu and Shyh-Kang Jeng,<br/> International Workshop on Computer Music and Audio Technology, 2012."
+      thumbnail_url: "projects/wocmat12/result.png"
+
+    - title: "Automatic Saliency Inspired Foreground Object Extraction from Videos"
+      title_url:
+      description: by Wei-te Li, Huei-tang Chang, Hermes Shing Lyu, and Yu-chiang Frank Wang,<br>IEEE International Conference of Image Processing, 2012
+      thumbnail_url: "projects/ICIP12/results.png"
+      source_url:
+

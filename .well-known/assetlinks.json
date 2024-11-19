@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "xyz.appmaker.kjjudc",
+      "sha256_cert_fingerprints": ["31:FC:8E:A4:1D:72:FC:75:BE:8E:81:92:A7:E2:95:11:68:D0:F1:C1:0E:34:43:5B:B1:63:05:F3:2D:AC:86:74", "10:C9:93:4B:2F:EA:8D:04:29:89:E4:B8:24:82:E7:8C:7C:30:9C:86:0B:C6:C5:09:FF:6C:5B:A7:0C:2B:89:34"]
+    }
+  }
+]

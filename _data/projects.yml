@@ -1,0 +1,262 @@
+- title: "Featured"
+  projects:
+
+    - title: "RustPython"
+      title_url: "https://github.com/RustPython/RustPython"
+      description: A Python interpreter written in Rust
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/RustPython"
+
+    - title: "Firefox Quantum - CSS engine"
+      title_url: "https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/"
+      description: A completely overhauled Firefox engine, super-fast and stable. I help port the Rust-based CSS engine from Servo into Gecko (Firefox's engine), and bring the automated test into place.
+      thumbnail_url: 
+
+    - title: "The Servo Parallel Browser Engine"
+      title_url: "https://servo.org"
+      description: Servo is a prototype web browser engine focus on parallism, security, and performance; written in the Rust language. I'm the core team reviewer of this project.
+      thumbnail_url: 
+      source_url: "https://github.com/servo/servo"
+
+    - title: "FocusBlocker"
+      title_url: "https://addons.mozilla.org/en-US/firefox/addon/focusblocker/"
+      description: "1000+ daily active users! Block websites for a given time to help you focus on work/study."
+      thumbnail_url: "projects/FocusBlocker/screenshot_icon.png"
+      source_url: https://github.com/shinglyu/focusblocker
+
+    - title: "Itinerary Viewer"
+      title_url: https://github.com/shinglyu/itinerary-viewer
+      description: Travel planner tool suite. Automaticall search for maps, direction and export as printable PDF and digital map file
+      thumbnail_url:
+      source_url: https://github.com/shinglyu/itinerary-viewer
+
+    - title: "QuantumVim"
+      title_url: https://addons.mozilla.org/zh-TW/firefox/addon/quantumvim/
+      description: Adds basic vim commands to Firefox 48+ (with e10s & WebExtension).
+      thumbnail_url: https://addons.cdn.mozilla.net/user-media/previews/full/178/178010.png?modified=1472658618
+      source_url: https://github.com/shinglyu/itinerary-viewer
+
+    - title: "MDSlides-new"
+      title_url: "https://github.com/shinglyu/mdslides-new"
+      description: Markdown slideshow system based on Remark, with live-refresh and exporting to a single HTML file
+      thumbnail_url:
+      source_url: "https://github.com/shinglyu/mdslides-new"
+
+- title: Mozilla
+  projects:
+    - title: "MozITP"
+      title_url: "https://github.com/Mozilla-TWQA/MozITP"
+      description: "Mozilla Integrated Tools Package. An all-in-one testing tool for Firefox ecosystem. You can flash phones, run Firefox OS phone or TV simulators, and run automated tests in this package. Greatly reduce the time and effort of setting up a testing enviornment."
+      thumbnail_url: "https://raw.githubusercontent.com/Mozilla-TWQA/MozITP/master/menu.png"
+      source_url: "https://github.com/Mozilla-TWQA/MozITP"
+
+    - title: "MozIlluminate"
+      title_url: "https://github.com/MozIlluminate/mozilluminate-demo"
+      description: "Next generation MozTrap, Mozilla's test case management database.  Using Google Spreadsheet to manage test cases and execute them in MozTrap. Greatly imporve the readability and maintainablity of test cases"
+      thumbnail_url: 
+      source_url: "https://github.com/MozIlluminate/mozilluminate-demo"
+
+    - title: "MozTrap Duplication Finder"
+      title_url: "https://github.com/shinglyu/moztrap-dup-finder"
+      description: "Using machine learning to find duplicated or redundent test cases on MozTrap, our test case management database."
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/moztrap-dup-finder"
+
+    - title: "BzDeck"
+      title_url: "https://www.bzdeck.com"
+      description: A useful experimental Bugzilla client demonstrating modern Web application technologies such as CSS3, DOM4, HTML5, ECMAScript 6 and WAI-ARIA
+      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
+      source_url: https://github.com/bzdeck/bzdeck
+
+    - title: "MozTrap"
+      title_url: "https://moztrap.mozilla.org"
+      description: MozTrap is the test case managment system for Mozilla. I am expanding its REST API for new UI design.
+      thumbnail_url: 
+      source_url: https://github.com/mozilla/moztrap
+
+    - title: "MozTrap New UI"
+      title_url: "https://shinglyu.github.io/moztrap-new-ui/#/"
+      description: "A new frontend UI for MozTrap. Improved searchablity; Better suite and test case managment and diff'ing test cases online"
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/moztrap-new-ui"
+
+    - title: "MozTrapHelper"
+      title_url: "https://addons.mozilla.org/en-US/firefox/addon/moztraphelper/"
+      description: "Add those missing functionalities to MozTrap ( http://moztrap.mozilla.org/  )."
+      thumbnail_url: 
+      source_url: 
+
+    - title: "Bugzilla Summarizer"
+      title_url: http://shinglyu.github.io/bugzilla_summarizer/
+      description: A visualization for Bugzilla's history
+      thumbnail_url: 
+      source_url: https://github.com/shinglyu/bugzilla_summarizer 
+
+- title: Firefox OS Apps & Add-ons
+  projects: 
+    - title: "Unread Icon (Fireofx OS Add-on)"
+      title_url: "https://marketplace.firefox.com/addon/unread-icons-1"
+      description: "Show unread messages counts on Firefox OS homescreen icons. Winner of the **2015 Firefox OS Add-on Hackathon** -- Most Useful Award. Featured in this [Mozilla Hack Blog article](https://hacks.mozilla.org/2015/11/building-an-ios-style-unread-notifications-add-on-for-firefox-os/)"
+      thumbnail_url: "https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2015/10/demo-250x444.png"
+      source_url: "https://github.com/shinglyu/fxos-unread-icon"
+
+    - title: "Back Button (Fireofx OS Add-on)"
+      title_url: "https://marketplace.firefox.com/addon/back-button-4"
+      description: "Add an global back button to Firefox OS"
+      thumbnail_url: "https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2015/10/demo-250x444.png"
+      source_url: "https://github.com/shinglyu/fxos-back-button"
+
+    - title: "Reader Mode"
+      title_url: "https://marketplace.firefox.com/app/reader-mode/"
+      description: "Cleanup the clutters on webpages for better reading experience"
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/176/176898.png?modified=1437707097"
+      source_url: "https://github.com/shinglyu/readermode"
+
+    - title: "Tip Calculator"
+      title_url: "https://marketplace.firefox.com/app/tip-calculator-3/"
+      description: "Help you calculate restaurant tips"
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/180/180944.png?modified=1447650668"
+      source_url: "https://github.com/shinglyu/tip-calculator"
+
+    - title: "HTML5 Roulette"
+      title_url: http://shinglyu.github.io/svg-roulette/roulette.html
+      description: "A lucky draw roulette created using HTML5 technology. <a href=\"https://marketplace.firefox.com/app/roulette-3\">[App version]</a>"
+      thumbnail_url: "projects/roulette.png"
+      source_url: "https://github.com/shinglyu/svg-roulette"
+
+    - title: FullBatteryAlarm
+      title_url: "https://marketplace.firefox.com/app/fullbatteryalarm"
+      description: "Alarm you when the battery if fully charged. Never over-charge your battery again! Over 2600 downloads"
+      thumbnail_url: projects/fullbatteryalarm.png
+      source_url:
+
+    - title: "Taipei MRT Map"
+      title_url: "https://marketplace.firefox.com/app/taipei-mrt-map"
+      description: An offline map for Taipei MRT 
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/160/160484.png?modified=1418916861"
+      source_url: 
+
+    - title: "TabataTimer"
+      title_url: "https://marketplace.firefox.com/app/tabatatimer"
+      description: A simple timer for a 4-minute tabata workout with voice reminders (remember to turn up the volume). 
+      thumbnail_url: "https://marketplace.cdn.mozilla.net/img/uploads/previews/full/149/149637.png?modified=1409889255"
+      source_url: 
+
+- title: Firefox (Desktop) Add-ons
+  projects:
+    - title: "Move Active Tab To Left"
+      title_url: https://addons.mozilla.org/zh-TW/firefox/addon/move-active-tab-to-left/
+      description: Move active tab to the left end, so recent tabs cluster to the left side.
+      thumbnail_url:
+      source_url:
+
+    - title: "Kanbanmarks"
+      title_url: https://addons.mozilla.org/en-US/firefox/addon/kanbanmark/
+      description: Organize your bookmarks with ease in a kanban-style layout 
+      thumbnail_url: https://addons.cdn.mozilla.net/user-media/previews/full/154/154040.png 
+      source_url: 
+
+    - title: "BzDeck (Firefox Add-on)"
+      title_url: https://addons.mozilla.org/en-US/firefox/addon/bzdeck
+      description: Redirect you to BzDeck when you open a bugzilla link 
+      thumbnail_url: https://camo.githubusercontent.com/5e4ae229925e8592e6ad7a3acf601525bee0d0ee/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f426c4f5151776a43514145664232372e706e673a6c61726765
+      source_url: https://github.com/shinglyu/bzdeck-addon 
+
+
+    - title: "Coursera Autoplay"
+      title_url: "https://addons.mozilla.org/en-US/firefox/addon/coursera-autoplay/"
+      description: "Auto skip in-video quizes and continue to the next video when current video ends."
+      thumbnail_url: "https://addons.cdn.mozilla.net/user-media/previews/full/148/148510.png?modified=1419153666"
+      source_url: 
+
+- title: Side Projects
+  projects: 
+    - title: "Music Explorer"
+      title_url: "http://shinglyu.github.io/musicexplorer/"
+      description: "Recommend a variety of music to expand your music repertoire, e.g. Classical, Opera, Jazz, Chinese."
+      thumbnail_url: 
+      source_url: "https://github.com/shinglyu/musicexplorer"
+
+    - title: "Asia Tech Conferences"
+      title_url: "https://asia-confs.github.io/asia-tech-confs"
+      description: A list of tech conferences in Aisa I collected
+      thumbnail_url: 
+
+
+    - title: "HTML5 Countdown Timer"
+      title_url: "http://shinglyu.github.io/countdown/countdown.html"
+      description: A simple countdown timer with audio and flashing light.
+      thumbnail_url: projects/countdown/screenshot.png 
+      source_url: "https://github.com/shinglyu/countdown"
+
+    - title: "MDSlides"
+      title_url: "http://mdslides.herokuapp.com/"
+      description: "An cloud-based editor for presentation slides using Markdown syntax."
+      thumbnail_url: "projects/MDSlides/screenshot.png" 
+      source_url: 
+
+    - title: "MDSlides-local"
+      title_url: "https://github.com/shinglyu/mdslides-local"
+      description: Markdown slideshow system based on Reveal.js, runs locally without the need for a web server
+      thumbnail_url:
+      source_url: "https://github.com/shinglyu/mdslides-local"
+
+- title: Freelancing
+  projects:
+    - title: "The Figured Bass"
+      title_url: "http://thefiguredbass.com/"
+      description: "A music education startup that tries to help students learn music theories with our automatic grading system."
+
+    - title: ASCII Oscilloscope running on Raspberry Pi
+      description: This oscilloscope can display the audio input as ASCII art in realtime. A commssioned work for a design student's graduation project (2012).
+      thumbnail_url: projects/oscilloscope/oscilloscope.jpg 
+
+#    - title: "Chinese Corpus Search Engine for Linguistic Research"
+#      description: "A query system for the Academia Scinica Chinese Corpus. Commissioned by National Taiwan University in 2013"
+#
+#    - title: "NTU Course Selection System Design Award"
+#      title_url: "projects/ntuDesign/"
+#      description: "An UI rework (mockup) for National Taiwan University's online course selection system."
+#
+
+- title: Academic
+  projects: 
+    - title: "A Semi-automatic Computer Expressive Music Performance System Using Structural Support Vector Machine"
+      title_url: "http://handle.ncl.edu.tw/11296/ndltd/78460609550247011906"
+      description: "Master Thesis, National Taiwan University, Jun 2014" 
+      thumbnail_url: "projects/wocmat12/result.png"
+      source_url:
+
+    - title: "JCMG Corpus for Computer Experssive Music Performance"
+      title_url: "projects/jcmg_corpus/corpus.html"
+      description: "Piano performance corpus for computer expressive music performance research."
+      thumbnail_url: 
+      source_url: 
+
+    - title: "Computer Expressive Music Performance By Phrase-wise Modeling"
+      title_url:
+      description: "by Hermes Shing Lyu and Shyh-Kang Jeng,<br/> International Workshop on Computer Music and Audio Technology, 2012."
+      thumbnail_url: "projects/wocmat12/result.png"
+
+    - title: "Automatic Saliency Inspired Foreground Object Extraction from Videos"
+      title_url:
+      description: by Wei-te Li, Huei-tang Chang, Hermes Shing Lyu, and Yu-chiang Frank Wang,<br>IEEE International Conference of Image Processing, 2012
+      thumbnail_url: "projects/ICIP12/results.png"
+      source_url:
+
+    - title: "Classical music composition style clustering"
+      description: "2013 Data Mining Final Project"
+
+    - title: "Dynamic Hedging of Stock Index with Warrants by MGARCH-BEKK Model"
+      description: "2013 Multivariate Statistical Analysis Final Project"
+
+    - title: "Augmented Reality Digital Signage"
+      description: "2012 Embedded System Experiment Final Project"
+
+    - title: "Offline Music-to-Score Alignment for Orchestral Music"
+      description: "2011 Special Project"
+      thumbnail_url: "projects/scoreFollowing/final.png"
+
+    - title: "Musical Source Separation Using Average Harmonic Models"
+      description: "2009 Multimedia Signal Processing Final Projects"
+

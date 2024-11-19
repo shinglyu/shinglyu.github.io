@@ -1,0 +1,34 @@
+---
+layout: default 
+title: Projects
+css: css/projects.css
+---
+      {% for category in site.data.projects%}
+      <section class="project-category">
+         <h2>{{category.title}}</h2>
+         {% for project in category.projects%}
+         <dl>
+           {% if project.title_url%}
+           <dt><a href="{{project.title_url}}" target="_blank">{{project.title}}</a></dt>
+           {% else %}
+           <dt>{{project.title}}</dt>
+           {% endif %}
+           {% if project.source_url%}
+           <dd>[<a href="{{project.source_url}}" target="_blank">Source Code</a>]</dd>
+           {% endif %}
+           <dd>{{project.description | markdownify}}</dd>
+           {% if project.thumbnail_url%}
+           <dd><a class="th radius" href="{{project.thumbnail_url}}">
+             <img src="{{project.thumbnail_url}}">
+           </a></dd>
+           {% endif %}
+         </dl>
+               <div class="small-3 columns">
+               </div>
+            </div>
+            <br>
+         {% endfor %}
+      <hr>
+      </section>
+      {% endfor %}
+
