@@ -2,7 +2,7 @@
 layout: post
 title: Building a temporary camera app with Windsurf
 categories: Web
-date: 2024-12-28 10:19:47 +08:00
+date: 2024-12-28 11:16:38 +08:00
 excerpt_separator: <!--more-->
 ---
 Note: This post is written with the help from Gemini 2.0 Flash. Let me know if you like the style and tone.
