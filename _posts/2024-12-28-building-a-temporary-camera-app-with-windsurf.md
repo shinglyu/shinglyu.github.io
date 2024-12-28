@@ -41,6 +41,11 @@ Also to my surprise, when it detects that the ImageMagic command is not installe
 ![install image magick]({{site_url}}/blog_assets/windsurf_tempphoto/install-image-magick.png)
 ![icon generated]({{site_url}}/blog_assets/windsurf_tempphoto/icon-generated.png)
 
+Finally, this is how the app looks like, and you can try it or install it here: [https://shinglyu.com/TempPhoto/](https://shinglyu.com/TempPhoto/).
+
+![app camera]({{site_url}}/blog_assets/windsurf_tempphoto/app_camera.png)
+![app gallery]({{site_url}}/blog_assets/windsurf_tempphoto/app_gallery.png)
+
 ## Conclusion
 
 Overall, my experience using Windsurf to create a temporary camera PWA was positive. It’s a promising tool that significantly lowers the barrier to entry for building web applications. While many current AI-powered IDEs seem to be little more than VS Code with a proprietary AI extension, I predict the real competition in this space will be fought on the battleground of agentic user experience and workflow design. As a developer, I'm already familiar with concepts like PWAs and understand their potential, but it makes me wonder how future AI editors will abstract away these underlying complexities for non-developer users. How will these tools empower everyday users to build the apps they envision without needing to understand the technical details? That's the truly exciting frontier, and I'm eager to see how it unfolds.
