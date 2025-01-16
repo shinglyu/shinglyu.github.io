@@ -1,5 +1,5 @@
-# - name: Email
-#   url: mailto:wntaztopr@mozmail.com
+- name: Email
+  url: mailto:wntaztopr@mozmail.com
 
 - name: GitHub
   url: https://www.github.com/shinglyu
@@ -7,6 +7,12 @@
 - name: LinkedIn
   url: https://tw.linkedin.com/in/shinglyu
 
-- name: Twitter
-  url: https://twitter.com/shinglyu
+- name: Facebook
+  url: https://www.facebook.com/shinglyuofficial/
+
+- name: Mastodon
+  url: https://mastodon.social/@shinglyu
+
+# - name: Twitter
+#   url: https://twitter.com/shinglyu
 
