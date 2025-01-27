@@ -38,7 +38,7 @@ graph TD
 
     subgraph "Output"
       WRITER[AI writing assistant] --> Blog
-      WRITER --> SOCIAL[Social media post]
+      WRITER --> Buffer --> SOCIAL[Social media post]
       WRITER --> Book
       WRITER --> Talk
       WRITER --> Email
@@ -124,7 +124,7 @@ Finally, all the knowledge I collected is useless until I generate insights from
 
 My writing process has evolved significantly with the integration of AI tools. I typically start by drafting outlines and key points as bullet points in Logseq, drawing from my collected notes and thoughts. Then, instead of struggling with the blank page syndrome, I use AI to help transform these bullet points into flowing paragraphs. I either use Claude's web interface and copy the markdown directly to VSCode, or leverage my open-source [ai-writer](https://github.com/aws-samples/ai-writer) project, which I built specifically for this workflow. To maintain consistency in my writing voice, I provide my previous blog posts as style examples to the AI. This approach lets me focus on the ideas and structure, while the AI helps with the initial prose, after which I edit and refine the text to ensure it truly reflects my thoughts and experiences.
 
-I also use GenAI to convert the new post into social media posts and post them on [LinkedIn](https://www.linkedin.com/in/shinglyu/), [Facebook](https://www.facebook.com/shinglyuofficial) and [Mastdon](https://mastodon.social/@shinglyu).
+I also use GenAI to convert the new post into social media posts and post them on [LinkedIn](https://www.linkedin.com/in/shinglyu/), [Facebook](https://www.facebook.com/shinglyuofficial) and [Mastdon](https://mastodon.social/@shinglyu). I use [Buffer](https://buffer.com/) to schedule my posts and post to all three places at the same time.
 
 I have to admit that I didn't use the power of linked notes when I wrote my previous two books. I worked in a waterfall manner and it created a lot of pain and friction. After reading the book How to Take Smart Notes by Sönke Ahrens I realized how wrong I was. I've used the method to wrote the 2nd edition of [Practical Rust Projects](https://link.springer.com/book/10.1007/978-1-4842-9331-7) and it has been much more structured. But I didn't get to use AI to write the book. It would be interesting to experiment with using AI to write a whole book in the future.
 
