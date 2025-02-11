@@ -2,7 +2,7 @@
 layout: post
 title: Building a Fast and Accurate Transcription Tool on Linux
 categories: Web
-date: 2025-02-11 16:56:02 +08:00
+date: 2025-02-11 17:02:52 +01:00
 excerpt_separator: <!--more-->
 ---
 
