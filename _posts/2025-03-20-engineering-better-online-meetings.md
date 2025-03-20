@@ -2,7 +2,7 @@
 layout: post
 title: "Engineering Better Online Meetings: Hardware, Software, and Environment"
 categories: Productivity
-date: 2025-03-20 23:18:00 +01:00
+date: 2025-03-20 23:20:24 +01:00
 excerpt_separator: <!--more-->
 tags: content, blog
 ---
