@@ -1,0 +1,178 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
+  <diagram name="Page-1" id="4x3QTy1Yol3j7I1FJ-X4">
+    <mxGraphModel dx="2718" dy="1431" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-1" value="Email Component" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="997" width="813" height="281" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-2" value="Data Tier" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1203" y="819" width="640" height="306" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-3" value="Application Tier" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="503" y="442" width="680" height="505" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-4" value="Auto Scaling Group" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="523" y="641" width="640" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-5" value="Presentation Tier" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="143" y="140" width="340" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-6" value="User" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="181" y="20" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-7" value="Amazon CloudFront&#xa;(CDN)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="188" y="165" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-8" value="Amazon S3&#xa;(Static Content)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="467" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-9" value="AWS WAF&#xa;(Web Application Firewall)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="188" y="314" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-10" value="Application Load Balancer" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="730" y="479" width="246" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-11" value="EC2 Instance&#xa;(Web Server)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="868" y="666" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-12" value="EC2 Instance&#xa;(Web Server)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="558" y="666" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-13" value="Amazon SQS&#xa;(Message Queue)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="538" y="844" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-14" value="Amazon RDS&#xa;(Primary DB)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1238" y="844" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-15" value="Amazon RDS&#xa;(Read Replica)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1238" y="1022" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-16" value="Amazon ElastiCache&#xa;(Caching)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1548" y="844" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-17" value="AWS Lambda&#xa;(Email Processing)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="538" y="1022" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-18" value="Amazon SES&#xa;(Simple Email Service)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="1175" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-19" value="HTTPS" style="curved=1;startArrow=none;endArrow=block;exitX=0.99;exitY=0.76;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-6" target="Na5nPybaqLz_nJYxHIOD-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="318" y="104" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-20" value="Origin Request" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-7" target="Na5nPybaqLz_nJYxHIOD-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-21" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.47;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-9" target="Na5nPybaqLz_nJYxHIOD-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="308" y="417" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-22" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.67;exitY=1;entryX=0;entryY=0.18;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-9" target="Na5nPybaqLz_nJYxHIOD-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="417" />
+              <mxPoint x="390" y="442" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-23" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.75;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-10" target="Na5nPybaqLz_nJYxHIOD-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="998" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-24" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.22;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-10" target="Na5nPybaqLz_nJYxHIOD-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="688" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-25" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.52;exitY=1;entryX=0;entryY=0.2;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-11" target="Na5nPybaqLz_nJYxHIOD-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1008" y="769" />
+              <mxPoint x="1008" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.71;exitY=1;entryX=0;entryY=0.32;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-11" target="Na5nPybaqLz_nJYxHIOD-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1090" y="769" />
+              <mxPoint x="1090" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-27" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.83;entryX=0.52;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-11" target="Na5nPybaqLz_nJYxHIOD-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="678" y="769" />
+              <mxPoint x="678" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-28" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.52;exitY=1;entryX=0;entryY=0.34;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-12" target="Na5nPybaqLz_nJYxHIOD-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="698" y="769" />
+              <mxPoint x="698" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-29" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.78;entryX=0;entryY=0.32;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-12" target="Na5nPybaqLz_nJYxHIOD-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1070" y="769" />
+              <mxPoint x="1070" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-30" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.33;exitY=1;entryX=0.38;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-12" target="Na5nPybaqLz_nJYxHIOD-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="615" y="769" />
+              <mxPoint x="615" y="819" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-31" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-14" target="Na5nPybaqLz_nJYxHIOD-15">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-32" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-13" target="Na5nPybaqLz_nJYxHIOD-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-33" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=1;entryY=0.13;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-17" target="Na5nPybaqLz_nJYxHIOD-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="668" y="1150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Na5nPybaqLz_nJYxHIOD-34" value="Sends Emails" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.08;entryX=-0.01;entryY=0.86;rounded=0;" edge="1" parent="1" source="Na5nPybaqLz_nJYxHIOD-18" target="Na5nPybaqLz_nJYxHIOD-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="123" y="1150" />
+              <mxPoint x="123" y="104" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

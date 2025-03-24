@@ -1,0 +1,68 @@
+graph TB
+    %% Client side
+    User((User))
+    
+    %% Presentation Tier
+    subgraph "Presentation Tier"
+        CloudFront["Amazon CloudFront\n(CDN)"]
+        S3["Amazon S3\n(Static Content)"]
+        WAF["AWS WAF\n(Web Application Firewall)"]
+    end
+    
+    %% Application Tier
+    subgraph "Application Tier"
+        ALB["Application Load Balancer"]
+        
+        subgraph "Auto Scaling Group"
+            EC2_1["EC2 Instance\n(Web Server)"]
+            EC2_2["EC2 Instance\n(Web Server)"]
+        end
+        
+        SQS["Amazon SQS\n(Message Queue)"]
+    end
+    
+    %% Data Tier
+    subgraph "Data Tier"
+        RDS["Amazon RDS\n(Primary DB)"]
+        RDSRead["Amazon RDS\n(Read Replica)"]
+        ElastiCache["Amazon ElastiCache\n(Caching)"]
+    end
+    
+    %% Email Sending Component
+    subgraph "Email Component"
+        Lambda["AWS Lambda\n(Email Processing)"]
+        SES["Amazon SES\n(Simple Email Service)"]
+    end
+    
+    %% Connections
+    User -->|HTTPS| CloudFront
+    CloudFront -->|Origin Request| WAF
+    WAF --> S3
+    WAF --> ALB
+    
+    ALB --> EC2_1
+    ALB --> EC2_2
+    
+    EC2_1 --> RDS
+    EC2_1 --> ElastiCache
+    EC2_1 --> SQS
+    
+    EC2_2 --> RDS
+    EC2_2 --> ElastiCache
+    EC2_2 --> SQS
+    
+    RDS --> RDSRead
+    
+    SQS --> Lambda
+    Lambda --> SES
+    
+    SES -->|Sends Emails| User
+    
+    %% Styling
+    classDef awsService fill:#FF9900,stroke:#232F3E,color:#232F3E,stroke-width:2px
+    classDef database fill:#3C873A,stroke:#232F3E,color:#FFFFFF,stroke-width:2px
+    classDef client fill:#00B7FF,stroke:#232F3E,color:#FFFFFF,stroke-width:2px
+    
+    class User client
+    class CloudFront,S3,WAF,ALB,EC2_1,EC2_2,SQS,Lambda,SES awsService
+    class RDS,RDSRead,ElastiCache database
