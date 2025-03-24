@@ -2,11 +2,9 @@
 layout: post
 title: Make AI Draw Architecture Diagrams with AWS Icons
 categories: Web
-date: 2025-03-24 22:23:56 +08:00
+date: 2025-03-24 23:02:39 +01:00
 excerpt_separator: <!--more-->
 ---
-
-## Taking AWS Architecture Diagrams to the Next Level
 
 Last year, I wrote about [turning hand-drawn architecture diagrams into digital diagrams using generative AI]({{site_url}}/ai/2024/07/12/turning-hand-drawn-architecture-diagrams-into-digital-diagrams-with-generative-ai.html). While that approach worked well for creating editable digital diagrams, the result was quite basic—mostly rectangles and text. But if you've ever seen presentations by AWS solution architects, you'll know that colorful AWS service icons can make architecture diagrams much more visually appealing and easier to understand at a glance.
 
