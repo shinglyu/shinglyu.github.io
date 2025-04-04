@@ -14,11 +14,11 @@ What struck me wasn't just the functionality these MCPs provided, but rather the
 
 <!--more-->
 
-## What Are MCP Marketplace in Cline?
+## What Is the MCP Marketplace in Cline?
 
 Before I dive deeper, let me briefly explain what MCPs are for those who might not be familiar. The Model Context Protocol (MCP) is a protocol that enables large language models (LLMs) like Claude or GPT to interact with external tools and services. MCP servers extend AI capabilities by allowing them to access specialized functions - from searching the web to controlling smart home devices.
 
-MCP marketplace in Cline are where developers can discover, distribute, and install these extensions. Think of them as app stores specifically for AI assistants. As these ecosystems grow, they're becoming increasingly important for developers who want to enhance their AI tools with specialized capabilities.
+MCP marketplaces in Cline are where developers can discover, distribute, and install these extensions. Think of them as app stores specifically for AI assistants. As these ecosystems grow, they're becoming increasingly important for developers who want to enhance their AI tools with specialized capabilities.
 
 ![Cline's MCP marketplace interface showing available extensions]({{site_url}}/blog_assets/cline-mcp-install/marketplace.png)
 
@@ -118,9 +118,9 @@ For mission-critical components, developer-curated installation scripts remain v
 
 Containerization offers another promising solution. Using Docker or Podman to create isolated environments for each installation would provide consistency and security while minimizing conflicts between different software components. You can see that in my chat history, the AI opted for `npx` over containers because it think it's simplier. Maybe a prompt that force it to use container might work better. 
 
-Looking to the future, Rust with its Cargo package manager offers advantages for MCP development. Rust's ability to compile to native binaries eliminates many runtime dependency issues, potentially making installation more straightforward and reliable. I have seen some MCP libraries poping up on Crates.io and I'm planning to explore it further. 
+Looking to the future, Rust with its Cargo package manager offers advantages for MCP development. Rust's ability to compile to native binaries eliminates many runtime dependency issues, potentially making installation more straightforward and reliable. I have seen some MCP libraries popping up on Crates.io and I'm planning to explore it further. 
 
-For the most comprehensive solution to dependency management, Nix deserves mention. Its declarative approach to package management ensures reproducible builds and consistent environments, which could complement an AI agent's installation capabilities. Nix is notorious for having a steep learning curve. If AI can use it we might be able to combine the power of Nix and ease-of-use of a natural languagechatbot. 
+For the most comprehensive solution to dependency management, Nix deserves mention. Its declarative approach to package management ensures reproducible builds and consistent environments, which could complement an AI agent's installation capabilities. Nix is notorious for having a steep learning curve. If AI can use it we might be able to combine the power of Nix and ease-of-use of a natural language chatbot. 
 
 ## Finding the Balance
 
