@@ -2,7 +2,7 @@
 layout: post
 title: Agentic Software Installer - A Genius or Terrible Idea?
 categories: AI
-date: 2025-03-31 22:55:00 +08:00
+date: 2025-04-04 22:24:13 +02:00
 excerpt_separator: <!--more-->
 ---
 
