@@ -1,7 +1,7 @@
 name: Shing Lyu
 highlighter: rouge
 markdown: kramdown
-exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus", "RSS", "Blog", "Privacy Policy"]
+exclude_pages: ["Hi! I'm Shing Lyu", "JCMG Corpus", "RSS", "Blog", "Privacy Policy", "All Posts"]
 include: [".well-known"]
 description: Shing Lyu's Portfolio and Blog
 url: https://shinglyu.com

@@ -58,6 +58,15 @@ article {
   text-decoration: underline;
 }
 
+.all-posts-nav {
+  font-size: 0.8em;
+  color: #666 !important;
+}
+
+.all-posts-nav:hover {
+  color: #333 !important;
+}
+
 @media (min-width: 768px) {
   .content {
     max-width: 600px;

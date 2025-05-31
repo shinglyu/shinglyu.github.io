@@ -1,0 +1,57 @@
+---
+title: All Posts
+layout: default
+css: /css/blog.css
+---
+
+<h1>All Posts</h1>
+<p>Here's a complete list of all blog posts:</p>
+
+<ul class="all-posts-list">
+  {% for post in site.posts %}
+  <li>
+    <time class="post-date">{{ post.date | date: '%B %d, %Y' }}</time>
+    <div class="post-title">
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+<style>
+.all-posts-list {
+  list-style: none;
+  padding: 0;
+}
+
+.all-posts-list li {
+  display: flex;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5em;
+  align-items: flex-start;
+}
+
+.post-date {
+  flex-shrink: 0;
+  width: 150px;
+  color: #666;
+  font-size: 0.9em;
+  margin-right: 1em;
+}
+
+.post-title {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.all-posts-list a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.all-posts-list a:hover {
+  color: #0066cc;
+}
+</style>
