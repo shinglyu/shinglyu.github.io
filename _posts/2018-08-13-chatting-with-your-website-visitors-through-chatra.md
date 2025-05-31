@@ -7,6 +7,10 @@ tags: mozilla
 excerpt_separator: <!--more-->
 ---
 
+**Update (May 31, 2025):** *I've removed the Chatra chat widget from my website today. While it was a useful tool, I found that many users mistakenly thought it was AI-powered and would be quite rude when interacting with what they assumed was a chatbot. If you need to reach out, please feel free to contact me via email listed at the bottom of this website instead.*
+
+---
+
 When I started the blog, I didn't add a message board below each article because I don't have the time to deal with spam. Due to [broken windows theory][broken_window], if I leave the spam unattended my blog will soon become a landfill for spammers. But nowadays many e-commerce site or brand sites have a live chatting box, which will solve my problem because I can simply ignore spam, while interested readers can ask questions and provide feedbacks easily. That's why when my sponsor, [Chatra.io][chatra], approached me with their great tool, I fell in love with it right away and must share it with everyone.
 
 <!--more-->
