@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "From DevTools Detective to Automation Hero: My Quest for Dutch Subtitles"
-categories: blog
+categories: ai
+date: 2025-06-06
+excerpt_separator: <!--more-->
 tags: [automation, language-learning, web-scraping, shell-scripting, rust, dutch]
 ---
 
@@ -9,8 +11,9 @@ I've been working on improving my Dutch by watching [NOS Journaal in Makkelijke 
 
 But here's the thing: while listening helps with comprehension, I wanted to read the subtitles after watching to catch vocabulary I missed during the video. The built-in video player has subtitles, but constantly pausing to point my phone's Google Translate camera at the screen proved incredibly disruptive. I'd get tired of watching within minutes.
 
-I already use [Readlang](https://readlang.com) extensively for my Dutch studies. It's a language learning tool where you can import articles, then click on any word or phrase to get AI-powered translations with contextual explanations. The UX is phenomenally smooth, removing most of the friction from reading foreign language content. This would be a great tool to study the subtitles right after I watched the video.
+I already use [Readlang](https://readlang.com) extensively for my Dutch studies. It's a language learning tool where you can import articles, then click on any word or phrase to get AI-powered translations with contextual explanations. The UX is phenomenally smooth, removing most of the friction from reading foreign language content. This would be a great tool to study the subtitles right after I watched the video. However, there is a problem.
 
+<!--more-->
 ## The Problem: Proprietary Video Players
 
 The NPO Start website uses a proprietary video player that makes subtitle extraction far from straightforward. Unlike simple HTML5 video implementations, there's no obvious way to grab the subtitle files directly.  Even if I could access them, they'd be VTT files filled with timestamps and formatting that would need cleaning up before import.
