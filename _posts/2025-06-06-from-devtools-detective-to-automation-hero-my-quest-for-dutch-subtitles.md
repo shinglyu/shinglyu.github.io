@@ -14,6 +14,16 @@ But here's the thing: while listening helps with comprehension, I wanted to read
 I already use [Readlang](https://readlang.com) extensively for my Dutch studies. It's a language learning tool where you can import articles, then click on any word or phrase to get AI-powered translations with contextual explanations. The UX is phenomenally smooth, removing most of the friction from reading foreign language content. This would be a great tool to study the subtitles right after I watched the video. However, there is a problem.
 
 <!--more-->
+
+## Update: The YouTube Alternative I Missed
+
+*Edit: After publishing this post and [sharing it on the Readlang forum](https://forum.readlang.com/t/downloading-dutch-tv-npo-start-subtitle/3123), a helpful reader named WarsawWill_Randomlde pointed out that NOS Journaal in Makkelijke Taal is actually available on YouTube with proper (non-auto-generated) subtitles. You can use YouTube's "Show transcript" feature to copy the text directly into Readlang, which is much simpler than my automated approach.*
+
+*However, I have good reasons for sticking with my NPO Start automation. My initial experience with YouTube was watching NOS Jeugdjournaal, where the auto-generated subtitle quality was frustratingly poor - full of transcription errors that made reading more confusing than helpful. This drove me to seek higher-quality subtitles on NPO Start, and I never looked back to check if other NOS programs had better YouTube subtitle quality.*
+
+*More importantly, the YouTube method still requires several manual steps: opening the video, toggling transcript settings, copying text, switching to Readlang, pasting content, and manually entering titles. While experienced users can do this quickly, my automation reduces the entire process to a single 2-second script execution. For someone who watches daily and values eliminating all friction from the learning workflow, the automation investment was worth it.*
+
+*That said, the YouTube method has a big advantage: You can play the YouTube video inside Readlang and have the subtitles right beneath the video, with the subtitles synced with the video's progress. You can see how this can be done in this [tutorial](https://forum.readlang.com/t/easier-way-to-sync-youtube-videos-beta/1073). I personally prefer to watch the video once without subtitles to practice my listening comprehension, so I don't use this feature. But if you prefer to watch the video and read the subtitles at the same time, you should follow this method.*
 ## The Problem: Proprietary Video Players
 
 The NPO Start website uses a proprietary video player that makes subtitle extraction far from straightforward. Unlike simple HTML5 video implementations, there's no obvious way to grab the subtitle files directly.  Even if I could access them, they'd be VTT files filled with timestamps and formatting that would need cleaning up before import.
