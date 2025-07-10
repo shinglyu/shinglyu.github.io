@@ -85,19 +85,19 @@ Claude remains my favorite for writing style—it produces the most natural, eng
 
 ### AI as a Creative Enabler
 
-**Delayed Decision-Making**: AI allowed me to postpone style decisions until later in the process. I could focus on content first, then systematically address formatting choices like capitalization, special term formatting, and voice consistency (first person vs. second person) across all chapters simultaneously. For example, I later realized that the AWS learning platform is stylelized as "AWS Skill Builder", but I used "AWS SkillBuilder", "SkillBuilder", "Skill Builder" interchangably. AI helped me make them consistent. I also need to change some chapter wrote by Gemini 2.0 in second person into first person, and change the tone to match the other chatpers.
+One of the most surprising discoveries was how AI enabled me to separate content creation from style decisions. Rather than wrestling with both simultaneously, I could focus entirely on getting my ideas down first, then systematically address formatting choices like capitalization, special term formatting, and voice consistency across all chapters. This delayed decision-making proved invaluable when I later realized inconsistencies in my terminology. For example, I had used "AWS SkillBuilder," "SkillBuilder," and "Skill Builder" interchangeably when the correct stylization is "AWS Skill Builder." AI helped me standardize these details efficiently across the entire manuscript. It also helped me change some chapters written by Gemini in second person tone into first person tone. 
 
-**Writer's Block Elimination**: Even on exhausting days after work, I could spend 10-15 minutes generating a chapter and reviewing a few paragraphs. Reviewing and editing proved much less mentally demanding than writing from scratch, especially important for non-native English speakers like myself.
+The collaboration also eliminated writer's block entirely. Even on exhausting days after work, I could spend just 10-15 minutes generating a chapter and reviewing a few paragraphs. This shift from writing to editing proved transformative, especially for non-native English speakers like myself who often get stuck on phrasing and structure rather than content. Reviewing and editing demanded far less mental energy than writing from scratch, allowing me to maintain momentum even when my creative reserves were low.
 
-**Administrative Task Automation**: AI excelled at the tedious but crucial tasks—writing descriptions, author bios, and category selections. These seemingly simple tasks often prove harder than writing the book itself due to length constraints and the need for persuasive, concise language.
+Perhaps most importantly, AI excelled at the tedious but crucial administrative tasks that often make book writing so painful. Writing compelling book descriptions, author bios, and category selections within strict length constraints proved surprisingly challenging—these seemingly simple tasks often feel harder than writing the book itself. The combination of length restrictions and the need for persuasive, concise language makes these tasks particularly difficult when you're already exhausted from the main writing process.
 
 ### AI vs. Human Editors
 
-**Technical Accuracy**: AI matches or exceeds human editors for grammar, typos, and formatting consistency. For technical books with code examples, AI significantly outperforms traditional typesetters who often mess up code formatting.
+When it comes to technical accuracy, AI consistently matches or exceeds human editors in catching grammar errors, typos, and formatting inconsistencies when there are many technical terms and very specific stylization. This advantage becomes even more pronounced for technical books with code examples (not this one, but I tried on others), where AI significantly outperforms traditional typesetters who frequently introduce errors in code formatting. The precision required for technical documentation makes AI's systematic approach particularly valuable.
 
-**Structural Feedback**: AI tends toward safe, conservative suggestions when acting as a developmental editor. Human insight remains valuable for bold structural decisions and creative direction.
+However, AI's strengths come with notable limitations in structural feedback. While AI provides reliable suggestions for surface-level improvements, it tends toward safe, conservative recommendations when acting as a developmental editor. Human insight remains crucial for bold structural decisions, creative direction, and understanding of the publishing market.
 
-**Cost and Speed**: With publishers increasingly outsourcing editing to lower-skilled overseas workers, AI offers comparable quality with better availability and consistency.
+The practical considerations of cost and speed further tip the balance toward AI collaboration. With many publishers increasingly outsourcing editing to lower-skilled overseas workers to reduce costs, AI offers comparable quality with significantly better availability and consistency. The traditional editing process can introduce delays and variability that AI partnerships eliminate, making the collaboration particularly attractive for self-published authors.
 
 ## Workflow Insights That Made the Difference
 
@@ -107,34 +107,25 @@ I fed Claude several blog posts I'd written manually and asked it to summarize m
 
 ### File-Based Progress Tracking
 
-I maintained all progress in simple text files:
-- **PROGRESS.txt**: Current status ("I'm currently reviewing chapter 2") with digital bookmarks using "<<<PROGRESS MARKER>>>"
+As mentioned before, I kept all the outline in text files, this helps the AI maintain the overall structure and flow I have in mind. 
+
+Although not realted to AI directly, I maintained all progress in simple text files:
+- **PROGRESS.txt**: Current status ("I'm currently reviewing chapter 2") with digital bookmarks using "PROGRESS MARKER" inserted into the place I left off. This allow me to get back into the flow much faster the next day. 
 - **TODO.txt**: Clear prompts written so AI could work through them systematically
 
 ### Meticulous Link and Reference Management
 
 One critical caveat: AI cannot be trusted with links or specific references. I learned to provide every URL, citation, and external reference explicitly. AI will hallucinate plausible-sounding but incorrect links.
 
-## Technical Challenges and Solutions
+### Agentic Limitations
 
-### Model Limitations
+Claude 4.0 with Cline occasionally give up when the context window grows larger. For example, when checking grammar across multiple chapters, it would process the first three thoroughly, then suggest "you can continue with chapters 4, 5, 6..." I learned to explicitly request "do it chapter by chapter" to ensure the agent go through each chapter.
 
-Claude 4.0 with Cline occasionally showed fatigue after processing several chapters. For example, when checking grammar across multiple chapters, it would process the first three thoroughly, then suggest "you can continue with chapters 4, 5, 6..." I learned to explicitly request "do it chapter by chapter" to ensure consistent quality.
-
-### The Outline-First Approach
-
-Starting with detailed outlines proved essential. This approach:
-- Maintains better control over information flow
-- Makes restructuring easier when needed
-- Prevents AI from meandering or losing focus
-- Allows for big-picture story adjustments
-
-However, outlines must be extremely specific about personal experiences and examples. Vague prompts lead to generic AI content that sounds artificial.
 
 ## Future Developments
 
 ### Audiobook Production
-I'm currently using Amazon Polly's long-form speech synthesis to generate an audiobook version. The proof-listening process is ongoing, but early results are promising for technical content.
+I'm currently using Amazon Polly's long-form speech synthesis to generate an audiobook version. The proof-listening process is ongoing, and I might release it as an extra on Leanpub.
 
 ### Content Expansion
 I'm considering adding a chapter on learning SageMaker, which presents unique challenges due to its different learning structure (notebooks, SDKs, MLOps workflows) compared to traditional AWS services.
@@ -144,7 +135,7 @@ A paperback print-on-demand version through Kindle Direct Publishing is under co
 
 ## The Bottom Line
 
-Writing a book with AI isn't about letting the machine do the work—it's about intelligent collaboration that amplifies your expertise while removing friction from the creative process. The key is maintaining intellectual ownership while leveraging AI's strengths: removing writer's block, handling administrative tasks, and enabling rapid iteration.
+Writing a book with AI isn't about letting the machine do the work. It's about intelligent collaboration that amplifies your expertise while removing friction from the creative process. The key is maintaining intellectual ownership while leveraging AI's strengths: removing writer's block, handling administrative tasks, and enabling rapid iteration.
 
 For technical authors especially, this approach offers a sustainable way to share knowledge without the crushing time investment that traditionally makes book writing prohibitive. The result isn't an AI-generated book, but a human-authored work that AI helped bring to life efficiently.
 
