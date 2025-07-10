@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Writing a Book with AI: My 5-Month Journey from Outline to Publication
+title: How I Wrote a Book with AI
 categories: Writing
 date: 2025-07-10 16:54:37 +02:00
 excerpt_separator: <!--more-->
