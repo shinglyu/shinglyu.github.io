@@ -2,7 +2,7 @@
 layout: post
 title: How I Wrote a Book with AI
 categories: Writing
-date: 2025-07-10 16:54:37 +02:00
+date: 2025-07-13 22:10:13 +02:00
 excerpt_separator: <!--more-->
 ---
 
