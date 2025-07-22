@@ -2,7 +2,7 @@
 layout: post
 title: Why the % Sign Breaks Your Website (And How to Fix It)
 categories: Web
-date: 2025-07-22 22:28:00 +02:00
+date: 2025-07-22 22:53:00 +02:00
 excerpt_separator: <!--more-->
 ---
 
