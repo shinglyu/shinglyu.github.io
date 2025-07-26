@@ -53,7 +53,7 @@ I'll walk you through a Hello World example for running Rust on Azure Fucntions,
 Before we begin, ensure you have the following installed:
 
 - **Azure Functions extension for VS Code**: Install from the VS Code marketplace.
-<<Insert /home/shinglyu/workspace/shinglyu.github.io/blog_assets/rust-serverless-azure-hello-world/azure-function-extension-marketplace.png>>
+![Azure Functions extension for VS Code]({{site_url}}/blog_assets/rust-serverless-azure-hello-world/azure-function-extension-marketplace.png)
 - **Rust toolchain**: I'm using Rustc 1.88.0.
 - **Azure Function Core Tools**: Essential for local testing
   - Follow the [official installation guide](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-python).  On Ubuntu, that means adding the apt repository and install with `apt install`
@@ -63,7 +63,7 @@ Before we begin, ensure you have the following installed:
 ### 1. Create Local Project
 
 We'll start by creating a new Azure Functions project using VS Code's integrated tooling. Open the VS Code command palette with `F1` and search for "Azure Functions: Create New Project".
-<<Insert /home/shinglyu/workspace/shinglyu.github.io/blog_assets/rust-serverless-azure-hello-world/vscode-create-project.png>>
+![VS Code create Azure Functions project]({{site_url}}/blog_assets/rust-serverless-azure-hello-world/vscode-create-project.png)
 When prompted for the language, select "Custom Handler" because Azure Functions doesn't have native Rust support yet. Custom handlers provide a way for Azure Functions to support any language that can run an HTTP server, which makes them perfect for languages like Go and Rust.
 
 Next, choose the "HTTP trigger" template since we want to create a simple web API endpoint that responds to HTTP requests. This is the most common trigger type and serves as an excellent starting point for learning Azure Functions.
@@ -71,7 +71,7 @@ Next, choose the "HTTP trigger" template since we want to create a simple web AP
 Name your function "HelloRust" to clearly identify it as a Rust-based function. Finally, set the authorization level to "Anonymous" so we can test the function easily without setting up authentication mechanisms during development.
 
 Once you are done, this is how it should look like:
-<<Insert /home/shinglyu/workspace/shinglyu.github.io/blog_assets/rust-serverless-azure-hello-world/project-created.png>>
+![Azure Functions project created in VS Code]({{site_url}}/blog_assets/rust-serverless-azure-hello-world/project-created.png)
 
 ### 2. Create and Build the Function Code
 
@@ -120,7 +120,7 @@ async fn main() {
 }
 ```
 
-**Critical Caveat**: Make sure to change the `warp::path("HelloRust")` to match your function name exactly, including the `/api/` prefix.
+**Caveat**: Make sure to change the `warp::path("HelloRust")` to match your function name. When you are testing later with cURL, the path you use must exactly match this declaration.
 
 Now we need to build our Rust application and place the executable where Azure Functions can find it. Build the release version for optimal performance and copy it to the project root:
 
@@ -276,8 +276,9 @@ Azure Functions supports different pricing models, called hosting options:
 - **Premium Plan**: Always-onVM, supports pre-warmed instances with more features than Dedicated Plan.
 
 There are also the Flex Consumption Plan and Container Apps.  I don't consider them because:
-* Flex Consumption Plan doesn't support custom handlers, so Rust isn't available on that plan.
-* Container Apps force you to build your code into containers. Since the focus of this series is on Serverless, I want to focus on Function-as-a-service abstration level rather than containers. 
+* **Flex Consumption Plan** doesn't support custom handlers, so Rust isn't available on that plan.
+* **Container Apps** force you to build your code into containers. Since the focus of this series is on Serverless, I want to focus on Function-as-a-service abstration level rather than containers. 
+
 You can learn more about these hosting options in the [documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale).
 
 The official tutorial suggests using a Premium hosting plan, but this isn't actually serverless because you pay for the underlying VM instances by the hour regardless of usage. For this hello world example, I chose the App Service plan (also called the Dedicated plan) instead for cost saving. It is similar to Premium's cost model but with fewer features. And also because that option is covered by the free credit in the specific sandbox Azure Subscription I'm experinementing on. 
@@ -299,13 +300,13 @@ You'll be prompted to fill in the required details:
 - **Basic authentication**: Disabled
 - **Application Insights**: Not enabled (consider enabling for production)
 
+This is just an setup that works for me for this small scale demo. It's not inteded for production use and it's probably not the most cost-efficient option.
+
 ![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-function-app-view.png)
 
 Once you've filled in the details, review and create the Function App. Wait for deployment to complete—Azure will show a confirmation when it's done.  
 ![](/blog_assets/rust-serverless-azure-hello-world/function-app-deployment-complete.png)
 
-After deployment, open your new Function App to see the overview.  
-![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-single-function-view.png)
 
 
 ## Deploying Your Rust Function to Azure
@@ -333,9 +334,9 @@ Here's the catch: the Azure Functions extension's default template defines both 
 
 In the portal, navigate to your Function App, and select the Hello Rust function, 
 ![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-function-app-view.png)  
-![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-single-function-view.png)  
+![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-single-function-view.png)
 
-Then click on the "Test/Run" tab. Here you can specify the HTTP method, set query parameters, and send requests directly to your deployed function—making it easy to verify GET endpoints and see the actual output.  
+Then click on the "Test/Run" button. Here you can specify the HTTP method, set query parameters, and send requests directly to your deployed function—making it easy to verify GET endpoints and see the actual output.  
 ![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-test.png)  
 ![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-test-output.png)
 
@@ -361,8 +362,8 @@ This tutorial covered the basics, but there's much more to explore in the server
 - **Disaster Recovery**: Multi-region setups with Traffic Manager
 
 My readers also [suggested](https://www.linkedin.com/feed/update/urn:li:activity:7353725719459307521/):
-- Integration with MongoDB Atlas 
-- Serverless Rust via WASM
+- Integration with MongoDB Atlas, for advanced features like Hybrid Search (vector + full-text search).
+- Serverless Rust via WASM, for switching programming languaguage but keep the deployed software the same.
 
 Send me an email to DM me on LinkedIn if you have any other suggestions!
 
