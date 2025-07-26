@@ -6,8 +6,6 @@ date: 2025-07-25 22:11:00 +08:00
 excerpt_separator: <!--more-->
 ---
 
-# TODO: Blur any Azure accoutn number in the images
-
 This is the first post in my new series on serverless Rust on Azure. We'll start simple by following the official Azure tutorial, with my notes on the caveats and tweaks I've made along the way. Having worked with AWS for the past 6 years, I'll also highlight key differences from AWS Lambda.
 
 You can find the complete code on GitHub: [https://github.com/shinglyu/serverless-rust-on-azure](https://github.com/shinglyu/serverless-rust-on-azure).
