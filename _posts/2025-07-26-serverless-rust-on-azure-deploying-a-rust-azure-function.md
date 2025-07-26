@@ -2,7 +2,7 @@
 layout: post
 title: "Serverless Rust on Azure: Deploying a Rust Azure Function"
 categories: Web
-date: 2025-07-25 22:11:00 +08:00
+date: 2025-07-26 21:49:05 +02:00
 excerpt_separator: <!--more-->
 ---
 
@@ -10,11 +10,11 @@ This is the first post in my new series on serverless Rust on Azure. We'll start
 
 You can find the complete code on GitHub: [https://github.com/shinglyu/serverless-rust-on-azure](https://github.com/shinglyu/serverless-rust-on-azure).
 
+<!--more-->
 
 ## Why Rust for Serverless?
 
-Before diving into the implementation, let's explore why Rust makes an excellent choice for serverless functions. I assume you already have some idea on waht Rust and serverless are. If not, read the [Why Rust](https://www.rust-lang.org/) page and [Azure documentation](https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree) and focus on Azure Functions on that page. 
-<!--more-->
+Before diving into the implementation, let's explore why Rust makes an excellent choice for serveless functions. I assume you already have some idea on what Rust and serverless are. If not, read the [Why Rust](https://www.rust-lang.org/) page and [Azure documentation](https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree) and focus on Azure Functions on that page. 
 
 ### General Benefits of Rust
 
@@ -48,7 +48,7 @@ Azure Functions offers different hosting plans. Some are truly serverless with p
 
 ## Prerequisites and Setup
 
-I'll walk you through a Hello World example for running Rust on Azure Fucntions, following the [official Microsoft guide](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-other?tabs=rust%2Clinux) with my real-world insights.
+I'll walk you through a Hello World example for running Rust on Azure Functions, following the [official Microsoft guide](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-other?tabs=rust%2Clinux) with my real-world insights.
 
 Before we begin, ensure you have the following installed:
 
@@ -248,7 +248,7 @@ target
 Before we can deploy the Rust code to Azure, we need to first create a Azure Function App to host the Azure Function. Let's first take a look at what Azure Function App is and how it works
 
 #### Understanding Azure Function App Architecture
-Before we learn about how to deploy the Auure Function 
+Before we learn about how to deploy the Azure Function 
 Let me explain the hierarchy with a diagram:
 
 ```mermaid
@@ -273,15 +273,15 @@ An Azure Function App is a container for multiple individual functions that shar
 Azure Functions supports different pricing models, called hosting options:
 - **Consumption Plan**: True pay-per-execution (like AWS Lambda).
 - **Dedicated Plan**: Traditional always-on VMs. Also known as the App Service Plan.
-- **Premium Plan**: Always-onVM, supports pre-warmed instances with more features than Dedicated Plan.
+- **Premium Plan**: Always-on VM, supports pre-warmed instances with more features than Dedicated Plan.
 
 There are also the Flex Consumption Plan and Container Apps.  I don't consider them because:
 * **Flex Consumption Plan** doesn't support custom handlers, so Rust isn't available on that plan.
-* **Container Apps** force you to build your code into containers. Since the focus of this series is on Serverless, I want to focus on Function-as-a-service abstration level rather than containers. 
+* **Container Apps** force you to build your code into containers. Since the focus of this series is on Serverless, I want to focus on Function-as-a-service abstraction level rather than containers. 
 
 You can learn more about these hosting options in the [documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale).
 
-The official tutorial suggests using a Premium hosting plan, but this isn't actually serverless because you pay for the underlying VM instances by the hour regardless of usage. For this hello world example, I chose the App Service plan (also called the Dedicated plan) instead for cost saving. It is similar to Premium's cost model but with fewer features. And also because that option is covered by the free credit in the specific sandbox Azure Subscription I'm experinementing on. 
+The official tutorial suggests using a Premium hosting plan, but this isn't actually serverless because you pay for the underlying VM instances by the hour regardless of usage. For this hello world example, I chose the App Service plan (also called the Dedicated plan) instead for cost saving. It is similar to Premium's cost model but with fewer features. And also because that option is covered by the free credit in the specific sandbox Azure Subscription I'm experimenting on. 
 
 #### Deployment Configuration
 
@@ -300,7 +300,7 @@ You'll be prompted to fill in the required details:
 - **Basic authentication**: Disabled
 - **Application Insights**: Not enabled (consider enabling for production)
 
-This is just an setup that works for me for this small scale demo. It's not inteded for production use and it's probably not the most cost-efficient option.
+This is just a setup that works for me for this small scale demo. It's not intended for production use and it's probably not the most cost-efficient option.
 
 ![](/blog_assets/rust-serverless-azure-hello-world/azure-portal-function-app-view.png)
 
@@ -320,7 +320,7 @@ Select the function app you just created in the Azure Portal. VS Code will warn 
 Once you confirm, VS Code will start uploading your code and assets to Azure.  
 ![](/blog_assets/rust-serverless-azure-hello-world/vs-code-function-deploying.png)
 
-And once you seee the green check mark, your code is running on Azure!
+And once you see the green check mark, your code is running on Azure!
 ![](/blog_assets/rust-serverless-azure-hello-world/vs-code-deployment-finish.png)
 
 
@@ -348,7 +348,7 @@ This tutorial covered the basics, but there's much more to explore in the server
 
 ### Advanced Use Cases
 - **API backed by CosmosDB**: Database integration
-- **Blob Storage**: React on file uploads; Write files to Blog Storage
+- **Blob Storage**: React on file uploads; Write files to Blob Storage
 - **Timer Functions**: Scheduled background tasks
 - **Event-driven Architectures**: Queues, Event Grid, etc. 
 - **Orchestration**: Durable Function
@@ -363,7 +363,7 @@ This tutorial covered the basics, but there's much more to explore in the server
 
 My readers also [suggested](https://www.linkedin.com/feed/update/urn:li:activity:7353725719459307521/):
 - Integration with MongoDB Atlas, for advanced features like Hybrid Search (vector + full-text search).
-- Serverless Rust via WASM, for switching programming languaguage but keep the deployed software the same.
+- Serverless Rust via WASM, for switching programming language but keep the deployed software the same.
 
 Send me an email to DM me on LinkedIn if you have any other suggestions!
 
