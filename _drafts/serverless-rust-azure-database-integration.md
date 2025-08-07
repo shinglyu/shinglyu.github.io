@@ -14,23 +14,32 @@ In my [previous post]({{site.url}}/blog/2025/07/26/serverless-rust-on-azure-depl
 
 Before diving into code, let's establish what we're building. Our fictional bakery needs a digital ordering system where:
 
-- Customers can place custom cake orders with specific styles and pickup dates
-- Each order tracks customer information, custom text, and cake specifications
-- The shop needs RESTful endpoints for future web and mobile app integration
-- Orders persist in a database for inventory management and fulfillment tracking
+- Bakery staff can create custom cake orders taken from counter or phone customers
+- Each order tracks customer information, custom text to be printed on the cake, and cake style selections
+- Staff can view and manage all orders for fulfillment tracking
+- Orders persist in a database for inventory management and operational workflows
+
+Note: We're not implementing user authentication or authorization in this tutorial - that's a topic for future posts. This API is designed for internal bakery operations.
 
 This scenario showcases real-world serverless patterns: event-driven APIs, NoSQL data modeling, input validation, and stateless request handling. It's complex enough to demonstrate production considerations while remaining approachable for learning.
 
 You can find the complete code on GitHub: [https://github.com/shinglyu/serverless-rust-on-azure/tree/api-with-db](https://github.com/shinglyu/serverless-rust-on-azure/tree/api-with-db).
 
+## API Design
+%%% write about the API schema and explain their rationale
+
 ## Understanding Azure Functions for Multi-Endpoint APIs
 
-Before we start coding, let's understand a crucial architectural difference between Azure Functions and other serverless platforms.
+In the previous post, there is only one API endpoint, but for this use case, we need multiple APi endpoints. Before we start coding, let's understand how Azure Functions differs from AWS Lambda in handling multi-endpoint APIs.
 
 ### The One-Binary, Multiple-Functions Model
 
 Unlike AWS Lambda where each function is typically a separate deployment unit, Azure Functions with custom handlers works differently:
 
+%%% Insert Microsoft documentation diagrm here
+%%% Explain that in the dedicated plan, there is one Function Host in each underlying App Service Plan VM instacne and they talk to one WEb server
+
+Conceptually, you can think of this as: 
 ```mermaid
 flowchart TB
     subgraph "Azure Function App"
@@ -57,18 +66,15 @@ flowchart TB
 
 **Key insights:**
 
-1. **Shared Code Base**: All your functions run in the same binary, sharing database connections, validation logic, and business rules.
+1. **Shared Code Base**: All your functions' code are in the same binary, and they run as one Warp web server. 
 2. **No Function Isolation**: Unlike Lambda's separate execution contexts, your functions share memory and state within the same process.
 3. **Configuration-Based Routing**: `function.json` files define HTTP routes and triggers, but your Rust code handles the actual request processing.
 
-This architecture has significant advantages for database-backed APIs:
-- **Connection Pooling**: Share expensive database connections across all endpoints
-- **Shared Validation**: Reuse input validation and business logic
-- **Consistent Error Handling**: Centralized error responses and logging
+This means the "Function" in an Azure Function App are more of a logical construct that has a route and trigger configuration, but not actually separate deployment units. Your custom handler is just a normal web server with multiple routes. So the common web server best practices like using share database connection, extract shared code (e.g. validation, payload formatting) into reusable modules applys here. 
 
-## Database Choice: Azure Cosmos DB Emulator
+## Database Choice: Azure Cosmos DB (Emulator)
 
-For this tutorial, we'll use Azure Cosmos DB with the local emulator. Cosmos DB is Microsoft's globally distributed, multi-model database service that fits perfectly with serverless architectures.
+For this tutorial, we'll use Azure Cosmos DB with the local emulator. Cosmos DB is Microsoft's globally distributed, multi-model database service that fits perfectly with serverless architectures. 
 
 ### Why Cosmos DB for Serverless?
 
@@ -76,15 +82,15 @@ For this tutorial, we'll use Azure Cosmos DB with the local emulator. Cosmos DB 
 
 **Global Distribution**: Built-in multi-region replication with configurable consistency levels, ideal for global serverless applications.
 
-**Multiple APIs**: Support for SQL, MongoDB, Cassandra, and Gremlin APIs, giving you flexibility in data modeling.
+**Multiple APIs**: Support for NoSQL, MongoDB, Cassandra, and Gremlin APIs, giving you flexibility in data modeling.
 
-**Serverless Pricing**: Request unit (RU) based billing aligns with function-based compute costs.
+**Serverless Pricing**: Request unit (RU) based billing.
 
 ### Local Development Setup
 
 For this tutorial, we'll focus entirely on local development using the Cosmos DB emulator. This approach lets us:
 - Develop without Azure account costs
-- Work offline with consistent performance
+- Work offline and experiment with quick iterations
 - Test database scenarios without cloud connectivity issues
 
 *Cloud deployment and production configuration will be covered in the next post in this series.*
@@ -117,6 +123,7 @@ The key additions are:
 - `chrono`: For handling dates and timestamps with proper serialization
 
 ### Data Model Design
+%%% Maybe split this section and mention these data models when we actually use them in the API
 
 Our order system uses two main structures:
 
@@ -153,6 +160,8 @@ pub struct CreateOrderRequest {
     pub pickup_date: DateTime<Utc>,
 }
 ```
+The Order struct maps to the CosmosDB "schema" (although it's technically schemaless), and the CreateOrderRequest is used as the input format for the POST /api/orders endpoint.
+
 
 **Design decisions explained:**
 
@@ -162,6 +171,8 @@ pub struct CreateOrderRequest {
 
 3. **Separate Request/Response Types**: `CreateOrderRequest` doesn't include generated fields like `id`, `status`, or `created_at`, enforcing proper API boundaries.
 
+%%% Mention how to setup CosmoDB emulator on a high level using Linux + Docker (https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&pivots=api-nosql), don't go into line by line but mention the user can reference the documentation.
+<!--PROGRESS MARKER-->
 ### Database Connection Setup
 
 Setting up the Cosmos DB connection requires handling authentication and client initialization:
@@ -708,18 +719,26 @@ This tutorial covered the fundamentals of building database-backed serverless AP
 
 ### Coming in the Next Post
 - **Cloud Cosmos DB deployment** with proper authentication and networking
+- **User authentication and authorization** with Azure Active Directory
 - **Production configuration** for security, monitoring, and performance
 - **CI/CD pipeline setup** for automated testing and deployment
 - **Multi-environment management** for dev, staging, and production
 
-### Advanced Topics to Explore
-- **Authentication and authorization** with Azure Active Directory
+### Future Work
+
+**Business Features:**
+- **Upload custom images** to be printed on the cake using Azure Blob Storage
+- **Change order status** with endpoints for updating order workflow states (pending, in-progress, ready, completed)
+- **Customer-facing API** with proper authentication for online ordering
+- **Inventory management** integration to track cake ingredients and availability
+
+**Technical Enhancements:**
 - **Structured logging and monitoring** with Application Insights
 - **Error tracking and alerting** for production reliability
 - **Performance optimization** and cost management strategies
 - **Multi-region deployment** for global availability
 
-### Architecture Evolution
+**Architecture Evolution:**
 - **Event-driven patterns** with Azure Service Bus and Event Grid
 - **File processing** with Azure Blob Storage triggers
 - **Scheduled functions** for background processing
