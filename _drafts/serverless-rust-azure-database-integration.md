@@ -8,6 +8,7 @@ excerpt_separator: <!--more-->
 
 In my [previous post]({{site.url}}/blog/2025/07/26/serverless-rust-on-azure-deploying-a-rust-azure-function.html), we deployed a simple "Hello World" Rust function to Azure. Now we're ready to build something production-worthy: a database-backed REST API that handles real business logic. We'll create a cake ordering system for a local bakery, complete with data persistence, input validation, and proper error handling.
 
+![Business Case]({{site_url}}/blog_assets/rust-serverless-azure-db/business_case.png)
 <!--more-->
 
 ## The Business Case: Sweet API Solutions
@@ -19,7 +20,10 @@ Before diving into code, let's establish what we're building. Our fictional bake
 - Staff can view and manage all orders for fulfillment tracking
 - Orders persist in a database for inventory management and operational workflows
 
+![Cake]({{site_url}}/blog_assets/rust-serverless-azure-db/cake.png)
+
 Note: We're not implementing user authentication or authorization in this tutorial - that's a topic for future posts. This API is designed for internal bakery operations.
+
 
 This scenario showcases real-world serverless patterns: event-driven APIs, NoSQL data modeling, input validation, and stateless request handling. It's complex enough to demonstrate production considerations while remaining approachable for learning.
 
@@ -64,7 +68,7 @@ flowchart TB
             Router[Azure Functions Host Router]
         end
         subgraph "Your Custom Handler"
-            Binary[Single Rust Binary/HTTP Server]
+            Binary[Single Rust Binary containing the web server]
         end
         subgraph "Function Definitions"
             F1["/Orders/function.json<br/>POST /api/orders"]
@@ -81,7 +85,7 @@ flowchart TB
     F3 --> Binary
 ```
 
-**Key insights:**
+Notice a few things here:
 
 1. **Shared Code Base**: All your functions' code are in the same binary, and they run as one Warp web server. 
 2. **No Function Isolation**: Unlike Lambda's separate execution contexts, your functions share memory and state within the same process.
@@ -191,7 +195,7 @@ Now that we've configured how Azure Functions will route requests to our applica
 
 ## Database Choice: Azure Cosmos DB (Emulator)
 
-For this tutorial, we'll use Azure Cosmos DB with the local emulator. Cosmos DB is Microsoft's globally distributed, multi-model database service that fits perfectly with serverless architectures.
+For this tutorial, we'll use [Azure Cosmos DB](https://azure.microsoft.com/en-us/products/cosmos-db/) with the local emulator. Cosmos DB is Microsoft's globally distributed, multi-model database service that fits perfectly with serverless architectures.
 
 ### Understanding Cosmos DB Architecture
 
@@ -224,7 +228,7 @@ For this tutorial, we're using Cosmos DB's NoSQL API because it's the most matur
 
 ### Local Development Setup
 
-For this tutorial, we'll focus entirely on local development using the Cosmos DB emulator. This approach lets us:
+For this tutorial, we'll focus entirely on local development using the [Cosmos DB emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/emulator). This approach lets us:
 - Develop without Azure account costs
 - Work offline and experiment with quick iterations
 - Test database scenarios without cloud connectivity issues
@@ -253,11 +257,11 @@ futures-util = "0.3.31"
 The key additions are:
 - `azure_data_cosmos`: Official Azure Cosmos DB SDK for Rust
 - `uuid`: For generating unique order IDs
-- `chrono`: For handling dates and timestamps with proper serialization
+- `chrono`: For handling dates and timestamps with proper serialization. Remember to enable the `serde` feature so we can use the `with = "chrono::serde::ts_seconds"` to automatically convert the time to Unix epoch seconds.
 
 ### Cosmos DB Emulator Setup
 
-Before implementing our data models, you'll need to set up the Cosmos DB emulator for local development. The emulator runs in a Docker container on Linux systems. You can follow the [official Microsoft documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&pivots=api-nosql) for detailed setup instructions.
+Before implementing our data models, you'll need to set up the [Cosmos DB emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/emulator) for local development. The emulator runs in a Docker container on Linux systems. You can follow the [official Microsoft documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&pivots=api-nosql) for detailed setup instructions.
 
 The basic setup involves pulling the Docker image and running it with the appropriate port mappings and SSL certificate configuration. Once running, the emulator provides a local endpoint at `https://localhost:8081` that mimics the cloud Cosmos DB service. You can access the web-based data explorer at `https://localhost:8081/_explorer/index.html` to manage your databases and containers through a GUI.
 
@@ -324,44 +328,113 @@ Now that we've configured our function definitions, let's implement the actual A
 Here's the skeleton structure showing how our three endpoints work together:
 
 ```rust
-use warp::Filter;
+#[tokio::main]
+async fn main() {
+    use std::convert::Infallible;
 
-// Main server setup with three routes
-let routes = create_order_route
-    .or(get_orders_route)
-    .or(get_order_by_id_route);
+    // Create shared Cosmos DB container client
+    // ... will be explained in a later section
+    let container_client = Arc::new(database_client.container_client(COSMOS_CONTAINER_NAME));
 
-// POST /api/orders - Create new order
-let create_order_route = warp::post()
-    .and(warp::path("api"))
-    .and(warp::path("orders"))
-    .and(warp::body::json())
-    .and(database_filter.clone())
-    .and_then(create_order_handler);
+    // Filter to inject shared container_client. Will be explained in a later section.
+    let database_filter = warp::any().map({
+        let container_client = Arc::clone(&container_client);
+        move || Arc::clone(&container_client)
+    });
 
-// GET /api/orders - List all orders  
-let get_orders_route = warp::get()
-    .and(warp::path("api"))
-    .and(warp::path("orders"))
-    .and(warp::path::end())
-    .and(database_filter.clone())
-    .and_then(get_orders_handler);
+    let create_order = warp::post()
+        .and(warp::path("api"))
+        .and(warp::path("orders"))
+        .and(warp::body::json())
+        .and(database_filter.clone())
+        .and_then(
+            |req: CreateOrderRequest, container_client: Arc<ContainerClient>| async move {
+                // ... create an order and insert it into the database
+            },
+        );
 
-// GET /api/orders/{id} - Get specific order
-let get_order_by_id_route = warp::get()
-    .and(warp::path("api"))
-    .and(warp::path("orders"))
-    .and(warp::path::param::<String>())
-    .and(warp::path::end())
-    .and(database_filter.clone())
-    .and_then(get_order_by_id_handler);
+    let get_orders = warp::get()
+        .and(warp::path("api"))
+        .and(warp::path("orders"))
+        .and(warp::path::end())
+        .and(database_filter.clone())
+        .and_then(|container_client: Arc<ContainerClient>| async move {
+            // ... list all orders from the database
+        });
+
+    let get_order = warp::get()
+        .and(warp::path("api"))
+        .and(warp::path("orders"))
+        .and(warp::path::param::<String>()) // id
+        .and(warp::path::end())
+        .and(database_filter.clone())
+        .and_then(|id: String, container_client: Arc<ContainerClient>| async move {
+            // ... get the details of one order from the database
+        });
+
+    let routes = create_order.or(get_orders).or(get_order);
+    
+    //...
+
+    warp::serve(routes).run((Ipv4Addr::LOCALHOST, port)).await
+}
 ```
 
-This structure demonstrates the power of Warp's filter composition - each route shares the same `database_filter` for dependency injection while handling different HTTP methods and path patterns. Let's implement each endpoint in detail.
+You can clearly see 3 endpoints being defined. 
+
 
 ### POST /api/orders - Creating Orders
 
-The order creation endpoint demonstrates input validation, business logic, and database interaction. Here's the actual implementation from our GitHub repository:
+The order creation endpoint demonstrates input validation, business logic, and database interaction. Before looking at the implementation, let's define the data structures we'll be working with:
+
+```rust
+use serde::{Deserialize, Serialize};
+use chrono::{DateTime, Utc};
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct Order {
+    #[serde(rename = "id")]
+    pub id: String, // Cosmos DB requires this field name exactly
+    #[serde(rename = "customerId")]
+    pub customer_id: String,
+    #[serde(rename = "customText")]
+    pub custom_text: String,
+    #[serde(rename = "cakeStyle")]
+    pub cake_style: String,
+    pub status: String,
+    #[serde(rename = "createdAt", with = "chrono::serde::ts_seconds")]
+    pub created_at: DateTime<Utc>,
+    #[serde(rename = "pickupDate", with = "chrono::serde::ts_seconds")]
+    pub pickup_date: DateTime<Utc>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateOrderRequest {
+    #[serde(rename = "customerId")]
+    pub customer_id: String,
+    #[serde(rename = "customText")]
+    pub custom_text: String,
+    #[serde(rename = "cakeStyle")]
+    pub cake_style: String,
+    #[serde(rename = "pickupDate", with = "chrono::serde::ts_seconds")]
+    pub pickup_date: DateTime<Utc>,
+}
+```
+
+The `CreateOrderRequest` represents the incoming JSON data from the client, while `Order` represents the complete record we store in Cosmos DB (including generated fields like `id`, `status`, and `created_at`).
+
+The Order struct maps to the CosmosDB "schema" (although it's technically schemaless), and the CreateOrderRequest is used as the input format for the POST /api/orders endpoint.
+
+**Design decisions explained:**
+
+1. **Serde Renaming**: The `#[serde(rename = "...")]` attributes ensure our Rust snake_case fields map to camelCase JSON, following JavaScript conventions for API consistency.
+
+2. **Timestamp Handling**: Using `chrono::serde::ts_seconds` converts between Rust's `DateTime<Utc>` and Unix timestamp integers in JSON.
+
+3. **Separate Request/Response Types**: `CreateOrderRequest` doesn't include generated fields like `id`, `status`, or `created_at`, enforcing proper API boundaries.
+
+
+Now we cain finally implement the business logic for `POST /api/orders`. Here's the actual implementation from our GitHub repository:
 
 ```rust
 let create_order = warp::post()
@@ -423,11 +496,25 @@ let create_order = warp::post()
     );
 ```
 
-**Key implementation details:**
 
-- **Partition Key Strategy**: Using `customer_id` as the partition key distributes orders across multiple physical partitions for better performance.
-- **Upsert vs Insert**: Using `upsert_item()` instead of `create_item()` handles potential duplicate requests gracefully.
-- **Error Conversion**: The `Infallible` return type means our handler never panics, converting all errors to proper HTTP responses.
+
+**Understanding the Operation Flow:**
+
+This endpoint follows a clear sequence of operations:
+
+1. **Input Validation**: We validate the incoming `CreateOrderRequest` for UUID format, text constraints, and business rules (valid cake styles).
+
+2. **Database Payload Construction**: We generate server-side fields (`id`, `status`, `created_at`) and construct the complete `Order` object that will be stored.
+
+3. **Database Upsert**: The critical operation here is `container_client.upsert_item()` - this safely inserts the order into Cosmos DB using the customer ID as the partition key.
+
+4. **Error Handling**: We convert database errors into proper HTTP responses, ensuring the API never panics and always returns meaningful error messages.
+
+
+The choice to have `customerId` as partition key is not immediately obvious. This is designed for future query patterns. First of all, customerId (a UUID) will distribute the items evenly, and later when we expose customer-facing APIs, most customers will most likely query their own orders, so we can use the `customerId` to make single-parition queries, improving the performance. For the bakery staff, they need to do a full scan to get all the orders anyway, so it will always be a cross-partition query. 
+
+Next we'll explained how the `database_client` are created, and how they are made available to this function. 
+
 
 ### Database Connection Setup
 
@@ -455,24 +542,25 @@ let database_client = client.database_client(COSMOS_DB_NAME);
 let container_client = Arc::new(database_client.container_client(COSMOS_CONTAINER_NAME));
 ```
 
-**Key architectural choices:**
+**Authentication with the Cosmos DB Emulator:**
 
-- **Arc Wrapping**: We wrap the `ContainerClient` in `Arc` (Atomically Reference Counted) to safely share the database connection across multiple request handlers.
-- **Environment Variables**: Database credentials come from environment variables, following twelve-factor app principles. Note that using static keys is appropriate for local development with the emulator, but in production we should implement proper Azure Entra ID authentication for security.
+The Cosmos DB emulator uses a [well-known authentication key](https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication) for local development. This key is the same for all emulator installations:
 
-## Shared State Management
+```
+C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
+```
 
-Azure Functions' custom handler model enables sharing expensive resources across multiple requests due to the single-process architecture we discussed earlier. Database connections are prime candidates for this optimization approach.
+While this key is publicly known and meant only for local development, we still store it in an environment variable for consistency with production security practices. In your `local.settings.json`, you would set:
 
-### The Connection Pooling Challenge
+```json
+{
+  "Values": {
+    "COSMOS_EMULATOR_KEY": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
+  }
+}
+```
 
-Creating new database connections for every request is expensive:
-- Network handshake overhead
-- Authentication processing
-- Connection establishment latency
-- Resource cleanup costs
-
-In a serverless environment where you pay for execution time, these costs add up quickly.
+This approach maintains the same authentication pattern you'll use in production (environment variables), making the transition to cloud deployment seamless.
 
 ### Arc-based Shared State
 
@@ -523,60 +611,13 @@ The `database_filter.clone()` creates a new filter that injects the same shared 
 
 This shared state approach provides significant performance improvements:
 - **Reduced Cold Start Time**: Connection established once, not per request
-- **Lower Memory Usage**: Single connection pool instead of per-request connections
-- **Better Throughput**: Eliminated connection establishment overhead
+- **Lower Memory Usage**: Single connection instead of per-request connections
+- **Better Throughput**: Eliminated connection establishment overhead during endpoint processing. The connection has already been created.
 - **Cost Efficiency**: Reduced execution time directly translates to lower serverless costs
-
-### Data Model Design
-
-Our order system uses two main structures:
-
-```rust
-use serde::{Deserialize, Serialize};
-use chrono::{DateTime, Utc};
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Order {
-    #[serde(rename = "id")]
-    pub id: String, // Cosmos DB requires this field name exactly
-    #[serde(rename = "customerId")]
-    pub customer_id: String,
-    #[serde(rename = "customText")]
-    pub custom_text: String,
-    #[serde(rename = "cakeStyle")]
-    pub cake_style: String,
-    pub status: String,
-    #[serde(rename = "createdAt", with = "chrono::serde::ts_seconds")]
-    pub created_at: DateTime<Utc>,
-    #[serde(rename = "pickupDate", with = "chrono::serde::ts_seconds")]
-    pub pickup_date: DateTime<Utc>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct CreateOrderRequest {
-    #[serde(rename = "customerId")]
-    pub customer_id: String,
-    #[serde(rename = "customText")]
-    pub custom_text: String,
-    #[serde(rename = "cakeStyle")]
-    pub cake_style: String,
-    #[serde(rename = "pickupDate", with = "chrono::serde::ts_seconds")]
-    pub pickup_date: DateTime<Utc>,
-}
-```
-The Order struct maps to the CosmosDB "schema" (although it's technically schemaless), and the CreateOrderRequest is used as the input format for the POST /api/orders endpoint.
-
-**Design decisions explained:**
-
-1. **Serde Renaming**: The `#[serde(rename = "...")]` attributes ensure our Rust snake_case fields map to camelCase JSON, following JavaScript conventions for API consistency.
-
-2. **Timestamp Handling**: Using `chrono::serde::ts_seconds` converts between Rust's `DateTime<Utc>` and Unix timestamp integers in JSON.
-
-3. **Separate Request/Response Types**: `CreateOrderRequest` doesn't include generated fields like `id`, `status`, or `created_at`, enforcing proper API boundaries.
 
 ### GET /api/orders - Listing All Orders
 
-The list endpoint demonstrates query execution and result aggregation. Here's the actual implementation from our GitHub repository:
+The list endpoint demonstrates query execution and result aggregation. It's has much less input validation, and just a simple `SELECT ... FROM` query:
 
 ```rust
 let get_orders = warp::get()
@@ -605,11 +646,11 @@ let get_orders = warp::get()
 
 **Cross-Partition Query Gotcha**: The Rust SDK documentation suggests that cross-partition queries aren't fully supported, but they actually work when you pass `()` as the partition key parameter. This allows the query to scan across all partitions to retrieve orders from different customers. However, be aware that cross-partition queries consume more RUs and have higher latency than single-partition queries.
 
-This implementation uses Cosmos DB's SQL-like query syntax to retrieve all orders. The paged result handling ensures we collect all orders regardless of result set size.
+This implementation uses Cosmos DB's SQL-like query syntax to retrieve all orders. The paged result handling ensures we collect all orders regardless of result set size. We haven't implmeneted pagination yet. Pagination will be implemented for future posts. For now, be careful not to create too many orders, otherwise your `GET /api/orders` query will be very slow.
 
 ### GET /api/orders/{id} - Single Order Retrieval
 
-The single order endpoint shows parameterized queries and proper error handling. Here's the actual implementation from our GitHub repository:
+The single order endpoint shows parameterized queries and proper error handling:
 
 ```rust
 // NOTE: This endpoint is slow because it scans all partitions for the order id.
@@ -674,7 +715,7 @@ Production APIs require robust input validation and security measures. Our cake 
 We implement validation at three levels:
 1. **Type-level validation**: Rust's type system prevents basic errors
 2. **Format validation**: Check data formats (UUIDs, ASCII text, length limits)
-3. **Business rule validation**: Enforce domain-specific constraints
+3. **Business rule validation**: Enforce domain-specific constraints. We hard-code the cake styles for now for simplicity, but in the future we might be able to get a list of cake style from a database so we can update them.
 
 ### Validation Implementation
 
@@ -705,7 +746,7 @@ fn is_valid_cake_style(style: &str) -> bool {
 
 ### Applying Validation in Handlers
 
-The validation functions integrate directly into our endpoint handlers:
+The validation functions integrate directly into our endpoint handlers, which you might have already noticed in the `POST /api/orders` implementation:
 
 ```rust
 // In create_order_handler:
@@ -753,7 +794,7 @@ let query = azure_data_cosmos::Query::from("SELECT * FROM c WHERE c.id = @id")
     .with_parameter("@id", &id)?;
 ```
 
-The `.with_parameter()` method properly escapes and validates the input, making injection attacks impossible. See the [documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/query/parameterized-queries) to learn more about parameterized queries.
+The `.with_parameter()` method properly escapes and validates the input, making injection attacks harder. See the [documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/query/parameterized-queries) to learn more about parameterized queries.
 
 With our API implementation complete and security measures in place, it's time to verify that everything works as expected. Testing database-backed APIs requires both manual verification and automated testing to ensure the HTTP interface and database interactions function correctly together.
 
@@ -763,7 +804,25 @@ Testing database-backed APIs requires a different approach than testing pure fun
 
 ### Local Testing Setup
 
-First, ensure you have the Cosmos DB emulator running and configure your environment:
+First, ensure you have the Cosmos DB emulator running:
+
+```bash
+podman run \
+    --publish 8081:8081 \
+    --publish 10250-10255:10250-10255 \
+    --name cosmosdb-linux-emulator \
+    --detach \
+    --replace \
+    mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+```
+**Important: TLS Certificate Setup Required**
+
+The Cosmos DB emulator uses HTTPS endpoints and requires proper TLS certificate configuration to work correctly. You'll need to install and trust the emulator's self-signed certificate on your system before your application can connect successfully. Without this step, you'll encounter SSL/TLS connection errors. What you'll most likely see is that the API request takes very long, then you recieve a database connection timeout error.
+
+You can find detailed instructions for installing the TLS certificate and setting up authentication in the [official Microsoft documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&pivots=api-nosql). The documentation covers different platforms and includes the essential certificate installation steps that ensure secure connections between your application and the emulator.
+
+    
+Then crate a copy of local.setting.json from the template and fill in the `COSMOS_EMULATOR_KEY`:
 
 ```bash
 # Set up local.settings.json
@@ -787,7 +846,7 @@ func start
 
 ### Manual Testing with curl
 
-Test the complete order lifecycle:
+You can test with cURL commands: 
 
 ```bash
 # Create a new order
@@ -807,9 +866,11 @@ curl "http://localhost:7071/api/orders"
 curl "http://localhost:7071/api/orders/[order-id-here]"
 ```
 
+But using cURL means you have to validate the response yourself, so to automate the result checking part, we can write an integration test using Rust's built-in test framework.
+
 ### Integration Testing with Rust
 
-For automated testing, we can use the `reqwest` crate together with Rust's built-in test runner to test our API. Here's an example from our GitHub repository:
+For integration testing, we can use the `reqwest` crate together with Rust's built-in test runner to test our API. Here's an example from our GitHub repository:
 
 ```rust
 use reqwest::Client;
@@ -847,6 +908,20 @@ cargo test --test api_integration
 ```
 
 
+## Conclusion
+
+Building database-backed serverless APIs with Rust on Azure demonstrates the power of combining modern systems programming languages with cloud-native architectures. This tutorial moved us from simple HTTP responses to a fully functional, persistent API service that handles real business logic.
+
+Key takeaways from this tutorial:
+
+**Database Integration**: We successfully integrated Azure Cosmos DB into our serverless architecture, showing how NoSQL databases provide the flexibility and scalability that serverless applications demand.
+
+**Performance Architecture**: The shared connection approach and Rust's zero-cost abstractions deliver excellent performance characteristics while maintaining the serverless cost model.
+
+**Towards Production Readiness**: Through comprehensive input validation, parameterized queries, and proper error handling, we've built an API that's resistant to common security vulnerabilities and set the foundation for production workloads.
+
+**Developer Experience**: Warp's filter composition and Rust's type system make complex API logic manageable, testable, and maintainable.
+
 ## What's Next?
 
 This tutorial covered the fundamentals of building database-backed serverless APIs with Rust on Azure. We've created a production-ready foundation, but there's much more to explore:
@@ -865,6 +940,7 @@ This tutorial covered the fundamentals of building database-backed serverless AP
 
 **Technical Enhancements:**
 - **API versioning** for backward compatibility and controlled feature rollouts
+- **Pagination** to avoid returning a huge list of order when calling `GET /api/orders`
 - **PUT/DELETE endpoints** for complete CRUD operations
 - **Infrastructure as Code** with Terraform or Bicep for reproducible deployments
 - **Structured logging and monitoring** with Application Insights
@@ -877,19 +953,5 @@ This tutorial covered the fundamentals of building database-backed serverless AP
 - **File processing** with Azure Blob Storage triggers
 - **Scheduled functions** for background processing
 - **Durable Functions** for long-running workflows
-
-## Conclusion
-
-Building database-backed serverless APIs with Rust on Azure demonstrates the power of combining modern systems programming languages with cloud-native architectures. This tutorial moved us from simple HTTP responses to a fully functional, persistent API service that handles real business logic.
-
-Key takeaways from this tutorial:
-
-**Database Integration**: We successfully integrated Azure Cosmos DB into our serverless architecture, showing how NoSQL databases provide the flexibility and scalability that serverless applications demand.
-
-**Performance Architecture**: The shared connection pooling approach and Rust's zero-cost abstractions deliver excellent performance characteristics while maintaining the serverless cost model.
-
-**Production Readiness**: Through comprehensive input validation, parameterized queries, and proper error handling, we've built an API that's resistant to common security vulnerabilities and ready for production workloads.
-
-**Developer Experience**: Warp's filter composition and Rust's type system make complex API logic manageable, testable, and maintainable.
 
 The next post will take this foundation to production, covering cloud deployment, security hardening, and operational concerns. Stay tuned for the complete journey from local development to production-ready serverless APIs!
