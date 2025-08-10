@@ -87,11 +87,11 @@ flowchart TB
 
 Notice a few things here:
 
-1. **Shared Code Base**: All your functions' code are in the same binary, and they run as one Warp web server. 
+1. **Shared Code Base**: All your functions' code is in the same binary, and they run as one Warp web server.
 2. **No Function Isolation**: Unlike Lambda's separate execution contexts, your functions share memory and state within the same process.
 3. **Configuration-Based Routing**: `function.json` files define HTTP routes and triggers, but your Rust code handles the actual request processing.
 
-This means the "Function" in an Azure Function App are more of a logical construct that has a route and trigger configuration, but not actually separate deployment units. Your custom handler is just a normal web server with multiple routes. So the common web server best practices like using share database connection, extract shared code (e.g. validation, payload formatting) into reusable modules applys here.
+This means the "Function" in an Azure Function App are more of a logical construct that has a route and trigger configuration, but not actually separate deployment units. Your custom handler is just a normal web server with multiple routes. So the common web server best practices like using shared database connections, extracting shared code (e.g. validation, payload formatting) into reusable modules apply here.
 
 ### Function Configuration Setup
 
@@ -434,7 +434,7 @@ The Order struct maps to the CosmosDB "schema" (although it's technically schema
 3. **Separate Request/Response Types**: `CreateOrderRequest` doesn't include generated fields like `id`, `status`, or `created_at`, enforcing proper API boundaries.
 
 
-Now we cain finally implement the business logic for `POST /api/orders`. Here's the actual implementation from our GitHub repository:
+Now we can finally implement the business logic for `POST /api/orders`. Here's the actual implementation from our GitHub repository:
 
 ```rust
 let create_order = warp::post()
@@ -513,7 +513,7 @@ This endpoint follows a clear sequence of operations:
 
 The choice to have `customerId` as partition key is not immediately obvious. This is designed for future query patterns. First of all, customerId (a UUID) will distribute the items evenly, and later when we expose customer-facing APIs, most customers will most likely query their own orders, so we can use the `customerId` to make single-parition queries, improving the performance. For the bakery staff, they need to do a full scan to get all the orders anyway, so it will always be a cross-partition query. 
 
-Next we'll explained how the `database_client` are created, and how they are made available to this function. 
+Next we'll explain how the `database_client` is created, and how it is made available to this function.
 
 
 ### Database Connection Setup
@@ -617,7 +617,7 @@ This shared state approach provides significant performance improvements:
 
 ### GET /api/orders - Listing All Orders
 
-The list endpoint demonstrates query execution and result aggregation. It's has much less input validation, and just a simple `SELECT ... FROM` query:
+The list endpoint demonstrates query execution and result aggregation. It has much less input validation, and just a simple `SELECT ... FROM` query:
 
 ```rust
 let get_orders = warp::get()
@@ -646,7 +646,7 @@ let get_orders = warp::get()
 
 **Cross-Partition Query Gotcha**: The Rust SDK documentation suggests that cross-partition queries aren't fully supported, but they actually work when you pass `()` as the partition key parameter. This allows the query to scan across all partitions to retrieve orders from different customers. However, be aware that cross-partition queries consume more RUs and have higher latency than single-partition queries.
 
-This implementation uses Cosmos DB's SQL-like query syntax to retrieve all orders. The paged result handling ensures we collect all orders regardless of result set size. We haven't implmeneted pagination yet. Pagination will be implemented for future posts. For now, be careful not to create too many orders, otherwise your `GET /api/orders` query will be very slow.
+This implementation uses Cosmos DB's SQL-like query syntax to retrieve all orders. The paged result handling ensures we collect all orders regardless of result set size. We haven't implemented pagination yet. Pagination will be implemented for future posts. For now, be careful not to create too many orders, otherwise your `GET /api/orders` query will be very slow.
 
 ### GET /api/orders/{id} - Single Order Retrieval
 
