@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building a Database-Backed API with Serverless Rust on Azure: From Simple Functions to Production-Ready Services"
+title: "Building a Database-Backed API with Serverless Rust on Azure"
 categories: Web
 date: 2025-08-07 22:30:00 +02:00
 excerpt_separator: <!--more-->
