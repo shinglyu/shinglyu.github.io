@@ -2,7 +2,7 @@
 layout: post
 title: "Building a Database-Backed API with Serverless Rust on Azure"
 categories: Web
-date: 2025-08-07 22:30:00 +02:00
+date: 2025-08-10 22:50:00 +02:00
 excerpt_separator: <!--more-->
 ---
 
