@@ -28,11 +28,17 @@ When a customer objects, your instinct might be to defend your solution. Instead
 Here's a realistic exchange from a cloud migration pitch:
 
 **Architect:** "We recommend moving your workloads to a managed Kubernetes service for scalability and reliability."
+
 **Customer:** "That won't work for us. Our compliance team says cloud isn't secure enough."
+
 **Architect:** "Can you share more about those security concerns? What specific risks are you worried about?"
+
 **Customer:** "Mostly data residency. We can't store sensitive data outside our country."
+
 **Architect:** "If data residency could be guaranteed, would cloud be an option?"
+
 **Customer:** "Possibly, but our apps also rely on legacy systems that aren't cloud-ready."
+
 **Architect:** "What makes those systems hard to migrate? Is it technical debt, vendor lock-in, or something else?"
 
 Notice how the initial objection ("cloud isn't secure") was actually about data residency and legacy integration, a classic XY problem. By asking questions, you uncover the real blockers.
@@ -44,19 +50,30 @@ Here is another example, with a bit more drama:
 **First meeting: Architect and App Dev Team**
 
 **App Dev Team:** "Nothing you said would work for us, we only want to build our own AI stack."
+
 **Architect:** "So, what’s driving your push to build your own AI stack?"
+
 **App Dev Team:** "Honestly, every time we propose something, the platform team shoots it down. We’re tired of waiting for approvals. If we build our own, we control everything."
+
 **Architect:** "Is it just about control, or are there features you’re missing?"
+
 **App Dev Team:** "We need AutoML. The platform team’s AWS setup is too rigid. We’re blocked at every turn."
+
 **Architect:** "If you could get AutoML on AWS, with less friction, would you consider it?"
+
 **App Dev Team:** "If it means fewer roadblocks, yes. But I doubt the platform team will ever agree."
+
 
 **Second meeting: Architect and Platform Team**
 
 **Platform Team:** "Everyone needs to use our platform-team approved components. Period."
+
 **Architect:** "The app dev team is frustrated. They feel blocked and want to go their own way. What’s your perspective?"
+
 **Platform Team:** "We’re just trying to keep things standardized and secure. If every team does their own thing, it’s chaos."
+
 **Architect:** "What if you could offer AWS’s managed AutoML as a shared service? It’s compliant, increases AWS usage, and gives the app team what they want."
+
 **Platform Team:** "If it’s AWS native and fits our standards, we can support it. We want teams to use AWS more, but within our guardrails."
 
 **Architect:** "Great. Let’s set up managed AutoML on AWS, document it, and let the platform team offer it internally."
