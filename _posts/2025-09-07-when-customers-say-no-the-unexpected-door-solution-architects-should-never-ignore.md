@@ -2,7 +2,7 @@
 layout: post
 title: "When Customers Say No: The Unexpected Door Solution Architects Should Never Ignore"
 categories: blog
-date: 2025-09-07 22:18:39 +02:00
+date: 2025-09-07 22:47:03 +02:00
 excerpt_separator: <!--more-->
 ---
 
@@ -47,13 +47,13 @@ Here is another example, with a bit more drama:
 **Architect:** "So, what’s driving your push to build your own AI stack?"
 **App Dev Team:** "Honestly, every time we propose something, the platform team shoots it down. We’re tired of waiting for approvals. If we build our own, we control everything."
 **Architect:** "Is it just about control, or are there features you’re missing?"
-**App Dev Team:** "We need AutoML. The platform team’s AWS setup is too rigid, and we’re blocked at every turn."
+**App Dev Team:** "We need AutoML. The platform team’s AWS setup is too rigid. We’re blocked at every turn."
 **Architect:** "If you could get AutoML on AWS, with less friction, would you consider it?"
-**App Dev Team:** "If it means fewer roadblocks, yes. But we doubt the platform team will ever agree."
+**App Dev Team:** "If it means fewer roadblocks, yes. But I doubt the platform team will ever agree."
 
 **Second meeting: Architect and Platform Team**
 
-**Platform Team:** "Everyone need to use our Platform-team approved component, period."
+**Platform Team:** "Everyone needs to use our platform-team approved components. Period."
 **Architect:** "The app dev team is frustrated. They feel blocked and want to go their own way. What’s your perspective?"
 **Platform Team:** "We’re just trying to keep things standardized and secure. If every team does their own thing, it’s chaos."
 **Architect:** "What if you could offer AWS’s managed AutoML as a shared service? It’s compliant, increases AWS usage, and gives the app team what they want."
