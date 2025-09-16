@@ -1,15 +1,14 @@
 ---
 layout: post
-title: Rust Serverless on the Big Three Clouds: AWS, Azure, and GCP Compared
+title: "Rust Serverless on the Big Three Clouds: AWS, Azure, and GCP Compared"
 categories: Web
-date: 2025-09-15 14:39:00 +02:00
+date: 2025-09-16 22:23:00 +02:00
 excerpt_separator: <!--more-->
 ---
 
 When you're choosing a cloud platform for your next Rust serverless project, the landscape can be confusing. Each of the big three cloud providers—AWS, Azure, and Google Cloud Platform—offers different levels of maturity and support for Rust in serverless environments. I've spent some time experimenting with two platforms (more on why I'm missing one later), and the differences are more significant than you might expect.
 
 Why does this comparison matter? Rust brings compelling advantages to serverless computing: it runs with low resource requirements and delivers high performance, which translates to improved performance and lower cloud costs. Additionally, Rust eliminates many bugs during compile time, so your code is less like a ticking time bomb that will break during runtime. This means less late night on-call madness and happier developers.
-
 
 ## What I Mean by "Serverless"
 
