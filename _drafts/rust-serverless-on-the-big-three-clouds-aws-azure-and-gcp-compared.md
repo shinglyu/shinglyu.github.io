@@ -17,9 +17,9 @@ Before diving into the comparison, let me clarify what I mean by "serverless" in
 
 <!--more-->
 
-True serverless means **pay-as-you-go pricing** where you only pay for what you use, not for idle time. Hourly pricing but with scaling to zero counts as serverless, but less ideal than the per milisecond pricing while the code executes. For programming model, I'm looking at **function-as-a-service** rather than containers. While you can theoretically do anything in containers, in my experience, when you go with containers, developers are easily distracted by all the technical details of how containers work, and they're not focusing on the business logic itself. In that case, you might be better off chasing the hype of full-scale Kubernetes clusters instead. At least your CV looks nicer that way.
+True serverless means **pay-as-you-go pricing** where you only pay for what you use, not for idle time. Hourly pricing but with scaling to zero counts as serverless, but less ideal than the per millisecond pricing while the code executes. For programming model, I'm looking at **function-as-a-service** rather than containers. While you can theoretically do anything in containers, in my experience, when you go with containers, developers are easily distracted by all the technical details of how containers work, and they're not focusing on the business logic itself. In that case, you might be better off chasing the hype of full-scale Kubernetes clusters instead. At least your CV looks nicer that way.
 
-For the comparsion, I'm focusing specifically on building REST APIs because this is one of the most common use cases. There are other domains like batch processing on events and data analytics like ETL pipelines, but these use different kinds of code libraries, so I'm not discussing them here. For supporting services like databases, I prefer fully-managed, cloud-native options like DynamoDB or CosmosDB.
+For the comparison, I'm focusing specifically on building REST APIs because this is one of the most common use cases. There are other domains like batch processing on events and data analytics like ETL pipelines, but these use different kinds of code libraries, so I'm not discussing them here. For supporting services like databases, I prefer fully-managed, cloud-native options like DynamoDB or CosmosDB.
 
 ## TL;DR: AWS Wins, Azure Struggles, GCP Doesn't Support It
 
@@ -64,7 +64,7 @@ I had to dig through multiple GitHub issues and PRs to understand why: [#2750](h
 
 **Example 2: Silent Breaking Changes**
 
-To fix the rustls issue mentioned above, I checked out the Azure Rust SDK code to my laptop and and point my Cargo.toml to the local copy (which is the not-yet-published 0.28.0), but my code breaks because `DefaultAzureCredential` was [renamed to `DeveloperToolsCredential`](https://github.com/Azure/azure-sdk-for-rust/pull/2873). I had to dig through pull requests to understand what happened. There's no official announcement channel for such significant changes—only bare minimum (and usually outdated) crate documentation.
+To fix the rustls issue mentioned above, I checked out the Azure Rust SDK code to my laptop and pointed my Cargo.toml to the local copy (which is the not-yet-published 0.28.0), but my code breaks because `DefaultAzureCredential` was [renamed to `DeveloperToolsCredential`](https://github.com/Azure/azure-sdk-for-rust/pull/2873). I had to dig through pull requests to understand what happened. There's no official announcement channel for such significant changes—only bare minimum (and usually outdated) crate documentation.
 
 ### Confusing Hosting Plans
 
@@ -77,7 +77,7 @@ Azure Functions offers [five hosting plans](https://learn.microsoft.com/en-us/az
 
 ### The Consumption Plan Problems
 
-The Consumption Plan appears to offer pay-as-you-go pricing, but Azure leaks its implementation details everywhere. After creating a Consumption Plan Azure Function App, the portal shows it has an App Service Plan (which is suppose to be only for Dedicated Paln or Premium Plan) with a cryptic `Y1` SKU (meaning consumption plan).
+The Consumption Plan appears to offer pay-as-you-go pricing, but Azure leaks its implementation details everywhere. After creating a Consumption Plan Azure Function App, the portal shows it has an App Service Plan (which is supposed to be only for Dedicated Plan or Premium Plan) with a cryptic `Y1` SKU (meaning consumption plan).
 
 If you expect per-function isolation, you'll be disappointed. Running a consumption plan function app consumes 1 VM quota for that region. Configuration changes require restarting the whole VM, causing downtime for all functions.
 
@@ -97,19 +97,19 @@ You're still building a full Warp web server that runs on the Azure Function hos
 
 This creates uncertainty and makes it harder for humans and GenAI to reason about your architecture, because most AI agents haven't seen enough examples of such setup, and documentation and code examples are also sparse. I had to spend extra effort to "teach" the AI to code it in a way that Azure Function accepts. 
 
-Conclusion: Azure Functions is not ready for production Rust workloads. But once the SDK stablize, and you are happy with the VM-style implementation, it has the potential to become a viable option.
+Conclusion: Azure Functions is not ready for production Rust workloads. But once the SDK stabilizes, and you are happy with the VM-style implementation, it has the potential to become a viable option.
 
 ## Google Cloud Platform: Rust Not Supported
 
-GCP's situation is straightforward but disappointing: Cloud Run Functions [don't support Rust](https://cloud.google.com/run/docs/runtimes/function-runtimes), nor custom runtimes. The platform pushes you toward Cloud Run, which is container-based and therefore not serverless by my definition. Cloud Run has a ["deploy from source code"](https://cloud.google.com/run/docs/deploying-source-code) option, which use GCP's buildpacks to automatically detect the language you are using the build the container for you, but sadly it also don't support Rust.
+GCP's situation is straightforward but disappointing: Cloud Run Functions [don't support Rust](https://cloud.google.com/run/docs/runtimes/function-runtimes), nor custom runtimes. The platform pushes you toward Cloud Run, which is container-based and therefore not serverless by my definition. Cloud Run has a ["deploy from source code"](https://cloud.google.com/run/docs/deploying-source-code) option, which uses GCP's buildpacks to automatically detect the language you are using and build the container for you, but sadly it also doesn't support Rust.
 
-Interestingly, Google released a [GA version (v1.0.0) of their Rust SDK](https://cloud.google.com/blog/topics/developers-practitioners/now-available-rust-sdk-for-google-cloud) on September 10, 2025. The GitHub repository was [created in October 2024](https://github.com/googleapis/google-cloud-rust/commits/main/?since=2024-10-01&until=2024-10-31), making it the last one of the three clouds to make a Rust SDK public, but it reaches general availability ealier than Azure. While I might experiment with Cloud Run later to evaluate the SDK's maturity, it doesn't meet the serverless criteria for this comparison.
+Interestingly, Google released a [GA version (v1.0.0) of their Rust SDK](https://cloud.google.com/blog/topics/developers-practitioners/now-available-rust-sdk-for-google-cloud) on September 10, 2025. The GitHub repository was [created in October 2024](https://github.com/googleapis/google-cloud-rust/commits/main/?since=2024-10-01&until=2024-10-31), making it the last one of the three clouds to make a Rust SDK public, but it reaches general availability earlier than Azure. While I might experiment with Cloud Run later to evaluate the SDK's maturity, it doesn't meet the serverless criteria for this comparison.
 
 For now, GCP simply isn't in the serverless (more specifically, FaaS) Rust game.
 
 ## Honorary Mention: Cloudflare Workers
 
-While not one of the "big three," Cloudflare Workers deserves mention. The platform [supports Rust through the workers-rs crate](https://developers.cloudflare.com/workers/languages/rust/) and follows a true serverless model. The crate is [announced on September 9, 2021](https://blog.cloudflare.com/workers-rust-sdk/).  Cloudflare choose to compile the Rust to WebAssembly, which impose certain limits on the supported features (e.g. Async not supported), but probably make it easier for them to support new languages in the future.  The reference architecture would be [Workers → KV storage](https://developers.cloudflare.com/reference-architecture/diagrams/serverless/serverless-global-apis/).
+While not one of the "big three," Cloudflare Workers deserves mention. The platform [supports Rust through the workers-rs crate](https://developers.cloudflare.com/workers/languages/rust/) and follows a true serverless model. The crate was [announced on September 9, 2021](https://blog.cloudflare.com/workers-rust-sdk/). Cloudflare chooses to compile the Rust to WebAssembly, which imposes certain limits on the supported features (e.g. Async not supported), but probably makes it easier for them to support new languages in the future. The reference architecture would be [Workers → KV storage](https://developers.cloudflare.com/reference-architecture/diagrams/serverless/serverless-global-apis/).
 
 Although I haven't thoroughly tested it yet, Cloudflare Workers looks promising and will be my next experiment while waiting for Azure's blockers to be resolved.
 
