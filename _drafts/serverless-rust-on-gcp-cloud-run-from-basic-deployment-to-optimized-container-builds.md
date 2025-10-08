@@ -264,7 +264,7 @@ The Reddit community suggests several minimal runtime options:
 
 For statically linked binaries, you could even use `scratch`, but that requires additional build configuration to build with musl. See this [post](https://shinglyu.com/web/2025/07/26/serverless-rust-on-azure-deploying-a-rust-azure-function.html) on how to do that.
 
-## Performance Comparison
+## Image Size Comparison
 
 The optimization results are impressive:
 
