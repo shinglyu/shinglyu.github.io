@@ -100,6 +100,8 @@ Conclusion: Azure Functions is not ready for production Rust workloads. But once
 
 ## Google Cloud Platform: Rust Not Supported
 
+> **Update (2025-10-08):** After publishing this comparison, I recieved many feedback online, So I gave Cloud Run a try and wrote about my experience in [Serverless Rust on GCP Cloud Run: From Basic Deployment to Optimized Container Builds](/web/2025/09/28/serverless-rust-on-gcp-cloud-run-from-basic-deployment-to-optimized-container-builds.html). The developer experience turned out to be much better than I initially thought.
+
 GCP's situation is straightforward but disappointing: Cloud Run Functions [don't support Rust](https://cloud.google.com/run/docs/runtimes/function-runtimes), nor custom runtimes. The platform pushes you toward Cloud Run, which is container-based and therefore not serverless by my definition. Cloud Run has a ["deploy from source code"](https://cloud.google.com/run/docs/deploying-source-code) option, which uses GCP's buildpacks to automatically detect the language you are using and build the container for you, but sadly it also doesn't support Rust.
 
 Interestingly, Google released a [GA version (v1.0.0) of their Rust SDK](https://cloud.google.com/blog/topics/developers-practitioners/now-available-rust-sdk-for-google-cloud) on September 10, 2025. The GitHub repository was [created in October 2024](https://github.com/googleapis/google-cloud-rust/commits/main/?since=2024-10-01&until=2024-10-31), making it the last one of the three clouds to make a Rust SDK public, but it reaches general availability earlier than Azure. While I might experiment with Cloud Run later to evaluate the SDK's maturity, it doesn't meet the serverless criteria for this comparison.
@@ -138,3 +140,5 @@ Azure Functions might become viable in the future, but the current beta SDK and 
 Google Cloud Platform isn't really in the game yet for true serverless Rust development. While their new SDK might be worth watching, the lack of Rust support in Cloud Functions means you'll need to compromise on the serverless model.
 
 Looking ahead, keep an eye on Cloudflare Workers as a potential alternative. Their approach to edge computing and true pay-per-use pricing could make them a compelling option as their Rust support matures.
+
+{% include rust_serverless_series_toc.html %}

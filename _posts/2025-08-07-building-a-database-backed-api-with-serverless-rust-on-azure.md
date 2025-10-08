@@ -9,6 +9,7 @@ excerpt_separator: <!--more-->
 In my [previous post]({{site.url}}/blog/2025/07/26/serverless-rust-on-azure-deploying-a-rust-azure-function.html), we deployed a simple "Hello World" Rust function to Azure. Now we're ready to build something production-worthy: a database-backed REST API that handles real business logic. We'll create a cake ordering system for a local bakery, complete with data persistence, input validation, and proper error handling.
 
 ![Business Case]({{site_url}}/blog_assets/rust-serverless-azure-db/business_case.png)
+
 <!--more-->
 
 ## The Business Case: Sweet API Solutions
@@ -955,3 +956,5 @@ This tutorial covered the fundamentals of building database-backed serverless AP
 - **Durable Functions** for long-running workflows
 
 The next post will take this foundation to production, covering cloud deployment, security hardening, and operational concerns. Stay tuned for the complete journey from local development to production-ready serverless APIs!
+
+{% include rust_serverless_series_toc.html %}

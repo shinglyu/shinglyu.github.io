@@ -372,3 +372,5 @@ Send me an email to DM me on LinkedIn if you have any other suggestions!
 Rust brings compelling advantages to serverless computing: fast cold starts, low memory usage, and excellent performance. While Azure Functions' Rust ecosystem is less mature than AWS Lambda's (see [Cargo Lambda](https://www.cargo-lambda.info/) and [GA of AWS SDK for Rust](https://aws.amazon.com/blogs/developer/announcing-general-availability-of-the-aws-sdk-for-rust/)), the native HTTP Server approach simplifies the development a lot.
 
 In the next post, we'll dive deeper into integrating with Azure databases and exploring more complex use cases. Stay tuned!
+
+{% include rust_serverless_series_toc.html %}

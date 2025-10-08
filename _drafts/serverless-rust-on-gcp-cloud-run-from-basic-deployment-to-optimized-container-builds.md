@@ -165,8 +165,6 @@ gcloud builds submit .
 
 You can then go to the Google Cloud Console > Cloud Build > History to see the running build:
 
-
-
 At the end of the build output, you'll see a URL like:
 ```
 https://rustless-3qqsqbdsuq-uc.a.run.app
@@ -272,16 +270,16 @@ The optimization results are impressive:
 - **Optimized approach**: ~27.5 MB container with just the binary
 - **Build time**: The build time difference is not that different because the Rust code is very minimal so the build time is very short comparing to the Docker cache miss time overhead. With bigger projects you'll see more significant improvments in image building time.
 
+![Image Size Comparison](/blog_assets/rust-serverless-gcp/image_size.png)
+
 ## Conclusion
 
-Looking back at my [initial comparison of Rust serverless offerings](/web/2025/09/16/rust-serverless-on-the-big-three-clouds-aws-azure-and-gcp-compared.html), I was wrong to assume that by using containers, GCP would not provide a good developer experience. The GCP community was right to call me out - I had dismissed Cloud Run without giving it a fair evaluation.
+Looking back at my [initial comparison of Rust serverless offerings](/web/2025/09/16/rust-serverless-on-the-big-three-clouds-aws-azure-and-gcp-compared.html), I was wrong to assume that by using container, GCP will not provide a good developer experience.
 
-After going through this hands-on exploration, the developer experience is quite smooth, and the container-first approach gives you remarkable flexibility because you can wrap almost anything in a container. Unlike the function-as-a-service constraints of AWS Lambda or Azure Functions, Cloud Run lets you bring your existing HTTP servers, use any runtime, and deploy with a simple `gcloud builds submit .` command.
+The developer experience is quite smooth, and it gives flexibility because you can wrap almost anything in a container.
 
-However, the journey from our basic 600MB container to the optimized 27.5MB version reveals an important consideration: the container optimization process requires quite some Docker knowledge. Understanding multi-stage builds, cargo-chef caching strategies, and minimal base images isn't trivial. If your development team doesn't have Docker expertise or just wants to focus on business logic, you need to think hard about whether this is what you want your developers spending time on.
-
-You could have a platform team that builds these optimized Dockerfiles and CI/CD pipelines for your application teams, but then you introduce more communication overhead and potential bottlenecks. There's a trade-off between the flexibility that containers provide and the operational complexity they can introduce.
-
-That said, once you have the optimization patterns in place - like the cargo-chef approach we explored - they become reusable templates that can benefit your entire organization's Rust deployments.
+But the container optimization process requires quite some docker knowledge. If your development team does not have docker expertise or just want to focus on business logic, you need to think hard if this is what you want your developer to spend time on. Maybe you can have a platform team that build these dockerfile and CI/CD for you, but then you have more communication overhead.
 
 It's worth noting that this post focuses on a simple "Hello World" deployment using standard HTTP libraries rather than the official GCP Rust SDK. In upcoming posts, I'll explore the maturity and capabilities of Google Cloud's Rust SDK to see how it compares to the AWS and Azure SDK experiences I've documented previously.
+
+{% include rust_serverless_series_toc.html %}
