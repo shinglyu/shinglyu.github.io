@@ -2,7 +2,7 @@
 layout: post
 title: "Serverless Rust on GCP Cloud Run: From Basic Deployment to Optimized Container Builds"
 categories: Web
-date: 2025-09-28 16:18:00 +02:00
+date: 2025-10-08 21:41:00 +02:00
 excerpt_separator: <!--more-->
 ---
 
@@ -268,17 +268,17 @@ The optimization results are impressive:
 
 - **Original approach**: ~600 MB container with full Rust toolchain
 - **Optimized approach**: ~27.5 MB container with just the binary
-- **Build time**: The build time difference is not that different because the Rust code is very minimal so the build time is very short comparing to the Docker cache miss time overhead. With bigger projects you'll see more significant improvments in image building time.
+- **Build time**: The build time difference is not that different because the Rust code is very minimal so the build time is very short compared to the Docker cache miss time overhead. With bigger projects you'll see more significant improvements in image building time.
 
 ![Image Size Comparison](/blog_assets/rust-serverless-gcp/image_size.png)
 
 ## Conclusion
 
-Looking back at my [initial comparison of Rust serverless offerings](/web/2025/09/16/rust-serverless-on-the-big-three-clouds-aws-azure-and-gcp-compared.html), I was wrong to assume that by using container, GCP will not provide a good developer experience.
+Looking back at my [initial comparison of Rust serverless offerings](/web/2025/09/16/rust-serverless-on-the-big-three-clouds-aws-azure-and-gcp-compared.html), I was wrong to assume that by using containers, GCP will not provide a good developer experience.
 
 The developer experience is quite smooth, and it gives flexibility because you can wrap almost anything in a container.
 
-But the container optimization process requires quite some docker knowledge. If your development team does not have docker expertise or just want to focus on business logic, you need to think hard if this is what you want your developer to spend time on. Maybe you can have a platform team that build these dockerfile and CI/CD for you, but then you have more communication overhead.
+But the container optimization process requires quite some Docker knowledge. If your development team does not have Docker expertise or just wants to focus on business logic, you need to think hard if this is what you want your developers to spend time on. Maybe you can have a platform team that builds these Dockerfiles and CI/CD for you, but then you have more communication overhead.
 
 It's worth noting that this post focuses on a simple "Hello World" deployment using standard HTTP libraries rather than the official GCP Rust SDK. In upcoming posts, I'll explore the maturity and capabilities of Google Cloud's Rust SDK to see how it compares to the AWS and Azure SDK experiences I've documented previously.
 
