@@ -2,7 +2,7 @@
 layout: post
 title: "Google Cloud Professional Cloud Architect Exam Changes October 2025: Key Updates You Need to Know"
 categories: Web
-date: 2025-10-26 00:00:00 +01:00
+date: 2025-10-28 22:34:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
