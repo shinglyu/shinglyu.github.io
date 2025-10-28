@@ -79,7 +79,7 @@ The new "Securing AI" section covers Model Armor (protection against adversarial
 
 Infrastructure-as-code is now explicitly required knowledge. The exam expects understanding of:
 
-- **Terraform and IaC** - Manual console provisioning is no longer the default 
+- **Terraform and IaC** - Understanding declarative infrastructure definition and automated deployment
 - **Apigee** for API management, including gateway patterns, rate limiting, and API lifecycle management
 - **Cloud Shell Editor and Cloud Code** for cloud-native development environments
 - **Migration Center** for workload assessment, dependency mapping, and migration strategy beyond lift-and-shift
