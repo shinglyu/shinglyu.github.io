@@ -1,0 +1,24 @@
+{
+  "name": "Jekyll Site",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3.3",
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "shopify.ruby-lsp"
+      ]
+    }
+  },
+  "forwardPorts": [4000],
+  "portsAttributes": {
+    "4000": {
+      "label": "Jekyll site",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "bash -lc 'gem install bundler && bundle config set path vendor/bundle && bundle install'",
+  "postStartCommand": "bash -lc 'bundle exec jekyll serve --host 0.0.0.0 --watch --drafts'"
+}

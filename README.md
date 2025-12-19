@@ -3,16 +3,35 @@ My Portfolio Site
 
 Visit [https://shinglyu.com](https://shinglyu.com)
 
-# Installation
+# Dev Container (Recommended)
+
+Run this site in a reproducible container with Jekyll auto-started.
+
+0) Install podman (as docker): `sudo apt install podman podman-docker`
+1) Open this folder in VS Code and install the "Dev Containers" extension.
+2) Reopen in container; it will install gems and start the server.
+3) Your site will be available at:
 
 ```
-sudo apt-get install ruby ruby-dev nodejs
-sudo gem install jekyll jekyll-paginate
+http://localhost:4000/
 ```
 
-# Preview
+If the server is not running, start it inside the container:
+
+```bash
+bundle exec jekyll serve --host 0.0.0.0 --watch --drafts
 ```
-jekyll serve --drafts
+
+# Local Setup (Optional)
+
+If you prefer running locally without the devcontainer:
+
+```bash
+sudo apt-get install ruby-full build-essential
+gem install bundler
+bundle config set path vendor/bundle
+bundle install
+bundle exec jekyll serve --drafts
 ```
 
 # Folder structure
