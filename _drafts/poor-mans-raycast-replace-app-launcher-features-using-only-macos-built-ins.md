@@ -6,11 +6,21 @@ date: 2025-10-17 16:39:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
-I was really into Raycast. The global hotkeys, the instant app launching, the clipboard management – it transformed how I worked on my Mac. But I really don't want to use their AI features. For the AI features it provides, I prefer using my own LLM provider. But I found out it's quite difficult to completely turn it off. With sensitive data flowing through my clipboard and workflows, I might want absolute certainty that nothing leaves my machine. Also Raycast is always in the gray area for corporate IT, and I live in the contstant fear of it being banned by my employer.
+I was really into Raycast. The global hotkeys, the instant app launching, the clipboard management – it transformed how I worked on my Mac. But I really don't want to use their AI features. For the AI features it provides, I prefer using my own LLM provider. But I found out it's quite difficult to completely turn it off. With sensitive data flowing through my clipboard and workflows, I want absolute certainty that nothing leaves my machine. Also Raycast is always in the gray area for corporate IT, and I live in the contstant fear of it being banned by my employer.
 
 That's when I discovered something surprising: I could rebuild almost everything I loved about Raycast using tools that were already on my Mac.
 
 <!--more-->
+
+## Why Global Hotkeys Matter
+
+Before diving into the how, let's talk about why global hotkeys are worth the setup effort.
+
+**Reduced cognitive burden.** When you use hotkeys, you don't need to think about which button to click or where an icon is located. Your muscle memory takes over, freeing your brain to focus on the actual task at hand.
+
+**No precision mouse movement required.** Finding and clicking small icons or menu items requires concentration and fine motor control. This may seem trivial, but over the course of a workday, these micro-decisions add up and deplete your mental energy.
+
+**Stay in your flow.** Perhaps most importantly, hotkeys let you trigger actions while you're still reading or focusing on something else on your screen. With mouse-based navigation, you often need to minimize windows, move them aside, or hunt for the dock – all of which break your concentration and disrupt your workflow.
 
 ## What You Can Replace
 
@@ -82,11 +92,11 @@ You can assign quick keys directly in Spotlight for actions and shortcuts:
 1. Press **Command-Space** to open Spotlight
 2. Search for the action or shortcut you want to assign a quick key to
 3. Click **"Add quick keys"** next to the action
-4. Enter the text shortcut you want (e.g., "ft" for FaceTime, "sl" for Slack)
+4. Enter the text shortcut you want (e.g., "sl" for Slack, "vsc" for Visual Studio Code)
 
-Once assigned, you can type your quick key in Spotlight and it will show the action. You can even add parameters right after the quick key - for example "ft Ashley" to call Ashley directly. This can work alongside the global hotkey method mentioned before. So you can have a 3-tier system for the shortcuts:
+Once assigned, you can type your quick key in Spotlight and it will show the action. You can even add parameters right after the quick key. This can work alongside the global hotkey method mentioned before. So you can have a 3-tier system for the shortcuts:
 * For frequently used shortcuts, assign it a global hotkey + quick keys in Spotlight
-* For less-frequently used shortcuts, assign them only quick keys in Spotlight
+* For less-frequently used shortcuts, assign them only quick keys in Spotlight, so you don't run out of global hotkey combinations
 * For rarely used shortcusts, simply search for the full name in Spotlight
 This way you don't need to memorize that many hotkeys, but are still able to access everything when you need to.
 
@@ -95,7 +105,7 @@ This way you don't need to memorize that many hotkeys, but are still able to acc
 One of the most exciting additions in macOS Tahoe is the built-in clipboard history feature in Spotlight. You can now access your clipboard history directly without third-party apps:
 
 1. Press **Command-Space** to open Spotlight
-2. Press Command-4 to limit your search to only the clipboard history
+2. Press **Command-4** to limit your search to only the clipboard history
 
 This feature maintains a history of your copied items, making it easy to access previously copied text, images, and other content. You can learn more about this feature in [Apple's official documentation](https://support.apple.com/en-ng/guide/mac-help/mchl40d5b86b/mac).
 
