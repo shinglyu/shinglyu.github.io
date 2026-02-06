@@ -6,7 +6,7 @@ date: 2026-01-29 00:00:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
-As a busy parent, I often only have 5-10 minutes of uninterrupted work time before my child needs attention. Traditional coding workflows—where you need a laptop open, an IDE running with AI agents actively working, and constant supervision—simply don't work for someone in my situation. I needed a setup that could run in the background without any intervention, be accessed from any device including my phone or tablet, and let me make meaningful progress in short bursts throughout the day. Here's the complete remote vibe coding workflow I've built using GitHub Copilot and Cloudflare Pages.
+As a busy parent, I often only have 5-10 minutes of uninterrupted work time before my child needs attention. Traditional coding workflows—where you need a laptop open, an IDE running with AI agents actively working, and constant supervision—simply don't work for someone in my situation. I needed a setup that could run in the background without any intervention, could be accessed from any device including my phone or tablet, and would let me make meaningful progress in short bursts throughout the day. Here's the complete remote vibe coding workflow I've built using GitHub Copilot and Cloudflare Pages.
 
 <!--more-->
 
@@ -25,11 +25,11 @@ Before diving into the setup, let me outline what I was looking for:
 
 The magic combination that makes this work is GitHub Copilot's agent mode running on GitHub-managed compute, combined with Cloudflare Pages for automatic preview deployments.
 
-I know some people prefer to run always-on servers at home for this purpose—a Mac mini with AI agents constantly running, or an SSH setup to connect to a home lab server with Claude Code running in tmux. I've seen impressive setups where developers have persistent connections to their home machines and can code from anywhere with full local power. But for me, these approaches require too much maintenance. I don't want to worry about keeping a server running, managing network configurations, or dealing with the inevitable hardware issues that pop up. I wanted something truly hands-off that runs entirely in the cloud.
+I know some people prefer to run always-on servers at home for this purpose—a Mac mini with AI agents constantly running, or an SSH setup to connect to a home lab server with Claude running in tmux. I've seen impressive setups where developers have persistent connections to their home machines and can code from anywhere with full local power. But for me, these approaches require too much maintenance. I don't want to worry about keeping a server running, managing network configurations, or dealing with the inevitable hardware issues that pop up. I wanted something truly hands-off that runs entirely in the cloud.
 
-### Getting GitHub Copilot Premium
+### Getting GitHub Copilot Pro
 
-I was fortunate to get GitHub Copilot Premium for free through my open source contributions. GitHub offers this benefit to maintainers of popular open source projects, which is a fantastic way to reward community contributors. If you're actively contributing to open source, check if you qualify.
+I was fortunate to get GitHub Copilot Pro for free through my open source contributions. GitHub offers this benefit to maintainers of popular open source projects, which is a fantastic way to reward community contributors. If you're actively contributing to open source, check if you qualify.
 
 ### The Workflow
 
@@ -51,7 +51,7 @@ Here's how my typical workflow looks:
 
 The issue-PR-review workflow has some advantages over local development:
 
-**Inline comments are more natural**: When I'm in VS Code, asking Copilot to fix something specific requires switching context, opening the chat panel, and explaining both the location and the issue in detail. With PR comments, I just click on the exact line and type my feedback—it's the same workflow I'd use for human code review, which makes it feel much more intuitive. I know that Google Antigravity also supports leaving inline comments through their coding tools, but since I already have GitHub Copilot Premium for free through my open source contributions, I prefer to stick with the GitHub ecosystem.
+**Inline comments are more natural**: When I'm in VS Code, asking Copilot to fix something specific requires switching context, opening the chat panel, and explaining both the location and the issue in detail. With PR comments, I just click on the exact line and type my feedback—it's the same workflow I'd use for human code review, which makes it feel much more intuitive. I know that Google's AI coding tools also support leaving inline comments, but since I already have GitHub Copilot Pro for free through my open source contributions, I prefer to stick with the GitHub ecosystem.
 
 **Long-running tasks don't block my machine**: Complex refactoring or tasks that require the agent to think and iterate can take 10-20 minutes or even longer for substantial changes. With local development, my laptop would be occupied the entire time, fans spinning and battery draining. With this remote setup, I don't even need my laptop powered on—the agent runs on GitHub's infrastructure and I can check back whenever I have a moment.
 
@@ -103,9 +103,9 @@ To disable production deployments, go to your project **Settings** > **Builds & 
 
 ### The Preview Comment
 
-Once configured, Cloudflare will automatically comment on your PR with a preview URL. This means when I check my phone to review Copilot's work, I can click straight through to see the live preview—no need to clone the repository, install dependencies, or run a local dev server. It's a remarkably smooth experience that makes reviewing changes from any device a breeze. You can see an example of this in action on [this PR](https://github.com/shinglyu/piggy-bank/pull/15).
+Once configured, Cloudflare will automatically comment on your PR with a preview URL. This means that when I check my phone to review Copilot's work, I can click straight through to see the live preview—no need to clone the repository, install dependencies, or run a local dev server. It's a remarkably smooth experience that makes reviewing changes from any device a breeze. You can see an example of this in action on [this PR](https://github.com/shinglyu/piggy-bank/pull/15).
 
-You can also use the "Access policy" setting in Cloudflare Pages to add authentication using Cloudflare Zero Trust, so only you or trusted users can access the preview pages via one-time PIN or SSO. This is useful if you want to keep your preview deployments private while still being able to access them from any device.
+You can also use the "Access policy" setting in Cloudflare Pages to add authentication using Cloudflare Zero Trust, so only you or trusted users can access the preview pages via a one-time PIN or SSO. This is useful if you want to keep your preview deployments private while still being able to access them from any device.
 
 ## Tips for Making This Work
 
