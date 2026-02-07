@@ -56,11 +56,6 @@ Before publishing, execute the following agents in sequence:
    - Check for sensitive information (PII, API keys) - STOP if found
    - This is a blocking check
 
-4. **Preview in Jekyll**
-   - Use the devcontainer to run `jekyll serve`
-   - Verify the post renders correctly with no layout issues
-   - Check that all images and links work
-
 ## Commands
 
 ```bash
@@ -87,6 +82,8 @@ Report the following after publishing:
 
 ## Full Publishing Workflow (from .clinerules/workflows/publish.md)
 
+**Note**: If running in GitHub Copilot agent mode (automated workflow), skip user approval steps and proceed automatically through the workflow.
+
 Follow these steps in order:
 
 1. **Verify draft is ready**: User should provide the draft file path
@@ -97,8 +94,7 @@ Follow these steps in order:
 6. **Security check**: Check for sensitive information (PII, API keys, credentials) - if found, STOP
 7. **Move file**: Use `mv` to move draft to `_posts/` with date prefix (`YYYY-MM-DD-filename.md`)
 8. **Update frontmatter**: Set the publishing date/time
-9. **Preview**: Run `jekyll serve` and open the blog in browser for user to verify
-10. **Get approval**: Ask for user confirmation before proceeding
-11. **Commit and push**: Commit the new post (including deleted draft) and push to GitHub
+9. **Commit and push**: Commit the new post (including deleted draft) and push to GitHub
+10. **Review Cloudflare preview**: After the PR is created, Cloudflare will automatically deploy a preview. Use the browser tool to check the Cloudflare preview link to verify the HTML matches the source and the post renders correctly with no layout issues
+11. **Get approval**: If running in GitHub Copilot agent mode, skip this step. Otherwise, ask for user confirmation after the Cloudflare preview has been reviewed
 12. **Social media**: Write a short, concise social media post promoting the article
-13. **Verify deployment**: Wait 5 minutes, then use a web tool to fetch https://shinglyu.com and verify the post is live and renders correctly (retry up to 3 times if needed)

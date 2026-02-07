@@ -8,7 +8,7 @@
 * Check if the post contains senstivity information like PII, or API keys or credential. If so, stop.
 * Use `mv` to move the draft file to `_posts/` with date prefix (`YYYY-MM-DD-filename.md`)
 * Update the frontmatter with the publishing date time.
-* Run `jekyll serve` and use the browser to open the root folder of the blog website to let the user check if the post exist and has no layout issue. 
-* Ask for user confirmation. Once approved, use git to commit (remember to also add the deleted draft) the new post and push.
+* Use git to commit (remember to also add the deleted draft) the new post and push to create a PR.
+* After the PR is created, Cloudflare will automatically deploy a preview. Guide the user to review the Cloudflare auto-deployed link provided in the PR to verify the post renders correctly and has no layout issues.
 * Write a short and concise social media post promoting this post
 * Use your browser tool to open https://shinglyu.com after a 3 mintues to check if the post is published. Retry 3 times. 
