@@ -97,4 +97,4 @@ Follow these steps in order:
 9. **Commit and push**: Commit the new post (including deleted draft) and push to GitHub
 10. **Review Cloudflare preview**: After the PR is created, Cloudflare will automatically deploy a preview. Use the browser tool to check the Cloudflare preview link to verify the HTML matches the source and the post renders correctly with no layout issues
 11. **Get approval**: If running in GitHub Copilot agent mode, skip this step. Otherwise, ask for user confirmation after the Cloudflare preview has been reviewed
-12. **Social media**: Write a short, concise social media post promoting the article
+12. **Social media**: Create a short, concise social media post promoting the article and output it directly in the agent chat (do NOT create a file)

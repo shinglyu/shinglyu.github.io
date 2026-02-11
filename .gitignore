@@ -7,3 +7,5 @@ Gemfile.lock
 .bundle/
 vendor/
 .gem/
+# Ignore social_media directory - posts should only be in agent chat
+social_media/

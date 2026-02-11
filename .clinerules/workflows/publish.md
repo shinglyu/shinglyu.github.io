@@ -10,5 +10,5 @@
 * Update the frontmatter with the publishing date time.
 * Use git to commit (remember to also add the deleted draft) the new post and push to create a PR.
 * After the PR is created, Cloudflare will automatically deploy a preview. Guide the user to review the Cloudflare auto-deployed link provided in the PR to verify the post renders correctly and has no layout issues.
-* Write a short and concise social media post promoting this post
-* Use your browser tool to open https://shinglyu.com after a 3 mintues to check if the post is published. Retry 3 times. 
+* Write a short and concise social media post promoting this post and output it directly in chat (do NOT create a file)
+* Use your browser tool to open https://shinglyu.com after a 3 minutes to check if the post is published. Retry 3 times. 
