@@ -2,7 +2,7 @@
 layout: post
 title: "ADR as Event Sourcing: Rethinking Software Architecture Documentation in the Age of AI"
 categories: Architecture
-date: 2026-02-07 00:00:00 +01:00
+date: 2026-02-18 00:00:00 +01:00
 excerpt_separator: <!--more-->
 ---
 
