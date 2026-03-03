@@ -13,7 +13,7 @@ What if we could give our AI code reviewer the ADRs as instructions, so it flags
 
 <!--more-->
 
-I built a small demo to show exactly this: [shinglyu/ai-adr-review-demo](https://github.com/shinglyu/ai-adr-review-demo). It's a bookstore API in Node.js/TypeScript with three documented architectural decisions, and GitHub Copilot Code Review configured to enforce them on every PR.
+I built a small demo to show exactly this: [shinglyu/ai-adr-review-demo](https://github.com/shinglyu/ai-adr-review-demo). It's a bookstore API in Node.js/TypeScript with three documented architectural decisions, and the GitHub Copilot Code Review configured to enforce them on every PR.
 
 The results were more interesting than I expected—especially what happens when you try to *tell* the AI to violate an ADR.
 
@@ -51,7 +51,7 @@ against the Architecture Decision Records (ADRs) located in `docs/adr/`.
 
 And when it finds a violation, it should use this format:
 
-```
+```markdown
 🚫 **Architecture Violation: ADR-[NUMBER]**
 
 **Issue:** [Describe what violates the ADR]
@@ -64,7 +64,7 @@ This is a simple idea but a powerful one. The ADRs are already in the repo. The 
 
 ## Seeing it in action: PR #6
 
-I instructed GitHub Copilot coding agent to open [PR #6](https://github.com/shinglyu/ai-adr-review-demo/pull/6) to add `birthDate` and `deathDate` fields to the `Author` model—a reasonable feature request. (PRs #1–5 were trial-and-error experiments while I was setting up the demo.) But I also slipped in a change: asking the agent to switch the Author ID from `number` to `string` (UUID), with the rationale that "number-based IDs look weird." This simulates a new developer who hasn't read the ADRs and just tells the agent to code things their preferred way.
+I instructed the GitHub Copilot coding agent to open [PR #6](https://github.com/shinglyu/ai-adr-review-demo/pull/6) to add `birthDate` and `deathDate` fields to the `Author` model—a reasonable feature request. (PRs #1–5 were trial-and-error experiments while I was setting up the demo.) But I also slipped in a change: asking the agent to switch the Author ID from `number` to `string` (UUID), with the rationale that "number-based IDs look weird." This simulates a new developer who hasn't read the ADRs and just tells the agent to code things their preferred way.
 
 Copilot caught it. Seven times. Here's one of the inline comments on `src/models/Author.ts`:
 
@@ -90,7 +90,7 @@ It recognized that the `birthDate`/`deathDate` part was fine—it was the UUID c
 
 ## The really interesting one: PR #10
 
-[PR #10](https://github.com/shinglyu/ai-adr-review-demo/pull/10) is where it gets more interesting. I used GitHub Copilot coding agent (the SWE agent) to implement a new feature—book reviews with CRUD and average rating calculation. In the issue, I deliberately told it: "Keep all logic in `src/controllers` for simplicity."
+[PR #10](https://github.com/shinglyu/ai-adr-review-demo/pull/10) is where it gets more interesting. I used the GitHub Copilot coding agent (the SWE agent) to implement a new feature—book reviews with CRUD and average rating calculation. In the issue, I deliberately told it: "Keep all logic in `src/controllers` for simplicity."
 
 That instruction directly violates ADR-0003, which requires business logic to live in the service layer.
 
@@ -140,7 +140,7 @@ If you want to try this in your own project, the setup is straightforward:
 
 2. **Add a `.github/copilot-instructions.md`** file that tells Copilot to act as an architecture compliance reviewer. Point it to your ADR directory and give it the violation comment template.
 
-3. **Enable GitHub Copilot Code Review** in your repository settings (Settings → Code security and analysis).
+3. **Enable GitHub Copilot Code Review** by going to Copilot Settings → Copilot Code Review → toggle it.
 
 4. **Optional**: Enable GitHub Copilot auto review so Copilot is automatically assigned as a reviewer on every PR, without having to add it manually each time.
 
