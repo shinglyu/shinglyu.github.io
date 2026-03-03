@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ADR in code: architecture compliance with AI code reviews"
+title: "ADR in Code: Architecture Compliance with AI Code Reviews"
 categories: blog
 date: 2026-03-01 18:00:00 +0100
 excerpt_separator: <!--more-->
