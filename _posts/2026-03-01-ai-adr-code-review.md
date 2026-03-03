@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 tags: [AI, ADR, code-review, GitHub-Copilot, architecture]
 ---
 
-In my [previous post about ADR as Event Sourcing]({% post_url 2026-02-07-adr-as-event-sourcing %}), I talked about capturing architecture decisions continuously as they happen, not months later when everyone's forgotten the context. But writing ADRs is only half the battle. The other half is actually *enforcing* them—and that's where most teams fail. ADRs sit in a separate wiki or documentation tool like Confluence or Notion, gradually becoming archaeology rather than law.
+In my [previous post about ADR as Event Sourcing]({% post_url 2026-02-06-adr-as-event-sourcing %}), I talked about capturing architecture decisions continuously as they happen, not months later when everyone's forgotten the context. But writing ADRs is only half the battle. The other half is actually *enforcing* them—and that's where most teams fail. ADRs sit in a separate wiki or documentation tool like Confluence or Notion, gradually becoming archaeology rather than law.
 
 What if we could give our AI code reviewer the ADRs as instructions, so it flags violations automatically on every pull request?
 
