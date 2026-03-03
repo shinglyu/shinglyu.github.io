@@ -1,3 +1,7 @@
+# Prerequisite
+# Set the PUBLIC_REPO_TOKEN
+#   - Repo: only the public repo
+#   - premissions: Content (read & write), Workflows (read & write)
 name: Publish to Public Repo
 
 on:
