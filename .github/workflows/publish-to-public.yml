@@ -1,0 +1,48 @@
+name: Publish to Public Repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check public repo is not ahead of private repo
+        env:
+          PUBLIC_REPO_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+        run: |
+          git remote remove public 2>/dev/null || true
+          git remote add public https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/shinglyu/shinglyu.github.io.git
+          git fetch public main
+          AHEAD=$(git rev-list HEAD..public/main --count)
+          echo "Public repo is ahead by $AHEAD commit(s)"
+          if [ "$AHEAD" -gt 0 ]; then
+            echo "Error: The public repo has $AHEAD commit(s) not present in this repo."
+            echo "Resolve the divergence before publishing."
+            exit 1
+          fi
+
+      - name: Push to public repo
+        run: |
+          # 'public' remote was added in the previous step and persists in .git/config
+          git push public main
+
+      - name: Wait 2 minutes for GitHub Pages to deploy
+        run: sleep 120
+
+      - name: Verify published site
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 30 --retry 3 https://shinglyu.com)
+          echo "HTTP status: $STATUS"
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Site returned HTTP $STATUS, expected 200"
+            exit 1
+          fi
+          echo "Site is up!"
