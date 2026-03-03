@@ -37,17 +37,21 @@ jobs:
       - name: Push to public repo
         run: |
           # 'public' remote was added in the previous step and persists in .git/config
+          COMMIT_SHA=$(git rev-parse HEAD)
+          echo "COMMIT_SHA=$COMMIT_SHA" >> "$GITHUB_ENV"
           git push public main
 
-      - name: Wait 2 minutes for GitHub Pages to deploy
-        run: sleep 120
+      - name: Wait 1 minute for GitHub Pages to deploy
+        run: sleep 60
 
-      - name: Verify published site
+      - name: Verify published site contains expected commit hash
         run: |
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 30 --retry 3 https://shinglyu.com)
-          echo "HTTP status: $STATUS"
-          if [ "$STATUS" -ne 200 ]; then
-            echo "Site returned HTTP $STATUS, expected 200"
+          echo "Checking for commit $COMMIT_SHA on https://shinglyu.com"
+          BODY=$(curl -s --max-time 30 --retry 3 https://shinglyu.com)
+          if echo "$BODY" | grep -q "git-commit: $COMMIT_SHA"; then
+            echo "Commit $COMMIT_SHA found in live site. Deployment verified!"
+          else
+            echo "Commit $COMMIT_SHA not found in live site HTML."
+            echo "The site may not have deployed yet or the build revision is not embedded."
             exit 1
           fi
-          echo "Site is up!"
