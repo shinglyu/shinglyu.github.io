@@ -339,6 +339,7 @@ Why it works: Honest, personal, shows vulnerability and distinct perspective
 - ❌ Use bullet lists for step-by-step explanations: Use flowing prose instead
 - ❌ Make conclusions just summaries: Add reflection, opinion, broader perspective
 - ❌ Edit for perfect grammar: Slight imperfections make it feel more authentic and raw
+- ❌ Use dramatic expressions for ordinary features: Avoid "killer feature", "game-changer", "revolutionary" for basic or common functionality. Use plain, honest language instead.
 
 ### Do
 - ✅ Start with a story or problem (or jump straight to solution if it fits)

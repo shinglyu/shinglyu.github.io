@@ -1,0 +1,43 @@
+; Example 3: Dutch Box 3 - Foreign savings account in TWD
+; with exchange rate tracking, then close and calculate EUR gain/loss
+;
+; Scenario: Dutch resident with a Taiwanese savings account (TWD)
+; Must report value in EUR on Jan 1 each year (Dutch Box 3 requirement)
+;
+; Run:
+;   hledger -f example3.journal bal assets:savings --end 2024-01-02 --value=then,EUR
+;   hledger -f example3.journal bal assets:savings --end 2024-12-31 --value=then,EUR
+;   hledger -f example3.journal bal assets:savings -p 2024 --value=then,EUR --invert
+;   hledger -f example3.journal areg assets:savings -p 2024 --value=then,EUR
+
+; Exchange rate P directives (TWD to EUR)
+; (approximate rates for illustration)
+P 2023-01-01 TWD 0.030 EUR
+P 2023-06-01 TWD 0.028 EUR
+P 2023-12-31 TWD 0.029 EUR
+P 2024-01-01 TWD 0.029 EUR
+P 2024-06-01 TWD 0.027 EUR
+P 2024-12-31 TWD 0.026 EUR
+
+; Opening balance of Taiwanese savings account (100,000 TWD)
+2023-01-01 Opening balance - Taiwan savings
+    assets:savings:taiwan-bank      100000 TWD
+    equity:opening-balances
+
+; Savings deposit
+2023-06-01 Savings deposit
+    assets:savings:taiwan-bank       50000 TWD
+    income:other
+
+; Cash withdrawal for expenses
+2023-09-01 Cash withdrawal
+    expenses:other                   30000 TWD
+    assets:savings:taiwan-bank
+
+; Balance at 2024-01-01 is 120,000 TWD
+
+; Close the account at end of 2024
+; Move remaining balance back to equity
+2024-12-31 Close Taiwan savings account
+    assets:savings:taiwan-bank      -120000 TWD
+    equity:opening-balances

@@ -1,0 +1,36 @@
+; Example 1: Basic transactions - opening balance, income and expenses
+; Run: hledger -f example1.journal bs
+;      hledger -f example1.journal is
+
+; Opening balance
+2024-01-01 Opening balance
+    assets:checking              5000.00 EUR
+    equity:opening-balances
+
+; Salary income
+2024-01-25 Employer
+    assets:checking              3000.00 EUR
+    income:salary               -3000.00 EUR  ; you can omit this line — hledger infers it
+
+; Groceries
+2024-01-10 Albert Heijn
+    expenses:food:groceries       120.50 EUR
+    assets:checking
+
+2024-01-17 Albert Heijn
+    expenses:food:groceries        95.30 EUR
+    assets:checking
+
+2024-01-24 Albert Heijn
+    expenses:food:groceries       110.00 EUR
+    assets:checking
+
+; Utilities
+2024-01-15 Power Company
+    expenses:utilities:electricity  80.00 EUR
+    assets:checking
+
+; Dining out
+2024-01-20 Local restaurant
+    expenses:food:dining-out       45.00 EUR
+    assets:checking
