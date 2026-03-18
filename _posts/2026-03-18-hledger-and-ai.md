@@ -2,7 +2,7 @@
 layout: post
 title: "hledger and AI: Managing Your Finances in Plain Text"
 categories: blog
-date: 2026-03-14 12:00:00 +0100
+date: 2026-03-18 21:57:22 +0000
 excerpt_separator: <!--more-->
 tags: [hledger, personal-finance, AI, plain-text-accounting, dutch-box3]
 ---

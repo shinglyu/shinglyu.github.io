@@ -25,7 +25,11 @@ When publishing a post from `_drafts/` to `_posts/`:
    - Convert the title to a URL-friendly slug (lowercase, hyphens instead of spaces)
 
 2. **Update the front matter**:
-   - Ensure `date` is set correctly
+   - **ALWAYS** set the `date` field to the current date and time using a shell command, e.g.:
+     ```bash
+     date "+%Y-%m-%d %H:%M:%S %z"
+     ```
+     Copy the output directly into the `date:` field. Never reuse a date from a draft or assume the date is correct.
    - Verify `layout: post` is present
    - Check that `categories` and `excerpt_separator` are properly set
 
@@ -92,9 +96,14 @@ Follow these steps in order:
 4. **Verify images**: Use git to check if images used in the file are committed
 5. **Fact check**: Check for factual errors - if found, STOP
 6. **Security check**: Check for sensitive information (PII, API keys, credentials) - if found, STOP
-7. **Move file**: Use `mv` to move draft to `_posts/` with date prefix (`YYYY-MM-DD-filename.md`)
-8. **Update frontmatter**: Set the publishing date/time
-9. **Commit and push**: Commit the new post (including deleted draft) and push to GitHub
-10. **Review Cloudflare preview**: After the PR is created, Cloudflare will automatically deploy a preview. Use the browser tool to check the Cloudflare preview link to verify the HTML matches the source and the post renders correctly with no layout issues
-11. **Get approval**: If running in GitHub Copilot agent mode, skip this step. Otherwise, ask for user confirmation after the Cloudflare preview has been reviewed
-12. **Social media**: Create a short, concise social media post promoting the article and output it directly in the agent chat (do NOT create a file)
+7. **Move file**: Use `mv` to move draft to `_posts/` with date prefix (`YYYY-MM-DD-filename.md`). The date prefix **must** use today's date, obtained via `date "+%Y-%m-%d"`.
+8. **Update frontmatter**: Set the publishing date/time to **now** using the output of `date "+%Y-%m-%d %H:%M:%S %z"`. Copy the value exactly into the `date:` field — never leave a placeholder or reuse the draft date.
+9. **Verify the date**: Run the date-check script to confirm the front matter date (YYYY-MM-DD portion) matches today. Only the date part is enforced; the time is for ordering purposes:
+   ```bash
+   python3 _scripts/check_post_date.py _posts/YYYY-MM-DD-filename.md
+   ```
+   If the script reports an error, fix the `date` field before proceeding.
+10. **Commit and push**: Commit the new post (including deleted draft) and push to GitHub
+11. **Review Cloudflare preview**: After the PR is created, Cloudflare will automatically deploy a preview. Use the browser tool to check the Cloudflare preview link to verify the HTML matches the source and the post renders correctly with no layout issues
+12. **Get approval**: If running in GitHub Copilot agent mode, skip this step. Otherwise, ask for user confirmation after the Cloudflare preview has been reviewed
+13. **Social media**: Create a short, concise social media post promoting the article and output it directly in the agent chat (do NOT create a file)
