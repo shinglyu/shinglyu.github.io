@@ -13,7 +13,7 @@ I've been managing my finances with a patchwork of Excel spreadsheets for years 
 
 <!--more-->
 
-Then there's the Dutch tax system. If you live in the Netherlands, you're probably familiar with Box 3 — the wealth tax on savings and investments. In the past it was based on fictional flat returns, calculated from your balance on January 1st. The new system asks for your actual return, which requires a lot more detailed numbers — especially if you hold foreign currency accounts (say, a savings account in Taiwan while living in Amsterdam). You need the EUR-equivalent balance on January 1st for the declaration, and you need to track currency gains and losses for the actual-return calculation. In Excel, this is painful. I needed something better.
+Then there's the Dutch tax system. If you live in the Netherlands, you're probably familiar with Box 3 — the wealth tax on savings and investments. In the past, it was based on fictional flat returns, calculated from your balance on January 1st. The new system asks for your actual return, which requires a lot more detailed numbers — especially if you hold foreign currency accounts (say, a savings account in Taiwan while living in Amsterdam). You need the EUR-equivalent balance on January 1st for the declaration, and you need to track currency gains and losses for the actual-return calculation. In Excel, this is painful. I needed something better.
 
 That's where [hledger](https://hledger.org/) came in.
 
@@ -239,7 +239,7 @@ P 2024-12-31 TWD 0.026 EUR
     equity:opening-balances
 ```
 
-**Balance on January 1st** (for the Box 3 declaration):
+### Balance on January 1st (for the Box 3 declaration)
 
 ```bash
 $ hledger -f example3.journal bal assets:savings --end 2024-01-02 --value=then,EUR
@@ -248,7 +248,7 @@ $ hledger -f example3.journal bal assets:savings --end 2024-01-02 --value=then,E
 
 The `--value=then,EUR` flag converts each TWD amount to EUR at the exchange rate in effect at the time of that transaction. So the 100,000 TWD opening at rate 0.030 = 3,000 EUR, plus the 50,000 TWD deposit at 0.028 = 1,400 EUR, minus the 30,000 TWD withdrawal at 0.028 = 840 EUR. Total: 3,560 EUR.
 
-**EUR value of the account at the end of the year** (after closing):
+### EUR value of the account at the end of the year (after closing)
 
 To see the full picture of what each transaction was worth in EUR at the time, I use the account register:
 
@@ -270,7 +270,7 @@ $ hledger -f example3.journal bal assets:savings --value=then,EUR --invert
 
 The −440 EUR is the net currency loss over the account's lifetime.
 
-**Inflows and outflows for the year:**
+### Inflows and outflows for the year
 
 You can also break down total deposits and withdrawals by filtering on the amount sign:
 
@@ -326,7 +326,7 @@ From then on, you run `hledger import bank_export.csv` and everything gets categ
 
 **Ask AI questions, run hledger answers.** The plain text journal is something any LLM can read and reason about directly. A nice workflow is to ask the AI a question about your finances, and instead of having it answer based on the journal directly (which risks hallucinating numbers), ask it to generate the hledger command that answers the question. Then you run the command yourself and get a deterministic, trustworthy result.
 
-For a simple question like *"How much did I spend on food in January?"* the AI would respond with:
+For a simple question like *"How much did I spend on food in January?"*, the AI would respond with:
 
 > Run: `hledger -f example1.journal bal expenses:food -p 2024-01`
 
