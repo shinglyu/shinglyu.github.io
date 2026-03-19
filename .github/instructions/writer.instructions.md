@@ -52,6 +52,7 @@ Based on analysis of blog posts from 2016-2022, the author's writing style has t
 ### Technical Writing Conventions
 - **Code formatting**: Always use backticks for inline code: `function_name`, `variable`, `command`
 - **Command examples**: Show both the command AND expected output - always include what the command produces
+- **Explain output values**: Don't just show raw command output. Explain what the key values mean, especially when they are counterintuitive (e.g., a positive number that represents a loss, or negative values that represent income).
 - **Terminal prompts**: Show terminal prompts (`%` or `$`) when displaying command output
 - **Step-by-step instructions**: Number sequential steps, use bullets for non-sequential items
 - **Visual aids**: Include diagrams, screenshots, or code blocks to illustrate concepts
@@ -196,8 +197,10 @@ Use "blog" for the category (not categories with multiple values). This simplifi
 
 ## Writing Process Guidelines
 
-**Note**: As an AI agent, testing code yourself may not always be possible. If code snippets and screenshots are provided, don't waste time testing them. However, point out obvious errors to the human author.
+**Note**: As an AI agent, if the author provides code snippets or screenshots to use directly, don't waste time re-testing them — use them as given and point out obvious errors.
 
+- **Follow the brief exactly**: When the issue/brief provides specific content, examples, commands, or describes the author's personal situation, implement it precisely. Don't paraphrase the author's situation, substitute your own examples, or add details not in the brief. If the brief says "add a monthly example", add a monthly example — not quarterly.
+- **All code examples must be run**: Every code example or command you write yourself must be executed and the real output verified before including it. Show real output — not approximated or invented output.
 - **Check official docs**: Verify technical details against authoritative sources when possible
 - **Use concrete over abstract**: Specific examples beat generic descriptions
 - **Show, don't just tell**: Include output, screenshots, diagrams
@@ -340,24 +343,20 @@ Why it works: Honest, personal, shows vulnerability and distinct perspective
 - ❌ Make conclusions just summaries: Add reflection, opinion, broader perspective
 - ❌ Edit for perfect grammar: Slight imperfections make it feel more authentic and raw
 - ❌ Use dramatic expressions for ordinary features: Avoid "killer feature", "game-changer", "revolutionary" for basic or common functionality. Use plain, honest language instead.
+- ❌ Use real company names, financial institutions, or service providers in examples without explicit authorization: Use generic placeholders ("Power Company", "My Bank", "Grocery Store") instead.
+- ❌ Make examples region or country-specific unless the brief explicitly targets that audience: Keep examples universally relatable.
+- ❌ Write redundant sentences that repeat the same point: Cut text that doesn't add new information. One clear sentence beats two that say the same thing.
+- ❌ Duplicate examples that demonstrate the same concept already shown: Each example should show something new.
+- ❌ Mention competing tools or alternatives unless explicitly requested: Don't volunteer mentions of similar tools the brief didn't ask for.
 
 ### Do
 - ✅ Start with a story or problem (or jump straight to solution if it fits)
-- ✅ Use plain language: "use" instead of "utilize"
 - ✅ Break up long content with headings
-- ✅ Explain the motivation and use case
-- ✅ Use active voice: "We can solve this..."
-- ✅ Explain what the code does and why
-- ✅ Keep promises made in the intro
-- ✅ Show command output examples with terminal prompts
 - ✅ Use "This is what I came up with:" before complex commands
-- ✅ Allow posts to meander and digress naturally
 - ✅ Include parenthetical asides frequently
-- ✅ Use flowing prose for explanations, bullets for actual lists
 - ✅ Be opinionated - share "I think..." opinions throughout
-- ✅ Allow run-on sentences and stream-of-consciousness writing
-- ✅ Make conclusions reflective/opinionated, not just summaries
-- ✅ Let posts feel raw/unedited - slight imperfection adds authenticity
+- ✅ Follow the brief's specific requirements precisely: examples, commands, structure, and technical details
+- ✅ Explain what command output means, especially when values might be counterintuitive
 
 ## Multilingual Considerations
 
