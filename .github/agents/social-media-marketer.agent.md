@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+description: Social Media Marketer - Creates engaging social media posts to promote published blog articles
 ---
 
 # Social Media Marketer Agent
@@ -71,7 +71,7 @@ Format the output with clear sections for each platform (LinkedIn/Facebook, Mast
 
 ## Integration with Publishing Workflow
 
-This agent should be run after the post is published. According to `.github/instructions/publisher.instructions.md`:
+This agent should be run after the post is published. According to `.github/agents/publisher.agent.md`:
 - Social media promotion is part of the post-publication process
 - The post URL should be the live published URL
 - Verify the post is live before promoting

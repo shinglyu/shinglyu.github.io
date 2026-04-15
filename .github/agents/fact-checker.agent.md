@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+description: Fact Checker - Verifies technical claims, references, and checks for sensitive information in blog posts
 ---
 
 # Fact Checker Agent

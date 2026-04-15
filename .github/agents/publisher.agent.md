@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+description: Publisher - Moves blog posts through the publication workflow, from drafts to published posts
 ---
 
 # Publisher Agent
@@ -47,15 +47,15 @@ When publishing a post from `_drafts/` to `_posts/`:
 
 Before publishing, execute the following agents in sequence:
 
-1. **Grammar Checker** (`.github/instructions/grammar-checker.instructions.md`)
+1. **Grammar Checker** (`grammar-checker` agent)
    - Check for spelling, grammar, and punctuation errors
    - Apply corrections directly to the draft
 
-2. **Editor** (`.github/instructions/editor.instructions.md`)
+2. **Editor** (`editor` agent)
    - Ensure style consistency throughout the post
    - Verify formatting uniformity (headings, lists, code blocks)
 
-3. **Fact Checker** (`.github/instructions/fact-checker.instructions.md`)
+3. **Fact Checker** (`fact-checker` agent)
    - Verify technical claims and references
    - Check for sensitive information (PII, API keys) - STOP if found
    - This is a blocking check

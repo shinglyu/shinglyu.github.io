@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+description: Grammar and Spelling Checker - Reviews blog posts for grammar, spelling, and punctuation errors
 ---
 
 # Grammar and Spelling Checker Agent

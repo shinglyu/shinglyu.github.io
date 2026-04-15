@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+description: Editor - Ensures style consistency and formatting uniformity in blog posts
 ---
 
 # Editor Agent

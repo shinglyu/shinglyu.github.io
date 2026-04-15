@@ -1,12 +1,24 @@
-# GitHub Copilot Agent Instructions
+# GitHub Copilot Instructions
 
-This directory contains instruction files for GitHub Copilot agents that help with the blog writing and publishing workflow.
+This directory contains path-specific instruction files (`.instructions.md`) for GitHub Copilot that provide general context about this repository.
+
+> **Note**: Custom agents (writer, editor, fact-checker, grammar-checker, publisher, social-media-marketer) are defined as `.agent.md` files in `.github/agents/`.
+
+## Files in This Directory
+
+### general.instructions.md
+General repository context applied to all files (`applyTo: '**'`). Describes the blog workflow and draft review requirements.
+
+### writer.instructions.md
+Detailed writing style guide for Shing Lyu's blog, applied to all files (`applyTo: '**'`). Referenced by the `writer` agent in `.github/agents/writer.agent.md`.
 
 ## Available Agents
 
+Specialized agents are defined in `.github/agents/` and can be invoked by Copilot:
+
 ### Content Creation Agents
 
-#### writer.instructions.md
+#### `.github/agents/writer.agent.md`
 **Purpose**: Create blog posts in Shing Lyu's writing style
 
 **When to use**:
@@ -14,15 +26,9 @@ This directory contains instruction files for GitHub Copilot agents that help wi
 - Expanding outlines into complete posts
 - Ensuring consistent voice and style across posts
 
-**Key Features**:
-- Based on analysis of 40+ pre-GenAI era blog posts (2016-2022)
-- Includes specific style patterns, common phrases, and structural templates
-- Covers tutorial, conceptual, and review post formats
-- Provides examples from actual published posts
-
 **See also**: `.github/WRITING_STYLE_ANALYSIS.md` for detailed analysis methodology
 
-#### grammar-checker.instructions.md
+#### `.github/agents/grammar-checker.agent.md`
 **Purpose**: Check for spelling, grammar, and punctuation errors
 
 **When to use**:
@@ -30,7 +36,7 @@ This directory contains instruction files for GitHub Copilot agents that help wi
 - As part of the publishing checklist
 - After making significant edits
 
-#### editor.instructions.md
+#### `.github/agents/editor.agent.md`
 **Purpose**: Ensure style and formatting consistency
 
 **When to use**:
@@ -38,7 +44,7 @@ This directory contains instruction files for GitHub Copilot agents that help wi
 - Before fact checking
 - To verify heading hierarchy and code formatting
 
-#### fact-checker.instructions.md
+#### `.github/agents/fact-checker.agent.md`
 **Purpose**: Verify technical claims and check for sensitive information
 
 **When to use**:
@@ -50,7 +56,7 @@ This directory contains instruction files for GitHub Copilot agents that help wi
 
 ### Publishing Agents
 
-#### publisher.instructions.md
+#### `.github/agents/publisher.agent.md`
 **Purpose**: Move posts through the publishing workflow
 
 **When to use**:
@@ -60,7 +66,7 @@ This directory contains instruction files for GitHub Copilot agents that help wi
 
 **Workflow**: drafts → grammar check → editing → fact check → publish → social media
 
-#### social-media-marketer.instructions.md
+#### `.github/agents/social-media-marketer.agent.md`
 **Purpose**: Create social media posts to promote published articles
 
 **When to use**:
@@ -78,37 +84,31 @@ ideas/ → _drafts/ → human_review/ → _posts/
 
 ### Step-by-step Process
 
-1. **Idea to Draft** (Writer Agent)
+1. **Idea to Draft** (`writer` agent)
    - Input: Idea notes or outline in `ideas/`
    - Output: Full draft in `_drafts/`
-   - Agent: `writer.instructions.md`
 
-2. **Grammar Check** (Grammar Checker Agent)
+2. **Grammar Check** (`grammar-checker` agent)
    - Input: Draft in `_drafts/`
    - Output: Corrected draft
-   - Agent: `grammar-checker.instructions.md`
 
-3. **Style Edit** (Editor Agent)
+3. **Style Edit** (`editor` agent)
    - Input: Grammar-checked draft
    - Output: Style-consistent draft
-   - Agent: `editor.instructions.md`
 
-4. **Fact Check** (Fact Checker Agent) ⚠️ BLOCKING
+4. **Fact Check** (`fact-checker` agent) ⚠️ BLOCKING
    - Input: Edited draft
    - Output: Factually verified draft
-   - Agent: `fact-checker.instructions.md`
    - Note: STOP if errors found
 
-5. **Publish** (Publisher Agent)
+5. **Publish** (`publisher` agent)
    - Input: Verified draft in `_drafts/`
    - Output: Published post in `_posts/` with proper filename
-   - Agent: `publisher.instructions.md`
    - Actions: Move file, update frontmatter, commit changes
 
-6. **Promote** (Social Media Marketer Agent)
+6. **Promote** (`social-media-marketer` agent)
    - Input: Published post URL
-   - Output: Social media posts in `social_media/`
-   - Agent: `social-media-marketer.instructions.md`
+   - Output: Social media post text in the chat
 
 ## File Naming Conventions
 
@@ -120,11 +120,6 @@ ideas/ → _drafts/ → human_review/ → _posts/
 - Location: `_posts/`
 - Format: `YYYY-MM-DD-post-slug.md`
 - Example: `2024-01-15-introduction-to-rust.md`
-
-### Social Media Posts
-- Location: `social_media/`
-- Format: `YYYY-MM-DD-post-slug.md`
-- Sections for each platform (LinkedIn, Facebook, Mastodon)
 
 ## Front Matter Requirements
 
@@ -143,41 +138,27 @@ excerpt_separator: <!--more-->
 
 Use "blog" for the category to simplify the path for future posts. Do not change existing posts for backward compatibility.
 
-## Using These Instructions
-
-### In GitHub Copilot Chat
-Reference these instructions when asking Copilot for help:
-
-```
-@workspace Using the writer agent instructions, create a blog post about [topic]
-```
-
-### In Automated Workflows
-These instructions are automatically applied by GitHub Copilot agents when triggered by the publishing workflow.
-
-### In Manual Reviews
-Use these instructions as a checklist when manually reviewing posts.
-
 ## Contributing to Instructions
 
-When updating agent instructions:
+When updating instruction files in this directory:
 
-1. Maintain the YAML front matter: `applyTo: '**'`
+1. Maintain the YAML front matter with `applyTo:` specifying the appropriate glob pattern
 2. Follow the existing structure and format
-3. Include specific examples when possible
-4. Test instructions by generating sample content
-5. Update this README if adding new agents
+3. Update this README if adding new files
+
+When adding or updating agents, edit the `.agent.md` files in `.github/agents/`.
 
 ## Related Documentation
 
 - `.github/WRITING_STYLE_ANALYSIS.md` - Detailed writing style analysis
 - `.clinerules/workflows/publish.md` - Complete publishing workflow
 - `.github/instructions/general.instructions.md` - General repository context
+- `.github/agents/` - Custom agent definitions
 
 ## Questions?
 
 For questions about these instructions or the workflow:
-1. Check the individual instruction files for detailed guidelines
+1. Check the individual instruction files in `.github/instructions/` and agent files in `.github/agents/` for detailed guidelines
 2. Review the writing style analysis document
 3. Examine published posts in `_posts/` as examples
 4. Reach out to the repository maintainer

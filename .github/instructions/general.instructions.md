@@ -17,6 +17,6 @@ This repository is a blog of Shing Lyu. It's built on Jekyll and hosted on GitHu
 
 Before opening a pull request — even for a draft — the following subagents **must** run and pass:
 
-1. **Editor** (`.github/instructions/editor.instructions.md`): checks style consistency and formatting uniformity
-2. **Fact Checker** (`.github/instructions/fact-checker.instructions.md`): verifies technical claims and checks for sensitive information — this is a **blocking** check; stop and fix any issues before opening the PR
+1. **Editor** (`editor` agent in `.github/agents/editor.agent.md`): checks style consistency and formatting uniformity
+2. **Fact Checker** (`fact-checker` agent in `.github/agents/fact-checker.agent.md`): verifies technical claims and checks for sensitive information — this is a **blocking** check; stop and fix any issues before opening the PR
 
