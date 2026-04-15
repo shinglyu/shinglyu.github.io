@@ -2,7 +2,7 @@
 layout: post
 title: "Automating Weekly Research with GitHub Agentic Workflows"
 categories: blog
-date: 2010-01-01 00:00:00 +08:00
+date: 2026-04-15 20:00:00 +01:00
 excerpt_separator: <!--more-->
 tags: [GitHub-Actions, AI, automation, github-copilot, gh-aw]
 ---
