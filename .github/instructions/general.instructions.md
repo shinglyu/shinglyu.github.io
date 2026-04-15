@@ -20,3 +20,7 @@ Before opening a pull request — even for a draft — the following subagents *
 1. **Editor** (`editor` agent in `.github/agents/editor.agent.md`): checks style consistency and formatting uniformity
 2. **Fact Checker** (`fact-checker` agent in `.github/agents/fact-checker.agent.md`): verifies technical claims and checks for sensitive information — this is a **blocking** check; stop and fix any issues before opening the PR
 
+# Publishing Requirement
+
+To publish a post, you **must** use the **Publisher** agent (`.github/agents/publisher.agent.md`). Do not attempt to publish manually — the publisher agent enforces date validation, timezone rules, and conflict-of-interest timing checks.
+
