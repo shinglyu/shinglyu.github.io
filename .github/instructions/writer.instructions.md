@@ -348,6 +348,10 @@ Why it works: Honest, personal, shows vulnerability and distinct perspective
 - ❌ Write redundant sentences that repeat the same point: Cut text that doesn't add new information. One clear sentence beats two that say the same thing.
 - ❌ Duplicate examples that demonstrate the same concept already shown: Each example should show something new.
 - ❌ Mention competing tools or alternatives unless explicitly requested: Don't volunteer mentions of similar tools the brief didn't ask for.
+- ❌ Reference the author's current employer or identify the professional context: Use vague personal framing instead — "I've been experimenting with this setup" rather than anything that points to a specific workplace.
+- ❌ Add meta-commentary about the post itself: Phrases like "This is the most useful part of the post" or "This is the key takeaway" sound self-congratulatory. Let the content speak for itself.
+- ❌ Leave external documentation as plain text: Any mention of "the official docs", "the AWS documentation", "the GitHub documentation", etc. must be a hyperlink. If you can't find the right URL, write the sentence differently rather than leaving unlinked prose.
+- ❌ Silently adapt official documentation examples: When you base an explanation on a docs example, say so — "I started with the example from the official docs" or "the docs show it like this...". Readers benefit from knowing the starting point.
 
 ### Do
 - ✅ Start with a story or problem (or jump straight to solution if it fits)
@@ -357,6 +361,9 @@ Why it works: Honest, personal, shows vulnerability and distinct perspective
 - ✅ Be opinionated - share "I think..." opinions throughout
 - ✅ Follow the brief's specific requirements precisely: examples, commands, structure, and technical details
 - ✅ Explain what command output means, especially when values might be counterintuitive
+- ✅ Hyperlink every mention of external documentation, official docs, or named references
+- ✅ Credit documentation examples: when your explanation is based on an official example, say so explicitly
+- ✅ Combine code examples from different doc sections when they must be used together in practice, and explain the connection
 
 ## Multilingual Considerations
 
