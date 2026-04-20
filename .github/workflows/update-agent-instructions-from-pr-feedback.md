@@ -7,6 +7,7 @@ on:
       - "_drafts/**"
       - "ideas/**"
       - "human_review/**"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,6 +24,11 @@ safe-outputs:
     labels: [agent-instructions, automated]
     draft: true
     if-no-changes: ignore
+    allowed-files:
+      - ".github/instructions/**"
+      - ".github/agents/**"
+      - ".github/aw/**"
+    protected-files: fallback-to-issue
 ---
 
 # Update Agent Instructions from PR Feedback
