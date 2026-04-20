@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Running GitHub Copilot Cloud Agent on AWS CodeBuild with Self-Hosted Runners"
-date: 2026-04-20 00:00:00 +00:00
+date: 2026-04-20 23:10:19 +0200
 categories: blog
 tags: [GitHub-Copilot, AWS, CodeBuild, self-hosted-runners]
 excerpt_separator: <!--more-->
@@ -31,7 +31,7 @@ Go through the repository settings to enable the Cloud Agent and to point it at 
 
 The two steps above are straightforward in theory, but there are several ways the setup can silently fail or behave unexpectedly. Here's what I ran into.
 
-### Pitfall 1: Network and firewall allowlists
+### Pitfall 1: The network and firewall allowlists are easy to overlook
 
 When the Copilot Cloud Agent runs, it needs to reach several external hosts. If your CodeBuild project runs inside a VPC with restrictive outbound rules (which is common in enterprise setups), you need to allowlist all the hosts GitHub requires.
 
@@ -43,9 +43,9 @@ The [GitHub documentation on self-hosted runners](https://docs.github.com/en/act
 - `api.business.githubcopilot.com` (for Copilot Business users)
 - `api.enterprise.githubcopilot.com` (for Copilot Enterprise users)
 
-If you're using the OpenAI Codex third-party agent, there are also additional npm-related domains required — check the GitHub docs for the full list. And if any of the above are blocked, the action run will fail with a lot of timeouts — the kind that look like transient network errors but are actually your firewall doing its job. I spent longer than I'd like to admit debugging timeout errors before realizing the runner domains were missing from the allowlist. In my experience, the missing standard runner domains from the self-hosted runner docs (not the Copilot-specific list) are the easiest to overlook.
+If you're using the OpenAI Codex third-party agent, there are additional npm-related domains required — check the GitHub docs for the full list. And if any of the above are blocked, the action run will fail with a lot of timeouts — the kind that look like transient network errors but are actually your firewall doing its job. I spent longer than I'd like to admit debugging timeout errors before realizing the runner domains were missing from the allowlist. In my experience, the missing standard runner domains from the self-hosted runner docs (not the Copilot-specific list) are the easiest to overlook.
 
-### Pitfall 2: Disable the built-in firewall in Copilot settings
+### Pitfall 2: The built-in Copilot firewall must be disabled
 
 Copilot has a "Built-in Firewall" option in the repository settings (under the Copilot section). If you're using a self-hosted runner, you need to disable this.
 
@@ -65,7 +65,7 @@ If you omit `run_id` and `run_attempt` and just use the project name, the Copilo
 
 ### Pitfall 4: The `copilot-setup-steps` job needs `contents: read` permission
 
-This one is listed in the GitHub documentation, but near the top where it reads like boilerplate — not something that seems directly related to self-hosted runners. I started from the example in the [GitHub documentation on customizing the agent environment](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment):
+This one is listed in the GitHub documentation, but near the top, where it reads like boilerplate — not something that seems directly related to self-hosted runners. I started from the example in the [GitHub documentation on customizing the agent environment](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment):
 
 ```yaml
 #===== .github/workflows/copilot-setup-steps.yml =====
