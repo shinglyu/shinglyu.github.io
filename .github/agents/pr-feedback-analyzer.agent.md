@@ -34,7 +34,6 @@ Collect the full text of every piece of feedback left by **human reviewers only*
 ### 2. Read the existing agent instructions
 
 Read every file in `.github/instructions/`:
-- `writer.instructions.md`
 - `general.instructions.md`
 
 And every file in `.github/agents/`:
@@ -62,7 +61,7 @@ Only surface feedback that is **generalizable**: it would help the AI agent beha
 ### 4. Draft the instruction updates
 
 For each generalizable improvement, decide which file it belongs to:
-- Writing style issues → `writer.instructions.md`
+- Writing style issues → `writer.agent.md`
 - Phrasing/grammar patterns → `grammar-checker.agent.md`
 - Fact-checking patterns → `fact-checker.agent.md`
 - Formatting/structure → `editor.agent.md`

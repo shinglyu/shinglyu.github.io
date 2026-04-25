@@ -9,9 +9,6 @@ This directory contains path-specific instruction files (`.instructions.md`) for
 ### general.instructions.md
 General repository context applied to all files (`applyTo: '**'`). Describes the blog workflow and draft review requirements.
 
-### writer.instructions.md
-Detailed writing style guide for Shing Lyu's blog, applied to all files (`applyTo: '**'`). Referenced by the `writer` agent in `.github/agents/writer.agent.md`.
-
 ## Available Agents
 
 Specialized agents are defined in `.github/agents/` and can be invoked by Copilot:
@@ -19,7 +16,7 @@ Specialized agents are defined in `.github/agents/` and can be invoked by Copilo
 ### Content Creation Agents
 
 #### `.github/agents/writer.agent.md`
-**Purpose**: Create blog posts in Shing Lyu's writing style
+**Purpose**: Create blog posts in Shing Lyu's writing style. Contains the complete writing style guide and detailed instructions.
 
 **When to use**:
 - Converting ideas to full drafts
@@ -146,14 +143,14 @@ When updating instruction files in this directory:
 2. Follow the existing structure and format
 3. Update this README if adding new files
 
-When adding or updating agents, edit the `.agent.md` files in `.github/agents/`.
+When adding or updating agents, edit the `.agent.md` files in `.github/agents/`. The complete writing style guide lives in `.github/agents/writer.agent.md`.
 
 ## Related Documentation
 
 - `.github/WRITING_STYLE_ANALYSIS.md` - Detailed writing style analysis
 - `.clinerules/workflows/publish.md` - Complete publishing workflow
 - `.github/instructions/general.instructions.md` - General repository context
-- `.github/agents/` - Custom agent definitions
+- `.github/agents/` - Custom agent definitions (including the complete writer style guide in `writer.agent.md`)
 
 ## Questions?
 

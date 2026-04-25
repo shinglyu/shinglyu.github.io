@@ -28,7 +28,11 @@ safe-outputs:
       - ".github/instructions/**"
       - ".github/agents/**"
       - ".github/aw/**"
-    protected-files: fallback-to-issue
+    protected-files:
+      policy: fallback-to-issue  # same values as string form (default: blocked)
+      exclude:
+        - .github/agents/writer.agent.md  # allow the agent to update writer instructions
+        - .github/agents/                 # allow updates to the .agents/ directory
 ---
 
 # Update Agent Instructions from PR Feedback
