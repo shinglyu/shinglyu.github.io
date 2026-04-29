@@ -2,12 +2,12 @@
 layout: post
 title: "Why AI-Generated Personal Software Should Default to Plaintext"
 categories: blog
-date: 2026-04-14 20:24:19 +0000
+date: 2026-04-25 10:37:38 +0200
 excerpt_separator: <!--more-->
 tags: [AI, plaintext, personal-software, vibe-coding, hledger, obsidian, event-sourcing]
 ---
 
-A few weeks ago I was vibe-coding a personal CRM with an AI assistant. Nothing fancy — just something to log my communication with people at work: who I talked to, what we discussed, when to follow up. The AI cheerfully scaffolded the whole thing: a Python backend, a SQLite database, tables for contacts and interactions, a schema with migration scripts.
+A few weeks ago, I was vibe coding a personal CRM with an AI assistant. Nothing fancy — just something to log my communication with people at work: who I talked to, what we discussed, when to follow up. The AI cheerfully scaffolded the whole thing: a Python backend, a SQLite database, tables for contacts and interactions, a schema with migration scripts.
 
 I stared at the output for a moment. A contacts table with foreign keys. For notes I could have kept in a text file.
 
@@ -21,7 +21,7 @@ My thesis: **plaintext files are the right default storage format for AI-generat
 
 I'm talking about single-user, single-machine apps generated (or heavily assisted) by AI — what people are calling [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding). A budget logger. A reading list. A habit tracker. A daily journal. A tool that scratches a very specific itch that no off-the-shelf app quite scratches.
 
-These apps share something important: they generate a small amount of data. One person's habits, finances, or notes over years of use rarely amounts to more than a few megabytes. Compare that to a SaaS product where database indexing, sharding, and ACID guarantees genuinely matter. The scale is completely different. Personal software doesn't need the infrastructure of a bank.
+These apps share something important: they generate a small amount of data. One person's habits, finances, or notes over years of use rarely amount to more than a few megabytes. Compare that to a SaaS product where database indexing, sharding, and ACID guarantees genuinely matter. The scale is completely different. Personal software doesn't need the infrastructure of a bank.
 
 I already had a vague sense of this from using [Obsidian](https://obsidian.md/) — notes as plain Markdown files, synced, searchable, no proprietary database. But the pattern really crystallized for me when I encountered [hledger](https://hledger.org/). Here was a financial tool where your entire account history lived in a text file, and deterministic CLI tools read that file to produce reports. That made the principle concrete. I wrote more about that experience in [my hledger post](https://shinglyu.com/blog/2026/03/18/hledger-and-ai.html) — the whole [plaintext accounting](https://plaintextaccounting.org/) philosophy is built on exactly this observation: a plain file is enough.
 
@@ -49,13 +49,13 @@ One clarification worth making: version control is not a backup. It doesn't prot
 
 ### Portability and no lock-in
 
-Text files open in any editor on any OS. This sounds obvious but it matters a lot when the "app" is AI-generated code that might break after a dependency update. If the app breaks, you still have your data — in a format you can open in Notepad if you have to.
+Text files open in any editor on any OS. This sounds obvious, but it matters a lot when the "app" is AI-generated code that might break after a dependency update. If the app breaks, you still have your data — in a format you can open in Notepad if you have to.
 
 And if you want to migrate to a different tool? That becomes a format conversion problem, not a database migration problem. If you ever want to switch from [hledger](https://hledger.org/) to [Beancount](https://beancount.github.io/), for instance, it's mostly just text transformation. An AI can build that conversion script. Or you can rebuild the whole app with different functionality — the data stays the same. That's a completely different proposition from exporting a proprietary database format.
 
 ### Sync is already solved — mostly
 
-[Syncthing](https://syncthing.net/), Dropbox, OneDrive, ResilioSync — file synchronization is a solved problem. For a personal app you want on multiple machines, you don't need to build a backend, set up user accounts, or deploy cloud infrastructure. The file just syncs.
+[Syncthing](https://syncthing.net/), Dropbox, OneDrive, Resilio Sync — file synchronization is a solved problem. For a personal app you want on multiple machines, you don't need to build a backend, set up user accounts, or deploy cloud infrastructure. The file just syncs.
 
 This is a bigger deal than it sounds for non-technical vibe coders. A lot of people can generate a working app with AI these days — but maintaining a cloud database is a different skill entirely. You're looking at Docker or a managed cloud-native database (RDS, Cloud SQL, etc.), deployment pipelines, connection strings, cloud costs, and endless debugging when something in the infrastructure breaks. And if you misconfigure access controls — easy to do when you're hacking on a personal project — you can accidentally expose your personal data to the internet. Avoiding a database means avoiding all of that. For a personal tool, that tradeoff is almost always worth it.
 
@@ -115,7 +115,7 @@ The event-based approach has a nice property for AI assistants: append-only is m
 
 ### AI-built indexes at write time
 
-Andrej Karpathy (OpenAI co-founder and former Tesla AI Director) has advocated for a plaintext-first approach to personal knowledge bases: store everything as Markdown files in folders, manage it with git, and use standard tools like grep for search. In a [2020 tweet](https://twitter.com/karpathy/status/1279425930683709442) he wrote: "The thing about plaintext is that it is future proof, search/index-able, script-able, diff-able, portable, not a proprietary format, hackable, and never locks you in to any tool." That philosophy applies directly to personal software.
+Andrej Karpathy (OpenAI co-founder and former Tesla AI Director) has advocated for a plaintext-first approach to personal knowledge bases: store everything as Markdown files in folders, manage it with git, and use standard tools like grep for search. His philosophy — that plaintext is portable, future-proof, and never locks you in to any tool — applies directly to personal software.
 
 More recently, he published a [GitHub gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) describing an "LLM wiki" pattern that takes this further. Instead of RAG — chunking documents, generating embeddings, running vector search at query time — the LLM incrementally builds and maintains a persistent wiki of Markdown files as you add sources. The key enabler is a single `index.md` file: a catalog of all wiki pages with one-line summaries. The LLM reads the index first to find relevant pages, then drills in. As the gist puts it: "This works surprisingly well at moderate scale (~100 sources, ~hundreds of pages) and avoids the need for embedding-based RAG infrastructure." No vector database. No embeddings pipeline. Just text files and an index.
 
@@ -137,7 +137,7 @@ The argument isn't "never use databases." It's "don't reach for a database by de
 
 ## The default I'd recommend
 
-Next time you vibe-code a personal app, push back when the AI reaches for SQLite. Ask: "Can this data fit in a text file?" Honestly, the answer is usually yes.
+Next time you vibe code a personal app, push back when the AI reaches for SQLite. Ask: "Can this data fit in a text file?" Honestly, the answer is usually yes.
 
 Plaintext + git + file sync is a low-complexity stack that covers a surprising amount of ground. It's auditable, portable, easy to back up, trivial to sync, and works beautifully with AI assistants that are trained on text.
 
