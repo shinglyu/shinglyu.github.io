@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Building a DIY Document Scanner With a Cardboard Box"
-date: 2026-05-16 23:30:00 +01:00
+title: "Building a DIY Document Scanner with a Cardboard Box"
+date: 2026-05-22 18:02:00 +0200
 categories: blog
 tags: [diy, productivity, smartphone]
 excerpt_separator: <!--more-->
