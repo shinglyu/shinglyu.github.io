@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using .github-private to Share Copilot Custom Agents Across All Your Personal Repos"
-date: 2026-05-27 20:50:00 +0200
+date: 2026-05-28 18:00:00 +0200
 categories: blog
 tags: [GitHub-Copilot, productivity, github]
 excerpt_separator: <!--more-->
@@ -27,7 +27,7 @@ Here is the part that is not in the documentation: the same mechanism works for 
 
 If you create a **private** repository named `.github-private` under your personal account, and add agent profiles under an `agents/` directory, those agents become available to all repositories you own personally. One place to define them, and they show up everywhere.
 
-I am on a **GitHub Copilot Pro** subscription and confirmed this works for me. I am not sure whether the same behaviour is available on the free tier. If you try this on a free account, [let me know whether it worked](mailto:pushover_simplify734@simplelogin.com).
+I am on a **GitHub Copilot Pro** subscription and confirmed this works for me. I am not sure whether the same behavior is available on the free tier. If you try this on a free account, [let me know whether it worked](mailto:pushover_simplify734@simplelogin.com).
 
 ## How to set it up
 
@@ -72,7 +72,7 @@ That is all. Once the file is in the repository, the agent appears in Copilot ac
 
 The main benefit is having a single source of truth for agents you use everywhere. I have a few agents I reach for regularly — a documentation writer and a coding agent with general best practices. Rather than copying agent files into each repository, I maintain them in one place and they are available wherever I work.
 
-It also makes it easier to iterate on agent prompts. When I notice an agent behaving in an unexpected way, I update the file in `.github-private` and the change takes effect across all repos immediately. No need to track down which repositories have copies and update each one.
+It also makes it easier to iterate on agent prompts. When I notice an agent behaving in an unexpected way, I update the file in `.github-private` and the change takes effect across all repositories immediately. No need to track down which repositories have copies and update each one.
 
 ## One thing to keep in mind
 
@@ -80,4 +80,4 @@ The repository must remain **private**. This is especially important because age
 
 ## Conclusion
 
-The `.github-private` repository is documented as an organization and enterprise feature, but it works just as well for personal GitHub accounts. If you find yourself wanting the same Copilot custom agents across all your repos, creating a private `.github-private` repository under your personal account and placing agent profiles in its `agents/` directory is the simplest way to do it.
+The `.github-private` repository is documented as an organization and enterprise feature, but it works just as well for personal GitHub accounts. If you find yourself wanting the same Copilot custom agents across all your repositories, creating a private `.github-private` repository under your personal account and placing agent profiles in its `agents/` directory is the simplest way to do it.
