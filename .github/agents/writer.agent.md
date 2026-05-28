@@ -69,6 +69,7 @@ Based on analysis of blog posts from 2016-2022, the author's writing style has t
 - **Terminal prompts**: Show terminal prompts (`%` or `$`) when displaying command output
 - **Step-by-step instructions**: Number sequential steps, use bullets for non-sequential items
 - **Visual aids**: Include diagrams, screenshots, or code blocks to illustrate concepts
+- **Image paths**: Always use root-relative paths (e.g., `/blog_assets/post-name/image.png`) — never `{{site.url}}/...` or `{{site.baseurl}}/...` — so images render correctly in Cloudflare previews and local builds
 - **Links and references**: Link to official documentation, specs, and related resources. Also link key terminologies or product names if you don't plan to explain them in detail
 
 ## Preferred Blog Structure
