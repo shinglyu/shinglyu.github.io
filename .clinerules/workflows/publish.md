@@ -6,9 +6,15 @@
 * Use the git command to check if the images used in the file are commited
 * Check for factual error in the draft. If so, stop
 * Check if the post contains senstivity information like PII, or API keys or credential. If so, stop.
-* Use `mv` to move the draft file to `_posts/` with date prefix (`YYYY-MM-DD-filename.md`)
-* Update the frontmatter with the publishing date time.
+* Run `./bin/publish -y <draft_file>` to move the draft to `_posts/` with the correct date-prefixed
+  filename and a deterministic timestamp in Amsterdam timezone.
+  The binary automatically adjusts the publish time to 8:30 AM (±5 min jitter, always before 09:00) when
+  publishing during working hours (Mon–Fri 09:00–18:00), so posts are never stamped with a future or
+  work-hour time that could delay or skip rendering.
+  Source code is in `tools/publish-rs/`. On non-Linux systems, rebuild with `cargo build --release`
+  inside that directory and copy the binary to `bin/publish`.
 * Use git to commit (remember to also add the deleted draft) the new post and push to create a PR.
 * After the PR is created, Cloudflare will automatically deploy a preview. Guide the user to review the Cloudflare auto-deployed link provided in the PR to verify the post renders correctly and has no layout issues.
 * Write a short and concise social media post promoting this post and output it directly in chat (do NOT create a file)
-* Use your browser tool to open https://shinglyu.com after a 3 minutes to check if the post is published. Retry 3 times. 
+* Use your browser tool to open https://shinglyu.com after 3 minutes to check if the post is published. Retry 3 times. 
+

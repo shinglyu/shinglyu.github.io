@@ -1,0 +1,13 @@
+[package]
+name = "publish"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "publish"
+path = "src/main.rs"
+
+[dependencies]
+chrono = { version = "0.4", features = ["clock"] }
+chrono-tz = "0.10"
+rand = "0.8"

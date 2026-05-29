@@ -9,3 +9,5 @@ vendor/
 .gem/
 # Ignore social_media directory - posts should only be in agent chat
 social_media/
+# Ignore Rust build artifacts (binary is checked in at bin/publish)
+tools/publish-rs/target/

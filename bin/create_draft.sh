@@ -1,20 +1,26 @@
-echo "Please input the title:"
+#!/bin/bash
+# Creates a new blog draft with the current date/time in Amsterdam timezone.
+# Usage: ./bin/create_draft.sh "<title>"
+# Or run without arguments to be prompted for a title.
 
-read TITLE
+if [ -n "$1" ]; then
+  TITLE="$*"
+else
+  echo "Please input the title:"
+  read -r TITLE
+fi
+
 SLUGIFIED="$(echo -n "${TITLE}" | sed -e 's/[^[:alnum:]]/-/g' \
   | tr -s '-' | tr A-Z a-z)"
 
-TIME=$(date +%Y-%m-%d\ %H:%M:%S\ +08:00)
+# Use Amsterdam timezone so the post date is always in the past and renders correctly
+TIME=$(TZ="Europe/Amsterdam" date +"%Y-%m-%d %H:%M:%S %:z")
 
-#echo $TITLE
-#echo $SLUGIFIED
-OUTFILE="_drafts/$SLUGIFIED.md"
+OUTFILE="_drafts/${SLUGIFIED}.md"
 
-cp _drafts/template.md $OUTFILE
-# sed -i 's/title:  "Your Title Here" /title: "$OUTFILE"/g'
-sed -i "s/title: TODO/title: $TITLE/g" $OUTFILE
-sed -i "s/date: 2010-01-01 00:00:00 +08:00/date: $TIME/g" $OUTFILE
-# cp _drafts
-echo "File gereated: $OUTFILE"
-cat $OUTFILE
-vim $OUTFILE
+cp _drafts/template.md "${OUTFILE}"
+sed -i "s/title: TODO/title: ${TITLE}/g" "${OUTFILE}"
+sed -i "s/date: 2010-01-01 00:00:00 +08:00/date: ${TIME}/g" "${OUTFILE}"
+
+echo "File generated: ${OUTFILE}"
+cat "${OUTFILE}"
