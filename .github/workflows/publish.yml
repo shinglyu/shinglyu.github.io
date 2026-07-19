@@ -1,0 +1,50 @@
+name: Publish Blog Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_name:
+        description: 'Select the draft to publish'
+        required: true
+        type: choice
+        options:
+          # Placeholder entry; publishable drafts are appended below this line by the agent.
+          - "placeholder-managed-by-agent.md"
+      run_mode:
+        description: 'Select steps to execute'
+        required: true
+        type: choice
+        default: 'both'
+        options:
+          - 'publish_only'
+          - 'sync_to_public_only'
+          - 'both'
+
+jobs:
+  publish_job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Publish (Move & Format)
+        if: ${{ github.event.inputs.run_mode == 'publish_only' || github.event.inputs.run_mode == 'both' }}
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          chmod +x .github/scripts/publish.sh
+          .github/scripts/publish.sh "${{ github.event.inputs.file_name }}"
+
+      - name: Run Sync to Public
+        if: ${{ github.event.inputs.run_mode == 'sync_to_public_only' || github.event.inputs.run_mode == 'both' }}
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          PUBLIC_REPO_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+        run: |
+          chmod +x .github/scripts/sync_to_public.sh
+          .github/scripts/sync_to_public.sh

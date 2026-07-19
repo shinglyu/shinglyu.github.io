@@ -41,7 +41,6 @@ And every file in `.github/agents/`:
 - `editor.agent.md`
 - `fact-checker.agent.md`
 - `grammar-checker.agent.md`
-- `publisher.agent.md`
 - `social-media-marketer.agent.md`
 
 ### 3. Analyze the feedback
@@ -65,7 +64,7 @@ For each generalizable improvement, decide which file it belongs to:
 - Phrasing/grammar patterns → `grammar-checker.agent.md`
 - Fact-checking patterns → `fact-checker.agent.md`
 - Formatting/structure → `editor.agent.md`
-- Publishing workflow → `publisher.agent.md`
+- Publishing workflow → `.github/workflows/publish.yml` and `.github/scripts/`
 - Cross-cutting concerns → `general.instructions.md`
 
 Edit those files to add or clarify the relevant rules. Keep changes **minimal and surgical** — do not rewrite entire sections. Add new bullet points, clarify existing ones, or add concrete examples as needed.

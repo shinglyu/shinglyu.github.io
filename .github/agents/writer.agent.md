@@ -12,11 +12,11 @@ When a user asks you to write or draft a blog post:
 
 1. **Write the draft** following the detailed style guidelines below
 2. **Save the draft** to the `_drafts/` folder with a descriptive filename (e.g., `_drafts/my-post-title.md`)
-3. **Run the editor subagent** (`editor` agent) to check style and formatting consistency
-4. **Run the fact-checker subagent** (`fact-checker` agent) to verify technical claims — stop if factual errors or sensitive information are found
-5. **Open a pull request** with the reviewed draft
+3. **Ensure the draft front matter is ready for publication** by including `grammar_checked: false` and `fact_checked: false` when the draft is intended for publication. If the draft comes from a deterministic template or script, rely on that template instead of treating missing flags as a special case.
+4. **Update the publish workflow list** by appending the draft filename under the placeholder entry in `.github/workflows/publish.yml` within `workflow_dispatch.inputs.file_name.options` when the draft should be publishable.
+5. **Open a pull request** with the draft so it can be reviewed iteratively.
 
-> **Important**: Steps 3 and 4 (editor and fact-checker review) are **required** before opening a PR, even for drafts.
+> **Important**: Once the draft is ready for editorial review, hand it off to the `editor` agent. The editor agent is responsible for invoking the grammar-checker and fact-checker subagents and updating the front matter flags before the deterministic GitHub Actions publish workflow can publish the draft.
 
 ## Core Principle: Authenticity Over Polish
 

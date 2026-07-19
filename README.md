@@ -53,16 +53,19 @@ bundle exec jekyll serve --drafts
 
 # Publish
 ```
-# Check if the post has any grammar, spelling error.
-# Check if the post contains any credentials, confidential data, PII etc. 
-./bin/publish.sh _drafts/draft_file_name.md
-# Verify if the draft file has been moved to the _post folder and added a timesteamp.
-# Verify if the post publish time is in the past. Future post will not be visible
-git commit
-git push
+# Drafts published through GitHub Actions should start with these front matter fields:
+---
+grammar_checked: false
+fact_checked: false
+---
+
+# After the editor-led grammar/fact review is complete, set the matching flags
+# to true before running the publish workflow.
+#
+# Add the draft filename to .github/workflows/publish.yml, then run the
+# "Publish Blog Post" workflow with publish_only, sync_to_public_only, or both.
+# The workflow uses .github/scripts/publish.sh and .github/scripts/sync_to_public.sh.
 ```
 
 Check https://github.com/shinglyu/shinglyu.github.io/deployments/github-pages to see if the deployment is successful
 Then, check https://shinglyu.com to verify if the post is published
-
-
