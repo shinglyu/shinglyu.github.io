@@ -9,7 +9,7 @@ on:
         type: choice
         options:
           # Placeholder entry; add publishable drafts below this line.
-          - "placeholder-managed-by-agent.md"
+          - "placeholder-use-this-if-sync-only.md"
           - "ai-the-next-printing-press-of-knowledge-transfer.md"
       run_mode:
         description: 'Select steps to execute'
@@ -48,3 +48,25 @@ jobs:
         run: |
           chmod +x .github/scripts/sync_to_public.sh
           .github/scripts/sync_to_public.sh
+
+      - name: Wait 1.5 minutes for GitHub Pages to deploy
+        if: ${{ github.event.inputs.run_mode == 'sync_to_public_only' || github.event.inputs.run_mode == 'both' }}
+        env:
+          DEPLOYMENT_WAIT_SECONDS: "90"
+        run: sleep "$DEPLOYMENT_WAIT_SECONDS"
+
+      - name: Verify published site contains expected commit hash
+        if: ${{ github.event.inputs.run_mode == 'sync_to_public_only' || github.event.inputs.run_mode == 'both' }}
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+          SITE_URL: "https://shinglyu.com"
+        run: |
+          echo "Checking for commit $COMMIT_SHA on $SITE_URL"
+          BODY=$(curl -s --max-time 30 --retry 3 "$SITE_URL")
+          if echo "$BODY" | grep -q "git-commit: $COMMIT_SHA"; then
+            echo "Commit $COMMIT_SHA found in live site. Deployment verified!"
+          else
+            echo "Commit $COMMIT_SHA not found in live site HTML."
+            echo "The site may not have deployed yet or the build revision is not embedded."
+            exit 1
+          fi

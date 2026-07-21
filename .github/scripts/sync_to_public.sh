@@ -22,6 +22,11 @@ git remote remove public 2>/dev/null || true
 
 # actions/checkout injects GitHub auth headers for the current repository.
 # Clear them so the dedicated public-repo token is used for the cross-repo push.
+# Fine-grain PAT permissions needed for the public repo token:
+# - Repo: the public repo
+# - Contents: Read and write
+# - Workflows: Read and write (required because this sync touches GitHub Actions files)
+# - Metadata: auto-selected
 git config --local --unset-all http.https://github.com/.extraheader || true
 
 git remote add public "https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_OWNER}/${PUBLIC_REPO_NAME}.git"

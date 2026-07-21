@@ -16,7 +16,7 @@ usage() {
 
 FILE_NAME="$(basename "$1")"
 SOURCE_FILE="${DRAFTS_DIR}/${FILE_NAME}"
-PLACEHOLDER_FILE="placeholder-managed-by-agent.md"
+PLACEHOLDER_FILE="placeholder-use-this-if-sync-only.md"
 
 if [ "${FILE_NAME}" = "${PLACEHOLDER_FILE}" ]; then
   echo "Error: Select a real draft file instead of the placeholder option"
