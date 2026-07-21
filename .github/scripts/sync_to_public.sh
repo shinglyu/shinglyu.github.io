@@ -8,9 +8,9 @@ PUBLIC_REPO_NAME="${PUBLIC_REPO_NAME:-shinglyu.github.io}"
 
 cd "${REPO_ROOT}"
 
-BRANCH_NAME="${GITHUB_REF_NAME:-$(git rev-parse --abbrev-ref HEAD)}"
-if [ "${BRANCH_NAME}" = "HEAD" ] || [ -z "${BRANCH_NAME}" ]; then
-  BRANCH_NAME="main"
+if [ -z "${PUBLIC_REPO_TOKEN:-}" ]; then
+  echo "Error: PUBLIC_REPO_TOKEN is required to sync to the public repository"
+  exit 1
 fi
 
 if ! git diff --quiet || ! git diff --cached --quiet; then
@@ -18,27 +18,33 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   exit 1
 fi
 
-git fetch origin "${BRANCH_NAME}"
-if ! git rev-parse --verify --quiet "origin/${BRANCH_NAME}" >/dev/null; then
-  echo "Error: remote branch origin/${BRANCH_NAME} does not exist"
-  exit 1
-fi
-LOCAL_AHEAD_COUNT="$(git rev-list --count "origin/${BRANCH_NAME}..HEAD")"
-if [ "${LOCAL_AHEAD_COUNT}" -gt 0 ]; then
-  echo "Error: local branch is ahead of origin/${BRANCH_NAME}; push or discard local commits before syncing"
-  exit 1
-fi
-# Reset to the fetched private-repo tip so the public push always mirrors the latest committed state.
-git reset --hard "origin/${BRANCH_NAME}"
-
 git remote remove public 2>/dev/null || true
-if [ -n "${PUBLIC_REPO_URL:-}" ]; then
-  git remote add public "${PUBLIC_REPO_URL}"
-else
-  if [ -z "${PUBLIC_REPO_TOKEN:-}" ]; then
-    echo "Error: PUBLIC_REPO_TOKEN is required when PUBLIC_REPO_URL is not set"
-    exit 1
-  fi
-  git remote add public "https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_OWNER}/${PUBLIC_REPO_NAME}.git"
+git remote add public "https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_OWNER}/${PUBLIC_REPO_NAME}.git"
+
+if ! git fetch public main; then
+  echo "Error: failed to fetch the public repository. Check PUBLIC_REPO_TOKEN and network access."
+  exit 1
 fi
-git push public HEAD:main
+
+if ! git merge-base HEAD public/main >/dev/null 2>&1; then
+  echo "Error: HEAD and public/main do not share a common ancestor."
+  exit 1
+fi
+
+# Count commits that exist on the public main branch but not on the current private checkout.
+AHEAD_COUNT="$(git rev-list --count HEAD..public/main)"
+if [ "${AHEAD_COUNT}" -gt 0 ]; then
+  echo "Error: The public repo has ${AHEAD_COUNT} commit(s) not present in this repo."
+  echo "Resolve the divergence before publishing."
+  exit 1
+fi
+
+COMMIT_SHA="$(git rev-parse HEAD)"
+if [ -n "${GITHUB_ENV:-}" ]; then
+  echo "COMMIT_SHA=${COMMIT_SHA}" >> "${GITHUB_ENV}"
+fi
+
+if ! git push public HEAD:main; then
+  echo "Error: failed to push to the public repository. Check PUBLIC_REPO_TOKEN and public repo permissions."
+  exit 1
+fi
