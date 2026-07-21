@@ -5,6 +5,8 @@ date: 2026-05-29 00:00:00 +01:00
 categories: blog
 tags: [career, linkedin]
 excerpt_separator: <!--more-->
+grammar_checked: true
+fact_checked: true
 ---
 
 Almost every day, I see someone on LinkedIn publicly calling out a "terrible" recruiter. The complaints follow familiar patterns: a recruiter mixed up the technology and pitched a role that had nothing to do with the person's actual skills; they demanded ten years of experience in a framework that's barely been around for two; they proposed a position several levels below where the person is in their career, and the candidate took it as a personal insult; or the job description itself was fantasy — a full-stack, AI-data-scientist-superhuman with an entry-level salary attached. The frustration is real. But the response — the public callout, the viral screenshot, the snark — is usually a mistake.

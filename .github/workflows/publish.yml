@@ -10,6 +10,7 @@ on:
         options:
           # Placeholder entry; publishable drafts are appended below this line by the agent.
           - "placeholder-managed-by-agent.md"
+          - "dont-shame-recruiters.md"
       run_mode:
         description: 'Select steps to execute'
         required: true
