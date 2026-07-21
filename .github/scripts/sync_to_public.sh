@@ -19,6 +19,11 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
 fi
 
 git remote remove public 2>/dev/null || true
+
+# actions/checkout injects GitHub auth headers for the current repository.
+# Clear them so the dedicated public-repo token is used for the cross-repo push.
+git config --local --unset-all http.https://github.com/.extraheader || true
+
 git remote add public "https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_OWNER}/${PUBLIC_REPO_NAME}.git"
 
 if ! git fetch public main; then
