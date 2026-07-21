@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Resist the Urge to Shame Recruiters on LinkedIn"
-date: 2026-05-29 00:00:00 +01:00
+date: 2026-07-21T00:00:00Z
 categories: blog
 tags: [career, linkedin]
 excerpt_separator: <!--more-->
