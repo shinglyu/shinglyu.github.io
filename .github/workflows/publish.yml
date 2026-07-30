@@ -8,8 +8,9 @@ on:
         required: true
         type: choice
         options:
-          # Placeholder entry; add publishable drafts below this line.
+          # Placeholder entry; publishable drafts are appended below this line by the agent.
           - "placeholder-use-this-if-sync-only.md"
+          - "are-you-yak-shaving-with-ai.md"
           - "ai-the-next-printing-press-of-knowledge-transfer.md"
       run_mode:
         description: 'Select steps to execute'
