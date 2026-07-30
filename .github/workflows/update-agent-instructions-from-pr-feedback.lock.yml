@@ -40,14 +40,14 @@
 
 name: "Update Agent Instructions from PR Feedback"
 "on":
-  pull_request:
-    paths:
-    - _posts/**
-    - _drafts/**
-    - ideas/**
-    - human_review/**
-    types:
-    - closed
+  # pull_request:
+  #   paths:
+  #   - _posts/**
+  #   - _drafts/**
+  #   - ideas/**
+  #   - human_review/**
+  #   types:
+  #   - closed
   workflow_dispatch:
     inputs:
       aw_context:

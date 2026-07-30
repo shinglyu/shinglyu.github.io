@@ -1,12 +1,12 @@
 ---
 on:
-  pull_request:
-    types: [closed]
-    paths:
-      - "_posts/**"
-      - "_drafts/**"
-      - "ideas/**"
-      - "human_review/**"
+  # pull_request:
+  #   types: [closed]
+  #   paths:
+  #     - "_posts/**"
+  #     - "_drafts/**"
+  #     - "ideas/**"
+  #     - "human_review/**"
   workflow_dispatch:
 
 permissions:
