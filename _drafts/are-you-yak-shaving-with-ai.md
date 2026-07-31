@@ -5,8 +5,8 @@ categories: blog
 date: 2026-07-19 14:11:09 +0000
 excerpt_separator: <!--more-->
 tags: [AI, productivity, agents, yak-shaving]
-grammar_checked: false
-fact_checked: false
+grammar_checked: true
+fact_checked: true
 ---
 
 Back then, if I wanted to start a side project, I would tell myself I only needed one hour to get going. Then I would open Vim, look at my `vimrc`, tweak a color theme, try a new font, remap a few keys, and somehow five days would disappear before I wrote anything real.
@@ -23,21 +23,21 @@ The trap is *more seductive now*. I can actually get a prototype in three hours.
 
 Here's what's insidious: **AI tools evolve so fast that your optimizations decay rapidly.** 
 
-Take chain-of-thought prompting. A few years ago, it was *the* hot technique. People spent weeks crafting the perfect CoT structure. Then models got smarter, and many started building that process directly into themselves. All those hand-tuned prompts became cargo cult. The skill evaporated.
+Take chain-of-thought prompting. A few years ago, it was *the* hot technique. People spent weeks crafting the perfect CoT structure. Then models got smarter, and for many top-tier models explicit CoT scaffolding mattered less than it once did. All those hand-tuned prompts became cargo-cult thinking. That skill evaporated.
 
-This happens again and again. Today you're optimizing your agent's tool-calling pattern. Next month, the model's tool-use gets better by default. Today you're designing a fancy memory format. Next quarter, context windows are three times bigger. The harness you built to compensate is already obsolete.
+This happens again and again. Today you're optimizing your agent's tool-calling pattern. Tomorrow the model you were working around may have stronger tool-use capabilities. Today you're designing a fancy memory format. Later, the context window may be larger or the model may simply behave better out of the box. The harness you built to compensate is already at risk of becoming obsolete.
 
-So here's the cruel math: you're spending time yak shaving on machinery that will be outdated faster than ever. You're not just choosing between building vs. optimizing—you're optimizing something with a shrinking half-life.
+So here's the cruel math: you're spending time yak shaving on machinery that may become outdated faster than ever. You're not just choosing between building vs. optimizing—you're optimizing something with a shrinking half-life.
 
 The smarter models get, the more tempting the meta-work becomes, and the less time you should actually spend on it.
 
 ## A conscious choice
 
-I want to be clear: I'm not saying don't build tooling. I'm saying *know when you're doing it*.
+I want to be clear: I'm not saying don't build tooling. I'm saying: *know when you're doing it*.
 
-Some agent harnesses pay for themselves. Some prompts are genuinely leverage. The problem is that AI makes it unusually easy to blur the line between building the thing and building the machine that helps you build the thing.
+Some agent harnesses pay for themselves. Some prompts are genuinely useful leverage. The problem is that AI makes it unusually easy to blur the line between building the thing and building the machine that helps you build the thing.
 
-The machine always looks useful because the machine *can always produce another layer*. You can ask for a harness. You can ask for eval scripts. You can ask for a prompt optimizer. And every layer looks legitimate while you're building it.
+The machine always looks useful because it can always produce another layer. You can ask for a harness. You can ask for eval scripts. You can ask for a prompt optimizer. And every layer looks legitimate while you're building it.
 
 If I spend a weekend improving my agents and prompts, what do I actually have at the end? A working blog post? An app I can use? Or just a more elaborate machine that hasn't produced anything yet?
 
