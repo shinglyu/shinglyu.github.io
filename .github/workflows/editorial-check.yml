@@ -1,0 +1,23 @@
+name: Editorial Review Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  check_editorial_review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check editorial review flags
+        run: |
+          chmod +x .github/scripts/check_editorial_review.sh
+          .github/scripts/check_editorial_review.sh "origin/${{ github.event.pull_request.base.ref }}" "${{ github.event.pull_request.head.sha }}"
