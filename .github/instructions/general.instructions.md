@@ -35,3 +35,7 @@ When adding a draft that is ready to be published, append its filename under the
 # Publishing Requirement
 
 Publishing is handled by the deterministic GitHub Actions workflow in `.github/workflows/publish.yml`, which calls `.github/scripts/publish.sh` and `.github/scripts/sync_to_public.sh`. There is no separate publisher agent in this workflow.
+
+# Automation Scripts and Workflows
+
+When writing or editing shell scripts and GitHub Actions workflows in this repo (e.g., under `.github/scripts/` or `.github/workflows/`), prefer a small number of clear, deterministic steps over defensive fallback logic. The author has explicitly rejected scripts with "too many unnecessary fallbacks" in favor of a simple, explicit flow (e.g., require a token rather than silently degrading, fail loudly with a clear message instead of trying multiple recovery paths). Also remove now-unused scripts that duplicate replaced logic instead of leaving them around "just in case."

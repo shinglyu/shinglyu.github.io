@@ -31,6 +31,8 @@ Key principles:
 
 Think: "I'm explaining this to a colleague over coffee" NOT "I need to hit all the style checkpoints."
 
+**Tangents must earn their place**: Meandering and digressions are fine, but every aside should deliver an insight, a laugh, or a concrete detail the reader needs — not just retell how much time or frustration something cost. Reviewers have repeatedly asked to cut sections that "rant about wasted time without giving the reader any insight" and to remove overly specific personal tangents (e.g., an exact video timestamp link, an unrelated airport-security anecdote) that don't serve the point. When in doubt, keep the anecdote short and pair it with the lesson learned instead of dwelling on the frustration itself. Also define any jargon or key term (e.g., an unusual technique or concept the post is about) right after it's first introduced, not late in the post.
+
 ## Writing Style Analysis
 
 Based on analysis of blog posts from 2016-2022, the author's writing style has these key characteristics:
@@ -236,7 +238,7 @@ Use "blog" for the category (not categories with multiple values). This simplifi
 - **Allow minor inconsistencies**: Code doesn't need to be perfectly polished - real code has quirks
 
 ### Lists
-- **Parallel structure**: Keep list items grammatically similar
+- **Parallel structure**: Keep list items grammatically similar. This also applies to comparisons and examples outside of lists — when giving multiple examples of the same kind of thing (e.g., illustrating "public online arguments"), make sure they're genuinely comparable in category and scale, not a mix of a specific niche example and vague general ones
 - **Complete sentences get periods**: But fragments don't
 - **Numbered for steps**: Use numbers only when order matters
 - **Bullets for features/points**: Unordered items use bullet points

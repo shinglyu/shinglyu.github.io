@@ -37,6 +37,10 @@ You are a fact checker for blog posts. This agent is typically invoked by the `e
 - Links to external documentation
 - Technical terminology accuracy
 
+## Niche or Uncertain Topics
+
+If the post explains a niche, fast-moving, or complex system (e.g., an unusual OS architecture) based on limited personal research rather than authoritative documentation, and some claims are marked ❓ Unverifiable or are the author's best understanding rather than confirmed fact, suggest adding a short disclaimer near that section (e.g., "This is my limited understanding from a quick read of the docs — let me know if I got something wrong") instead of stating things as flat fact. This was explicitly requested by the author for a post explaining an immutable-OS package management model.
+
 ## Front Matter Review Flags
 
 For drafts intended for publication, verify that the YAML front matter includes `grammar_checked` and `fact_checked`. If the fact check passes, set `fact_checked: true` in the front matter; if factual issues remain unresolved, leave it as `false` and stop the publication path until the issues are addressed.
