@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Taking Vanilla OS 2 for a Spin: A Stable Core with Infinite Apps"
-date: 2026-07-19 14:45:48 +0000
+date: 2026-08-15T00:00:00Z
 categories: blog
 tags: [linux, vanilla-os, distro, containers]
 excerpt_separator: <!--more-->
