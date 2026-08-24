@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Checks that any changed draft/post markdown files have the editorial review
-# front matter flags (grammar_checked, fact_checked) set to true.
+# front matter flags (grammar_checked, fact_checked) set to true. Changed
+# drafts must also be available in the publish workflow chooser.
 #
 # If no _drafts/ or _posts/ markdown files were changed, this script exits 0
 # without performing any checks, so unrelated PRs are not blocked.
@@ -64,6 +65,26 @@ missing = [key for key in ("grammar_checked", "fact_checked") if values.get(key)
 if missing:
     print(f"Error: {path} has not completed editorial review. Set these flags to true: {', '.join(missing)}")
     raise SystemExit(1)
+
+if path.parts[0] == "_drafts":
+    publish_workflow = Path(".github/workflows/publish.yml")
+    workflow = publish_workflow.read_text(encoding="utf-8")
+    chooser = re.search(
+        r"file_name:\s*\n[\s\S]*?^\s+options:\s*\n([\s\S]*?)(?=^\s+\w+:)",
+        workflow,
+        re.MULTILINE,
+    )
+    if not chooser:
+        print(f"Error: could not read file_name options from {publish_workflow}")
+        raise SystemExit(1)
+    options = chooser.group(1)
+    filenames = {
+        match.group(1)
+        for match in re.finditer(r'^\s+-\s+["\']?([^"\'\s]+)["\']?\s*$', options, re.MULTILINE)
+    }
+    if path.name not in filenames:
+        print(f"Error: {path} is missing from the publish workflow chooser")
+        raise SystemExit(1)
 PY
   then
     FAILED=1

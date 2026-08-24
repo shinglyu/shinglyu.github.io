@@ -12,8 +12,7 @@ on:
           - "placeholder-use-this-if-sync-only.md"
           - "are-you-yak-shaving-with-ai.md"
           - "ai-the-next-printing-press-of-knowledge-transfer.md"
-          - "the-power-of-tactile-cues-in-a-screen-first-world.md"
-          - "vanilla-os-2-impressions.md"
+          - "snippet-manager-in-spotlight.md"
       run_mode:
         description: 'Select steps to execute'
         required: true
