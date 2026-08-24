@@ -2,7 +2,7 @@
 layout: post
 title: "Snippet Manager in Spotlight: Faster Launching with .app Bundles"
 categories: Productivity
-date: 2026-08-21 00:00:00 +00:00
+date: 2026-08-24T00:00:00Z
 excerpt_separator: <!--more-->
 grammar_checked: true
 fact_checked: true
