@@ -2,7 +2,7 @@
 layout: post
 title: The Power of Tactile Cues in a Screen-First World
 categories: Productivity
-date: 2026-06-12 22:53:34 +02:00
+date: 2026-09-22T00:00:00Z
 excerpt_separator: <!--more-->
 tags: [productivity, habits, design, travel, AI, obsidian]
 grammar_checked: true
