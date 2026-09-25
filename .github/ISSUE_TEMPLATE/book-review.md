@@ -1,7 +1,7 @@
 ---
 name: Book review
 about: For book reviews
-title: ''
+title: 'Book Review - '
 labels: ''
 assignees: ''
 
