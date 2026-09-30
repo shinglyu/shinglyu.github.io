@@ -44,7 +44,7 @@
           <li {% if page.url == "/all-posts.html" %} class="active" {% endif %}><a href="/all-posts.html" class="all-posts-nav">(All Posts)</a></li>
           {% assign sorted_pages = site.pages | sort:"name" %}
           {% for node in sorted_pages %}
-            {% if site.exclude_pages contains node.title %}
+            {% if site.exclude_pages contains node.title or node.exclude_from_nav %}
               {% continue %}
             {% endif %}
             {% if node.url contains "css" %}

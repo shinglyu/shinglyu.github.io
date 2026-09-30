@@ -4,6 +4,10 @@ applyTo: '**'
 
 This repository is a blog of Shing Lyu. It's built on Jekyll and hosted on GitHub Pages.
 
+# Page Navigation
+
+The default site navigation is generated from `site.pages` in `_layouts/default.html`. To keep a page directly accessible but out of site navigation, set `exclude_from_nav: true` in its YAML front matter. Do not rely on matching the page title in `_config.yml`'s `exclude_pages`, because titles can change.
+
 # Workflow
 
 * Each post go through these folders: `ideas` -> `drafts` -> `human_review`-> `posts`
