@@ -5,7 +5,7 @@ date: 2026-10-23
 categories: blog
 excerpt_separator: <!--more-->
 grammar_checked: true
-fact_checked: false
+fact_checked: true
 ---
 
 I'm studying Traditional Chinese Medicine in English, and I find it difficult to translate English terms back into Chinese. To help with that, I built a [quick reference for Volume 1](/tcm/Essentials-of-Chinese-Medicine-Volume-1-Quick-Reference.html) of *Essentials of Chinese Medicine*. It maps the book's terms to Traditional Chinese and cross-references selected terms in the WHO's *International Standard Terminologies on Traditional Chinese Medicine* (2022). The WHO source presents its Chinese forms in Simplified Chinese.
