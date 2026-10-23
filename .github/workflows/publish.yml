@@ -15,6 +15,7 @@ on:
           - "converting-multiple-htmls-to-epub-or-mobi.md"
           - "stop-using-lego-as-an-analogy-for-your-platform.md"
           - "the-power-of-tactile-cues-in-a-screen-first-world.md"
+          - "traditional-chinese-medicine-volume-1-quick-reference.md"
       run_mode:
         description: 'Select steps to execute'
         required: true
