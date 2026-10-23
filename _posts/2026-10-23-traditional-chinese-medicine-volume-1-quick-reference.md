@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Quick Reference for Traditional Chinese Medicine"
-date: 2026-10-23
+date: 2026-10-23T00:00:00Z
 categories: blog
 excerpt_separator: <!--more-->
 grammar_checked: true
