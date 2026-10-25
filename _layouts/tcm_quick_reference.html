@@ -1,0 +1,3 @@
+{%- capture google_analytics_tag -%}{%- include google_analytics.html -%}{%- endcapture -%}
+{%- assign head_close_with_analytics = google_analytics_tag | append: '</head>' -%}
+{{- content | replace: '</head>', head_close_with_analytics -}}

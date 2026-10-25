@@ -2,16 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- GA4 tags -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2F5HVSVTH6"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2F5HVSVTH6');
-    </script>
+    {% include google_analytics.html %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>{{ page.title }} | Shing's Blog</title>
@@ -77,4 +68,3 @@
     </footer>
   </body>
 </html>
-
