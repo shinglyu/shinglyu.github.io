@@ -16,6 +16,7 @@ on:
           - "stop-using-lego-as-an-analogy-for-your-platform.md"
           - "the-power-of-tactile-cues-in-a-screen-first-world.md"
           - "traditional-chinese-medicine-volume-1-quick-reference.md"
+          - "five-elements-interactive-reference.md"
       run_mode:
         description: 'Select steps to execute'
         required: true

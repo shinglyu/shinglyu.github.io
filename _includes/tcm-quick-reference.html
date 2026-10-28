@@ -25,6 +25,7 @@
     }
     .toolbar-inner { max-width: 1280px; margin: 0 auto; padding: .8rem 1.25rem; }
     .app-name { margin: 0 0 .45rem; font-size: .88rem; font-weight: 700; color: #34445f; }
+    .toolbar-links { margin: .1rem 0 .55rem; font-size: .86rem; }
     .search-row { display: flex; align-items: center; gap: .65rem; }
     .search-row label { flex: 0 0 auto; font-weight: 650; }
     .search-row input {
@@ -71,7 +72,7 @@
     }
     @media print {
       .app-toolbar { position: static; box-shadow: none; }
-      .search-row, .search-help, .search-status { display: none; }
+      .toolbar-links, .search-row, .search-help, .search-status { display: none; }
       main { max-width: none; padding: 0; }
       section.level2 { overflow: visible; }
       table { min-width: 0; }
@@ -82,6 +83,7 @@
   <header class="app-toolbar">
     <div class="toolbar-inner">
       <p class="app-name">Essentials of Chinese Medicine, Volume 1 — Quick Reference</p>
+      <p class="toolbar-links"><a href="/tcm/">All TCM references</a> · <a href="/tcm/Five-Elements-Interactive-Reference.html">Five Elements interactive reference</a></p>
       <div class="search-row" role="search">
         <label for="term-search">Search terms and quotations</label>
         <input id="term-search" type="search" placeholder="e.g., Qi, epistaxis, 氣, 气" autocomplete="off" aria-describedby="search-help search-status">

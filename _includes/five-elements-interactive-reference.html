@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive English, Traditional Chinese, and Simplified Chinese reference to the Five Elements and their correspondences.">
+  <title>Five Elements — Interactive Reference</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f7f8fb;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.55; }
+    .app-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #d7deea;
+      background: rgb(255 255 255 / 96%);
+      box-shadow: 0 2px 8px rgb(23 32 51 / 7%);
+      backdrop-filter: blur(8px);
+    }
+    .toolbar-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: .8rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .app-name { margin: 0; font-size: .88rem; font-weight: 700; color: #34445f; }
+    .toolbar-links { margin: .1rem 0 0; font-size: .86rem; }
+    a { color: #145ea8; }
+    .language-control { display: flex; align-items: center; gap: .55rem; }
+    .language-control label { font-weight: 650; }
+    select, button {
+      border: 1px solid #aebbd0;
+      border-radius: .45rem;
+      padding: .55rem .7rem;
+      color: #172033;
+      background: #fff;
+      font: inherit;
+    }
+    button { cursor: pointer; background: #f4f7fb; }
+    button:hover { background: #e9eff8; }
+    :focus-visible { outline: 3px solid #b9d5ff; outline-offset: 2px; }
+    main { max-width: 1380px; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; }
+    h1 { margin: .25rem 0 .5rem; line-height: 1.2; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+    h2 { line-height: 1.25; }
+    .intro { max-width: 78ch; margin-bottom: 1.3rem; }
+    .intro p { margin: .45rem 0; color: #46556d; }
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+    fieldset, .diagram-scroll, .reading-guide, .table-wrap {
+      border: 1px solid #d7deea;
+      border-radius: .7rem;
+      background: #fff;
+      box-shadow: 0 1px 3px rgb(23 32 51 / 4%);
+    }
+    fieldset { min-width: 0; margin: 0; padding: .85rem 1rem 1rem; }
+    legend { padding: 0 .35rem; font-weight: 750; }
+    .control-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; margin: .15rem 0 .8rem; }
+    .control-actions button { padding: .4rem .7rem; font-size: .92rem; }
+    .status { margin: 0; color: #53627a; font-size: .9rem; font-weight: 600; }
+    .category-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1.25rem; }
+    .category-group h3 { margin: .2rem 0 .45rem; font-size: 1rem; }
+    .checkbox-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .32rem .65rem; }
+    .category-option { display: flex; align-items: flex-start; gap: .42rem; min-width: 0; }
+    .category-option input, .relationship-option input { flex: 0 0 auto; width: 1.05rem; height: 1.05rem; margin: .22rem 0 0; accent-color: #315d89; }
+    .category-option label { cursor: pointer; line-height: 1.35; }
+    .relationship-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .38rem .65rem; margin: .15rem 0 .65rem; }
+    .relationship-option { display: flex; align-items: flex-start; gap: .45rem; min-width: 0; font-weight: 650; cursor: pointer; }
+    .relationship-help { margin: .45rem 0 .75rem; color: #53627a; font-size: .92rem; }
+    .relationship-legend { display: grid; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+    .relationship-item.is-disabled { opacity: .45; }
+    .relationship-item { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: .55rem; align-items: start; font-size: .9rem; }
+    .relationship-swatch { position: relative; width: 1.85rem; margin-top: .72rem; border-top: 3px solid; }
+    .relationship-swatch::after {
+      position: absolute;
+      top: -.33rem;
+      right: -.02rem;
+      width: 0;
+      height: 0;
+      border-top: .23rem solid transparent;
+      border-bottom: .23rem solid transparent;
+      border-left: .38rem solid currentColor;
+      content: "";
+    }
+    .swatch-generation { color: #327448; }
+    .swatch-restraint { color: #355b91; }
+    .swatch-over-restraint { color: #bb493d; border-top-style: dashed; }
+    .swatch-counter-restraint { color: #8555a5; border-top-style: dotted; }
+    .relationship-name { display: block; font-weight: 700; }
+    .relationship-detail { display: block; color: #53627a; }
+    .hover-status { min-height: 1.5em; margin: .35rem 0 .75rem; color: #34445f; font-size: .92rem; font-weight: 600; }
+    .diagram-section, .table-section { margin: 2rem 0; }
+    .section-heading { margin-bottom: .3rem; padding-bottom: .4rem; border-bottom: 2px solid #d7deea; }
+    .section-intro { margin: .35rem 0 .9rem; color: #53627a; }
+    .diagram-layout { display: block; }
+    .diagram-scroll { max-width: 100%; overflow: auto; padding: .5rem; }
+    #diagram { display: block; max-width: none; }
+    .element-segment { cursor: pointer; transition: opacity .15s ease; }
+    .element-segment:focus { outline: none; }
+    .element-base { transition: stroke-width .15s ease; }
+    .element-segment:focus .element-base, .element-segment.is-hovered .element-base { stroke: #172033; stroke-width: 3; }
+    .element-segment.is-related .element-base { stroke: #172033; stroke-width: 2.5; }
+    .relationship-arrow { transition: opacity .15s ease, stroke-width .15s ease; }
+    .relationship-arrow.is-related { stroke-width: 3.5; }
+    #diagram[data-hover-element] .element-segment:not(.is-hovered):not(.is-related) { opacity: .2; }
+    #diagram[data-hover-element] .relationship-arrow:not(.is-related) { opacity: .12; }
+    .reading-guide { max-width: 58rem; margin-top: .75rem; padding: .9rem 1rem; }
+    .reading-guide h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .reading-guide p { margin: .45rem 0; color: #53627a; font-size: .92rem; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; min-width: 58rem; border-collapse: collapse; background: #fff; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+    th, td { padding: .55rem .65rem; border: 1px solid #d7deea; text-align: left; vertical-align: top; }
+    thead th { background: #eaf0f8; font-weight: 700; }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #edf4ff; }
+    tbody tr.selected-category > th:first-child { border-left: 4px solid #3974c6; }
+    .group-row th { background: #eaf0f8; text-align: left; }
+    .source-note { margin: 1.1rem 0 0; color: #53627a; font-size: .88rem; }
+    @media (max-width: 900px) {
+      .controls { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .toolbar-inner { align-items: flex-start; flex-direction: column; padding: .7rem .8rem; }
+      .language-control { width: 100%; justify-content: space-between; }
+      .language-control select { flex: 1; max-width: 16rem; }
+      main { padding: 1rem .8rem 2rem; }
+      .category-groups, .checkbox-grid { grid-template-columns: 1fr; }
+      .relationship-options { grid-template-columns: 1fr; }
+    }
+    @media print {
+      :root { background: #fff; }
+      .app-toolbar { position: static; box-shadow: none; }
+      .toolbar-links, .language-control, .controls, .section-intro, .reading-guide, .hover-status { display: none !important; }
+      main { max-width: none; padding: 0; }
+      .diagram-layout { display: block; }
+      .diagram-scroll { overflow: visible; border: 0; box-shadow: none; padding: 0; }
+      #diagram { width: 100% !important; height: auto !important; max-width: 100%; }
+      .table-wrap { overflow: visible; border: 0; box-shadow: none; }
+      table { min-width: 0; font-size: 8pt; }
+      th, td { padding: .25rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-toolbar">
+    <div class="toolbar-inner">
+      <div>
+        <p class="app-name">Five Elements — Interactive Reference</p>
+        <p class="toolbar-links"><a id="tcm-home-link" href="/tcm/">All TCM references</a> · <a id="glossary-link" href="/tcm/Essentials-of-Chinese-Medicine-Volume-1-Quick-Reference.html">Open the Volume 1 glossary</a></p>
+      </div>
+      <div class="language-control">
+        <label id="language-label" for="language-select">Display language</label>
+        <select id="language-select">
+          <option value="en">English</option>
+          <option value="zh-Hant">繁體中文</option>
+          <option value="zh-Hans">简体中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">Five Elements — interactive reference</h1>
+      <p id="page-description">Select correspondence categories to add concentric rings to the wheel. Each element occupies one fifth of the circle.</p>
+    </section>
+
+    <section class="diagram-section" aria-labelledby="diagram-heading">
+      <h2 id="diagram-heading" class="section-heading">Five-elements wheel</h2>
+      <p id="diagram-intro" class="section-intro">The inner sectors show the elements; selected categories form rings from inside to outside.</p>
+      <p id="hover-status" class="hover-status" role="status" aria-live="polite">Hover or focus an element sector to highlight its links for the selected relationships.</p>
+      <div class="diagram-layout">
+        <div id="diagram-scroll" class="diagram-scroll" tabindex="0" role="region" aria-label="Scrollable Five Elements diagram">
+          <svg id="diagram" viewBox="0 0 300 300" role="group" aria-labelledby="diagram-title diagram-description" aria-describedby="hover-status">
+            <title id="diagram-title">Five Elements wheel</title>
+            <desc id="diagram-description">An interactive diagram of the Five Elements and selected correspondences.</desc>
+          </svg>
+        </div>
+        <aside class="reading-guide">
+          <h3 id="guide-heading">Reading the wheel</h3>
+          <p id="guide-first">The five colored sectors follow the generation sequence clockwise: Wood, Fire, Earth, Metal, Water.</p>
+          <p id="guide-second">Each selected category adds one ring. Read the value in a sector to find its correspondence to that element.</p>
+          <p id="guide-third">Choose relationship arrows individually. Hover or focus an element sector to highlight its connected elements.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="controls" class="controls" aria-label="Reference controls">
+      <fieldset>
+        <legend id="category-legend">Correspondence categories</legend>
+        <div class="control-actions">
+          <button id="select-all" type="button">Select all</button>
+          <button id="clear-all" type="button">Clear all</button>
+          <p id="category-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="category-groups">
+          <section class="category-group" aria-labelledby="natural-heading">
+            <h3 id="natural-heading">The Natural World</h3>
+            <div id="natural-options" class="checkbox-grid"></div>
+          </section>
+          <section class="category-group" aria-labelledby="human-heading">
+            <h3 id="human-heading">The Human Body</h3>
+            <div id="human-options" class="checkbox-grid"></div>
+          </section>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend id="relationship-heading">Relationships</legend>
+        <div id="relationship-options" class="relationship-options"></div>
+        <p id="relationship-help" class="relationship-help">Select relationships individually. Hover or focus an element sector to highlight its linked elements and arrows.</p>
+        <ul id="relationship-legend" class="relationship-legend"></ul>
+      </fieldset>
+    </section>
+
+    <section class="table-section" aria-labelledby="table-heading">
+      <h2 id="table-heading" class="section-heading">Full correspondences</h2>
+      <p id="table-intro" class="section-intro">All categories from Table 1.5 are listed below; blue side markers indicate categories currently shown as rings.</p>
+      <div class="table-wrap">
+        <table aria-labelledby="table-heading">
+          <caption id="table-caption" class="visually-hidden">Five Elements correspondence table</caption>
+          <thead id="table-head"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      <p id="source-note" class="source-note">Source: Essentials of Chinese Medicine, Volume 1, Table 1.5 (p. 23) and Fig. 1.4 (p. 24). The relationship cycles summarize sections 1.2.iii and 1.2.iv (pp. 25–27); over-restraint and counter-restraint are detailed in section 1.2.iv.</p>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const SVG_NS = "http://www.w3.org/2000/svg";
+      const translate = (en, zhHant, zhHans) => ({ en, "zh-Hant": zhHant, "zh-Hans": zhHans });
+      const elements = [
+        { id: "wood", name: translate("Wood", "木", "木"), fill: "#e8f2e9", stroke: "#347046" },
+        { id: "fire", name: translate("Fire", "火", "火"), fill: "#ffede8", stroke: "#b94436" },
+        { id: "earth", name: translate("Earth", "土", "土"), fill: "#fff4da", stroke: "#a5761f" },
+        { id: "metal", name: translate("Metal", "金", "金"), fill: "#eef1f5", stroke: "#59677b" },
+        { id: "water", name: translate("Water", "水", "水"), fill: "#e8f1fb", stroke: "#32689f" }
+      ];
+      const categories = [
+        { id: "grains", group: "natural", name: translate("Five Grains", "五穀", "五谷"), values: [
+          translate("Wheat", "小麥", "小麦"), translate("Foxtail millet", "小米", "小米"), translate("Sorghum", "高粱", "高粱"), translate("Rice", "稻", "稻"), translate("Soybean", "大豆", "大豆")
+        ] },
+        { id: "flavors", group: "natural", name: translate("Five Flavors", "五味", "五味"), values: [
+          translate("Sour", "酸", "酸"), translate("Bitter", "苦", "苦"), translate("Sweet", "甘", "甘"), translate("Acrid", "辛", "辛"), translate("Salty", "鹹", "咸")
+        ] },
+        { id: "colors", group: "natural", name: translate("Five Colors", "五色", "五色"), values: [
+          translate("Green", "青", "青"), translate("Red", "赤", "赤"), translate("Yellow", "黃", "黄"), translate("White", "白", "白"), translate("Black", "黑", "黑")
+        ] },
+        { id: "transformations", group: "natural", name: translate("Five Transformations", "五化", "五化"), values: [
+          translate("Germination", "生", "生"), translate("Growth", "長", "长"), translate("Transformation", "化", "化"), translate("Reaping", "收", "收"), translate("Storing", "藏", "藏")
+        ] },
+        { id: "weather", group: "natural", name: translate("Five Weather Agents", "五氣", "五气"), values: [
+          translate("Wind", "風", "风"), translate("Heat", "熱", "热"), translate("Dampness", "濕", "湿"), translate("Dryness", "燥", "燥"), translate("Cold", "寒", "寒")
+        ] },
+        { id: "orientations", group: "natural", name: translate("Five Orientations", "五方", "五方"), values: [
+          translate("East", "東", "东"), translate("South", "南", "南"), translate("Middle", "中", "中"), translate("West", "西", "西"), translate("North", "北", "北")
+        ] },
+        { id: "seasons", group: "natural", name: translate("Five Seasons", "五季", "五季"), values: [
+          translate("Spring", "春", "春"), translate("Summer", "夏", "夏"), translate("Late summer", "長夏", "长夏"), translate("Autumn", "秋", "秋"), translate("Winter", "冬", "冬")
+        ] },
+        { id: "zang-organs", group: "human", name: translate("Five Zang Organs", "五臟", "五脏"), values: [
+          translate("Liver", "肝", "肝"), translate("Heart", "心", "心"), translate("Spleen", "脾", "脾"), translate("Lung", "肺", "肺"), translate("Kidney", "腎", "肾")
+        ] },
+        { id: "fu-organs", group: "human", name: translate("Five Fu Organs", "五腑", "五腑"), values: [
+          translate("Gallbladder", "膽", "胆"), translate("Small intestine", "小腸", "小肠"), translate("Stomach", "胃", "胃"), translate("Large intestine", "大腸", "大肠"), translate("Urinary bladder", "膀胱", "膀胱")
+        ] },
+        { id: "sense-organs", group: "human", name: translate("Five Sense Organs", "五官", "五官"), values: [
+          translate("Eyes", "目", "目"), translate("Tongue", "舌", "舌"), translate("Lips", "唇", "唇"), translate("Nose", "鼻", "鼻"), translate("Ears", "耳", "耳")
+        ] },
+        { id: "body-tissues", group: "human", name: translate("Five Body Tissues", "五體", "五体"), values: [
+          translate("Tendons", "筋", "筋"), translate("Vessels", "脈", "脉"), translate("Muscles", "肌肉", "肌肉"), translate("Skin and hair", "皮毛", "皮毛"), translate("Bones", "骨", "骨")
+        ] },
+        { id: "passions", group: "human", name: translate("Five Passions", "五志", "五志"), values: [
+          translate("Rage", "怒", "怒"), translate("Joy", "喜", "喜"), translate("Brooding", "思", "思"), translate("Grief", "憂", "忧"), translate("Fear", "恐", "恐")
+        ] },
+        { id: "fluids", group: "human", name: translate("Five Fluids", "五液", "五液"), values: [
+          translate("Tears", "淚", "泪"), translate("Sweat", "汗", "汗"), translate("Saliva", "涎", "涎"), translate("Nasal discharge", "涕", "涕"), translate("Spittle", "唾", "唾")
+        ] },
+        { id: "pulses", group: "human", name: translate("Five Pulses", "五脈", "五脉"), values: [
+          translate("Taut", "弦", "弦"), translate("Surging", "洪", "洪"), translate("Moderate", "緩", "缓"), translate("Deep and thin", "沉細", "沉细"), translate("Deep", "沉", "沉")
+        ] }
+      ];
+      const text = {
+        en: {
+          pageTitle: "Five Elements — interactive reference",
+          pageDescription: "Select correspondence categories to add concentric rings to the wheel. Each element occupies one fifth of the circle.",
+          tcmHomeLink: "All TCM references",
+          glossaryLink: "Open the Volume 1 glossary",
+          controlsLabel: "Reference controls",
+          languageLabel: "Display language",
+          categoryLegend: "Correspondence categories",
+          naturalWorld: "The Natural World",
+          humanBody: "The Human Body",
+          selectAll: "Select all",
+          clearAll: "Clear all",
+          shownCount: (shown, total) => `${shown} of ${total} categories shown in the wheel.`,
+          noCategories: "No correspondence rings are selected; the five-element wheel remains visible.",
+          relationshipHeading: "Relationships",
+          relationshipHelp: "Select which relationships to draw. Hover or focus an element sector to highlight its linked elements and arrows.",
+          hoverPrompt: "Hover or focus an element sector to highlight its links for the selected relationships.",
+          hoverSummary: (links) => links.join("; "),
+          relationshipPhrase: (source, verb, target) => `${source} ${verb} ${target.toLowerCase()}`,
+          relationshipVerbs: {
+            generation: "generates",
+            restraint: "restrains",
+            over: "over-restrains",
+            counter: "counter-restrains"
+          },
+          hoverNoRelationships: (name) => `${name}: no relationships are selected.`,
+          diagramHeading: "Five-elements wheel",
+          diagramIntro: "The inner sectors show the elements; selected categories form rings from inside to outside.",
+          guideHeading: "Reading the wheel",
+          guideFirst: "The five colored sectors follow the generation sequence clockwise: Wood, Fire, Earth, Metal, Water.",
+          guideSecond: "Each selected category adds one ring. Read the value in a sector to find its correspondence to that element.",
+          guideThird: "Choose relationship arrows individually. Hover or focus an element sector to highlight its connected elements.",
+          tableHeading: "Full correspondences",
+          tableIntro: "All categories from Table 1.5 are listed below; blue side markers indicate categories currently shown as rings.",
+          tableCategory: "Category",
+          tableTitle: "Five Elements correspondence table",
+          diagramTitle: "Five Elements wheel",
+          diagramDescription: "A five-sector wheel with selected correspondence categories as concentric rings.",
+          relationshipNames: {
+            generation: "Generation (mutual generation)",
+            restraint: "Restraint (mutual restraint)",
+            over: "Over-restraint (overacting)",
+            counter: "Counter-restraint (counteracting)"
+          },
+          relationshipDetails: {
+            generation: "Normal nourishing cycle",
+            restraint: "Normal checking cycle",
+            over: "Excessive restraint in the normal restraint direction",
+            counter: "Reversal: the restrained element acts back"
+          },
+          standaloneRelationshipDetails: [],
+          sourceNote: "Source: Essentials of Chinese Medicine, Volume 1, Table 1.5 (p. 23) and Fig. 1.4 (p. 24). The relationship cycles summarize sections 1.2.iii and 1.2.iv (pp. 25–27); over-restraint and counter-restraint are detailed in section 1.2.iv."
+        },
+        "zh-Hant": {
+          pageTitle: "五行互動參考",
+          pageDescription: "勾選對應類別，將其加入同心圓。每個元素各占圓周的五分之一。",
+          tcmHomeLink: "所有中醫參考資料",
+          glossaryLink: "開啟第一冊完整詞彙表",
+          controlsLabel: "參考設定",
+          languageLabel: "顯示語言",
+          categoryLegend: "對應類別",
+          naturalWorld: "自然界",
+          humanBody: "人體",
+          selectAll: "全選",
+          clearAll: "清除全選",
+          shownCount: (shown, total) => `圓圖顯示 ${shown}／${total} 個類別。`,
+          noCategories: "目前未選取對應圓環；五行圓圖仍會顯示。",
+          relationshipHeading: "五行關係",
+          relationshipHelp: "勾選要顯示的關係。將游標移至元素區塊或以鍵盤聚焦，可突顯相連元素與箭頭。",
+          hoverPrompt: "將游標移至元素區塊或以鍵盤聚焦，可查看所選關係中的相連元素。",
+          hoverSummary: (links) => links.join("；"),
+          relationshipPhrase: (source, verb, target) => `${source}${verb}${target}`,
+          relationshipVerbs: {
+            generation: "生",
+            restraint: "剋",
+            over: "乘",
+            counter: "侮"
+          },
+          hoverNoRelationships: (name) => `${name}：尚未選取任何關係。`,
+          diagramHeading: "五行圓圖",
+          diagramIntro: "內圈顯示五行；所選類別會由內向外形成同心圓環。",
+          guideHeading: "圓圖讀法",
+          guideFirst: "五個色彩區塊依順時針排列相生次序：木、火、土、金、水。",
+          guideSecond: "每個所選類別會增加一個圓環。沿區塊讀取文字，即可查看該元素的對應項目。",
+          guideThird: "可個別勾選關係箭頭；將游標移至元素區塊或以鍵盤聚焦，可突顯相連元素。",
+          tableHeading: "完整對應表",
+          tableIntro: "下表列出表 1.5 的所有類別；左側藍色標記表示目前已顯示於圓環。",
+          tableCategory: "類別",
+          tableTitle: "五行對應表",
+          diagramTitle: "五行圓圖",
+          diagramDescription: "由五個等分區塊組成的圓圖，並以同心圓環顯示所選對應類別。",
+          relationshipNames: {
+            generation: "相生",
+            restraint: "相剋",
+            over: "相乘",
+            counter: "相侮"
+          },
+          relationshipDetails: {
+            generation: "正常的滋生循環",
+            restraint: "正常的制約循環",
+            over: "木乘土，土乘水，水乘火，火乘金，金乘木",
+            counter: "木侮金，金侮火，火侮水，水侮土，土侮木"
+          },
+          standaloneRelationshipDetails: ["over", "counter"],
+          sourceNote: "資料來源：《Essentials of Chinese Medicine》第 1 卷，表 1.5（第 23 頁）與圖 1.4（第 24 頁）。關係箭頭概述 1.2.iii 與 1.2.iv 節（第 25–27 頁）；相乘與相侮詳見 1.2.iv 節。"
+        },
+        "zh-Hans": {
+          pageTitle: "五行互动参考",
+          pageDescription: "勾选对应类别，将其加入同心圆。每个元素各占圆周的五分之一。",
+          tcmHomeLink: "所有中医参考资料",
+          glossaryLink: "打开第一册完整词汇表",
+          controlsLabel: "参考设置",
+          languageLabel: "显示语言",
+          categoryLegend: "对应类别",
+          naturalWorld: "自然界",
+          humanBody: "人体",
+          selectAll: "全选",
+          clearAll: "清除全选",
+          shownCount: (shown, total) => `圆图显示 ${shown}/${total} 个类别。`,
+          noCategories: "当前未选择对应圆环；五行圆图仍会显示。",
+          relationshipHeading: "五行关系",
+          relationshipHelp: "勾选要显示的关系。将光标移至元素区块或用键盘聚焦，可突出显示相关元素与箭头。",
+          hoverPrompt: "将光标移至元素区块或用键盘聚焦，可查看所选关系中的相关元素。",
+          hoverSummary: (links) => links.join("；"),
+          relationshipPhrase: (source, verb, target) => `${source}${verb}${target}`,
+          relationshipVerbs: {
+            generation: "生",
+            restraint: "克",
+            over: "乘",
+            counter: "侮"
+          },
+          hoverNoRelationships: (name) => `${name}：尚未选择任何关系。`,
+          diagramHeading: "五行圆图",
+          diagramIntro: "内圈显示五行；所选类别会由内向外形成同心圆环。",
+          guideHeading: "圆图读法",
+          guideFirst: "五个色彩区块按顺时针排列相生次序：木、火、土、金、水。",
+          guideSecond: "每个所选类别会增加一个圆环。沿区块读取文字，即可查看该元素的对应项目。",
+          guideThird: "可单独勾选关系箭头；将光标移至元素区块或用键盘聚焦，可突出显示相关元素。",
+          tableHeading: "完整对应表",
+          tableIntro: "下表列出表 1.5 的所有类别；左侧蓝色标记表示当前已显示在圆环中。",
+          tableCategory: "类别",
+          tableTitle: "五行对应表",
+          diagramTitle: "五行圆图",
+          diagramDescription: "由五个等分区块组成的圆图，并以同心圆环显示所选对应类别。",
+          relationshipNames: {
+            generation: "相生",
+            restraint: "相克",
+            over: "相乘",
+            counter: "相侮"
+          },
+          relationshipDetails: {
+            generation: "正常的滋生循环",
+            restraint: "正常的制约循环",
+            over: "木乘土，土乘水，水乘火，火乘金，金乘木",
+            counter: "木侮金，金侮火，火侮水，水侮土，土侮木"
+          },
+          standaloneRelationshipDetails: ["over", "counter"],
+          sourceNote: "资料来源：《Essentials of Chinese Medicine》第 1 卷，表 1.5（第 23 页）与图 1.4（第 24 页）。关系箭头概述 1.2.iii 与 1.2.iv 节（第 25–27 页）；相乘与相侮详见 1.2.iv 节。"
+        }
+      };
+      const relationKinds = [
+        { id: "generation", sequence: [0, 1, 2, 3, 4, 0], color: "#327448", marker: "arrow-generation" },
+        { id: "restraint", sequence: [0, 2, 4, 1, 3, 0], color: "#355b91", marker: "arrow-restraint" },
+        { id: "over", sequence: [0, 2, 4, 1, 3, 0], color: "#bb493d", marker: "arrow-over" },
+        { id: "counter", sequence: [2, 0, 3, 1, 4, 2], color: "#8555a5", marker: "arrow-counter" }
+      ];
+      const selected = new Set(["zang-organs", "fu-organs"]);
+      const enabledRelationships = new Set(["generation", "restraint"]);
+      const languageSelect = document.getElementById("language-select");
+      const naturalOptions = document.getElementById("natural-options");
+      const humanOptions = document.getElementById("human-options");
+      const categoryStatus = document.getElementById("category-status");
+      const relationshipOptions = document.getElementById("relationship-options");
+      const relationshipLegend = document.getElementById("relationship-legend");
+      const hoverStatus = document.getElementById("hover-status");
+      const diagram = document.getElementById("diagram");
+      const svgTitle = document.getElementById("diagram-title");
+      const svgDescription = document.getElementById("diagram-description");
+      const tableHead = document.getElementById("table-head");
+      const tableBody = document.getElementById("table-body");
+      let language = "en";
+      let hoveredElement = null;
+
+      function setText(id, value) {
+        document.getElementById(id).textContent = value;
+      }
+
+      function svgElement(name, attributes = {}) {
+        const node = document.createElementNS(SVG_NS, name);
+        for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, String(value));
+        return node;
+      }
+
+      function pointAt(cx, cy, radius, angle) {
+        const radians = angle * Math.PI / 180;
+        return { x: cx + radius * Math.cos(radians), y: cy + radius * Math.sin(radians) };
+      }
+
+      function sectorPath(cx, cy, innerRadius, outerRadius, startAngle, endAngle) {
+        const outerStart = pointAt(cx, cy, outerRadius, startAngle);
+        const outerEnd = pointAt(cx, cy, outerRadius, endAngle);
+        const innerEnd = pointAt(cx, cy, innerRadius, endAngle);
+        const innerStart = pointAt(cx, cy, innerRadius, startAngle);
+        const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+        return [
+          `M ${outerStart.x} ${outerStart.y}`,
+          `A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${outerEnd.x} ${outerEnd.y}`,
+          `L ${innerEnd.x} ${innerEnd.y}`,
+          `A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${innerStart.x} ${innerStart.y}`,
+          "Z"
+        ].join(" ");
+      }
+
+      function renderOptions() {
+        naturalOptions.replaceChildren();
+        humanOptions.replaceChildren();
+        for (const category of categories) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "category-option";
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.id = `category-${category.id}`;
+          input.checked = selected.has(category.id);
+          input.addEventListener("change", () => {
+            if (input.checked) selected.add(category.id);
+            else selected.delete(category.id);
+            updateSelection();
+          });
+          const label = document.createElement("label");
+          label.htmlFor = input.id;
+          label.textContent = category.name[language];
+          wrapper.append(input, label);
+          (category.group === "natural" ? naturalOptions : humanOptions).append(wrapper);
+        }
+      }
+
+      function renderTable() {
+        const headerRow = document.createElement("tr");
+        const categoryHeading = document.createElement("th");
+        categoryHeading.scope = "col";
+        categoryHeading.textContent = text[language].tableCategory;
+        headerRow.append(categoryHeading);
+        for (const element of elements) {
+          const heading = document.createElement("th");
+          heading.scope = "col";
+          heading.textContent = element.name[language];
+          headerRow.append(heading);
+        }
+        tableHead.replaceChildren(headerRow);
+        tableBody.replaceChildren();
+
+        for (const group of ["natural", "human"]) {
+          const groupRow = document.createElement("tr");
+          groupRow.className = "group-row";
+          const groupHeading = document.createElement("th");
+          groupHeading.scope = "rowgroup";
+          groupHeading.colSpan = elements.length + 1;
+          groupHeading.textContent = group === "natural" ? text[language].naturalWorld : text[language].humanBody;
+          groupRow.append(groupHeading);
+          tableBody.append(groupRow);
+
+          for (const category of categories.filter((item) => item.group === group)) {
+            const row = document.createElement("tr");
+            row.dataset.category = category.id;
+            row.classList.toggle("selected-category", selected.has(category.id));
+            const name = document.createElement("th");
+            name.scope = "row";
+            name.textContent = category.name[language];
+            row.append(name);
+            for (const value of category.values) {
+              const cell = document.createElement("td");
+              cell.textContent = value[language];
+              row.append(cell);
+            }
+            tableBody.append(row);
+          }
+        }
+      }
+
+      function renderRelationshipControls() {
+        relationshipOptions.replaceChildren();
+        for (const relation of relationKinds) {
+          const label = document.createElement("label");
+          label.className = "relationship-option";
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.id = `relationship-${relation.id}`;
+          input.checked = enabledRelationships.has(relation.id);
+          input.addEventListener("change", () => {
+            if (input.checked) enabledRelationships.add(relation.id);
+            else enabledRelationships.delete(relation.id);
+            renderRelationshipLegend();
+            renderDiagram();
+          });
+          const name = document.createElement("span");
+          name.textContent = text[language].relationshipNames[relation.id];
+          label.append(input, name);
+          relationshipOptions.append(label);
+        }
+      }
+
+      function renderRelationshipLegend() {
+        relationshipLegend.replaceChildren();
+        for (const relation of relationKinds) {
+          const item = document.createElement("li");
+          item.className = "relationship-item";
+          item.classList.toggle("is-disabled", !enabledRelationships.has(relation.id));
+          const swatch = document.createElement("span");
+          swatch.className = `relationship-swatch swatch-${relation.id === "over" ? "over-restraint" : relation.id === "counter" ? "counter-restraint" : relation.id}`;
+          swatch.setAttribute("aria-hidden", "true");
+          const copy = document.createElement("span");
+          const name = document.createElement("span");
+          name.className = "relationship-name";
+          name.textContent = text[language].relationshipNames[relation.id];
+          const detail = document.createElement("span");
+          detail.className = "relationship-detail";
+          const sequence = relation.sequence.map((index) => elements[index].name[language]).join(" → ");
+          const description = text[language].relationshipDetails[relation.id];
+          detail.textContent = text[language].standaloneRelationshipDetails.includes(relation.id)
+            ? description
+            : `${sequence} — ${description}`;
+          copy.append(name, detail);
+          item.append(swatch, copy);
+          relationshipLegend.append(item);
+        }
+      }
+
+      function relationshipStatement(relation, sourceIndex, targetIndex) {
+        const source = elements[sourceIndex].name[language];
+        const target = elements[targetIndex].name[language];
+        return text[language].relationshipPhrase(source, text[language].relationshipVerbs[relation.id], target);
+      }
+
+      function addMarker(defs, id, color) {
+        const marker = svgElement("marker", {
+          id,
+          viewBox: "0 0 10 10",
+          markerWidth: 10,
+          markerHeight: 10,
+          refX: 8.5,
+          refY: 5,
+          orient: "auto",
+          markerUnits: "userSpaceOnUse"
+        });
+        marker.append(svgElement("path", { d: "M 0 0 L 10 5 L 0 10 Z", fill: color }));
+        defs.append(marker);
+      }
+
+      function addRelationshipPath(group, relation, sourceIndex, targetIndex, d, description) {
+        const path = svgElement("path", {
+          class: "relationship-arrow",
+          "data-relation-id": relation.id,
+          "data-source-element": elements[sourceIndex].id,
+          "data-target-element": elements[targetIndex].id,
+          d,
+          fill: "none",
+          stroke: relation.color,
+          "stroke-width": relation.id === "over" ? 2.5 : 2,
+          "stroke-dasharray": relation.id === "over" ? "5 3" : relation.id === "counter" ? "2 3" : "none",
+          "stroke-linecap": "round",
+          "marker-end": `url(#${relation.marker})`,
+          "vector-effect": "non-scaling-stroke"
+        });
+        const title = svgElement("title");
+        title.textContent = description;
+        path.append(title);
+        group.append(path);
+      }
+
+      function renderRelationships(group, cx, cy) {
+        const defs = svgElement("defs");
+        for (const relation of relationKinds.filter((item) => enabledRelationships.has(item.id))) {
+          addMarker(defs, relation.marker, relation.color);
+        }
+        group.append(defs);
+        const nodeRadius = 48;
+        const startAngle = (index) => -90 + index * 72;
+        const position = (index) => pointAt(cx, cy, nodeRadius, startAngle(index));
+
+        if (enabledRelationships.has("generation")) {
+          for (let index = 0; index < elements.length; index += 1) {
+            const next = (index + 1) % elements.length;
+            const start = position(index);
+            const end = position(next);
+            const control = pointAt(cx, cy, 68, startAngle(index) + 36);
+            const d = `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${end.x} ${end.y}`;
+            addRelationshipPath(group, relationKinds[0], index, next, d, relationshipStatement(relationKinds[0], index, next));
+          }
+        }
+
+        for (let index = 0; index < elements.length; index += 1) {
+          const target = (index + 2) % elements.length;
+          const startAngleValue = startAngle(index);
+          const targetAngle = startAngle(index + 2);
+          const midpointAngle = (startAngleValue + targetAngle) / 2;
+          const start = position(index);
+          const end = position(target);
+          const straight = `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
+          if (enabledRelationships.has("restraint")) {
+            addRelationshipPath(group, relationKinds[1], index, target, straight, relationshipStatement(relationKinds[1], index, target));
+          }
+
+          const outerControl = pointAt(cx, cy, 79, midpointAngle);
+          const overPath = `M ${start.x} ${start.y} Q ${outerControl.x} ${outerControl.y} ${end.x} ${end.y}`;
+          if (enabledRelationships.has("over")) {
+            addRelationshipPath(group, relationKinds[2], index, target, overPath, relationshipStatement(relationKinds[2], index, target));
+          }
+
+          const innerControl = pointAt(cx, cy, 23, midpointAngle);
+          const counterPath = `M ${end.x} ${end.y} Q ${innerControl.x} ${innerControl.y} ${start.x} ${start.y}`;
+          if (enabledRelationships.has("counter")) {
+            addRelationshipPath(group, relationKinds[3], target, index, counterPath, relationshipStatement(relationKinds[3], target, index));
+          }
+        }
+      }
+
+      function renderDiagram() {
+        const chosen = categories.filter((category) => selected.has(category.id));
+        const baseRadius = 112;
+        const ringWidth = 32;
+        const padding = 20;
+        const outerRadius = baseRadius + chosen.length * ringWidth;
+        const size = (outerRadius + padding) * 2;
+        const cx = size / 2;
+        const cy = size / 2;
+        diagram.setAttribute("viewBox", `0 0 ${size} ${size}`);
+        diagram.setAttribute("width", String(size));
+        diagram.setAttribute("height", String(size));
+        diagram.style.width = `${size}px`;
+        diagram.style.height = `${size}px`;
+        svgTitle.textContent = text[language].diagramTitle;
+        svgDescription.textContent = `${text[language].diagramDescription} ${chosen.map((category) => category.name[language]).join(", ")}`;
+        diagram.querySelectorAll(":scope > :not(title):not(desc)").forEach((node) => node.remove());
+
+        const wheel = svgElement("g");
+        const elementGroups = new Map();
+        const sectorAngle = 72;
+        elements.forEach((element, index) => {
+          const centerAngle = -90 + index * sectorAngle;
+          const elementGroup = svgElement("g", {
+            class: "element-segment",
+            "data-element-id": element.id,
+            tabindex: 0,
+            role: "img",
+            "aria-label": element.name[language]
+          });
+          const segment = svgElement("path", {
+            class: "element-base",
+            d: sectorPath(cx, cy, 18, baseRadius, centerAngle - 36, centerAngle + 36),
+            fill: element.fill,
+            stroke: "#fff",
+            "stroke-width": 2
+          });
+          elementGroup.append(segment);
+
+          const labelPoint = pointAt(cx, cy, 76, centerAngle);
+          const label = svgElement("text", {
+            x: labelPoint.x,
+            y: labelPoint.y,
+            fill: element.stroke,
+            "font-size": 14,
+            "font-weight": 750,
+            "text-anchor": "middle",
+            "dominant-baseline": "middle"
+          });
+          label.textContent = element.name[language];
+          elementGroup.append(label);
+          elementGroups.set(element.id, elementGroup);
+          wheel.append(elementGroup);
+        });
+
+        chosen.forEach((category, categoryIndex) => {
+          const innerRadius = baseRadius + categoryIndex * ringWidth;
+          const outerRingRadius = innerRadius + ringWidth;
+          elements.forEach((element, elementIndex) => {
+            const centerAngle = -90 + elementIndex * sectorAngle;
+            const cell = svgElement("path", {
+              class: "element-wedge",
+              d: sectorPath(cx, cy, innerRadius, outerRingRadius, centerAngle - 36, centerAngle + 36),
+              fill: element.fill,
+              stroke: "#fff",
+              "stroke-width": 1.5
+            });
+            const title = svgElement("title");
+            title.textContent = `${category.name[language]} — ${element.name[language]}: ${category.values[elementIndex][language]}`;
+            cell.append(title);
+            const elementGroup = elementGroups.get(element.id);
+            elementGroup.append(cell);
+
+            const labelPoint = pointAt(cx, cy, (innerRadius + outerRingRadius) / 2, centerAngle);
+            const value = svgElement("text", {
+              x: labelPoint.x,
+              y: labelPoint.y,
+              fill: element.stroke,
+              "font-size": 11,
+              "font-weight": 600,
+              "text-anchor": "middle",
+              "dominant-baseline": "middle"
+            });
+            value.textContent = category.values[elementIndex][language];
+            elementGroup.append(value);
+          });
+        });
+        diagram.append(wheel);
+
+        if (enabledRelationships.size > 0) {
+          const relationships = svgElement("g", {
+            class: "relationship-layer",
+            "aria-label": text[language].relationshipHeading
+          });
+          renderRelationships(relationships, cx, cy);
+          diagram.append(relationships);
+        }
+
+        diagram.append(svgElement("circle", {
+          cx,
+          cy,
+          r: 12,
+          fill: "#fff",
+          stroke: "#aebbd0",
+          "stroke-width": 1.5
+        }));
+        const centerLabel = svgElement("text", {
+          x: cx,
+          y: cy,
+          fill: "#34445f",
+          "font-size": 10,
+          "font-weight": 800,
+          "text-anchor": "middle",
+          "dominant-baseline": "middle"
+        });
+        centerLabel.textContent = "5";
+        diagram.append(centerLabel);
+        updateHoverState();
+      }
+
+      function updateHoverState() {
+        const relatedElements = new Set();
+        const links = [];
+        if (hoveredElement) relatedElements.add(hoveredElement);
+        for (const path of diagram.querySelectorAll(".relationship-arrow")) {
+          const source = path.dataset.sourceElement;
+          const target = path.dataset.targetElement;
+          const related = Boolean(hoveredElement) && (source === hoveredElement || target === hoveredElement);
+          path.classList.toggle("is-related", related);
+          if (related) {
+            relatedElements.add(source);
+            relatedElements.add(target);
+            const relation = relationKinds.find((item) => item.id === path.dataset.relationId);
+            const sourceIndex = elements.findIndex((element) => element.id === source);
+            const targetIndex = elements.findIndex((element) => element.id === target);
+            links.push(relationshipStatement(relation, sourceIndex, targetIndex));
+          }
+        }
+        for (const group of diagram.querySelectorAll(".element-segment")) {
+          const elementId = group.dataset.elementId;
+          group.classList.toggle("is-hovered", elementId === hoveredElement);
+          group.classList.toggle("is-related", elementId !== hoveredElement && relatedElements.has(elementId));
+        }
+        if (hoveredElement) diagram.setAttribute("data-hover-element", hoveredElement);
+        else diagram.removeAttribute("data-hover-element");
+
+        if (!hoveredElement) {
+          hoverStatus.textContent = text[language].hoverPrompt;
+        } else {
+          const element = elements.find((item) => item.id === hoveredElement);
+          hoverStatus.textContent = links.length
+            ? text[language].hoverSummary(links)
+            : text[language].hoverNoRelationships(element.name[language]);
+        }
+      }
+
+      function setHoveredElement(elementId) {
+        if (hoveredElement === elementId) return;
+        hoveredElement = elementId;
+        updateHoverState();
+      }
+
+      function elementIdFromTarget(target) {
+        if (!(target instanceof Element)) return null;
+        return target.closest(".element-segment")?.dataset.elementId || null;
+      }
+
+      function updateSelection() {
+        const count = selected.size;
+        categoryStatus.textContent = count === 0
+          ? text[language].noCategories
+          : text[language].shownCount(count, categories.length);
+        for (const row of tableBody.querySelectorAll("tr[data-category]")) {
+          row.classList.toggle("selected-category", selected.has(row.dataset.category));
+        }
+        renderDiagram();
+      }
+
+      function updateLanguage() {
+        language = languageSelect.value;
+        const current = text[language];
+        document.documentElement.lang = language;
+        document.title = current.pageTitle;
+        setText("page-title", current.pageTitle);
+        setText("page-description", current.pageDescription);
+        setText("tcm-home-link", current.tcmHomeLink);
+        setText("glossary-link", current.glossaryLink);
+        document.getElementById("controls").setAttribute("aria-label", current.controlsLabel);
+        setText("language-label", current.languageLabel);
+        setText("category-legend", current.categoryLegend);
+        setText("natural-heading", current.naturalWorld);
+        setText("human-heading", current.humanBody);
+        setText("select-all", current.selectAll);
+        setText("clear-all", current.clearAll);
+        setText("relationship-heading", current.relationshipHeading);
+        setText("relationship-help", current.relationshipHelp);
+        setText("diagram-heading", current.diagramHeading);
+        setText("diagram-intro", current.diagramIntro);
+        setText("guide-heading", current.guideHeading);
+        setText("guide-first", current.guideFirst);
+        setText("guide-second", current.guideSecond);
+        setText("guide-third", current.guideThird);
+        setText("table-heading", current.tableHeading);
+        setText("table-intro", current.tableIntro);
+        setText("table-caption", current.tableTitle);
+        setText("source-note", current.sourceNote);
+        document.getElementById("diagram-scroll").setAttribute("aria-label", current.diagramHeading);
+        renderOptions();
+        renderRelationshipControls();
+        renderRelationshipLegend();
+        renderTable();
+        updateSelection();
+      }
+
+      document.getElementById("select-all").addEventListener("click", () => {
+        categories.forEach((category) => selected.add(category.id));
+        renderOptions();
+        updateSelection();
+      });
+      document.getElementById("clear-all").addEventListener("click", () => {
+        selected.clear();
+        renderOptions();
+        updateSelection();
+      });
+      languageSelect.addEventListener("change", updateLanguage);
+      diagram.addEventListener("pointerover", (event) => {
+        const elementId = elementIdFromTarget(event.target);
+        if (elementId) setHoveredElement(elementId);
+      });
+      diagram.addEventListener("pointerout", (event) => {
+        const currentElement = elementIdFromTarget(event.target);
+        const nextElement = elementIdFromTarget(event.relatedTarget);
+        if (currentElement && currentElement !== nextElement) setHoveredElement(nextElement);
+      });
+      diagram.addEventListener("focusin", (event) => {
+        const elementId = elementIdFromTarget(event.target);
+        if (elementId) setHoveredElement(elementId);
+      });
+      diagram.addEventListener("focusout", (event) => {
+        const currentElement = elementIdFromTarget(event.target);
+        const nextElement = elementIdFromTarget(event.relatedTarget);
+        if (currentElement && currentElement !== nextElement) setHoveredElement(nextElement);
+      });
+      updateLanguage();
+    })();
+  </script>
+</body>
+</html>
