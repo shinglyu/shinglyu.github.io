@@ -17,6 +17,7 @@ on:
           - "the-power-of-tactile-cues-in-a-screen-first-world.md"
           - "traditional-chinese-medicine-volume-1-quick-reference.md"
           - "five-elements-interactive-reference.md"
+          - "temporary-camera-android-app.md"
       run_mode:
         description: 'Select steps to execute'
         required: true
