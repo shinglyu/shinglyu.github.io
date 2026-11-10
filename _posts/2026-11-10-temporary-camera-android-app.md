@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Temporary Camera: The Android App I Always Wanted, Built with AI"
-date: 2026-11-08 00:00:00 +01:00
+date: 2026-11-10T00:00:00Z
 categories: blog
 excerpt_separator: <!--more-->
 grammar_checked: true
