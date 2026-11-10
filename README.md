@@ -51,6 +51,22 @@ bundle exec jekyll serve --drafts
 ...
 ```
 
+# Public Repository Sync Token
+
+The `Publish Blog Post` workflow syncs this repository to `shinglyu/shinglyu.github.io`.
+To allow it to push, create a **fine-grained personal access token** with:
+
+- **Resource owner:** `shinglyu`
+- **Repository access:** Only select `shinglyu.github.io`
+- **Repository permissions:**
+  - **Contents:** Read and write
+  - **Workflows:** Read and write
+  - **Metadata:** Read-only (automatically required)
+
+In this private repository, add the token as an Actions secret named
+`PUBLIC_REPO_TOKEN` under **Settings → Secrets and variables → Actions**.
+The workflow uses this token only for syncing to the public repository.
+
 # Publish
 ```
 # Drafts published through GitHub Actions should start with these front matter fields:

@@ -27,6 +27,8 @@ git remote remove public 2>/dev/null || true
 # - Contents: Read and write
 # - Workflows: Read and write (required because this sync touches GitHub Actions files)
 # - Metadata: auto-selected
+git config --local --unset-all "includeIf.gitdir:${REPO_ROOT}/.git.path" || true
+git config --local --unset-all "includeIf.gitdir:${REPO_ROOT}/.git/worktrees/*.path" || true
 git config --local --unset-all http.https://github.com/.extraheader || true
 
 git remote add public "https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_OWNER}/${PUBLIC_REPO_NAME}.git"
