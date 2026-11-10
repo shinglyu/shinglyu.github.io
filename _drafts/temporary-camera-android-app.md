@@ -4,8 +4,8 @@ title: "Temporary Camera: The Android App I Always Wanted, Built with AI"
 date: 2026-11-08 00:00:00 +01:00
 categories: blog
 excerpt_separator: <!--more-->
-grammar_checked: false
-fact_checked: false
+grammar_checked: true
+fact_checked: true
 ---
 
 I just released [Temporary Camera](https://play.google.com/store/apps/details?id=com.shinglyu.temporarycamera) on Google Play, a tool I've always wanted, built with AI. Here is why I made it and how an old phone, a piece of paper and an AI model got the camera rotation right while I did the dishes.
